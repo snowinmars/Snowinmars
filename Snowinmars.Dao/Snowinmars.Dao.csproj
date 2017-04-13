@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
+    <ProjectGuid>{864d84a0-e72e-44fd-900e-baa36ce39d91}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Snowinmars.Dao</RootNamespace>
+    <TargetFrameworkVersion>4.6.2</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Snowinmars.Common\Snowinmars.Common.csproj">
+      <Project>{b672661f-888c-4da2-bd4f-8ab7c78d8bc3}</Project>
+      <Name>Snowinmars.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Snowinmars.Dao.Interfaces\Snowinmars.Dao.Interfaces.csproj">
+      <Project>{c27c80af-707f-4035-86d9-6a88ec5cd645}</Project>
+      <Name>Snowinmars.Dao.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Snowinmars.Entities\Snowinmars.Entities.csproj">
+      <Project>{bb0b33b5-a16b-4ad6-a1cb-24dc9981a69d}</Project>
+      <Name>Snowinmars.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Dapper, Version=1.50.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.50.2\lib\net451\Dapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AuthorDao.cs" />
+    <Compile Include="BookDao.cs" />
+    <Compile Include="Validation.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

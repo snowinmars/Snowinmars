@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
+    <ProjectGuid>{c27c80af-707f-4035-86d9-6a88ec5cd645}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Snowinmars.Dao.Interfaces</RootNamespace>
+    <TargetFrameworkVersion>4.6.2</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Snowinmars.Common\Snowinmars.Common.csproj">
+      <Project>{b672661f-888c-4da2-bd4f-8ab7c78d8bc3}</Project>
+      <Name>Snowinmars.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Snowinmars.Entities\Snowinmars.Entities.csproj">
+      <Project>{bb0b33b5-a16b-4ad6-a1cb-24dc9981a69d}</Project>
+      <Name>Snowinmars.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IAuthorDao.cs" />
+    <Compile Include="IBookDao.cs" />
+    <Compile Include="ICRUD.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
