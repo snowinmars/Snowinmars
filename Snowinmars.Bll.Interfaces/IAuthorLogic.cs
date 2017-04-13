@@ -1,11 +1,8 @@
-
-
-
+using Snowinmars.Entities;
 
 namespace Snowinmars.Bll.Interfaces
 {
-	 public  interface IAuthorLogic  : Snowinmars.Bll.Interfaces.ICRUD< Snowinmars.Entities.Author > 
+	public interface IAuthorLogic : ICRUD<Author>
 	{
-
 	}
 }

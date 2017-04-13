@@ -1,32 +1,20 @@
-
-
-using Snowinmars.Common;
-
-
+using System;
 
 namespace Snowinmars.Entities
 {
- public  class Author 
+	public class Author
 	{
+		public Author(string name, string surname)
+		{
+			this.Name = name;
+			this.Surname = surname;
+		}
 
+		public Guid Id { get; set; }
+		public string Name { get; set; }
 
+		public string Surname { get; set; }
 
-
- public  System.String Name { get;  set; }
-
- public  System.String Surname { get;  set; }
-
- public  System.String Tag { get;  set; }
-
- public  System.Guid Id { get;  set; }
-
-
- public  Author (System.String name,System.String surname) 
-{
-	 this. Name = name;
- this. Surname = surname;
-
-}
-
+		public string Tag { get; set; }
 	}
 }

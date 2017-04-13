@@ -1,19 +1,7 @@
-
-
-using System;
-
-
-
 namespace Snowinmars.Common
 {
- public  class Constant 
+	public class Constant
 	{
-
-
- public  const System.String ConnectionString = default(System.String);
-
-
-
-
+		public const string ConnectionString = default(string);
 	}
 }

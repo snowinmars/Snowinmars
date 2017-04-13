@@ -1,35 +1,22 @@
-
-
-using Snowinmars.Common;
-
-
+using System;
+using System.Collections.Generic;
 
 namespace Snowinmars.Entities
 {
- public  class Book 
+	public class Book
 	{
+		public Book(string title, uint pageCount)
+		{
+			this.Title = title;
+			this.PageCount = pageCount;
 
+			this.Authors = new List<Author>();
+		}
 
-
-
- public  System.String Title { get;  set; }
-
- public  System.UInt32 PageCount { get;  set; }
-
- public  System.Int32 Year { get;  set; }
-
- public  System.Collections.Generic.IEnumerable<Snowinmars.Entities.Author> Authors { get;  set; }
-
- public  System.Guid Id { get;  set; }
-
-
- public  Book (System.String title,System.UInt32 pageCount) 
-{
-	 this. Title = title;
- this. PageCount = pageCount;
-  this .Authors =  new  System.Collections.Generic.List<Snowinmars.Entities.Author>();
-
-}
-
+		public IEnumerable<Author> Authors { get; }
+		public Guid Id { get; set; }
+		public uint PageCount { get; set; }
+		public string Title { get; set; }
+		public int Year { get; set; }
 	}
 }

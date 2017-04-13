@@ -1,21 +1,15 @@
-
-
-using Snowinmars.Common;
-using Snowinmars.Entities;
-
+using System;
 
 namespace Snowinmars.Dao.Interfaces
 {
-	 public  interface ICRUD<T>  
+	public interface ICRUD<T>
 	{
+		void Create(T book);
 
+		T Get(Guid id);
 
- void  Create (T book);
+		void Remove(Guid id);
 
-T Get (System.Guid id);
-
- void  Remove (System.Guid id);
-
- void  Update (T book);
+		void Update(T book);
 	}
 }

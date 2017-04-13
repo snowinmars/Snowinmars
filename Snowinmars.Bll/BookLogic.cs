@@ -1,78 +1,40 @@
-
-
 using Snowinmars.Bll.Interfaces;
-using System;
-using System.Linq;
-using Snowinmars.Dao.Interfaces;
-using Snowinmars.Common;
 using Snowinmars.Entities;
-
-
+using System;
 
 namespace Snowinmars.Bll
 {
- public  class BookLogic  : Snowinmars.Bll.Interfaces.ICRUD< Snowinmars.Entities.Book >,Snowinmars.Bll.Interfaces.IBookLogic
+	public class BookLogic : IBookLogic, ICRUD<Book>
 	{
+		private readonly Dao.Interfaces.IBookDao bookLogicDestination;
 
+		public BookLogic(Dao.Interfaces.IBookDao bookLogicDestination)
+		{
+			this.bookLogicDestination = bookLogicDestination;
+		}
 
+		public void Create(Book book)
+		{
+			Validation.Check(book);
 
- private  Snowinmars.Dao.Interfaces.IBookDao BookLogicDestination;
+			this.bookLogicDestination.Create(book);
+		}
 
+		public Book Get(Guid id)
+		{
+			return this.bookLogicDestination.Get(id);
+		}
 
+		public void Remove(Guid id)
+		{
+			this.bookLogicDestination.Remove(id);
+		}
 
- public  BookLogic (Snowinmars.Dao.Interfaces.IBookDao bookLogicDestination) 
-{
-	 this. BookLogicDestination = bookLogicDestination;
+		public void Update(Book book)
+		{
+			Validation.Check(book);
 
-}
-
-
- public   void  Create (Snowinmars.Entities.Book book)
-{
-	
-
-
-
-	Validation.Check(book);
-
- this .BookLogicDestination.Create(book);
-
-
-}
-
- public  Snowinmars.Entities.Book Get (System.Guid id)
-{
-	
-
-
-
-	  return   this .BookLogicDestination.Get(id);
-
-
-}
-
- public   void  Remove (System.Guid id)
-{
-	
-
-
-
-	 this .BookLogicDestination.Remove(id);
-
-
-}
-
- public   void  Update (Snowinmars.Entities.Book book)
-{
-	
-
-
-
-	Validation.Check(book);
-
- this .BookLogicDestination.Update(book);
-
-
-}
+			this.bookLogicDestination.Update(book);
+		}
 	}
 }

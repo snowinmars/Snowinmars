@@ -1,36 +1,15 @@
-
-
-using System;
-using System.Text.RegularExpressions;
-
-
+using Snowinmars.Entities;
 
 namespace Snowinmars.Bll
 {
- internal  sealed  class Validation 
+	internal sealed class Validation
 	{
+		public static void Check(Author author)
+		{
+		}
 
-
-
-
-
-
- public  static   void  Check (Snowinmars.Entities.Author author)
-{
-	
-
-
-
-	
-}
-
- public  static   void  Check (Snowinmars.Entities.Book book)
-{
-	
-
-
-
-	
-}
+		public static void Check(Book book)
+		{
+		}
 	}
 }
