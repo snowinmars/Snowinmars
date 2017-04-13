@@ -12,7 +12,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
-    <ProjectGuid>{bb0b33b5-a16b-4ad6-a1cb-24dc9981a69d}</ProjectGuid>
+    <ProjectGuid>{BB0B33B5-A16B-4AD6-A1CB-24DC9981A69D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>Snowinmars.Entities</RootNamespace>
     <TargetFrameworkVersion>4.6.2</TargetFrameworkVersion>
@@ -37,6 +37,10 @@
   <ItemGroup>
     <Compile Include="Author.cs" />
     <Compile Include="Book.cs" />
+    <Compile Include="Entity.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
