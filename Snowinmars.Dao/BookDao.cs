@@ -46,20 +46,12 @@ namespace Snowinmars.Dao
 					throw new ObjectNotFoundException();
 				}
 
-				Guid bookId = (Guid)reader[LocalConst.Book.Column.Id];
-				string title = (string)reader[LocalConst.Book.Column.Title];
-				int year = (int)reader[LocalConst.Book.Column.Year];
-				int pageCount = (int)reader[LocalConst.Book.Column.PageCount];
+				Book book = this.MapBook(reader);
 
 				sqlConnection.Close();
 
-				Book book = new Book(title, pageCount)
-				{
-					Id = bookId,
-					Year = year,
-				};
-
 				//////////////////////
+				//// I suppose that reusing SqlCommand will improve perfomance. I read few about it. I have to know it better. Todo?
 
 				command.CommandText = LocalConst.BookAuthor.SelectByBookCommand;
 
@@ -80,6 +72,20 @@ namespace Snowinmars.Dao
 
 				return book;
 			}
+		}
+
+		private Book MapBook(SqlDataReader reader)
+		{
+			Guid bookId = (Guid)reader[LocalConst.Book.Column.Id];
+			string title = (string)reader[LocalConst.Book.Column.Title];
+			int year = (int)reader[LocalConst.Book.Column.Year];
+			int pageCount = (int)reader[LocalConst.Book.Column.PageCount];
+
+			return new Book(title, pageCount)
+			{
+				Id = bookId,
+				Year = year,
+			};
 		}
 
 		public IEnumerable<Book> Get(Expression<Func<Book, bool>> filter)
@@ -104,19 +110,25 @@ namespace Snowinmars.Dao
 
 				sqlConnection.Open();
 				var reader = command.ExecuteReader();
-
-				List<Author> authors = new List<Author>();
-				while (reader.Read())
-				{
-					Guid g = (Guid)reader[LocalConst.BookAuthor.Column.AuthorId];
-
-					authors.Add(this.authorDao.Get(g));
-				}
-
+				var authors = this.MapAuthors(reader);
 				sqlConnection.Close();
 
 				return authors;
 			}
+		}
+
+		private IEnumerable<Author> MapAuthors(SqlDataReader reader)
+		{
+			List<Author> authors = new List<Author>();
+
+			while (reader.Read())
+			{
+				Guid g = (Guid)reader[LocalConst.BookAuthor.Column.AuthorId];
+
+				authors.Add(this.authorDao.Get(g));
+			}
+
+			return authors;
 		}
 
 		public void Remove(Guid id)
@@ -139,6 +151,7 @@ namespace Snowinmars.Dao
 
 			using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
 			{
+				// updating usual fields
 				var command = new SqlCommand(LocalConst.Book.UpdateCommand, sqlConnection);
 
 				command.Parameters.AddWithValue(LocalConst.Book.Column.Id, item.Id);
@@ -150,29 +163,42 @@ namespace Snowinmars.Dao
 				command.ExecuteNonQuery();
 				sqlConnection.Close();
 
-				List<Guid> oldAuthors = this.GetAuthors(item.Id).Select(a => a.Id).ToList();
-				List<Guid> newAuthors = item.AuthorIds.ToList();
+				//handle with authors
 
-				for (var i = 0; i < oldAuthors.Count; i++)
+				this.HandleAuthorUpdate(item, sqlConnection);
+			}
+		}
+
+		private void HandleAuthorUpdate(Book item, SqlConnection sqlConnection)
+		{
+			// Authors can be updated with three ways: one can add new ones, can remove old ones and can don't touch authors at all
+
+			// I want to compare the old and the new one collections.
+			List<Guid> oldAuthors = this.GetAuthors(item.Id).Select(a => a.Id).ToList();
+			List<Guid> newAuthors = item.AuthorIds.ToList();
+
+			// I remove all matching entries from both of them
+			for (var i = 0; i < oldAuthors.Count; i++)
+			{
+				var oldAuthor = oldAuthors[i];
+
+				if (newAuthors.Contains(oldAuthor))
 				{
-					var oldAuthor = oldAuthors[i];
-
-					if (newAuthors.Contains(oldAuthor))
-					{
-						newAuthors.Remove(oldAuthor);
-						oldAuthors.Remove(oldAuthor);
-					}
+					newAuthors.Remove(oldAuthor);
+					oldAuthors.Remove(oldAuthor);
 				}
+			}
 
-				if (oldAuthors.Any())
-				{
-					this.DeleteBookAuthorConnections(item.Id, oldAuthors, sqlConnection);
-				}
+			// and then if there's something in remainder in old author's collection  - I remove em.
+			if (oldAuthors.Any())
+			{
+				this.DeleteBookAuthorConnections(item.Id, oldAuthors, sqlConnection);
+			}
 
-				if (newAuthors.Any())
-				{
-					this.AddBookAuthorConnections(item.Id, newAuthors, sqlConnection);
-				}
+			// or add if there is something in new author's collection.
+			if (newAuthors.Any())
+			{
+				this.AddBookAuthorConnections(item.Id, newAuthors, sqlConnection);
 			}
 		}
 
@@ -196,6 +222,7 @@ namespace Snowinmars.Dao
 
 			command.Parameters.AddWithValue(LocalConst.BookAuthor.Column.BookId, bookId);
 
+			// Here I reusing SqlParameter to improve everything :3 Idk, is it true. Read about it? Todo.
 			var authorIdParameter = new SqlParameter(LocalConst.BookAuthor.Parameter.AuthorId, SqlDbType.UniqueIdentifier);
 			command.Parameters.Add(authorIdParameter);
 
@@ -217,6 +244,7 @@ namespace Snowinmars.Dao
 
 			command.Parameters.AddWithValue(LocalConst.BookAuthor.Column.BookId, bookId);
 
+			// Here I reusing SqlParameter to improve everything :3 Idk, is it true. Read about it? Todo.
 			var authorIdParameter = new SqlParameter(LocalConst.BookAuthor.Parameter.AuthorId, SqlDbType.UniqueIdentifier);
 			command.Parameters.Add(authorIdParameter);
 
@@ -240,29 +268,25 @@ namespace Snowinmars.Dao
 
 				sqlConnection.Open();
 				var reader = command.ExecuteReader();
-
-				List<Book> books = new List<Book>();
-
-				while (reader.Read())
-				{
-					Guid bookId = (Guid)reader[LocalConst.Book.Column.Id];
-					string title = (string)reader[LocalConst.Book.Column.Title];
-					int year = (int)reader[LocalConst.Book.Column.Year];
-					int pageCount = (int)reader[LocalConst.Book.Column.PageCount];
-
-					Book book = new Book(title, pageCount)
-					{
-						Id = bookId,
-						Year = year,
-					};
-
-					books.Add(book);
-				}
-
+				var books = this.MapBooks(reader);
 				sqlConnection.Close();
 
 				return books;
 			}
+		}
+
+		private IEnumerable<Book> MapBooks(SqlDataReader reader)
+		{
+			List<Book> books = new List<Book>();
+
+			while (reader.Read())
+			{
+				Book book = this.MapBook(reader);
+
+				books.Add(book);
+			}
+
+			return books;
 		}
 	}
 }

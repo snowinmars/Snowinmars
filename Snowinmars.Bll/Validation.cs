@@ -1,3 +1,4 @@
+using System;
 using Snowinmars.Entities;
 
 namespace Snowinmars.Bll
@@ -10,6 +11,11 @@ namespace Snowinmars.Bll
 
 		public static void Check(Book book)
 		{
+		}
+
+		public static void Check(Guid id)
+		{
+			
 		}
 	}
 }

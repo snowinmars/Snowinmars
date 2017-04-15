@@ -47,19 +47,8 @@ namespace Snowinmars.Dao
 					throw new ObjectNotFoundException();
 				}
 
-				Guid authorId = (Guid)reader[LocalConst.Author.Column.Id];
-				string firstName = (string)reader[LocalConst.Author.Column.FirstName];
-				string lastName = (string)reader[LocalConst.Author.Column.LastName];
-				string surname = (string)reader[LocalConst.Author.Column.Surname];
-				string shortcut = (string)reader[LocalConst.Author.Column.Shortcut];
-
+				var author = this.MapAuthor(reader);
 				sqlConnection.Close();
-
-				Author author = new Author(firstName, lastName, surname)
-				{
-					Id = authorId,
-					Shortcut = shortcut,
-				};
 
 				return author;
 			}
@@ -73,26 +62,7 @@ namespace Snowinmars.Dao
 
 				sqlConnection.Open();
 				var reader = command.ExecuteReader();
-
-				List<Author> authors = new List<Author>();
-
-				while (reader.Read())
-				{
-					Guid authorId = (Guid)reader[LocalConst.Author.Column.Id];
-					string firstName = (string)reader[LocalConst.Author.Column.FirstName];
-					string lastName = (string)reader[LocalConst.Author.Column.LastName];
-					string surname = (string)reader[LocalConst.Author.Column.Surname];
-					string shortcut = (string)reader[LocalConst.Author.Column.Shortcut];
-
-					Author author = new Author(firstName, lastName, surname)
-					{
-						Id = authorId,
-						Shortcut = shortcut,
-					};
-
-					authors.Add(author);
-				}
-
+				var authors = this.MapAuthors(reader);
 				sqlConnection.Close();
 
 				return authors;
@@ -131,6 +101,35 @@ namespace Snowinmars.Dao
 				command.ExecuteNonQuery();
 				sqlConnection.Close();
 			}
+		}
+
+		private Author MapAuthor(IDataRecord reader)
+		{
+			Guid authorId = (Guid)reader[LocalConst.Author.Column.Id];
+			string firstName = (string)reader[LocalConst.Author.Column.FirstName];
+			string lastName = (string)reader[LocalConst.Author.Column.LastName];
+			string surname = (string)reader[LocalConst.Author.Column.Surname];
+			string shortcut = (string)reader[LocalConst.Author.Column.Shortcut];
+
+			return new Author(firstName, lastName, surname)
+			{
+				Id = authorId,
+				Shortcut = shortcut,
+			};
+		}
+
+		private IEnumerable<Author> MapAuthors(IDataReader reader)
+		{
+			List<Author> authors = new List<Author>();
+
+			while (reader.Read())
+			{
+				Author author = this.MapAuthor(reader);
+
+				authors.Add(author);
+			}
+
+			return authors;
 		}
 	}
 }

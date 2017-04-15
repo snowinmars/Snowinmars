@@ -3,45 +3,52 @@ using Snowinmars.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using Snowinmars.Dao.Interfaces;
 
 namespace Snowinmars.Bll
 {
-	public class AuthorLogic : IAuthorLogic, ICRUD<Author>
+	// ReSharper disable once RedundantExtendsListEntry
+	// ReSharper disable once RedundantNameQualifier
+	public class AuthorLogic : IAuthorLogic, Bll.Interfaces.ICRUD<Author>
 	{
-		private readonly Dao.Interfaces.IAuthorDao authorLogicDestination;
+		private readonly IAuthorDao authorDao;
 
-		public AuthorLogic(Dao.Interfaces.IAuthorDao authorLogicDestination)
+		public AuthorLogic(IAuthorDao authorDao)
 		{
-			this.authorLogicDestination = authorLogicDestination;
+			this.authorDao = authorDao;
 		}
 
 		public void Create(Author item)
 		{
 			Validation.Check(item);
 
-			this.authorLogicDestination.Create(item);
+			this.authorDao.Create(item);
 		}
 
 		public Author Get(Guid id)
 		{
-			return this.authorLogicDestination.Get(id);
+			Validation.Check(id);
+
+			return this.authorDao.Get(id);
 		}
 
 		public IEnumerable<Author> Get(Expression<Func<Book, bool>> filter)
 		{
-			return this.authorLogicDestination.Get(filter);
+			return this.authorDao.Get(filter);
 		}
 
 		public void Remove(Guid id)
 		{
-			this.authorLogicDestination.Remove(id);
+			Validation.Check(id);
+
+			this.authorDao.Remove(id);
 		}
 
 		public void Update(Author item)
 		{
 			Validation.Check(item);
 
-			this.authorLogicDestination.Update(item);
+			this.authorDao.Update(item);
 		}
 	}
 }

@@ -99,19 +99,15 @@
 					" from " + Book.TableName;
 
 			internal const string SelectCommand =
-					" select b." + Column.Id +
-							",c." + BookAuthor.Column.AuthorId +
+					" select " + Column.Id +
 							"," + Column.Title +
 							"," + Column.PageCount +
 							"," + Column.Year +
-					" from " + Book.TableName + " b " +
-						" inner join " + BookAuthor.TableName + " c " +
-							" on b." + Column.Id + " = " + " c." + BookAuthor.Column.BookId +
-					" where ( b." + Column.Id + " = " + Parameter.Id + " ) ";
+					" from " + Book.TableName +
+					" where ( " + Column.Id + " = " + Parameter.Id + " ) ";
 
 			internal const string TableName = "[Books]";
 
-			// TODO remove join?
 			internal const string UpdateCommand =
 					" update " + Book.TableName +
 					" set " + Column.Title + " = " + Parameter.Title +
