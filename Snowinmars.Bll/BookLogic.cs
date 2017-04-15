@@ -27,6 +27,16 @@ namespace Snowinmars.Bll
 			return this.bookLogicDestination.Get(id);
 		}
 
+		public IEnumerable<Book> Get(Expression<Func<Book, bool>> filter)
+		{
+			return this.bookLogicDestination.Get(filter);
+		}
+
+		public IEnumerable<Author> GetAuthors(Guid bookId)
+		{
+			return this.bookLogicDestination.GetAuthors(bookId);
+		}
+
 		public void Remove(Guid id)
 		{
 			this.bookLogicDestination.Remove(id);
@@ -37,16 +47,6 @@ namespace Snowinmars.Bll
 			Validation.Check(item);
 
 			this.bookLogicDestination.Update(item);
-		}
-
-		public IEnumerable<Book> Get(Expression<Func<Book, bool>> filter)
-		{
-			return this.bookLogicDestination.Get(filter);
-		}
-
-		public IEnumerable<Author> GetAuthors(Guid bookId)
-		{
-			return this.bookLogicDestination.GetAuthors(bookId);
 		}
 	}
 }

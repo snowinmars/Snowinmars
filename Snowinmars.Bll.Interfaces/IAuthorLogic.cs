@@ -1,7 +1,7 @@
+using Snowinmars.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Snowinmars.Entities;
 
 namespace Snowinmars.Bll.Interfaces
 {

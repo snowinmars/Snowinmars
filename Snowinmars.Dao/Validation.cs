@@ -10,7 +10,6 @@ namespace Snowinmars.Dao
 
 		public static void Check(Book book)
 		{
-
 		}
 	}
 }

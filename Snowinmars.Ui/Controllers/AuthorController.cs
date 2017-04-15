@@ -1,36 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Snowinmars.Bll.Interfaces;
+﻿using Snowinmars.Bll.Interfaces;
 using Snowinmars.Entities;
 using Snowinmars.Ui.Models;
+using System;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace Snowinmars.Ui.Controllers
 {
 	[Route("author")]
-    public class AuthorController : Controller
-    {
-	    private readonly IAuthorLogic authorLogic;
+	public class AuthorController : Controller
+	{
+		private readonly IAuthorLogic authorLogic;
 
-	    public AuthorController(IAuthorLogic authorLogic)
-	    {
-		    this.authorLogic = authorLogic;
-	    }
-
-		[HttpGet]
-		[Route("")]
-	    public ActionResult Index()
-	    {
-		    var c = this.authorLogic.Get(null).Select(a => new AuthorModel() {Id = a.Id, FirstName = a.FirstName, LastName = a.LastName, Shortcut = a.Shortcut, Surname = a.Surname});
-
-		    return View(c);
-	    }
+		public AuthorController(IAuthorLogic authorLogic)
+		{
+			this.authorLogic = authorLogic;
+		}
 
 		[HttpPost]
 		[Route("create")]
-	    public ActionResult Create(AuthorModel authorModel)
+		public ActionResult Create(AuthorModel authorModel)
 		{
 			Author author = new Author(authorModel.FirstName, authorModel.LastName, authorModel.Surname)
 			{
@@ -40,14 +29,22 @@ namespace Snowinmars.Ui.Controllers
 			this.authorLogic.Create(author);
 
 			return new EmptyResult();
-
 		}
 
 		[HttpGet]
 		[Route("create")]
-	    public ActionResult Create()
+		public ActionResult Create()
 		{
 			return View();
+		}
+
+		[HttpGet]
+		[Route("delete")]
+		public ActionResult Delete(Guid id)
+		{
+			this.authorLogic.Remove(id);
+
+			return new EmptyResult();
 		}
 
 		[HttpGet]
@@ -63,7 +60,7 @@ namespace Snowinmars.Ui.Controllers
 
 		[HttpGet]
 		[Route("edit")]
-	    public ActionResult Edit(Guid id)
+		public ActionResult Edit(Guid id)
 		{
 			Author author = this.authorLogic.Get(id);
 
@@ -89,18 +86,18 @@ namespace Snowinmars.Ui.Controllers
 
 		[HttpPost]
 		[Route("getAll")]
-	    public JsonResult GetAll()
-	    {
-		    return Json(this.authorLogic.Get(null));
-	    }
+		public JsonResult GetAll()
+		{
+			return Json(this.authorLogic.Get(null));
+		}
 
 		[HttpGet]
-		[Route("delete")]
-	    public ActionResult Delete(Guid id)
-	    {
-			this.authorLogic.Remove(id);
+		[Route("")]
+		public ActionResult Index()
+		{
+			var c = this.authorLogic.Get(null).Select(a => new AuthorModel() { Id = a.Id, FirstName = a.FirstName, LastName = a.LastName, Shortcut = a.Shortcut, Surname = a.Surname });
 
-		    return new EmptyResult();
-	    }
-    }
+			return View(c);
+		}
+	}
 }

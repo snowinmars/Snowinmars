@@ -15,17 +15,17 @@
 }
 
 .table,
-tbody>tr>th {
+tbody > tr > th {
 	text-align: center;
 }
 
-.table>tbody>tr>th {
-	padding: 8px 0;
-}
+	.table > tbody > tr > th {
+		padding: 8px 0;
+	}
 
-.table>tbody>tr>th:first-child {
-	padding-left: 8px;
-}
+		.table > tbody > tr > th:first-child {
+			padding-left: 8px;
+		}
 
 .actions {
 	text-align: center;
@@ -40,12 +40,12 @@ tbody>tr>th {
 	border: 0;
 }
 
+	.btn-danger:hover {
+		background-color: #8a544d;
+	}
+
 a .btn-danger {
 	color: #ffa500;
-}
-
-.btn-danger:hover {
-	background-color: #8a544d;
 }
 
 .btn-default {

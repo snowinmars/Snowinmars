@@ -5,16 +5,16 @@ namespace Snowinmars.Entities
 {
 	public class Book : Entity
 	{
-		private Book()
-		{
-		}
-
 		public Book(string title, int pageCount)
 		{
 			this.Title = title;
 			this.PageCount = pageCount;
 
 			this.AuthorIds = new List<Guid>();
+		}
+
+		private Book()
+		{
 		}
 
 		public ICollection<Guid> AuthorIds { get; }

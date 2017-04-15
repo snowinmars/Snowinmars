@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Linq.Expressions;
 
 namespace Snowinmars.Dao
@@ -16,7 +15,7 @@ namespace Snowinmars.Dao
 		{
 			Validation.Check(item);
 
-			using (var sqlConnection = new System.Data.SqlClient.SqlConnection(Constant.ConnectionString))
+			using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
 			{
 				var command = new SqlCommand(LocalConst.Author.InsertCommand, sqlConnection);
 
@@ -34,7 +33,7 @@ namespace Snowinmars.Dao
 
 		public Author Get(Guid id)
 		{
-			using (var sqlConnection = new System.Data.SqlClient.SqlConnection(Constant.ConnectionString))
+			using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
 			{
 				var command = new SqlCommand(LocalConst.Author.SelectCommand, sqlConnection);
 
@@ -66,43 +65,9 @@ namespace Snowinmars.Dao
 			}
 		}
 
-		public void Remove(Guid id)
-		{
-			using (var sqlConnection = new System.Data.SqlClient.SqlConnection(Constant.ConnectionString))
-			{
-				var command = new SqlCommand(LocalConst.Author.DeleteCommand, sqlConnection);
-
-				command.Parameters.AddWithValue(LocalConst.Author.Column.Id, id);
-
-				sqlConnection.Open();
-				command.ExecuteNonQuery();
-				sqlConnection.Close();
-			}
-		}
-
-		public void Update(Author item)
-		{
-			Validation.Check(item);
-
-			using (var sqlConnection = new System.Data.SqlClient.SqlConnection(Constant.ConnectionString))
-			{
-				var command = new SqlCommand(LocalConst.Author.UpdateCommand, sqlConnection);
-
-				command.Parameters.AddWithValue(LocalConst.Author.Column.Id, item.Id);
-				command.Parameters.AddWithValue(LocalConst.Author.Column.FirstName, item.FirstName);
-				command.Parameters.AddWithValue(LocalConst.Author.Column.LastName, item.LastName);
-				command.Parameters.AddWithValue(LocalConst.Author.Column.Shortcut, item.Shortcut);
-				command.Parameters.AddWithValue(LocalConst.Author.Column.Surname, item.Surname);
-
-				sqlConnection.Open();
-				command.ExecuteNonQuery();
-				sqlConnection.Close();
-			}
-		}
-
 		public IEnumerable<Author> Get(Expression<Func<Book, bool>> filter)
 		{
-			using (var sqlConnection = new System.Data.SqlClient.SqlConnection(Constant.ConnectionString))
+			using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
 			{
 				var command = new SqlCommand(LocalConst.Author.SelectAllCommand, sqlConnection);
 
@@ -131,6 +96,40 @@ namespace Snowinmars.Dao
 				sqlConnection.Close();
 
 				return authors;
+			}
+		}
+
+		public void Remove(Guid id)
+		{
+			using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
+			{
+				var command = new SqlCommand(LocalConst.Author.DeleteCommand, sqlConnection);
+
+				command.Parameters.AddWithValue(LocalConst.Author.Column.Id, id);
+
+				sqlConnection.Open();
+				command.ExecuteNonQuery();
+				sqlConnection.Close();
+			}
+		}
+
+		public void Update(Author item)
+		{
+			Validation.Check(item);
+
+			using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
+			{
+				var command = new SqlCommand(LocalConst.Author.UpdateCommand, sqlConnection);
+
+				command.Parameters.AddWithValue(LocalConst.Author.Column.Id, item.Id);
+				command.Parameters.AddWithValue(LocalConst.Author.Column.FirstName, item.FirstName);
+				command.Parameters.AddWithValue(LocalConst.Author.Column.LastName, item.LastName);
+				command.Parameters.AddWithValue(LocalConst.Author.Column.Shortcut, item.Shortcut);
+				command.Parameters.AddWithValue(LocalConst.Author.Column.Surname, item.Surname);
+
+				sqlConnection.Open();
+				command.ExecuteNonQuery();
+				sqlConnection.Close();
 			}
 		}
 	}

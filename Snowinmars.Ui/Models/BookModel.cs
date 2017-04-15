@@ -1,10 +1,8 @@
-﻿using System;
+﻿using Snowinmars.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Web;
-using Snowinmars.Entities;
 
 namespace Snowinmars.Ui.Models
 {
@@ -12,10 +10,13 @@ namespace Snowinmars.Ui.Models
 	{
 		[DisplayName("Authors")]
 		public IEnumerable<Guid> AuthorModelIds { get; set; }
+
 		[DisplayName("Page count")]
 		public int PageCount { get; set; }
+
 		[DisplayName("Title")]
 		public string Title { get; set; }
+
 		[DisplayName("Year")]
 		public int Year { get; set; }
 

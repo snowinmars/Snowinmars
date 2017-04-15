@@ -1,5 +1,7 @@
 ﻿(function () {
-	var parser = document.createElement('a');
+	// toggle navbar buttons
+
+	var parser = document.createElement("a");
 	parser.href = location.href;
 	var page = parser.pathname.split("/")[1];
 	var navbar = $(".navbar-nav");

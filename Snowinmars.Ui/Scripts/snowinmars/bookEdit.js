@@ -1,5 +1,4 @@
 ﻿(function () {
-
 	$.ajax({
 		url: "/author/getAll",
 		type: "POST",

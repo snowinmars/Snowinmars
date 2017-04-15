@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Snowinmars.Entities;
 using System.ComponentModel;
-using System.Linq;
-using System.Web;
-using Snowinmars.Entities;
 
 namespace Snowinmars.Ui.Models
 {
@@ -13,18 +9,17 @@ namespace Snowinmars.Ui.Models
 		//Given Name(First Name)
 		//Full Middle Name(If applicable)
 
-		
 		[DisplayName("First name")]
 		public string FirstName { get; set; }
 
 		[DisplayName("Last name")]
 		public string LastName { get; set; }
 
-		[DisplayName("Surname")]
-		public string Surname { get; set; }
-
 		[DisplayName("Shortcut")]
 		public string Shortcut { get; set; }
+
+		[DisplayName("Surname")]
+		public string Surname { get; set; }
 
 		public static AuthorModel Map(Author author)
 		{
