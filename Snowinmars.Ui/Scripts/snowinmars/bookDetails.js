@@ -6,14 +6,10 @@
 		type: "POST",
 		success: function (data) {
 			var authorModelIds = $(".authorModelIds");
-
-
-			var options = authorModelIds.children("option");
-			var l = data.length;
-			var author;
+			var l = data.Authors.length;
 
 			for (var i = 0; i < l; i++) {
-				authorModelIds.append("<option value=\"" + data[i].Id + "\" selected=\"selected\">" + data[i].Shortcut + "</option>");
+				authorModelIds.append("<option value=\"" + data.Authors[i].Id + "\" selected=\"selected\">" + data.Authors[i].Shortcut + "</option>");
 			}
 
 			authorModelIds.prop('disabled', 'disabled');

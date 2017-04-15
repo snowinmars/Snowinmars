@@ -131,12 +131,10 @@
 
 			internal const string UpdateCommand = 
 					" update " + Book.TableName +
-					" set ( " + Column.Title + " = " + Parameter.Title +
+					" set " + Column.Title + " = " + Parameter.Title +
 								"," + Column.PageCount + " = " + Parameter.PageCount +
 								"," + Column.Year + " = " + Parameter.Year +
-								"," + Column.Authors + " = " + Parameter.Authors + 
-							" ) " + 
-					"where ( " + Column.Id + " = " + Parameter.Id + " ) ";
+					" where ( " + Column.Id + " = " + Parameter.Id + " ) ";
 		}
 
 		internal class BookAuthor

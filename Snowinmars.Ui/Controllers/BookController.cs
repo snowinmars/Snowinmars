@@ -75,14 +75,26 @@ namespace Snowinmars.Ui.Controllers
 		[Route("edit")]
 	    public ActionResult Edit(Guid id)
 		{
-            return View();
+			var book = this.bookLogic.Get(id);
+
+			var bookModel = BookModel.Map(book);
+
+			return View(bookModel);
 		}
 
 		[HttpPost]
 		[Route("edit")]
 		public ActionResult Edit(BookModel bookModel)
 		{
+			Book book = new Book(bookModel.Title, bookModel.PageCount)
+			{
+				Id = bookModel.Id,
+				Year = bookModel.Year,
+			};
 
+			book.AuthorIds.AddRange(bookModel.AuthorModelIds);
+
+			this.bookLogic.Update(book);
 
 			return new EmptyResult();
 		}

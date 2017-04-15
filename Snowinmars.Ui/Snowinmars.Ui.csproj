@@ -162,6 +162,7 @@
     <Content Include="Scripts\chosen.jquery.min.js" />
     <Content Include="Scripts\chosen.proto.js" />
     <Content Include="Scripts\chosen.proto.min.js" />
+    <Content Include="Scripts\snowinmars\bookEdit.js" />
     <Content Include="Scripts\snowinmars\bookIndex.js" />
     <Content Include="Scripts\snowinmars\defaultJavaScript.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
@@ -199,6 +200,7 @@
     <Content Include="Views\Book\Index.cshtml" />
     <Content Include="Views\Book\BrokenDetails.cshtml" />
     <Content Include="Views\Author\Edit.cshtml" />
+    <Content Include="Views\Book\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

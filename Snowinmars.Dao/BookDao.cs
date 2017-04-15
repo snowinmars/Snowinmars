@@ -28,23 +28,23 @@ namespace Snowinmars.Dao
 
 			using (var sqlConnection = new System.Data.SqlClient.SqlConnection(Constant.ConnectionString))
 			{
-				BookDao.AddBook(item, sqlConnection);
-				BookDao.AddBookAuthorConnections(item, sqlConnection);
+				this.AddBook(item, sqlConnection);
+				this.AddBookAuthorConnections(item.Id, item.AuthorIds, sqlConnection);
 			}
 		}
 
-		private static void AddBookAuthorConnections(Book book, SqlConnection sqlConnection)
+		private void AddBookAuthorConnections(Guid bookId, IEnumerable<Guid> authorIds, SqlConnection sqlConnection)
 		{
 			var command = new SqlCommand(LocalConst.BookAuthor.InsertCommand, sqlConnection);
 
-			command.Parameters.AddWithValue(LocalConst.BookAuthor.Column.BookId, book.Id);
+			command.Parameters.AddWithValue(LocalConst.BookAuthor.Column.BookId, bookId);
 
 			var authorIdParameter = new SqlParameter(LocalConst.BookAuthor.Parameter.AuthorId, SqlDbType.UniqueIdentifier);
 			command.Parameters.Add(authorIdParameter);
 
 			sqlConnection.Open();
 
-			foreach (var authorId in book.AuthorIds)
+			foreach (var authorId in authorIds)
 			{
 				command.Parameters[1].Value = authorId;
 
@@ -54,7 +54,28 @@ namespace Snowinmars.Dao
 			sqlConnection.Close();
 		}
 
-		private static void AddBook(Book book, SqlConnection sqlConnection)
+		private void DeleteBookAuthorConnections(Guid bookId, IEnumerable<Guid> authorIds, SqlConnection sqlConnection)
+		{
+			var command = new SqlCommand(LocalConst.BookAuthor.DeleteBookAuthorCommand, sqlConnection);
+
+			command.Parameters.AddWithValue(LocalConst.BookAuthor.Column.BookId, bookId);
+
+			var authorIdParameter = new SqlParameter(LocalConst.BookAuthor.Parameter.AuthorId, SqlDbType.UniqueIdentifier);
+			command.Parameters.Add(authorIdParameter);
+
+			sqlConnection.Open();
+
+			foreach (var authorId in authorIds)
+			{
+				command.Parameters[1].Value = authorId;
+
+				command.ExecuteNonQuery();
+			}
+
+			sqlConnection.Close();
+		}
+
+		private void AddBook(Book book, SqlConnection sqlConnection)
 		{
 			var command = new SqlCommand(LocalConst.Book.InsertCommand, sqlConnection);
 
@@ -136,14 +157,46 @@ namespace Snowinmars.Dao
 
 		public void Update(Book item)
 		{
-			//Validation.Check(book);
+			Validation.Check(item);
 
-			//using (var sqlConnection = new System.Data.SqlClient.SqlConnection(Constant.ConnectionString))
-			//{
-			//	sqlConnection.Execute(BookDao.UpdateCommand, param: new { book.Title, book.PageCount, book.Year, book.Authors, book.Id });
-			//}
+			using (var sqlConnection = new System.Data.SqlClient.SqlConnection(Constant.ConnectionString))
+			{
+				var command = new SqlCommand(LocalConst.Book.UpdateCommand, sqlConnection);
 
-			throw new NotImplementedException();
+				command.Parameters.AddWithValue(LocalConst.Book.Column.Id, item.Id);
+				command.Parameters.AddWithValue(LocalConst.Book.Column.Title, item.Title);
+				command.Parameters.AddWithValue(LocalConst.Book.Column.PageCount, item.PageCount);
+				command.Parameters.AddWithValue(LocalConst.Book.Column.Year, item.Year);
+
+				sqlConnection.Open();
+				command.ExecuteNonQuery();
+				sqlConnection.Close();
+
+				List<Guid> oldAuthors = this.GetAuthors(item.Id).Select(a => a.Id).ToList();
+				List<Guid> newAuthors = item.AuthorIds.ToList();
+
+				for (var i = 0; i < oldAuthors.Count; i++)
+				{
+					var oldAuthor = oldAuthors[i];
+
+					if (newAuthors.Contains(oldAuthor))
+					{
+						newAuthors.Remove(oldAuthor);
+						oldAuthors.Remove(oldAuthor);
+					}
+
+				}
+
+				if (oldAuthors.Any())
+				{
+					this.DeleteBookAuthorConnections(item.Id, oldAuthors, sqlConnection);
+				}
+
+				if (newAuthors.Any())
+				{
+					this.AddBookAuthorConnections(item.Id, newAuthors, sqlConnection);
+				}
+			}
 		}
 
 		public IEnumerable<Book> Get(Expression<Func<Book, bool>> filter)
