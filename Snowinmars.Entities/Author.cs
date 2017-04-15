@@ -4,16 +4,22 @@ namespace Snowinmars.Entities
 {
 	public class Author : Entity
 	{
-		public Author(string name, string surname)
+		private Author()
 		{
-			this.Name = name;
+		}
+
+		public Author(string firstName, string lastName, string surname)
+		{
+			this.FirstName = firstName;
+			this.LastName = lastName;
 			this.Surname = surname;
 		}
 
-		public string Name { get; set; }
+		public string FirstName { get; set; }
+		public string LastName { get; set; }
 
 		public string Surname { get; set; }
 
-		public string Tag { get; set; }
+		public string Shortcut { get; set; }
 	}
 }

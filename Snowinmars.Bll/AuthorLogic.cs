@@ -1,6 +1,8 @@
 using Snowinmars.Bll.Interfaces;
 using Snowinmars.Entities;
 using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace Snowinmars.Bll
 {
@@ -13,11 +15,11 @@ namespace Snowinmars.Bll
 			this.authorLogicDestination = authorLogicDestination;
 		}
 
-		public void Create(Author author)
+		public void Create(Author item)
 		{
-			Validation.Check(author);
+			Validation.Check(item);
 
-			this.authorLogicDestination.Create(author);
+			this.authorLogicDestination.Create(item);
 		}
 
 		public Author Get(Guid id)
@@ -30,11 +32,16 @@ namespace Snowinmars.Bll
 			this.authorLogicDestination.Remove(id);
 		}
 
-		public void Update(Author author)
+		public void Update(Author item)
 		{
-			Validation.Check(author);
+			Validation.Check(item);
 
-			this.authorLogicDestination.Update(author);
+			this.authorLogicDestination.Update(item);
+		}
+
+		public IEnumerable<Author> Get(Expression<Func<Book, bool>> filter)
+		{
+			return this.authorLogicDestination.Get(filter);
 		}
 	}
 }

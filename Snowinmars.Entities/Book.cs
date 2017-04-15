@@ -5,7 +5,11 @@ namespace Snowinmars.Entities
 {
 	public class Book : Entity
 	{
-		public Book(string title, uint pageCount)
+		private Book()
+		{
+		}
+
+		public Book(string title, int pageCount)
 		{
 			this.Title = title;
 			this.PageCount = pageCount;
@@ -13,8 +17,8 @@ namespace Snowinmars.Entities
 			this.Authors = new List<Author>();
 		}
 
-		public IEnumerable<Author> Authors { get; }
-		public uint PageCount { get; set; }
+		public ICollection<Author> Authors { get; }
+		public int PageCount { get; set; }
 		public string Title { get; set; }
 		public int Year { get; set; }
 	}
