@@ -21,7 +21,7 @@ namespace Snowinmars.Ui.Controllers
 
         public ActionResult Index()
         {
-	        var c = this.bookLogic.Get(book => book.Authors.Any(a => a.FirstName == "nnn"));
+	        var c = this.bookLogic.Get(null);
 			
             return View(c);
         }
@@ -40,10 +40,10 @@ namespace Snowinmars.Ui.Controllers
 			    Year = bookModel.Year,
 		    };
 
-		    if (bookModel.AuthorModels != null &&
-		        bookModel.AuthorModels.Any())
+		    if (bookModel.AuthorModelIds != null &&
+		        bookModel.AuthorModelIds.Any())
 		    {
-			    book.Authors.AddRange(bookModel.AuthorModels.Select(am => new Author(am.FirstName, am.LastName, am.Surname) {Shortcut = am.Shortcut}));
+			    book.AuthorIds.AddRange(bookModel.AuthorModelIds);
 			}
 
 		    this.bookLogic.Create(book);
@@ -69,5 +69,13 @@ namespace Snowinmars.Ui.Controllers
 	    {
             return View();
 	    }
-    }
+
+		[HttpPost]
+	    public JsonResult GetAuthorIds(Guid id)
+	    {
+		    IEnumerable<Guid> authorIds = this.bookLogic.GetAuthorIds(id);
+
+		    return Json(authorIds);
+	    }
+	}
 }

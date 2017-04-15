@@ -9,6 +9,7 @@ using Snowinmars.Ui.Models;
 
 namespace Snowinmars.Ui.Controllers
 {
+	[Route("author")]
     public class AuthorController : Controller
     {
 	    private readonly IAuthorLogic authorLogic;
@@ -57,6 +58,13 @@ namespace Snowinmars.Ui.Controllers
 	    public ActionResult Edit(string s)
 	    {
 		    throw new NotImplementedException();
+	    }
+
+		[Route("getAll")]
+		[HttpPost]
+	    public JsonResult GetAll()
+	    {
+		    return Json(this.authorLogic.Get(null));
 	    }
     }
 }

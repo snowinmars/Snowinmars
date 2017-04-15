@@ -10,7 +10,7 @@ namespace Snowinmars.Ui.Models
 	public class BookModel
 	{
 		public Guid Id { get; set; }
-		public IEnumerable<AuthorModel> AuthorModels { get; set; }
+		public IEnumerable<Guid> AuthorModelIds { get; set; }
 		public int PageCount { get; set; }
 		public string Title { get; set; }
 		public int Year { get; set; }
@@ -23,7 +23,7 @@ namespace Snowinmars.Ui.Models
 				PageCount = book.PageCount,
 				Title = book.Title,
 				Year = book.Year,
-				AuthorModels = book.Authors.Select(AuthorModel.Map).ToList(),
+				AuthorModelIds = book.AuthorIds.ToList(),
 			};
 
 			return bookModel;

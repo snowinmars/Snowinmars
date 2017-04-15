@@ -14,10 +14,10 @@ namespace Snowinmars.Entities
 			this.Title = title;
 			this.PageCount = pageCount;
 
-			this.Authors = new List<Author>();
+			this.AuthorIds = new List<Guid>();
 		}
 
-		public ICollection<Author> Authors { get; }
+		public ICollection<Guid> AuthorIds { get; }
 		public int PageCount { get; set; }
 		public string Title { get; set; }
 		public int Year { get; set; }

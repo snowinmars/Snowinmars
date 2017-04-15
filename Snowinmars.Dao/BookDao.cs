@@ -44,9 +44,9 @@ namespace Snowinmars.Dao
 
 			sqlConnection.Open();
 
-			foreach (var author in book.Authors)
+			foreach (var authorId in book.AuthorIds)
 			{
-				command.Parameters[1].Value = author.Id;
+				command.Parameters[1].Value = authorId;
 
 				command.ExecuteNonQuery();
 			}
@@ -111,9 +111,7 @@ namespace Snowinmars.Dao
 				{
 					Guid authorId = (Guid) reader[LocalConst.BookAuthor.Column.AuthorId];
 
-					Author author = this.authorDao.Get(authorId);
-
-					book.Authors.Add(author);
+					book.AuthorIds.Add(authorId);
 				}
 
 				sqlConnection.Close();
@@ -158,6 +156,30 @@ namespace Snowinmars.Dao
 			//}
 
 			throw new NotImplementedException();
+		}
+
+		public IEnumerable<Guid> GetAuthorIds(Guid bookId)
+		{
+			using (var sqlConnection = new System.Data.SqlClient.SqlConnection(Constant.ConnectionString))
+			{
+				var command = new SqlCommand(LocalConst.BookAuthor.SelectByBookCommand, sqlConnection);
+
+				command.Parameters.AddWithValue(LocalConst.BookAuthor.Column.BookId, bookId);
+
+				sqlConnection.Open();
+				var reader = command.ExecuteReader();
+
+				List<Guid> authorIds = new List<Guid>();
+				while (reader.Read())
+				{
+					Guid g = (Guid) reader[LocalConst.BookAuthor.Column.AuthorId];
+					authorIds.Add(g);
+				}
+
+				sqlConnection.Close();
+
+				return authorIds;
+			}
 		}
 	}
 }

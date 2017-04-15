@@ -137,6 +137,10 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\chosen-sprite%402x.png" />
+    <Content Include="Content\chosen-sprite.png" />
+    <Content Include="Content\chosen.css" />
+    <Content Include="Content\chosen.min.css" />
     <Content Include="Content\defaultStyleSheet.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -149,11 +153,17 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="Scripts\snowinmars\bookDetails.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\defaultJavaScript.js" />
+    <Content Include="Scripts\chosen.jquery.js" />
+    <Content Include="Scripts\chosen.jquery.min.js" />
+    <Content Include="Scripts\chosen.proto.js" />
+    <Content Include="Scripts\chosen.proto.min.js" />
+    <Content Include="Scripts\snowinmars\defaultJavaScript.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\prototype.js" />
     <Content Include="Web.config" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>

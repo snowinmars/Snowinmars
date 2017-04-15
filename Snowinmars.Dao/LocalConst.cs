@@ -48,6 +48,14 @@
 				" from " + Author.TableName +
 				" where ( " + Column.Id + " = " + Parameter.Id + " ) ";
 
+			internal const string SelectAllCommand = @"
+				select " + Column.Id +
+			            "," + Column.FirstName +
+			            "," + Column.LastName +
+			            "," + Column.Surname +
+			            "," + Column.Shortcut +
+			            " from " + Author.TableName;
+
 			internal const string DeleteCommand = @"
 				delete
 				from " + Author.TableName +

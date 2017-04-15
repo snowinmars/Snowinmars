@@ -90,12 +90,36 @@ namespace Snowinmars.Dao
 
 		public IEnumerable<Author> Get(Expression<Func<Book, bool>> filter)
 		{
-			//using (var sqlConnection = new System.Data.SqlClient.SqlConnection(Constant.ConnectionString))
-			//{
-			//	return sqlConnection.Query<Author>($"select * from {AuthorDao.TableName}");
-			//}
+			using (var sqlConnection = new System.Data.SqlClient.SqlConnection(Constant.ConnectionString))
+			{
+				var command = new SqlCommand(LocalConst.Author.SelectAllCommand, sqlConnection);
 
-			throw new NotImplementedException();
+				sqlConnection.Open();
+				var reader = command.ExecuteReader();
+
+				List<Author> authors = new List<Author>();
+
+				while (reader.Read())
+				{
+					Guid authorId = (Guid)reader[LocalConst.Author.Column.Id];
+					string firstName = (string)reader[LocalConst.Author.Column.FirstName];
+					string lastName = (string)reader[LocalConst.Author.Column.LastName];
+					string surname = (string)reader[LocalConst.Author.Column.Surname];
+					string shortcut = (string)reader[LocalConst.Author.Column.Shortcut];
+
+					Author author = new Author(firstName, lastName, surname)
+					{
+						Id = authorId,
+						Shortcut = shortcut,
+					};
+
+					authors.Add(author);
+				}
+
+				sqlConnection.Close();
+
+				return authors;
+			}
 		}
 	}
 }

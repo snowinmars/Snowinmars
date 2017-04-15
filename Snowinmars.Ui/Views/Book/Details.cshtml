@@ -10,7 +10,7 @@
 <div>
     <h4>BookModel</h4>
     <hr />
-    <dl class="dl-horizontal">
+    <dl class="dl-horizontal" data-id="@Model.Id">
         <dt>
             @Html.DisplayNameFor(model => model.PageCount)
         </dt>
@@ -36,18 +36,11 @@
         </dd>
 		
 		<dt>
-			@Html.DisplayNameFor(model => model.AuthorModels)
+			@Html.DisplayNameFor(model => model.AuthorModelIds)
 		</dt>
 
 	    <dd>
-		    @{
-			    var authors = Model.AuthorModels.ToList();
-
-				List<SelectListItem> items = new List<SelectListItem>(authors.Count);
-			    items.AddRange(authors.Select(author => new SelectListItem() {Text = author.Shortcut,}));
-		    }
-
-		    @Html.DropDownList("authorDropdown", items, new Dictionary<string, object> {{"class", "authorDropdown"},})
+		    @Html.DropDownList("authorDropdown", new SelectListItem[0], new Dictionary<string, object> {{"class", "authorDropdown"}, { "multiple", "multiple" }, })
 	    </dd>
 
     </dl>
