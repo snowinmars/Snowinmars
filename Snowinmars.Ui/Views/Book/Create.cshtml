@@ -12,9 +12,12 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>BookModel</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+	    <h4>new book</h4>
+	    <hr />
+		<div>@Html.ActionLink("Back to List", "Index", "Book")</div>
+
+	    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.PageCount, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -55,9 +58,6 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index", "Home")
-</div>
 
 @section Scripts
 {

@@ -40,11 +40,29 @@ tbody>tr>th {
 	border: 0;
 }
 
-.btn-danger a {
+a .btn-danger {
 	color: #ffa500;
+}
+
+.btn-danger:hover {
+	background-color: #8a544d;
 }
 
 .btn-default {
 	background-color: #003B46;
+	color: #2aa198;
 	border: 0;
+}
+
+#authorModelIds_chosen {
+	min-width: 100%;
+}
+
+.search-choice {
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.search-choice-close {
+	margin-right: ex;
 }

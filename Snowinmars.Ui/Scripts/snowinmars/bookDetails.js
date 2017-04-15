@@ -1,5 +1,5 @@
 ﻿(function () {
-	var bookId = $(".dl-horizontal").data().id;
+	var bookId = $("#Id").attr("value");
 
 	$.ajax({
 		url: "/book/GetAuthors/" + bookId,

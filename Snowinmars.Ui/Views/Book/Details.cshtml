@@ -5,50 +5,52 @@
     Layout = "~/Views/Layouts/DefaultLayout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>About</h2>
 
 <div>
-    <h4>BookModel</h4>
+	<h4>book</h4>
+	<div>@Html.ActionLink("Back to List", "Index", "Book")</div>
     <hr />
-    <dl class="dl-horizontal" data-id="@Model.Id">
-        <dt>
+    <div class="mainBlock clearfix" data-id="@Model.Id">
+		@Html.HiddenFor(model => model.Id)
+	    
+		<div class="col-xs-6">
             @Html.DisplayNameFor(model => model.PageCount)
-        </dt>
+        </div>
 
-        <dd>
+        <div class="col-xs-6">
             @Html.DisplayFor(model => model.PageCount)
-        </dd>
+        </div>
 
-        <dt>
+        <div class="col-xs-6">
             @Html.DisplayNameFor(model => model.Title)
-        </dt>
+        </div>
 
-        <dd>
+        <div class="col-xs-6">
             @Html.DisplayFor(model => model.Title)
-        </dd>
+        </div>
 
-        <dt>
+        <div class="col-xs-6">
             @Html.DisplayNameFor(model => model.Year)
-        </dt>
+        </div>
 
-        <dd>
+        <div class="col-xs-6">
             @Html.DisplayFor(model => model.Year)
-        </dd>
+        </div>
 		
-		<dt>
+		<div class="col-xs-6">
 			@Html.DisplayNameFor(model => model.AuthorModelIds)
-		</dt>
+		</div>
 
-	    <dd>
+	    <div class="col-xs-6">
 			@Html.DropDownList("authorModelIds", new SelectListItem[0], new Dictionary<string, object> { { "class", "authorModelIds" }, { "multiple", "multiple" }, })
-	    </dd>
+	    </div>
 
-    </dl>
+    </div>
+<div class="actions col-xs-12">
+    @RenderPage("~/Views/Layouts/_EditDeleteActionPartialPanel.cshtml", Model.Id)
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", "Book", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index", "Home")
-</p>
+</div>
 
 @section Scripts
 {
