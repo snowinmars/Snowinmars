@@ -12,6 +12,7 @@ using Snowinmars.Ui.Models;
 
 namespace Snowinmars.Ui.Controllers
 {
+	[Route("book")]
     public class BookController : Controller
     {
 	    private readonly IBookLogic bookLogic;
@@ -21,6 +22,8 @@ namespace Snowinmars.Ui.Controllers
 		    this.bookLogic = bookLogic;
 	    }
 
+		[HttpGet]
+		[Route("")]
         public ActionResult Index()
         {
 			IEnumerable<Book> c;
@@ -42,13 +45,15 @@ namespace Snowinmars.Ui.Controllers
         }
 
 		[HttpGet]
+		[Route("create")]
 	    public ActionResult Create()
 	    {
             return View();
 		}
 
 	    [HttpPost]
-	    public ActionResult Create(BookModel bookModel)
+		[Route("create")]
+		public ActionResult Create(BookModel bookModel)
 	    {
 		    Book book = new Book(bookModel.Title, bookModel.PageCount)
 		    {
@@ -66,11 +71,24 @@ namespace Snowinmars.Ui.Controllers
 		    return new EmptyResult();
 	    }
 
+		[HttpGet]
+		[Route("edit")]
 	    public ActionResult Edit(Guid id)
-	    {
+		{
             return View();
 		}
 
+		[HttpPost]
+		[Route("edit")]
+		public ActionResult Edit(BookModel bookModel)
+		{
+
+
+			return new EmptyResult();
+		}
+
+		[HttpGet]
+		[Route("details")]
 	    public ActionResult Details(Guid id)
 	    {
 			Book book;
@@ -89,6 +107,8 @@ namespace Snowinmars.Ui.Controllers
             return View(bookModel);
 		}
 
+		[HttpGet]
+		[Route("delete")]
 	    public ActionResult Delete(Guid id)
 	    {
 			this.bookLogic.Remove(id);
@@ -97,6 +117,7 @@ namespace Snowinmars.Ui.Controllers
 	    }
 
 		[HttpPost]
+		[Route("getAuthors")]
 	    public JsonResult GetAuthors(Guid id)
 	    {
 		    IEnumerable<Author> authorIds = this.bookLogic.GetAuthors(id);

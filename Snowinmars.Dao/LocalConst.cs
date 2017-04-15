@@ -63,13 +63,11 @@
 
 			internal const string UpdateCommand = @"
 				update " + Author.TableName + @"
-				set
-					( " + Column.Id + " = " + Parameter.Id +
-						"," + Column.FirstName + " = " + Parameter.FirstName +
+				set " + Column.FirstName + " = " + Parameter.FirstName +
 						"," + Column.LastName + " = " + Parameter.LastName +
 						"," + Column.Surname + " = " + Parameter.Surname +
 						"," + Column.Shortcut + " = " + Parameter.Shortcut +
-				" where( " + Column.Id + " = " + Parameter.Id + " ) ";
+				" where ( " + Column.Id + " = " + Parameter.Id + " ) ";
 		}
 
 		internal class Book
@@ -133,9 +131,7 @@
 
 			internal const string UpdateCommand = 
 					" update " + Book.TableName +
-					" set ( " +
-							Column.Id + " = " + Parameter.Id +
-								"," + Column.Title + " = " + Parameter.Title +
+					" set ( " + Column.Title + " = " + Parameter.Title +
 								"," + Column.PageCount + " = " + Parameter.PageCount +
 								"," + Column.Year + " = " + Parameter.Year +
 								"," + Column.Authors + " = " + Parameter.Authors + 

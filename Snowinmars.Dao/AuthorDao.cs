@@ -82,14 +82,22 @@ namespace Snowinmars.Dao
 
 		public void Update(Author item)
 		{
-			//Validation.Check(author);
+			Validation.Check(item);
 
-			//using (var sqlConnection = new System.Data.SqlClient.SqlConnection(Constant.ConnectionString))
-			//{
-			//	sqlConnection.Execute(AuthorDao.UpdateCommand, param: new { author.Name, author.Surname, Tag = author.Shortcut, author.Id });
-			//}
+			using (var sqlConnection = new System.Data.SqlClient.SqlConnection(Constant.ConnectionString))
+			{
+				var command = new SqlCommand(LocalConst.Author.UpdateCommand, sqlConnection);
 
-			throw new NotImplementedException();
+				command.Parameters.AddWithValue(LocalConst.Author.Column.Id, item.Id);
+				command.Parameters.AddWithValue(LocalConst.Author.Column.FirstName, item.FirstName);
+				command.Parameters.AddWithValue(LocalConst.Author.Column.LastName, item.LastName);
+				command.Parameters.AddWithValue(LocalConst.Author.Column.Shortcut, item.Shortcut);
+				command.Parameters.AddWithValue(LocalConst.Author.Column.Surname, item.Surname);
+
+				sqlConnection.Open();
+				command.ExecuteNonQuery();
+				sqlConnection.Close();
+			}
 		}
 
 		public IEnumerable<Author> Get(Expression<Func<Book, bool>> filter)
