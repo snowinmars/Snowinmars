@@ -21,7 +21,7 @@ namespace Snowinmars.Ui.Controllers
 
 	    public ActionResult Index()
 	    {
-		    var c = this.authorLogic.Get(null);
+		    var c = this.authorLogic.Get(null).Select(a => new AuthorModel() {Id = a.Id, FirstName = a.FirstName, LastName = a.LastName, Shortcut = a.Shortcut, Surname = a.Surname});
 
 		    return View(c);
 	    }
@@ -65,6 +65,11 @@ namespace Snowinmars.Ui.Controllers
 	    public JsonResult GetAll()
 	    {
 		    return Json(this.authorLogic.Get(null));
+	    }
+
+	    public ActionResult Delete(Guid id)
+	    {
+		    throw new NotImplementedException();
 	    }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Web;
 using System.Web.Mvc;
 using Snowinmars.Bll.Interfaces;
@@ -23,7 +24,12 @@ namespace Snowinmars.Ui.Controllers
         {
 	        var c = this.bookLogic.Get(null);
 			
-            return View(c);
+			List<BookModel> models = c.Select(book => new BookModel()
+			{
+				Id = book.Id, Title = book.Title, Year = book.Year, PageCount = book.PageCount, AuthorModelIds = book.AuthorIds.ToList(),
+			}).ToList();
+
+	        return View(models);
         }
 
 		[HttpGet]
@@ -71,11 +77,15 @@ namespace Snowinmars.Ui.Controllers
 	    }
 
 		[HttpPost]
-	    public JsonResult GetAuthorIds(Guid id)
+	    public JsonResult GetAuthors(Guid id)
 	    {
-		    IEnumerable<Guid> authorIds = this.bookLogic.GetAuthorIds(id);
+		    IEnumerable<Author> authorIds = this.bookLogic.GetAuthors(id);
 
-		    return Json(authorIds);
+		    return Json(new
+		    {
+			    BookId = id,
+				Authors = authorIds,
+			});
 	    }
 	}
 }

@@ -40,7 +40,7 @@
 		</dt>
 
 	    <dd>
-		    @Html.DropDownList("authorDropdown", new SelectListItem[0], new Dictionary<string, object> {{"class", "authorDropdown"}, { "multiple", "multiple" }, })
+			@Html.DropDownList("authorModelIds", new SelectListItem[0], new Dictionary<string, object> { { "class", "authorModelIds" }, { "multiple", "multiple" }, })
 	    </dd>
 
     </dl>
@@ -49,3 +49,8 @@
     @Html.ActionLink("Edit", "Edit", "Book", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index", "Home")
 </p>
+
+@section Scripts
+{
+	<script src="~/Scripts/snowinmars/bookDetails.js"></script>
+}

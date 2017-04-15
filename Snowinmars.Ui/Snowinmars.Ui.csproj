@@ -153,6 +153,7 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="Scripts\snowinmars\bookCreate.js" />
     <Content Include="Scripts\snowinmars\bookDetails.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -160,6 +161,7 @@
     <Content Include="Scripts\chosen.jquery.min.js" />
     <Content Include="Scripts\chosen.proto.js" />
     <Content Include="Scripts\chosen.proto.min.js" />
+    <Content Include="Scripts\snowinmars\bookIndex.js" />
     <Content Include="Scripts\snowinmars\defaultJavaScript.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
@@ -188,11 +190,12 @@
     </Content>
     <Content Include="Views\Layouts\DefaultLayout.cshtml" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
-    <Content Include="Views\Book\Index.cshtml" />
     <Content Include="Views\Book\Create.cshtml" />
     <Content Include="Views\Author\Create.cshtml" />
     <Content Include="Views\Author\Details.cshtml" />
     <Content Include="Views\Book\Details.cshtml" />
+    <Content Include="Views\Author\Index.cshtml" />
+    <Content Include="Views\Book\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

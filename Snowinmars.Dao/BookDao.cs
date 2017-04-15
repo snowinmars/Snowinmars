@@ -144,21 +144,52 @@ namespace Snowinmars.Dao
 
 		public IEnumerable<Book> Get(Expression<Func<Book, bool>> filter)
 		{
-			//using (var sqlConnection = new System.Data.SqlClient.SqlConnection(Constant.ConnectionString))
-			//{
-			//	IEnumerable<Book> books = sqlConnection.Query<Book>($"select * from {BookDao.BookTableName}");
-			//	IEnumerable<Author> authors = this.authorDao.Get(a => true);
+			
+				IEnumerable<Book> books = this.GetAll();
 
-			//	foreach (var book in books)
-			//	{
-			//		book.Authors.Add(this.authorDao.Get());
-			//	}
-			//}
+				foreach (var book in books)
+				{
+					book.AuthorIds.AddRange(this.GetAuthors(book.Id).Select(a => a.Id));
+				}
 
-			throw new NotImplementedException();
+				return books;
+			
 		}
 
-		public IEnumerable<Guid> GetAuthorIds(Guid bookId)
+		private IEnumerable<Book> GetAll()
+		{
+			using (var sqlConnection = new System.Data.SqlClient.SqlConnection(Constant.ConnectionString))
+			{
+				var command = new SqlCommand(LocalConst.Book.SelectAllCommand, sqlConnection);
+
+				sqlConnection.Open();
+				var reader = command.ExecuteReader();
+
+				List<Book> books = new List<Book>();
+
+				while (reader.Read())
+				{
+					Guid bookId = (Guid)reader[LocalConst.Book.Column.Id];
+					string title = (string)reader[LocalConst.Book.Column.Title];
+					int year = (int)reader[LocalConst.Book.Column.Year];
+					int pageCount = (int)reader[LocalConst.Book.Column.PageCount];
+
+					Book book = new Book(title, pageCount)
+					{
+						Id = bookId,
+						Year = year,
+					};
+
+					books.Add(book);
+				}
+
+				sqlConnection.Close();
+
+				return books;
+			}
+		}
+
+		public IEnumerable<Author> GetAuthors(Guid bookId)
 		{
 			using (var sqlConnection = new System.Data.SqlClient.SqlConnection(Constant.ConnectionString))
 			{
@@ -169,16 +200,17 @@ namespace Snowinmars.Dao
 				sqlConnection.Open();
 				var reader = command.ExecuteReader();
 
-				List<Guid> authorIds = new List<Guid>();
+				List<Author> authors = new List<Author>();
 				while (reader.Read())
 				{
 					Guid g = (Guid) reader[LocalConst.BookAuthor.Column.AuthorId];
-					authorIds.Add(g);
+
+					authors.Add(this.authorDao.Get(g));
 				}
 
 				sqlConnection.Close();
 
-				return authorIds;
+				return authors;
 			}
 		}
 	}

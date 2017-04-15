@@ -44,9 +44,9 @@ namespace Snowinmars.Bll
 			return this.bookLogicDestination.Get(filter);
 		}
 
-		public IEnumerable<Guid> GetAuthorIds(Guid bookId)
+		public IEnumerable<Author> GetAuthors(Guid bookId)
 		{
-			return this.bookLogicDestination.GetAuthorIds(bookId);
+			return this.bookLogicDestination.GetAuthors(bookId);
 		}
 	}
 }

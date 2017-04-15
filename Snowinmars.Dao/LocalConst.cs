@@ -117,7 +117,14 @@
 					" from " + Book.TableName + " b " +
 						" inner join " + BookAuthor.TableName + " c " +
 							" on b." + Column.Id + " = " + " c." + BookAuthor.Column.BookId + 
-					" where ( b." + Column.Id + " = " + Parameter.Id + " ) ";
+					" where ( b." + Column.Id + " = " + Parameter.Id + " ) "; // TODO remove join?
+
+			internal const string SelectAllCommand =
+					" select " + Column.Id +
+							"," + Column.Title +
+							"," + Column.PageCount +
+							"," + Column.Year +
+					" from " + Book.TableName;
 
 			internal const string DeleteCommand =
 					" delete " + 
