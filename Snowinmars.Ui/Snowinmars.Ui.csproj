@@ -142,6 +142,7 @@
     <Content Include="Content\chosen-sprite.png" />
     <Content Include="Content\chosen.css" />
     <Content Include="Content\chosen.min.css" />
+    <Content Include="Content\cyborg.bootstrap.min.css" />
     <Content Include="Content\defaultStyleSheet.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -182,6 +183,7 @@
     </Compile>
     <Compile Include="Models\AuthorModel.cs" />
     <Compile Include="Models\BookModel.cs" />
+    <Compile Include="Models\EntityModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -201,6 +203,8 @@
     <Content Include="Views\Book\BrokenDetails.cshtml" />
     <Content Include="Views\Author\Edit.cshtml" />
     <Content Include="Views\Book\Edit.cshtml" />
+    <Content Include="Views\Layouts\_EditDetailsDeleteActionPartialPanel.cshtml" />
+    <Content Include="Views\Layouts\_EditDeleteActionPartialPanel.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

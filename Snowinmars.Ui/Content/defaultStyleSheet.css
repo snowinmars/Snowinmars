@@ -9,3 +9,42 @@
 #authorModelIds_chosen {
 	min-width: 60ex;
 }
+
+.active {
+	margin-left: 2px;
+}
+
+.table,
+tbody>tr>th {
+	text-align: center;
+}
+
+.table>tbody>tr>th {
+	padding: 8px 0;
+}
+
+.table>tbody>tr>th:first-child {
+	padding-left: 8px;
+}
+
+.actions {
+	text-align: center;
+}
+
+.mainBlock {
+	margin-bottom: 30px;
+}
+
+.btn-danger {
+	background-color: #6a342d;
+	border: 0;
+}
+
+.btn-danger a {
+	color: #ffa500;
+}
+
+.btn-default {
+	background-color: #003B46;
+	border: 0;
+}

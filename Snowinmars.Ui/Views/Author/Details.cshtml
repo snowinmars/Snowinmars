@@ -8,45 +8,45 @@
 <h2>Details</h2>
 
 <div>
-    <h4>AuthorModel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
+	<h4>Author's info</h4>
+	<div>@Html.ActionLink("Back to List", "Index", "Author")</div>
+	<hr />
 
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
+	<div class="clearfix mainBlock">
+		<div class="col-xs-6">
+			@Html.DisplayNameFor(model => model.FirstName)
+		</div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
+		<div class="col-xs-6">
+			@Html.DisplayFor(model => model.FirstName)
+		</div>
 
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
+		<div class="col-xs-6">
+			@Html.DisplayNameFor(model => model.LastName)
+		</div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Surname)
-        </dt>
+		<div class="col-xs-6">
+			@Html.DisplayFor(model => model.LastName)
+		</div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Surname)
-        </dd>
+		<div class="col-xs-6">
+			@Html.DisplayNameFor(model => model.Surname)
+		</div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Shortcut)
-        </dt>
+		<div class="col-xs-6">
+			@Html.DisplayFor(model => model.Surname)
+		</div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Shortcut)
-        </dd>
+		<div class="col-xs-6">
+			@Html.DisplayNameFor(model => model.Shortcut)
+		</div>
 
-    </dl>
+		<div class="col-xs-6">
+			@Html.DisplayFor(model => model.Shortcut)
+		</div>
+	</div>
+
+	<div class="actions col-xs-12">
+		@RenderPage("~/Views/Layouts/_EditDeleteActionPartialPanel.cshtml", Model.Id)
+	</div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", "Author",  new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index", "Home")
-</p>
-

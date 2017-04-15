@@ -184,7 +184,6 @@ namespace Snowinmars.Dao
 						newAuthors.Remove(oldAuthor);
 						oldAuthors.Remove(oldAuthor);
 					}
-
 				}
 
 				if (oldAuthors.Any())

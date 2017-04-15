@@ -12,9 +12,12 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>AuthorModel</h4>
+
+	    <h4>Create new author</h4>
+		<div>@Html.ActionLink("Back to List", "Index", "Author")</div>
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+	    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -55,6 +58,3 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index", "Home")
-</div>

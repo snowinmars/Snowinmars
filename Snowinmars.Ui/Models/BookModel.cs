@@ -7,9 +7,8 @@ using Snowinmars.Entities;
 
 namespace Snowinmars.Ui.Models
 {
-	public class BookModel
+	public class BookModel : EntityModel
 	{
-		public Guid Id { get; set; }
 		public IEnumerable<Guid> AuthorModelIds { get; set; }
 		public int PageCount { get; set; }
 		public string Title { get; set; }

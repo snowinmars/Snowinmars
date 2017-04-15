@@ -1,0 +1,7 @@
+﻿@{
+	var g = (Guid)PageData[0];
+}
+
+<span class="btn btn-default hidden-sm hidden-xs col-md-2 col-md-offset-1">@Html.ActionLink("Edit", "Edit", new { id = g}) </span>
+<span class="btn btn-default col-md-2 col-md-offset-2">@Html.ActionLink("Details", "Details", new { id = g }) </span>
+<span class="btn btn-danger hidden-sm hidden-xs col-md-2 col-md-offset-2">@Html.ActionLink("Delete", "Delete", new { id = g })</span>
