@@ -69,7 +69,9 @@ namespace Snowinmars.Ui.Controllers
 
 	    public ActionResult Delete(Guid id)
 	    {
-		    throw new NotImplementedException();
+			this.authorLogic.Remove(id);
+
+		    return new EmptyResult();
 	    }
     }
 }

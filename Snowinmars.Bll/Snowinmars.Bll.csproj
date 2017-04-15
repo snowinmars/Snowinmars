@@ -12,7 +12,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
-    <ProjectGuid>{a6737d90-70db-4c6c-b80f-f4a1613de137}</ProjectGuid>
+    <ProjectGuid>{A6737D90-70DB-4C6C-B80F-F4A1613DE137}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>Snowinmars.Bll</RootNamespace>
     <TargetFrameworkVersion>4.6.2</TargetFrameworkVersion>
@@ -45,6 +45,8 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

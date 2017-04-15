@@ -122,12 +122,16 @@ namespace Snowinmars.Dao
 
 		public void Remove(Guid id)
 		{
-			//using (var sqlConnection = new System.Data.SqlClient.SqlConnection(Constant.ConnectionString))
-			//{
-			//	sqlConnection.Execute(BookDao.DeleteCommand, param: new { id });
-			//}
+			using (var sqlConnection = new System.Data.SqlClient.SqlConnection(Constant.ConnectionString))
+			{
+				var command = new SqlCommand(LocalConst.Book.DeleteCommand, sqlConnection);
 
-			throw new NotImplementedException();
+				command.Parameters.AddWithValue(LocalConst.Book.Column.Id, id);
+
+				sqlConnection.Open();
+				command.ExecuteNonQuery();
+				sqlConnection.Close();
+			}
 		}
 
 		public void Update(Book item)

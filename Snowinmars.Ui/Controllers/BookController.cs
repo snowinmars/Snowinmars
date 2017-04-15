@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Web;
@@ -22,9 +23,17 @@ namespace Snowinmars.Ui.Controllers
 
         public ActionResult Index()
         {
-	        var c = this.bookLogic.Get(null);
-			
-			List<BookModel> models = c.Select(book => new BookModel()
+			IEnumerable<Book> c;
+			try
+			{
+		        c = this.bookLogic.Get(null);
+			}
+			catch (ObjectNotFoundException e)
+			{
+				return View("BrokenDetails");
+			}
+
+	        List<BookModel> models = c.Select(book => new BookModel()
 			{
 				Id = book.Id, Title = book.Title, Year = book.Year, PageCount = book.PageCount, AuthorModelIds = book.AuthorIds.ToList(),
 			}).ToList();
@@ -64,7 +73,16 @@ namespace Snowinmars.Ui.Controllers
 
 	    public ActionResult Details(Guid id)
 	    {
-		    var book = this.bookLogic.Get(id);
+			Book book;
+
+			try
+		    {
+			    book = this.bookLogic.Get(id);
+		    }
+			catch (ObjectNotFoundException e)
+			{
+				return View("BrokenDetails");
+			}
 
 			BookModel bookModel = BookModel.Map(book);
 
@@ -73,7 +91,9 @@ namespace Snowinmars.Ui.Controllers
 
 	    public ActionResult Delete(Guid id)
 	    {
-            return View();
+			this.bookLogic.Remove(id);
+
+			return new EmptyResult();
 	    }
 
 		[HttpPost]
