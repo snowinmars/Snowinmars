@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Snowinmars.Ui.Models.AuthorModel>
+﻿@model IEnumerable<Snowinmars.Ui.ViewModels.Author.DetailsViewModel>
 
 @{
 	ViewBag.Title = "Index";
@@ -10,34 +10,60 @@
 <p>
 	@Html.ActionLink("Create new author", "Create", "Author")
 </p>
-<table class="table table-bordered">
+<table id="authorTable" class="table table-bordered" data-sortable>
+	<thead>
 	<tr>
 		<th>
-			@Html.DisplayNameFor(model => model.FirstName)
+			@Html.DisplayNameFor(model => model.GivenName)
 		</th>
 		<th>
-			@Html.DisplayNameFor(model => model.LastName)
+			@Html.DisplayNameFor(model => model.FullMiddleName)
 		</th>
 		<th>
-			@Html.DisplayNameFor(model => model.Surname)
+			@Html.DisplayNameFor(model => model.FamilyName)
 		</th>
 		<th>
 			@Html.DisplayNameFor(model => model.Shortcut)
 		</th>
-		<th></th>
+		<th class="col-xs-2"></th>
 	</tr>
-
+	</thead>
+	
+	<tbody>
 	@foreach (var item in Model)
 	{
 		<tr>
 			<td>
-				@Html.DisplayFor(modelItem => item.FirstName)
+				<span class="col-xs-12">@Html.DisplayFor(modelItem => item.GivenName)</span>
+				
+				@if (item.GivenName == "Илья")
+				{
+					int a = 2 * 2;
+				}
+
+				@if (!string.IsNullOrWhiteSpace(item.PseudonymGivenName) &&
+					item.GivenName != item.PseudonymGivenName)
+				{
+					<span class="col-xs-12">pseudo: @Html.DisplayFor(modelItem => item.PseudonymGivenName)</span>
+				}
 			</td>
 			<td>
-				@Html.DisplayFor(modelItem => item.LastName)
+				<span class="col-xs-12">@Html.DisplayFor(modelItem => item.FullMiddleName)</span>
+				
+				@if (!string.IsNullOrWhiteSpace(item.PseudonymFullMiddleName) &&
+					item.FullMiddleName != item.PseudonymFullMiddleName)
+				{
+					<span class="col-xs-12">pseudo: @Html.DisplayFor(modelItem => item.PseudonymFullMiddleName)</span>
+				}
 			</td>
 			<td>
-				@Html.DisplayFor(modelItem => item.Surname)
+				<span class="col-xs-12">@Html.DisplayFor(modelItem => item.FamilyName)</span>
+				
+				@if (!string.IsNullOrWhiteSpace(item.PseudonymFamilyName) &&
+					item.FamilyName != item.PseudonymFamilyName)
+				{
+					<span class="col-xs-12">pseudo: @Html.DisplayFor(modelItem => item.PseudonymFamilyName)</span>
+				}
 			</td>
 			<td>
 				@Html.DisplayFor(modelItem => item.Shortcut)
@@ -47,4 +73,9 @@
 			</td>
 		</tr>
 	}
+	</tbody>
 </table>
+
+@section Scripts{
+	<script src="~/Scripts/snowinmars/authorIndex.js"></script>
+}

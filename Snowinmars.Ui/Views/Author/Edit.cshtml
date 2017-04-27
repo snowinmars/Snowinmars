@@ -1,4 +1,4 @@
-﻿@model Snowinmars.Ui.Models.AuthorModel
+﻿@model Snowinmars.Ui.ViewModels.Author.UpdateViewModel
 
 @{
 	ViewBag.Title = "Edit";
@@ -21,26 +21,53 @@
 		@Html.HiddenFor(model => model.Id)
 
 		<div class="form-group">
-			@Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
-			<div class="col-md-10">
-				@Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-				@Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+			<div>
+				@Html.LabelFor(model => model.GivenName, htmlAttributes: new { @class = "control-label col-md-2" })
+				<div class="col-md-10">
+					@Html.EditorFor(model => model.GivenName, new { htmlAttributes = new { @class = "form-control", autofocus = "autofocus" } })
+					@Html.ValidationMessageFor(model => model.GivenName, "", new { @class = "text-danger" })
+				</div>
+			</div>
+			<div>
+				@Html.LabelFor(model => model.PseudonymGivenName, htmlAttributes: new { @class = "control-label col-md-2" })
+				<div class="col-md-10">
+					@Html.EditorFor(model => model.PseudonymGivenName, new { htmlAttributes = new { @class = "form-control", autofocus = "autofocus" } })
+					@Html.ValidationMessageFor(model => model.PseudonymGivenName, "", new { @class = "text-danger" })
+				</div>
 			</div>
 		</div>
 
 		<div class="form-group">
-			@Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
-			<div class="col-md-10">
-				@Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
-				@Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+			<div>
+				@Html.LabelFor(model => model.FullMiddleName, htmlAttributes: new { @class = "control-label col-md-2" })
+				<div class="col-md-10">
+					@Html.EditorFor(model => model.FullMiddleName, new { htmlAttributes = new { @class = "form-control" } })
+					@Html.ValidationMessageFor(model => model.FullMiddleName, "", new { @class = "text-danger" })
+				</div>
+			</div>
+			<div>
+				@Html.LabelFor(model => model.PseudonymFullMiddleName, htmlAttributes: new { @class = "control-label col-md-2" })
+				<div class="col-md-10">
+					@Html.EditorFor(model => model.PseudonymFullMiddleName, new { htmlAttributes = new { @class = "form-control" } })
+					@Html.ValidationMessageFor(model => model.PseudonymFullMiddleName, "", new { @class = "text-danger" })
+				</div>
 			</div>
 		</div>
 
 		<div class="form-group">
-			@Html.LabelFor(model => model.Surname, htmlAttributes: new { @class = "control-label col-md-2" })
-			<div class="col-md-10">
-				@Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "form-control" } })
-				@Html.ValidationMessageFor(model => model.Surname, "", new { @class = "text-danger" })
+			<div>
+				@Html.LabelFor(model => model.FamilyName, htmlAttributes: new { @class = "control-label col-md-2" })
+				<div class="col-md-10">
+					@Html.EditorFor(model => model.FamilyName, new { htmlAttributes = new { @class = "form-control" } })
+					@Html.ValidationMessageFor(model => model.FamilyName, "", new { @class = "text-danger" })
+				</div>
+			</div>
+			<div>
+				@Html.LabelFor(model => model.PseudonymFamilyName, htmlAttributes: new {@class = "control-label col-md-2"})
+				<div class="col-md-10">
+					@Html.EditorFor(model => model.PseudonymFamilyName, new {htmlAttributes = new {@class = "form-control"}})
+					@Html.ValidationMessageFor(model => model.PseudonymFamilyName, "", new {@class = "text-danger"})
+				</div>
 			</div>
 		</div>
 

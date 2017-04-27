@@ -22,6 +22,11 @@ namespace Snowinmars.Bll
 		{
 			Validation.Check(item);
 
+			if (item.Shortcut == string.Empty)
+			{
+				item.Shortcut = item.FamilyName;
+			}
+
 			this.authorDao.Create(item);
 		}
 
@@ -47,6 +52,11 @@ namespace Snowinmars.Bll
 		public void Update(Author item)
 		{
 			Validation.Check(item);
+
+			if (item.Shortcut == string.Empty)
+			{
+				item.Shortcut = item.FamilyName;
+			}
 
 			this.authorDao.Update(item);
 		}

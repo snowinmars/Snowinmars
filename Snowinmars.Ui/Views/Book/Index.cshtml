@@ -1,52 +1,67 @@
-﻿@model IEnumerable<Snowinmars.Ui.Models.BookModel>
+﻿@using Snowinmars.Ui.ViewModels.Author
+@model IEnumerable<Snowinmars.Ui.ViewModels.Book.DetailsViewModel>
 
 @{
 	ViewBag.Title = "Index";
 	Layout = "~/Views/Layouts/DefaultLayout.cshtml";
+
+	List<DetailsViewModel> authors = new List<Snowinmars.Ui.ViewModels.Author.DetailsViewModel>();
+
+	foreach (var book in Model)
+	{
+		foreach (var author in book.AuthorModels)
+		{
+			
+		}
+	}
 }
 
 <h2>All books</h2>
 
 <p>
-	@Html.ActionLink("Create new book", "Create")
+	@Html.ActionLink("Create new book (N)", "Create", "Book")
 </p>
-<table class="table">
-	<tr>
-		<th class="col-xs-2">
-			@Html.DisplayNameFor(model => model.PageCount)
-		</th>
-		<th class="col-xs-1">
-			@Html.DisplayNameFor(model => model.Title)
-		</th>
-		<th class="col-xs-1">
-			@Html.DisplayNameFor(model => model.Year)
-		</th>
-		<th class="col-xs-4">
-			@Html.DisplayNameFor(model => model.AuthorModelIds)
-		</th>
-		<th class="col-xs-4"></th>
-	</tr>
-
-	@foreach (var item in Model)
-	{
-		<tr class="book" data-id="@item.Id">
-			<td class="col-xs-2">
-				@Html.DisplayFor(modelItem => item.PageCount)
-			</td>
-			<td class="col-xs-1">
-				@Html.DisplayFor(modelItem => item.Title)
-			</td>
-			<td class="col-xs-1">
-				@Html.DisplayFor(modelItem => item.Year)
-			</td>
-			<td class="col-xs-4">
-				@Html.DropDownList("authorModelIds", new SelectListItem[0], new Dictionary<string, object> { { "class", "authorModelIds" }, { "multiple", "multiple" }, })
-			</td>
-			<td class="col-xs-4">
-				@RenderPage("~/Views/Layouts/_EditDetailsDeleteActionPartialPanel.cshtml", item.Id)
-			</td>
+<table id="authorTable" class="table" data-sortable>
+	<thead>
+		<tr>
+			<th class="col-xs-2">
+				@Html.DisplayNameFor(model => model.PageCount)
+			</th>
+			<th class="col-xs-1">
+				@Html.DisplayNameFor(model => model.Title)
+			</th>
+			<th class="col-xs-1">
+				@Html.DisplayNameFor(model => model.Year)
+			</th>
+			<th class="col-xs-4">
+				@Html.DisplayNameFor(model => model.AuthorModels)
+			</th>
+			<th class="col-xs-4"></th>
 		</tr>
-	}
+	</thead>
+	
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr class="book" data-id="@item.Id">
+				<td class="col-xs-2">
+					@Html.DisplayFor(modelItem => item.PageCount)
+				</td>
+				<td class="col-xs-1">
+					@Html.DisplayFor(modelItem => item.Title)
+				</td>
+				<td class="col-xs-1">
+					@Html.DisplayFor(modelItem => item.Year)
+				</td>
+				<td class="col-xs-4">
+					@Html.DropDownList("authorModels", new SelectListItem[0], new Dictionary<string, object> { { "class", "authorModels" }, { "multiple", "multiple" }, })
+				</td>
+				<td class="col-xs-4">
+					@RenderPage("~/Views/Layouts/_EditDetailsDeleteActionPartialPanel.cshtml", item.Id)
+				</td>
+			</tr>
+		}
+	</tbody>
 </table>
 
 @section Scripts

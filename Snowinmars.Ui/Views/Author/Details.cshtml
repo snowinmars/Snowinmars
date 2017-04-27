@@ -1,4 +1,4 @@
-﻿@model Snowinmars.Ui.Models.AuthorModel
+﻿@model Snowinmars.Ui.ViewModels.Author.DetailsViewModel
 
 @{
 	ViewBag.Title = "Details";
@@ -13,36 +13,83 @@
 	<hr />
 
 	<div class="clearfix mainBlock">
-		<div class="col-xs-6">
-			@Html.DisplayNameFor(model => model.FirstName)
+		<div class="detailsBlock clearfix">
+			<div class="col-xs-12">
+				<div class="col-xs-6">
+					@Html.DisplayNameFor(model => model.GivenName)
+				</div>
+
+				<div class="col-xs-6">
+					@Html.DisplayFor(model => model.GivenName)
+				</div>
+			</div>
+			
+			<div class="col-xs-12">
+				<div class="col-xs-6">
+					@Html.DisplayNameFor(model => model.PseudonymGivenName)
+				</div>
+
+				<div class="col-xs-6">
+					@Html.DisplayFor(model => model.PseudonymGivenName)
+				</div>
+			</div>
+		</div>
+		
+		<div class="detailsBlock clearfix"> @*WHY*@
+			<div class="col-xs-12">
+				<div class="col-xs-6">
+					@Html.DisplayNameFor(model => model.FullMiddleName)
+				</div>
+
+				<div class="col-xs-6">
+					@Html.DisplayFor(model => model.FullMiddleName)
+				</div>
+			</div>
+			
+			<div class="col-xs-12">
+
+				<div class="col-xs-6">
+					@Html.DisplayNameFor(model => model.PseudonymFullMiddleName)
+				</div>
+
+				<div class="col-xs-6">
+					@Html.DisplayFor(model => model.PseudonymFullMiddleName)
+				</div>
+			</div>
 		</div>
 
-		<div class="col-xs-6">
-			@Html.DisplayFor(model => model.FirstName)
-		</div>
+		<div class="detailsBlock clearfix">
+			<div class="col-xs-12">
 
-		<div class="col-xs-6">
-			@Html.DisplayNameFor(model => model.LastName)
-		</div>
+				<div class="col-xs-6">
+					@Html.DisplayNameFor(model => model.FamilyName)
+				</div>
 
-		<div class="col-xs-6">
-			@Html.DisplayFor(model => model.LastName)
-		</div>
+				<div class="col-xs-6">
+					@Html.DisplayFor(model => model.FamilyName)
+				</div>
+			</div>
 
-		<div class="col-xs-6">
-			@Html.DisplayNameFor(model => model.Surname)
-		</div>
+			<div class="col-xs-12">
 
-		<div class="col-xs-6">
-			@Html.DisplayFor(model => model.Surname)
-		</div>
+				<div class="col-xs-6">
+					@Html.DisplayNameFor(model => model.PseudonymFamilyName)
+				</div>
 
-		<div class="col-xs-6">
-			@Html.DisplayNameFor(model => model.Shortcut)
+				<div class="col-xs-6">
+					@Html.DisplayFor(model => model.PseudonymFamilyName)
+				</div>
+			</div>
 		</div>
+		
+		<div class="col-xs-12 detailsBlock">
+			<div class="col-xs-6">
+				@Html.DisplayNameFor(model => model.Shortcut)
+			</div>
 
-		<div class="col-xs-6">
-			@Html.DisplayFor(model => model.Shortcut)
+			<div class="col-xs-6">
+				@Html.DisplayFor(model => model.Shortcut)
+			</div>
 		</div>
 	</div>
 

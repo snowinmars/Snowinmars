@@ -6,7 +6,7 @@
 	left: 0;
 }
 
-#authorModelIds_chosen {
+#authorModels_chosen {
 	min-width: 60ex;
 }
 
@@ -54,7 +54,7 @@ a .btn-danger {
 	border: 0;
 }
 
-#authorModelIds_chosen {
+#authorModels_chosen {
 	min-width: 100%;
 }
 
@@ -63,6 +63,22 @@ a .btn-danger {
 	overflow: hidden;
 }
 
-.search-choice-close {
-	margin-right: ex;
+.asd:first-letter{
+    text-transform: uppercase;
+}
+
+.glyphicon:before {
+	margin-left: -0.4ex;
+}
+
+.detailsBlock {
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+	box-sizing: border-box;
+	border: transparent solid 1px;
+	border-bottom: darkslategrey solid 1px;
+}
+
+hr {
+	border-color: darkslategrey;
 }

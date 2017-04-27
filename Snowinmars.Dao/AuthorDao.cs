@@ -18,12 +18,7 @@ namespace Snowinmars.Dao
 			using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
 			{
 				var command = new SqlCommand(LocalConst.Author.InsertCommand, sqlConnection);
-
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.Id, item.Id);
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.FirstName, item.FirstName);
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.LastName, item.LastName);
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.Surname, item.Surname);
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.Shortcut, item.Shortcut);
+				this.InjectParameters(item, command);
 
 				sqlConnection.Open();
 				command.ExecuteNonQuery();
@@ -47,7 +42,7 @@ namespace Snowinmars.Dao
 					throw new ObjectNotFoundException();
 				}
 
-				var author = this.MapAuthor(reader);
+				var author = LocalCommon.MapAuthor(reader);
 				sqlConnection.Close();
 
 				return author;
@@ -62,7 +57,7 @@ namespace Snowinmars.Dao
 
 				sqlConnection.Open();
 				var reader = command.ExecuteReader();
-				var authors = this.MapAuthors(reader);
+				var authors = LocalCommon.MapAuthors(reader);
 				sqlConnection.Close();
 
 				return authors;
@@ -91,11 +86,7 @@ namespace Snowinmars.Dao
 			{
 				var command = new SqlCommand(LocalConst.Author.UpdateCommand, sqlConnection);
 
-				command.Parameters.AddWithValue(LocalConst.Author.Column.Id, item.Id);
-				command.Parameters.AddWithValue(LocalConst.Author.Column.FirstName, item.FirstName);
-				command.Parameters.AddWithValue(LocalConst.Author.Column.LastName, item.LastName);
-				command.Parameters.AddWithValue(LocalConst.Author.Column.Shortcut, item.Shortcut);
-				command.Parameters.AddWithValue(LocalConst.Author.Column.Surname, item.Surname);
+				this.InjectParameters(item, command);
 
 				sqlConnection.Open();
 				command.ExecuteNonQuery();
@@ -103,33 +94,32 @@ namespace Snowinmars.Dao
 			}
 		}
 
-		private Author MapAuthor(IDataRecord reader)
-		{
-			Guid authorId = (Guid)reader[LocalConst.Author.Column.Id];
-			string firstName = (string)reader[LocalConst.Author.Column.FirstName];
-			string lastName = (string)reader[LocalConst.Author.Column.LastName];
-			string surname = (string)reader[LocalConst.Author.Column.Surname];
-			string shortcut = (string)reader[LocalConst.Author.Column.Shortcut];
+		
 
-			return new Author(firstName, lastName, surname)
-			{
-				Id = authorId,
-				Shortcut = shortcut,
-			};
+		private void InjectParameters(Author item, SqlCommand command)
+		{
+			var pseudonymGivenName = LocalCommon.ConvertToDbValue(item.Pseudonym.GivenName);
+			var pseudonymFullMiddleName = LocalCommon.ConvertToDbValue(item.Pseudonym.FullMiddleName);
+			var pseudonymFamilyName = LocalCommon.ConvertToDbValue(item.Pseudonym.FamilyName);
+			var id = LocalCommon.ConvertToDbValue(item.Id);
+			var givenName = LocalCommon.ConvertToDbValue(item.GivenName);
+			var fullMiddleName = LocalCommon.ConvertToDbValue(item.FullMiddleName);
+			var familyName = LocalCommon.ConvertToDbValue(item.FamilyName);
+			var shortcut = LocalCommon.ConvertToDbValue(item.Shortcut);
+
+			command.Parameters.AddWithValue(LocalConst.Author.Parameter.Id, id);
+			command.Parameters.AddWithValue(LocalConst.Author.Parameter.GivenName, givenName);
+			command.Parameters.AddWithValue(LocalConst.Author.Parameter.FullMiddleName, fullMiddleName);
+			command.Parameters.AddWithValue(LocalConst.Author.Parameter.FamilyName, familyName);
+			command.Parameters.AddWithValue(LocalConst.Author.Parameter.Shortcut, shortcut);
+			command.Parameters.AddWithValue(LocalConst.Author.Parameter.PseudonymGivenName, pseudonymGivenName);
+			command.Parameters.AddWithValue(LocalConst.Author.Parameter.PseudonymFullMiddleName, pseudonymFullMiddleName);
+			command.Parameters.AddWithValue(LocalConst.Author.Parameter.PseudonymFamilyName, pseudonymFamilyName);
 		}
 
-		private IEnumerable<Author> MapAuthors(IDataReader reader)
-		{
-			List<Author> authors = new List<Author>();
+	
 
-			while (reader.Read())
-			{
-				Author author = this.MapAuthor(reader);
+		
 
-				authors.Add(author);
-			}
-
-			return authors;
-		}
 	}
 }

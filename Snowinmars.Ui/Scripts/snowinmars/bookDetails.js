@@ -5,15 +5,15 @@
 		url: "/book/GetAuthors/" + bookId,
 		type: "POST",
 		success: function (data) {
-			var authorModelIds = $(".authorModelIds");
+			var authorModels = $(".authorModels");
 			var l = data.Authors.length;
 
 			for (var i = 0; i < l; i++) {
-				authorModelIds.append("<option value=\"" + data.Authors[i].Id + "\" selected=\"selected\">" + data.Authors[i].Shortcut + "</option>");
+				authorModels.append("<option value=\"" + data.Authors[i].Id + "\" selected=\"selected\">" + data.Authors[i].Shortcut + "</option>");
 			}
 
-			authorModelIds.prop('disabled', 'disabled');
-			authorModelIds.chosen({ no_results_text: "Oops, nothing found!" });
+			authorModels.prop('disabled', 'disabled');
+			authorModels.chosen({ no_results_text: "Oops, nothing found!" });
 		}
 	});
 })();

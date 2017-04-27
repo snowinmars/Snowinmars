@@ -1,4 +1,4 @@
-﻿@model Snowinmars.Ui.Models.BookModel
+﻿@model Snowinmars.Ui.ViewModels.Book.DetailsViewModel
 
 @{
 	ViewBag.Title = "Details";
@@ -39,11 +39,11 @@
 		</div>
 
 		<div class="col-xs-6">
-			@Html.DisplayNameFor(model => model.AuthorModelIds)
+			@Html.DisplayNameFor(model => model.AuthorModels)
 		</div>
 
 		<div class="col-xs-6">
-			@Html.DropDownList("authorModelIds", new SelectListItem[0], new Dictionary<string, object> { { "class", "authorModelIds" }, { "multiple", "multiple" }, })
+			@Html.DropDownList("authorModels", new SelectListItem[0], new Dictionary<string, object> { { "class", "authorModels" }, { "multiple", "multiple" }, })
 		</div>
 	</div>
 	<div class="actions col-xs-12">

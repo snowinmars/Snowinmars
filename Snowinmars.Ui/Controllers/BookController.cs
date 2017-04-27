@@ -1,12 +1,14 @@
 ﻿using Snowinmars.Bll.Interfaces;
 using Snowinmars.Common;
 using Snowinmars.Entities;
-using Snowinmars.Ui.Models;
+using Snowinmars.Ui.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.Routing;
+using Newtonsoft.Json;
 
 namespace Snowinmars.Ui.Controllers
 {
@@ -29,22 +31,22 @@ namespace Snowinmars.Ui.Controllers
 
 		[HttpPost]
 		[Route("create")]
-		public ActionResult Create(BookModel bookModel)
+		public ActionResult Create(ViewModels.Book.CreateViewModel bookModel)
 		{
-			Book book = new Book(bookModel.Title, bookModel.PageCount)
+			Book book = new Book(bookModel.Title.Trim(), bookModel.PageCount)
 			{
 				Year = bookModel.Year,
 			};
 
-			if (bookModel.AuthorModelIds != null &&
-				bookModel.AuthorModelIds.Any())
+			if (bookModel.AuthorModels != null &&
+				bookModel.AuthorModels.Any())
 			{
-				book.AuthorIds.AddRange(bookModel.AuthorModelIds);
+				book.Authors.AddRange(bookModel.AuthorModels);
 			}
 
 			this.bookLogic.Create(book);
 
-			return new EmptyResult();
+			return new RedirectResult(Url.Action("Index", "Book"));
 		}
 
 		[HttpGet]
@@ -53,7 +55,7 @@ namespace Snowinmars.Ui.Controllers
 		{
 			this.bookLogic.Remove(id);
 
-			return new EmptyResult();
+			return new RedirectResult(Url.Action("Index", "Book"));
 		}
 
 		[HttpGet]
@@ -71,7 +73,7 @@ namespace Snowinmars.Ui.Controllers
 				return View("BrokenDetails");
 			}
 
-			BookModel bookModel = BookModel.Map(book);
+			ViewModels.Book.DetailsViewModel bookModel = ViewModels.Book.DetailsViewModel.Map(book);
 
 			return View(bookModel);
 		}
@@ -82,33 +84,33 @@ namespace Snowinmars.Ui.Controllers
 		{
 			var book = this.bookLogic.Get(id);
 
-			var bookModel = BookModel.Map(book);
+			var bookModel = ViewModels.Book.UpdateViewModel.Map(book);
 
 			return View(bookModel);
 		}
 
 		[HttpPost]
 		[Route("edit")]
-		public ActionResult Edit(BookModel bookModel)
+		public ActionResult Edit(ViewModels.Book.UpdateViewModel bookModel)
 		{
-			Book book = new Book(bookModel.Title, bookModel.PageCount)
+			Book book = new Book(bookModel.Title.Trim(), bookModel.PageCount)
 			{
 				Id = bookModel.Id,
 				Year = bookModel.Year,
 			};
 
-			book.AuthorIds.AddRange(bookModel.AuthorModelIds);
+			book.Authors.AddRange(bookModel.AuthorModels);
 
 			this.bookLogic.Update(book);
 
-			return new EmptyResult();
+			return new RedirectResult(Url.Action("Details", "Book", new RouteValueDictionary() { { "id", book.Id } }));
 		}
 
 		[HttpPost]
 		[Route("getAuthors")]
 		public JsonResult GetAuthors(Guid id)
 		{
-			IEnumerable<Author> authorIds = this.bookLogic.GetAuthors(id);
+			IEnumerable<Entities.Author> authorIds = this.bookLogic.GetAuthors(id);
 
 			return Json(new
 			{
@@ -131,13 +133,13 @@ namespace Snowinmars.Ui.Controllers
 				return View("BrokenDetails");
 			}
 
-			List<BookModel> models = c.Select(book => new BookModel()
+			List<ViewModels.Book.DetailsViewModel> models = c.Select(book => new ViewModels.Book.DetailsViewModel()
 			{
 				Id = book.Id,
 				Title = book.Title,
 				Year = book.Year,
 				PageCount = book.PageCount,
-				AuthorModelIds = book.AuthorIds.ToList(),
+				AuthorModels = book.Authors.ToList(),
 			}).ToList();
 
 			return View(models);

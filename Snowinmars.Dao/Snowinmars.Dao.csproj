@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="AuthorDao.cs" />
     <Compile Include="BookDao.cs" />
+    <Compile Include="LocalCommon.cs" />
     <Compile Include="LocalConst.cs" />
     <Compile Include="Validation.cs" />
   </ItemGroup>

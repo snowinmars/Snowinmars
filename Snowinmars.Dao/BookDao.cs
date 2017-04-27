@@ -26,7 +26,7 @@ namespace Snowinmars.Dao
 			using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
 			{
 				this.AddBook(item, sqlConnection);
-				this.AddBookAuthorConnections(item.Id, item.AuthorIds, sqlConnection);
+				this.AddBookAuthorConnections(item.Id, item.Authors, sqlConnection);
 			}
 		}
 
@@ -50,25 +50,9 @@ namespace Snowinmars.Dao
 
 				sqlConnection.Close();
 
-				//////////////////////
-				//// I suppose that reusing SqlCommand will improve perfomance. I read few about it. I have to know it better. Todo?
+				IEnumerable<Author> authors = this.GetAuthors(book.Id);
 
-				command.CommandText = LocalConst.BookAuthor.SelectByBookCommand;
-
-				command.Parameters.Clear();
-				command.Parameters.AddWithValue(LocalConst.BookAuthor.Column.BookId, book.Id);
-
-				sqlConnection.Open();
-				reader = command.ExecuteReader();
-
-				while (reader.Read())
-				{
-					Guid authorId = (Guid)reader[LocalConst.BookAuthor.Column.AuthorId];
-
-					book.AuthorIds.Add(authorId);
-				}
-
-				sqlConnection.Close();
+				book.Authors.AddRange(authors);
 
 				return book;
 			}
@@ -94,7 +78,7 @@ namespace Snowinmars.Dao
 
 			foreach (var book in books)
 			{
-				book.AuthorIds.AddRange(this.GetAuthors(book.Id).Select(a => a.Id));
+				book.Authors.AddRange(this.GetAuthors(book.Id));
 			}
 
 			return books;
@@ -174,8 +158,8 @@ namespace Snowinmars.Dao
 			// Authors can be updated with three ways: one can add new ones, can remove old ones and can don't touch authors at all
 
 			// I want to compare the old and the new one collections.
-			List<Guid> oldAuthors = this.GetAuthors(item.Id).Select(a => a.Id).ToList();
-			List<Guid> newAuthors = item.AuthorIds.ToList();
+			List<Author> oldAuthors = this.GetAuthors(item.Id).ToList();
+			List<Author> newAuthors = item.Authors.ToList();
 
 			// I remove all matching entries from both of them
 			for (var i = 0; i < oldAuthors.Count; i++)
@@ -216,7 +200,7 @@ namespace Snowinmars.Dao
 			sqlConnection.Close();
 		}
 
-		private void AddBookAuthorConnections(Guid bookId, IEnumerable<Guid> authorIds, SqlConnection sqlConnection)
+		private void AddBookAuthorConnections(Guid bookId, IEnumerable<Author> authors, SqlConnection sqlConnection)
 		{
 			var command = new SqlCommand(LocalConst.BookAuthor.InsertCommand, sqlConnection);
 
@@ -228,9 +212,9 @@ namespace Snowinmars.Dao
 
 			sqlConnection.Open();
 
-			foreach (var authorId in authorIds)
+			foreach (var author in authors)
 			{
-				command.Parameters[1].Value = authorId;
+				command.Parameters[1].Value = author.Id;
 
 				command.ExecuteNonQuery();
 			}
@@ -238,7 +222,7 @@ namespace Snowinmars.Dao
 			sqlConnection.Close();
 		}
 
-		private void DeleteBookAuthorConnections(Guid bookId, IEnumerable<Guid> authorIds, SqlConnection sqlConnection)
+		private void DeleteBookAuthorConnections(Guid bookId, IEnumerable<Author> authors, SqlConnection sqlConnection)
 		{
 			var command = new SqlCommand(LocalConst.BookAuthor.DeleteBookAuthorCommand, sqlConnection);
 
@@ -250,9 +234,9 @@ namespace Snowinmars.Dao
 
 			sqlConnection.Open();
 
-			foreach (var authorId in authorIds)
+			foreach (var author in authors)
 			{
-				command.Parameters[1].Value = authorId;
+				command.Parameters[1].Value = author.Id;
 
 				command.ExecuteNonQuery();
 			}

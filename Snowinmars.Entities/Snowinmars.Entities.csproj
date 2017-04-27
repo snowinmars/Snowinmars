@@ -38,6 +38,7 @@
     <Compile Include="Author.cs" />
     <Compile Include="Book.cs" />
     <Compile Include="Entity.cs" />
+    <Compile Include="Pseudonym.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
