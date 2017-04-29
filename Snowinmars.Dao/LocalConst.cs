@@ -139,13 +139,25 @@ namespace Snowinmars.Dao
 			internal const string TableName = "[Books]";
 
 			internal const string UpdateCommand =
-					" update " + Book.TableName +
-					" set " + Column.Title + " = " + Parameter.Title +
-								"," + Column.PageCount + " = " + Parameter.PageCount +
-								"," + Column.Year + " = " + Parameter.Year +
-								"," + Column.AuthorsShortcuts + " = " + Parameter.AuthorsShortcuts +
-								"," + Column.MustInformAboutWarnings + " = " + Parameter.MustInformAboutWarnings + 
-					" where ( " + Column.Id + " = " + Parameter.Id + " ) ";
+					" if (" + Parameter.AuthorsShortcuts + " = '__ignore'" + ") " +
+					" begin " +
+						" update " + Book.TableName +
+						" set " + Column.Title + " = " + Parameter.Title +
+									"," + Column.PageCount + " = " + Parameter.PageCount +
+									"," + Column.Year + " = " + Parameter.Year +
+									"," + Column.MustInformAboutWarnings + " = " + Parameter.MustInformAboutWarnings + 
+						" where ( " + Column.Id + " = " + Parameter.Id + " ) " +
+					" end " +
+					" else " +
+					" begin " +
+						" update " + Book.TableName +
+						" set " + Column.Title + " = " + Parameter.Title +
+									"," + Column.PageCount + " = " + Parameter.PageCount +
+									"," + Column.Year + " = " + Parameter.Year +
+									"," + Column.AuthorsShortcuts + " = " + Parameter.AuthorsShortcuts +
+									"," + Column.MustInformAboutWarnings + " = " + Parameter.MustInformAboutWarnings +
+						" where ( " + Column.Id + " = " + Parameter.Id + " ) " +
+					" end ";
 
 			internal class Column
 			{

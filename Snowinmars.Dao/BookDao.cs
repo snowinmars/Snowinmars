@@ -28,8 +28,6 @@ namespace Snowinmars.Dao
 			{
 				this.AddBook(item, sqlConnection);
 				this.AddBookAuthorConnections(item.Id, item.AuthorIds, sqlConnection);
-
-				BackgroundDaoWorker.AddBookToQueue(item.Id);
 			}
 		}
 
@@ -141,6 +139,18 @@ namespace Snowinmars.Dao
 
 			using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
 			{
+				bool haveToUpdateAuthorShortcuts = this.HandleAuthorUpdate(item, sqlConnection);
+
+				object authorsShortcuts;
+				if (haveToUpdateAuthorShortcuts)
+				{
+					authorsShortcuts = LocalCommon.ConvertToDbValue(""); // tiny worker will update everything that have this field empty
+				}
+				else
+				{
+					authorsShortcuts = LocalCommon.ConvertToDbValue("__ignore");
+				}
+
 				// updating usual fields
 				var command = new SqlCommand(LocalConst.Book.UpdateCommand, sqlConnection);
 
@@ -148,7 +158,6 @@ namespace Snowinmars.Dao
 				var year = LocalCommon.ConvertToDbValue(item.Year);
 				var title = LocalCommon.ConvertToDbValue(item.Title);
 				var pageCount = LocalCommon.ConvertToDbValue(item.PageCount);
-				var authorsShortcuts = LocalCommon.ConvertToDbValue(string.Join(",", item.AuthorShortcuts));
 				var mustInformAboutWarnings = LocalCommon.ConvertToDbValue(item.MustInformAboutWarnings);
 
 				command.Parameters.AddWithValue(LocalConst.Book.Column.Id, id);
@@ -161,16 +170,10 @@ namespace Snowinmars.Dao
 				sqlConnection.Open();
 				command.ExecuteNonQuery();
 				sqlConnection.Close();
-
-				//handle with authors
-
-				this.HandleAuthorUpdate(item, sqlConnection);
-
-				BackgroundDaoWorker.AddBookToQueue(item.Id);
 			}
 		}
 
-		private void HandleAuthorUpdate(Book item, SqlConnection sqlConnection)
+		private bool HandleAuthorUpdate(Book item, SqlConnection sqlConnection)
 		{
 			// Authors can be updated with three ways: one can add new ones, can remove old ones and can don't touch authors at all
 
@@ -194,13 +197,19 @@ namespace Snowinmars.Dao
 			if (oldAuthors.Any())
 			{
 				this.DeleteBookAuthorConnections(item.Id, oldAuthors, sqlConnection);
+
+				return true;
 			}
 
 			// or add if there is something in new author's collection.
 			if (newAuthors.Any())
 			{
 				this.AddBookAuthorConnections(item.Id, newAuthors, sqlConnection);
+
+				return true;
 			}
+
+			return false;
 		}
 
 		private void AddBook(Book book, SqlConnection sqlConnection)

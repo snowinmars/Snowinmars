@@ -4,6 +4,7 @@ using Snowinmars.Ui.Models;
 using System;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace Snowinmars.Ui.Controllers
 {
@@ -25,7 +26,7 @@ namespace Snowinmars.Ui.Controllers
 
 			this.authorLogic.Create(author);
 
-			return new EmptyResult();
+			return new RedirectResult(Url.Action("Index", "Author"));
 		}
 
 		private static Author Map(AuthorModel authorModel)
@@ -34,7 +35,8 @@ namespace Snowinmars.Ui.Controllers
 			{
 				GivenName = authorModel.GivenName,
 				FullMiddleName = authorModel.FullMiddleName,
-				FamilyName = authorModel.FamilyName
+				FamilyName = authorModel.FamilyName,
+				Id = authorModel.Id,
 			};
 		}
 
@@ -51,7 +53,7 @@ namespace Snowinmars.Ui.Controllers
 		{
 			this.authorLogic.Remove(id);
 
-			return new EmptyResult();
+			return new RedirectResult(Url.Action("Index", "Author"));
 		}
 
 		[HttpGet]
@@ -84,7 +86,7 @@ namespace Snowinmars.Ui.Controllers
 
 			this.authorLogic.Update(author);
 
-			return new EmptyResult();
+			return new RedirectResult(Url.Action("Details", "Author", new RouteValueDictionary() { { "id", author.Id } }));
 		}
 
 		[HttpPost]

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace Snowinmars.Ui.Controllers
 {
@@ -26,7 +27,7 @@ namespace Snowinmars.Ui.Controllers
 		{
 			this.bookLogic.StartInformAboutWarnings(bookId);
 
-			return new EmptyResult();
+			return new RedirectResult(Url.Action("Index", "Book"));
 		}
 
 		[HttpPost]
@@ -35,7 +36,7 @@ namespace Snowinmars.Ui.Controllers
 		{
 			this.bookLogic.StopInformAboutWarnings(bookId);
 
-			return new EmptyResult();
+			return new RedirectResult(Url.Action("Index", "Book"));
 
 		}
 
@@ -45,7 +46,7 @@ namespace Snowinmars.Ui.Controllers
 		{
 			this.bookLogic.StartInformAboutWarnings();
 
-			return new EmptyResult();
+			return new RedirectResult(Url.Action("Index", "Book"));
 		}
 
 		[HttpPost]
@@ -54,7 +55,7 @@ namespace Snowinmars.Ui.Controllers
 		{
 			this.bookLogic.StopInformAboutWarnings();
 
-			return new EmptyResult();
+			return new RedirectResult(Url.Action("Index", "Book"));
 		}
 
 
@@ -83,7 +84,7 @@ namespace Snowinmars.Ui.Controllers
 
 			this.bookLogic.Create(book);
 
-			return new EmptyResult();
+			return new RedirectResult(Url.Action("Index", "Book"));
 		}
 
 		[HttpGet]
@@ -92,7 +93,7 @@ namespace Snowinmars.Ui.Controllers
 		{
 			this.bookLogic.Remove(id);
 
-			return new EmptyResult();
+			return new RedirectResult(Url.Action("Index", "Book"));
 		}
 
 		[HttpGet]
@@ -140,7 +141,7 @@ namespace Snowinmars.Ui.Controllers
 
 			this.bookLogic.Update(book);
 
-			return new EmptyResult();
+			return new RedirectResult(Url.Action("Details", "Book", new RouteValueDictionary() { { "id", book.Id } }));
 		}
 
 		[HttpPost]
