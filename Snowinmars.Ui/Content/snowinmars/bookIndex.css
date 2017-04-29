@@ -1,0 +1,23 @@
+﻿.search-choice {
+	display: inline;
+}
+
+.search-field {
+	display: inline;
+}
+
+.chosen-container-multi .chosen-choices li {
+	float: none;
+}
+
+.chosen-choices:after {
+	content:'';
+	position:absolute;
+	left:0;
+	top:0;
+	width:100%; 
+	height:100%;
+	display:inline-block;
+	background: linear-gradient(to right, rgba(19,19,19,0) 70%, rgba(19,19,19,0.80) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#131313', endColorstr='#131313', GradientType=1 );
+}

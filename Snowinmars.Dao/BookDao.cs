@@ -39,7 +39,7 @@ namespace Snowinmars.Dao
 			{
 				var command = new SqlCommand(LocalConst.Book.SelectCommand, sqlConnection);
 
-				command.Parameters.AddWithValue(LocalConst.Book.Parameter.Id, id);
+				command.Parameters.AddWithValue(LocalConst.Book.Parameter.Id, LocalCommon.ConvertToDbValue(id));
 
 				sqlConnection.Open();
 				var reader = command.ExecuteReader();
@@ -59,7 +59,7 @@ namespace Snowinmars.Dao
 				command.CommandText = LocalConst.BookAuthor.SelectByBookCommand;
 
 				command.Parameters.Clear();
-				command.Parameters.AddWithValue(LocalConst.BookAuthor.Column.BookId, book.Id);
+				command.Parameters.AddWithValue(LocalConst.BookAuthor.Column.BookId, LocalCommon.ConvertToDbValue(book.Id));
 
 				sqlConnection.Open();
 				reader = command.ExecuteReader();
@@ -79,7 +79,7 @@ namespace Snowinmars.Dao
 
 		public IEnumerable<Book> Get(Expression<Func<Book, bool>> filter)
 		{
-			IEnumerable<Book> books = this.GetAll();
+			var books = this.GetAll().ToList();
 
 			foreach (var book in books)
 			{
@@ -95,7 +95,7 @@ namespace Snowinmars.Dao
 			{
 				var command = new SqlCommand(LocalConst.BookAuthor.SelectByBookCommand, sqlConnection);
 
-				command.Parameters.AddWithValue(LocalConst.BookAuthor.Column.BookId, bookId);
+				command.Parameters.AddWithValue(LocalConst.BookAuthor.Column.BookId, LocalCommon.ConvertToDbValue(bookId));
 
 				sqlConnection.Open();
 				var reader = command.ExecuteReader();
@@ -127,7 +127,7 @@ namespace Snowinmars.Dao
 			{
 				var command = new SqlCommand(LocalConst.Book.DeleteCommand, sqlConnection);
 
-				command.Parameters.AddWithValue(LocalConst.Book.Column.Id, id);
+				command.Parameters.AddWithValue(LocalConst.Book.Column.Id, LocalCommon.ConvertToDbValue(id));
 
 				sqlConnection.Open();
 				command.ExecuteNonQuery();
@@ -144,11 +144,17 @@ namespace Snowinmars.Dao
 				// updating usual fields
 				var command = new SqlCommand(LocalConst.Book.UpdateCommand, sqlConnection);
 
-				command.Parameters.AddWithValue(LocalConst.Book.Column.Id, item.Id);
-				command.Parameters.AddWithValue(LocalConst.Book.Column.Title, item.Title);
-				command.Parameters.AddWithValue(LocalConst.Book.Column.PageCount, item.PageCount);
-				command.Parameters.AddWithValue(LocalConst.Book.Column.Year, item.Year);
-				command.Parameters.AddWithValue(LocalConst.Book.Column.AuthorsShortcuts, string.Join(",", item.AuthorShortcuts));
+				var id = LocalCommon.ConvertToDbValue(item.Id);
+				var year = LocalCommon.ConvertToDbValue(item.Year);
+				var title = LocalCommon.ConvertToDbValue(item.Title);
+				var pageCount = LocalCommon.ConvertToDbValue(item.PageCount);
+				var authorsShortcuts = LocalCommon.ConvertToDbValue(string.Join(",", item.AuthorShortcuts));
+
+				command.Parameters.AddWithValue(LocalConst.Book.Column.Id, id);
+				command.Parameters.AddWithValue(LocalConst.Book.Column.Title, title);
+				command.Parameters.AddWithValue(LocalConst.Book.Column.PageCount, pageCount);
+				command.Parameters.AddWithValue(LocalConst.Book.Column.Year, year);
+				command.Parameters.AddWithValue(LocalConst.Book.Column.AuthorsShortcuts, authorsShortcuts);
 
 				sqlConnection.Open();
 				command.ExecuteNonQuery();
@@ -199,11 +205,17 @@ namespace Snowinmars.Dao
 		{
 			var command = new SqlCommand(LocalConst.Book.InsertCommand, sqlConnection);
 
-			command.Parameters.AddWithValue(LocalConst.Book.Parameter.Id, book.Id);
-			command.Parameters.AddWithValue(LocalConst.Book.Parameter.Title, book.Title);
-			command.Parameters.AddWithValue(LocalConst.Book.Parameter.Year, book.Year);
-			command.Parameters.AddWithValue(LocalConst.Book.Parameter.PageCount, book.PageCount);
-			command.Parameters.AddWithValue(LocalConst.Book.Parameter.AuthorsShortcuts, book.AuthorShortcuts);
+			var id = LocalCommon.ConvertToDbValue(book.Id);
+			var year = LocalCommon.ConvertToDbValue(book.Year);
+			var title = LocalCommon.ConvertToDbValue(book.Title);
+			var pageCount = LocalCommon.ConvertToDbValue(book.PageCount);
+			var authorsShortcuts = LocalCommon.ConvertToDbValue(string.Join(",", book.AuthorShortcuts));
+
+			command.Parameters.AddWithValue(LocalConst.Book.Column.Id, id);
+			command.Parameters.AddWithValue(LocalConst.Book.Column.Title, title);
+			command.Parameters.AddWithValue(LocalConst.Book.Column.PageCount, pageCount);
+			command.Parameters.AddWithValue(LocalConst.Book.Column.Year, year);
+			command.Parameters.AddWithValue(LocalConst.Book.Column.AuthorsShortcuts, authorsShortcuts);
 
 			sqlConnection.Open();
 			command.ExecuteNonQuery();
@@ -214,7 +226,7 @@ namespace Snowinmars.Dao
 		{
 			var command = new SqlCommand(LocalConst.BookAuthor.InsertCommand, sqlConnection);
 
-			command.Parameters.AddWithValue(LocalConst.BookAuthor.Column.BookId, bookId);
+			command.Parameters.AddWithValue(LocalConst.BookAuthor.Column.BookId, LocalCommon.ConvertToDbValue(bookId));
 
 			// Here I reusing SqlParameter to improve everything :3 Idk, is it true. Read about it? Todo.
 			var authorIdParameter = new SqlParameter(LocalConst.BookAuthor.Parameter.AuthorId, SqlDbType.UniqueIdentifier);
@@ -236,7 +248,7 @@ namespace Snowinmars.Dao
 		{
 			var command = new SqlCommand(LocalConst.BookAuthor.DeleteBookAuthorCommand, sqlConnection);
 
-			command.Parameters.AddWithValue(LocalConst.BookAuthor.Column.BookId, bookId);
+			command.Parameters.AddWithValue(LocalConst.BookAuthor.Column.BookId, LocalCommon.ConvertToDbValue(bookId));
 
 			// Here I reusing SqlParameter to improve everything :3 Idk, is it true. Read about it? Todo.
 			var authorIdParameter = new SqlParameter(LocalConst.BookAuthor.Parameter.AuthorId, SqlDbType.UniqueIdentifier);
@@ -292,7 +304,5 @@ namespace Snowinmars.Dao
 				return books;
 			}
 		}
-
-	
 	}
 }

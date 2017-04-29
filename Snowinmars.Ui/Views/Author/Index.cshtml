@@ -5,46 +5,72 @@
 	Layout = "~/Views/Layouts/DefaultLayout.cshtml";
 }
 
+@section Content
+{
+	<link href="~/Content/snowinmars/loadingCube.css" rel="stylesheet" />
+}
+
 <h2>All authors</h2>
 
 <p>
 	@Html.ActionLink("Create new author", "Create", "Author")
 </p>
-<table class="table table-bordered">
-	<tr>
-		<th>
-			@Html.DisplayNameFor(model => model.GivenName)
-		</th>
-		<th>
-			@Html.DisplayNameFor(model => model.FullMiddleName)
-		</th>
-		<th>
-			@Html.DisplayNameFor(model => model.FamilyName)
-		</th>
-		<th>
-			@Html.DisplayNameFor(model => model.Shortcut)
-		</th>
-		<th></th>
-	</tr>
 
-	@foreach (var item in Model)
-	{
+<div class="sk-folding-cube-parent">
+	<div class="sk-folding-cube">
+		<div class="sk-cube1 sk-cube"></div>
+		<div class="sk-cube2 sk-cube"></div>
+		<div class="sk-cube4 sk-cube"></div>
+		<div class="sk-cube3 sk-cube"></div>
+	</div>
+</div>
+
+<table class="table table-bordered hidden">
+	<thead>
 		<tr>
-			<td>
-				@Html.DisplayFor(modelItem => item.GivenName)
-			</td>
-			<td>
-				@Html.DisplayFor(modelItem => item.FullMiddleName)
-			</td>
-			<td>
-				@Html.DisplayFor(modelItem => item.FamilyName)
-			</td>
-			<td>
-				@Html.DisplayFor(modelItem => item.Shortcut)
-			</td>
-			<td class="actions">
-				@RenderPage("~/Views/Layouts/_EditDetailsDeleteActionPartialPanel.cshtml", item.Id)
-			</td>
+			<th class="col-xs-2 noOverflow">
+				@Html.DisplayNameFor(model => model.GivenName)
+			</th>
+			<th class="col-xs-2 hidden-xs noOverflow">
+				@Html.DisplayNameFor(model => model.FullMiddleName)
+			</th>
+			<th class="col-xs-3 noOverflow">
+				@Html.DisplayNameFor(model => model.FamilyName)
+			</th>
+			<th class="col-xs-3 noOverflow">
+				@Html.DisplayNameFor(model => model.Shortcut)
+			</th>
+			<th class="col-xs-2 no-sort"></th>
 		</tr>
-	}
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td class="col-xs-2 noOverflow">
+					@Html.DisplayFor(modelItem => item.GivenName)
+				</td>
+				<td class="col-xs-2 hidden-xs noOverflow">
+					@Html.DisplayFor(modelItem => item.FullMiddleName)
+				</td>
+				<td class="col-xs-3 noOverflow">
+					@Html.DisplayFor(modelItem => item.FamilyName)
+				</td>
+				<td class="col-xs-3 noOverflow">
+					@Html.DisplayFor(modelItem => item.Shortcut)
+				</td>
+				<td class="col-xs-2 actions">
+					@RenderPage("~/Views/Layouts/_EditDetailsDeleteActionPartialPanel.cshtml", item.Id)
+				</td>
+			</tr>
+		}
+	</tbody>
 </table>
+
+@section Scripts
+{
+	<script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+	<script src="~/Scripts/DataTables/dataTables.bootstrap.min.js"></script>
+
+	<script src="~/Scripts/snowinmars/authorIndex.js"></script>
+}

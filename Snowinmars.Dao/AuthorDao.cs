@@ -19,11 +19,23 @@ namespace Snowinmars.Dao
 			{
 				var command = new SqlCommand(LocalConst.Author.InsertCommand, sqlConnection);
 
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.Id, item.Id);
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.FirstName, item.GivenName);
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.LastName, item.FullMiddleName);
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.Surname, item.FamilyName);
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.Shortcut, item.Shortcut);
+				var id = LocalCommon.ConvertToDbValue(item.Id);
+				var givenName = LocalCommon.ConvertToDbValue(item.GivenName);
+				var fullMiddleName = LocalCommon.ConvertToDbValue(item.FullMiddleName);
+				var shortcut = LocalCommon.ConvertToDbValue(item.Shortcut);
+				var familyName = LocalCommon.ConvertToDbValue(item.FamilyName);
+				var pseudonymGivenName = LocalCommon.ConvertToDbValue(item.Pseudonym.GivenName);
+				var pseudonymFullMiddleName = LocalCommon.ConvertToDbValue(item.Pseudonym.FullMiddleName);
+				var pseudonymFamilyName = LocalCommon.ConvertToDbValue(item.Pseudonym.FamilyName);
+
+				command.Parameters.AddWithValue(LocalConst.Author.Column.Id, id);
+				command.Parameters.AddWithValue(LocalConst.Author.Column.GivenName, givenName);
+				command.Parameters.AddWithValue(LocalConst.Author.Column.FullMiddleName, fullMiddleName);
+				command.Parameters.AddWithValue(LocalConst.Author.Column.Shortcut, shortcut);
+				command.Parameters.AddWithValue(LocalConst.Author.Column.FamilyName, familyName);
+				command.Parameters.AddWithValue(LocalConst.Author.Parameter.PseudonymGivenName, pseudonymGivenName);
+				command.Parameters.AddWithValue(LocalConst.Author.Parameter.PseudonymFullMiddleName, pseudonymFullMiddleName);
+				command.Parameters.AddWithValue(LocalConst.Author.Parameter.PseudonymFamilyName, pseudonymFamilyName);
 
 				sqlConnection.Open();
 				command.ExecuteNonQuery();
@@ -37,7 +49,7 @@ namespace Snowinmars.Dao
 			{
 				var command = new SqlCommand(LocalConst.Author.SelectCommand, sqlConnection);
 
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.Id, id);
+				command.Parameters.AddWithValue(LocalConst.Author.Parameter.Id, LocalCommon.ConvertToDbValue(id));
 
 				sqlConnection.Open();
 				var reader = command.ExecuteReader();
@@ -75,7 +87,7 @@ namespace Snowinmars.Dao
 			{
 				var command = new SqlCommand(LocalConst.Author.DeleteCommand, sqlConnection);
 
-				command.Parameters.AddWithValue(LocalConst.Author.Column.Id, id);
+				command.Parameters.AddWithValue(LocalConst.Author.Column.Id, LocalCommon.ConvertToDbValue(id));
 
 				sqlConnection.Open();
 				command.ExecuteNonQuery();
@@ -91,11 +103,23 @@ namespace Snowinmars.Dao
 			{
 				var command = new SqlCommand(LocalConst.Author.UpdateCommand, sqlConnection);
 
-				command.Parameters.AddWithValue(LocalConst.Author.Column.Id, item.Id);
-				command.Parameters.AddWithValue(LocalConst.Author.Column.GivenName, item.GivenName);
-				command.Parameters.AddWithValue(LocalConst.Author.Column.FullMiddleName, item.FullMiddleName);
-				command.Parameters.AddWithValue(LocalConst.Author.Column.Shortcut, item.Shortcut);
-				command.Parameters.AddWithValue(LocalConst.Author.Column.FamilyName, item.FamilyName);
+				var id = LocalCommon.ConvertToDbValue(item.Id);
+				var givenName = LocalCommon.ConvertToDbValue(item.GivenName);
+				var fullMiddleName = LocalCommon.ConvertToDbValue(item.FullMiddleName);
+				var shortcut = LocalCommon.ConvertToDbValue(item.Shortcut);
+				var familyName = LocalCommon.ConvertToDbValue(item.FamilyName);
+				var pseudonymGivenName = LocalCommon.ConvertToDbValue(item.Pseudonym?.GivenName);
+				var pseudonymFullMiddleName = LocalCommon.ConvertToDbValue(item.Pseudonym?.FullMiddleName);
+				var pseudonymFamilyName = LocalCommon.ConvertToDbValue(item.Pseudonym?.FamilyName);
+
+				command.Parameters.AddWithValue(LocalConst.Author.Column.Id, id);
+				command.Parameters.AddWithValue(LocalConst.Author.Column.GivenName, givenName);
+				command.Parameters.AddWithValue(LocalConst.Author.Column.FullMiddleName, fullMiddleName);
+				command.Parameters.AddWithValue(LocalConst.Author.Column.Shortcut, shortcut);
+				command.Parameters.AddWithValue(LocalConst.Author.Column.FamilyName, familyName);
+				command.Parameters.AddWithValue(LocalConst.Author.Parameter.PseudonymGivenName, pseudonymGivenName);
+				command.Parameters.AddWithValue(LocalConst.Author.Parameter.PseudonymFullMiddleName, pseudonymFullMiddleName);
+				command.Parameters.AddWithValue(LocalConst.Author.Parameter.PseudonymFamilyName, pseudonymFamilyName);
 
 				sqlConnection.Open();
 				command.ExecuteNonQuery();

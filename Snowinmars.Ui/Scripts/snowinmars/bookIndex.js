@@ -12,6 +12,6 @@
 
 	table.removeClass("hidden");
 	table.DataTable({
-		"autoWidth": false 
+		columnDefs: [{ targets: "no-sort", orderable: false }]
 	});
 })();
