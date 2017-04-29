@@ -1,4 +1,7 @@
-﻿namespace Snowinmars.Dao
+﻿using System;
+using System.Collections.Generic;
+
+namespace Snowinmars.Dao
 {
 	internal static class LocalConst
 	{
@@ -12,61 +15,74 @@
 			internal const string InsertCommand =
 				" insert into " + Author.TableName +
 					"( " + Column.Id +
-						"," + Column.FirstName +
-						"," + Column.LastName +
-						"," + Column.Surname +
+						"," + Column.GivenName +
+						"," + Column.FullMiddleName +
+						"," + Column.FamilyName +
 						"," + Column.Shortcut +
+						"," + Column.PseudonymGivenName +
+						"," + Column.PseudonymFullMiddleName +
+						"," + Column.PseudonymFamilyName +
 						@")
 				values
 					( " + Parameter.Id +
 						"," + Parameter.FirstName +
 						"," + Parameter.LastName +
 						"," + Parameter.Surname +
-						"," + Parameter.Shortcut + " ) ";
+						"," + Parameter.Shortcut +
+						"," + Parameter.PseudonymGivenName +
+						"," + Parameter.PseudonymFullMiddleName +
+						"," + Parameter.PseudonymFamilyName + " ) ";
 
-			internal const string SelectAllCommand = @"
-				select " + Column.Id +
-						"," + Column.FirstName +
-						"," + Column.LastName +
-						"," + Column.Surname +
-						"," + Column.Shortcut +
-						" from " + Author.TableName;
+			internal const string SelectAllCommand = 
+				" select " + Column.Id +
+			            "," + Column.GivenName +
+			            "," + Column.FullMiddleName +
+			            "," + Column.FamilyName +
+			            "," + Column.Shortcut +
+			            "," + Column.PseudonymGivenName +
+			            "," + Column.PseudonymFullMiddleName +
+			            "," + Column.PseudonymFamilyName +
+			    " from " + Author.TableName;
 
-			internal const string SelectCommand = @"
-				select " + Column.Id +
-						"," + Column.FirstName +
-						"," + Column.LastName +
-						"," + Column.Surname +
-						"," + Column.Shortcut +
-				" from " + Author.TableName +
+			internal const string SelectCommand =
+				Author.SelectAllCommand +
 				" where ( " + Column.Id + " = " + Parameter.Id + " ) ";
 
 			internal const string TableName = "[Authors]";
 
 			internal const string UpdateCommand = @"
 				update " + Author.TableName + @"
-				set " + Column.FirstName + " = " + Parameter.FirstName +
-						"," + Column.LastName + " = " + Parameter.LastName +
-						"," + Column.Surname + " = " + Parameter.Surname +
+				set " + Column.GivenName + " = " + Parameter.FirstName +
+						"," + Column.FullMiddleName + " = " + Parameter.LastName +
+						"," + Column.FamilyName + " = " + Parameter.Surname +
 						"," + Column.Shortcut + " = " + Parameter.Shortcut +
+						"," + Column.PseudonymGivenName + " = " + Parameter.PseudonymGivenName +
+						"," + Column.PseudonymFullMiddleName + " = " + Parameter.PseudonymFullMiddleName +
+						"," + Column.PseudonymFamilyName + " = " + Parameter.PseudonymFamilyName +
 				" where ( " + Column.Id + " = " + Parameter.Id + " ) ";
 
 			internal class Column
 			{
-				internal const string FirstName = "FirstName";
-				internal const string Id = "Id";
-				internal const string LastName = "LastName";
+				internal const string GivenName = "GivenName";
+				internal const string Id = "AuthorId";
+				internal const string FullMiddleName = "FullMiddleName";
 				internal const string Shortcut = "Shortcut";
-				internal const string Surname = "Surname";
+				internal const string FamilyName = "FamilyName";
+				internal const string PseudonymFullMiddleName = "PseudonymFullMiddleName";
+				internal const string PseudonymFamilyName = "PseudonymFamilyName";
+				internal const string PseudonymGivenName = "PseudonymGivenName";
 			}
 
 			internal class Parameter
 			{
-				internal const string FirstName = "@firstName";
-				internal const string Id = "@id";
-				internal const string LastName = "@lastName";
+				internal const string FirstName = "@givenName";
+				internal const string Id = "@authorId";
+				internal const string LastName = "@fullMiddleName";
 				internal const string Shortcut = "@shortcut";
-				internal const string Surname = "@surname";
+				internal const string Surname = "@familyName";
+				internal const string PseudonymFullMiddleName = "@pseudonymFullMiddleName";
+				internal const string PseudonymFamilyName = "@pseudonymFamilyName";
+				internal const string PseudonymGivenName = "@pseudonymGivenName";
 			}
 		}
 
@@ -83,12 +99,14 @@
 							"," + Column.Title +
 							"," + Column.PageCount +
 							"," + Column.Year +
+							"," + Column.AuthorsShortcuts +
 						 @")
 					values
 							( " + Parameter.Id +
 							"," + Parameter.Title +
 							"," + Parameter.PageCount +
 							"," + Parameter.Year +
+							"," + Parameter.AuthorsShortcuts +
 							" ) ";
 
 			internal const string SelectAllCommand =
@@ -96,15 +114,18 @@
 							"," + Column.Title +
 							"," + Column.PageCount +
 							"," + Column.Year +
+							"," + Column.AuthorsShortcuts +
 					" from " + Book.TableName;
 
 			internal const string SelectCommand =
-					" select " + Column.Id +
-							"," + Column.Title +
-							"," + Column.PageCount +
-							"," + Column.Year +
-					" from " + Book.TableName +
+					Book.SelectAllCommand +
 					" where ( " + Column.Id + " = " + Parameter.Id + " ) ";
+
+			internal const string SelectBooksUnindexedByShortcutsCommand =
+					" select " + Column.Id +
+					" from " + Book.TableName+
+					" where ( " + Column.AuthorsShortcuts + " is null or " + 
+								Column.AuthorsShortcuts + " = '' ) ";
 
 			internal const string TableName = "[Books]";
 
@@ -113,24 +134,27 @@
 					" set " + Column.Title + " = " + Parameter.Title +
 								"," + Column.PageCount + " = " + Parameter.PageCount +
 								"," + Column.Year + " = " + Parameter.Year +
+								"," + Column.AuthorsShortcuts + " = " + Parameter.AuthorsShortcuts +
 					" where ( " + Column.Id + " = " + Parameter.Id + " ) ";
 
 			internal class Column
 			{
 				internal const string Authors = "Authors";
-				internal const string Id = "Id";
+				internal const string Id = "BookId";
 				internal const string PageCount = "PageCount";
 				internal const string Title = "Title";
 				internal const string Year = "Year";
+				internal const string AuthorsShortcuts = "AuthorShortcuts";
 			}
 
 			internal class Parameter
 			{
 				internal const string Authors = "@authors";
-				internal const string Id = "@id";
+				internal const string Id = "@bookId";
 				internal const string PageCount = "@pageCount";
 				internal const string Title = "@title";
 				internal const string Year = "@year";
+				internal const string AuthorsShortcuts = "@authorShortcuts";
 			}
 		}
 
@@ -187,4 +211,5 @@
 			}
 		}
 	}
+
 }

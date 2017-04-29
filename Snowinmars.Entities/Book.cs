@@ -11,6 +11,7 @@ namespace Snowinmars.Entities
 			this.PageCount = pageCount;
 
 			this.AuthorIds = new List<Guid>();
+			this.AuthorShortcuts = new List<string>();
 		}
 
 		private Book()
@@ -21,5 +22,6 @@ namespace Snowinmars.Entities
 		public int PageCount { get; set; }
 		public string Title { get; set; }
 		public int Year { get; set; }
+		public IList<string> AuthorShortcuts { get; }
 	}
 }

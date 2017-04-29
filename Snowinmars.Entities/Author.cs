@@ -2,21 +2,19 @@ namespace Snowinmars.Entities
 {
 	public class Author : Entity
 	{
-		public Author(string firstName, string lastName, string surname)
+		public Author(string shortcut)
 		{
-			this.FirstName = firstName;
-			this.LastName = lastName;
-			this.Surname = surname;
+			this.Shortcut = shortcut;
 		}
 
 		private Author()
 		{
 		}
 
-		public string FirstName { get; set; }
-		public string LastName { get; set; }
-
+		public string GivenName { get; set; }
+		public string FullMiddleName { get; set; }
 		public string Shortcut { get; set; }
-		public string Surname { get; set; }
+		public string FamilyName { get; set; }
+		public Pseudonym Pseudonym { get; set; }
 	}
 }

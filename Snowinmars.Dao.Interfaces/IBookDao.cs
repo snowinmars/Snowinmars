@@ -10,5 +10,7 @@ namespace Snowinmars.Dao.Interfaces
 		IEnumerable<Book> Get(Expression<Func<Book, bool>> filter);
 
 		IEnumerable<Author> GetAuthors(Guid bookId);
+
+		IEnumerable<Guid> SelectBooksUnindexedByShortcutsCommand();
 	}
 }

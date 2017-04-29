@@ -21,14 +21,21 @@ namespace Snowinmars.Ui.Controllers
 		[Route("create")]
 		public ActionResult Create(AuthorModel authorModel)
 		{
-			Author author = new Author(authorModel.FirstName, authorModel.LastName, authorModel.Surname)
-			{
-				Shortcut = authorModel.Shortcut,
-			};
+			Author author = Map(authorModel);
 
 			this.authorLogic.Create(author);
 
 			return new EmptyResult();
+		}
+
+		private static Author Map(AuthorModel authorModel)
+		{
+			return new Author(authorModel.Shortcut)
+			{
+				GivenName = authorModel.GivenName,
+				FullMiddleName = authorModel.FullMiddleName,
+				FamilyName = authorModel.FamilyName
+			};
 		}
 
 		[HttpGet]
@@ -73,11 +80,7 @@ namespace Snowinmars.Ui.Controllers
 		[Route("edit")]
 		public ActionResult Edit(AuthorModel authorModel)
 		{
-			Author author = new Author(authorModel.FirstName, authorModel.LastName, authorModel.Surname)
-			{
-				Id = authorModel.Id,
-				Shortcut = authorModel.Shortcut,
-			};
+			Author author = Map(authorModel);
 
 			this.authorLogic.Update(author);
 
@@ -95,7 +98,7 @@ namespace Snowinmars.Ui.Controllers
 		[Route("")]
 		public ActionResult Index()
 		{
-			var c = this.authorLogic.Get(null).Select(a => new AuthorModel() { Id = a.Id, FirstName = a.FirstName, LastName = a.LastName, Shortcut = a.Shortcut, Surname = a.Surname });
+			var c = this.authorLogic.Get(null).Select(a => new AuthorModel() { Id = a.Id, GivenName = a.GivenName, FullMiddleName = a.FullMiddleName, Shortcut = a.Shortcut, FamilyName = a.FamilyName });
 
 			return View(c);
 		}

@@ -5,51 +5,63 @@
 	Layout = "~/Views/Layouts/DefaultLayout.cshtml";
 }
 
+@section Content
+{
+	
+<link href="~/Content/snowinmars/bookIndexStyleSheet.css" rel="stylesheet" />
+}
+
 <h2>All books</h2>
 
 <p>
 	@Html.ActionLink("Create new book", "Create")
 </p>
 <table class="table">
-	<tr>
-		<th class="col-xs-2">
-			@Html.DisplayNameFor(model => model.PageCount)
-		</th>
-		<th class="col-xs-1">
-			@Html.DisplayNameFor(model => model.Title)
-		</th>
-		<th class="col-xs-1">
-			@Html.DisplayNameFor(model => model.Year)
-		</th>
-		<th class="col-xs-4">
-			@Html.DisplayNameFor(model => model.AuthorModelIds)
-		</th>
-		<th class="col-xs-4"></th>
-	</tr>
-
-	@foreach (var item in Model)
-	{
-		<tr class="book" data-id="@item.Id">
-			<td class="col-xs-2">
-				@Html.DisplayFor(modelItem => item.PageCount)
-			</td>
-			<td class="col-xs-1">
-				@Html.DisplayFor(modelItem => item.Title)
-			</td>
-			<td class="col-xs-1">
-				@Html.DisplayFor(modelItem => item.Year)
-			</td>
-			<td class="col-xs-4">
-				@Html.DropDownList("authorModelIds", new SelectListItem[0], new Dictionary<string, object> { { "class", "authorModelIds" }, { "multiple", "multiple" }, })
-			</td>
-			<td class="col-xs-4">
-				@RenderPage("~/Views/Layouts/_EditDetailsDeleteActionPartialPanel.cshtml", item.Id)
-			</td>
+	<thead>
+		<tr>
+			<th class="col-xs-3 noOverflow">
+				@Html.DisplayNameFor(model => model.Title)
+			</th>
+			<th class="col-xs-1">
+				@Html.DisplayNameFor(model => model.Year)
+			</th>
+			<th class="col-xs-1">
+				@Html.DisplayNameFor(model => model.PageCount)
+			</th>
+			<th class="col-xs-4 noOverflow">
+				@Html.DisplayNameFor(model => model.AuthorModelIds)
+			</th>
+			<th class="col-xs-3"></th>
 		</tr>
-	}
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr class="book" data-id="@item.Id">
+				<td class="col-xs-3 noOverflow">
+					@Html.DisplayFor(modelItem => item.Title)
+				</td>
+				<td class="col-xs-1">
+					@Html.DisplayFor(modelItem => item.Year)
+				</td>
+				<td class="col-xs-1">
+					@Html.DisplayFor(modelItem => item.PageCount)
+				</td>
+				<td class="col-xs-4 noOverflow">
+					@Html.DropDownList("authorModelIds_" + item.Id, item.AuthorShortcuts.Select(s => new SelectListItem { Text = s, Selected = true, }), new Dictionary<string, object> { { "class", "authorModelIds" }, { "multiple", "multiple" }, })
+				</td>
+				<td class="col-sm-4 col-xs-2">
+					@RenderPage("~/Views/Layouts/_EditDetailsDeleteActionPartialPanel.cshtml", item.Id)
+				</td>
+			</tr>
+		}
+	</tbody>
 </table>
 
 @section Scripts
 {
+	<script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+	<script src="~/Scripts/DataTables/dataTables.bootstrap.min.js"></script>
+
 	<script src="~/Scripts/snowinmars/bookIndex.js"></script>
 }

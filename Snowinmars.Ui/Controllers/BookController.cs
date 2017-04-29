@@ -71,7 +71,7 @@ namespace Snowinmars.Ui.Controllers
 				return View("BrokenDetails");
 			}
 
-			BookModel bookModel = BookModel.Map(book);
+			var bookModel = BookModel.Map(book);
 
 			return View(bookModel);
 		}
@@ -131,14 +131,7 @@ namespace Snowinmars.Ui.Controllers
 				return View("BrokenDetails");
 			}
 
-			List<BookModel> models = c.Select(book => new BookModel()
-			{
-				Id = book.Id,
-				Title = book.Title,
-				Year = book.Year,
-				PageCount = book.PageCount,
-				AuthorModelIds = book.AuthorIds.ToList(),
-			}).ToList();
+			List<BookModel> models = c.Select(BookModel.Map).ToList();
 
 			return View(models);
 		}

@@ -20,9 +20,9 @@ namespace Snowinmars.Dao
 				var command = new SqlCommand(LocalConst.Author.InsertCommand, sqlConnection);
 
 				command.Parameters.AddWithValue(LocalConst.Author.Parameter.Id, item.Id);
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.FirstName, item.FirstName);
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.LastName, item.LastName);
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.Surname, item.Surname);
+				command.Parameters.AddWithValue(LocalConst.Author.Parameter.FirstName, item.GivenName);
+				command.Parameters.AddWithValue(LocalConst.Author.Parameter.LastName, item.FullMiddleName);
+				command.Parameters.AddWithValue(LocalConst.Author.Parameter.Surname, item.FamilyName);
 				command.Parameters.AddWithValue(LocalConst.Author.Parameter.Shortcut, item.Shortcut);
 
 				sqlConnection.Open();
@@ -47,7 +47,7 @@ namespace Snowinmars.Dao
 					throw new ObjectNotFoundException();
 				}
 
-				var author = this.MapAuthor(reader);
+				var author = LocalCommon.MapAuthor(reader);
 				sqlConnection.Close();
 
 				return author;
@@ -62,7 +62,7 @@ namespace Snowinmars.Dao
 
 				sqlConnection.Open();
 				var reader = command.ExecuteReader();
-				var authors = this.MapAuthors(reader);
+				var authors = LocalCommon.MapAuthors(reader);
 				sqlConnection.Close();
 
 				return authors;
@@ -92,44 +92,15 @@ namespace Snowinmars.Dao
 				var command = new SqlCommand(LocalConst.Author.UpdateCommand, sqlConnection);
 
 				command.Parameters.AddWithValue(LocalConst.Author.Column.Id, item.Id);
-				command.Parameters.AddWithValue(LocalConst.Author.Column.FirstName, item.FirstName);
-				command.Parameters.AddWithValue(LocalConst.Author.Column.LastName, item.LastName);
+				command.Parameters.AddWithValue(LocalConst.Author.Column.GivenName, item.GivenName);
+				command.Parameters.AddWithValue(LocalConst.Author.Column.FullMiddleName, item.FullMiddleName);
 				command.Parameters.AddWithValue(LocalConst.Author.Column.Shortcut, item.Shortcut);
-				command.Parameters.AddWithValue(LocalConst.Author.Column.Surname, item.Surname);
+				command.Parameters.AddWithValue(LocalConst.Author.Column.FamilyName, item.FamilyName);
 
 				sqlConnection.Open();
 				command.ExecuteNonQuery();
 				sqlConnection.Close();
 			}
-		}
-
-		private Author MapAuthor(IDataRecord reader)
-		{
-			Guid authorId = (Guid)reader[LocalConst.Author.Column.Id];
-			string firstName = (string)reader[LocalConst.Author.Column.FirstName];
-			string lastName = (string)reader[LocalConst.Author.Column.LastName];
-			string surname = (string)reader[LocalConst.Author.Column.Surname];
-			string shortcut = (string)reader[LocalConst.Author.Column.Shortcut];
-
-			return new Author(firstName, lastName, surname)
-			{
-				Id = authorId,
-				Shortcut = shortcut,
-			};
-		}
-
-		private IEnumerable<Author> MapAuthors(IDataReader reader)
-		{
-			List<Author> authors = new List<Author>();
-
-			while (reader.Read())
-			{
-				Author author = this.MapAuthor(reader);
-
-				authors.Add(author);
-			}
-
-			return authors;
 		}
 	}
 }

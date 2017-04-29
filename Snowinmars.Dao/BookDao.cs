@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Linq.Expressions;
+using Snowinmars.BackgroundWorkers;
 
 namespace Snowinmars.Dao
 {
@@ -27,6 +28,8 @@ namespace Snowinmars.Dao
 			{
 				this.AddBook(item, sqlConnection);
 				this.AddBookAuthorConnections(item.Id, item.AuthorIds, sqlConnection);
+
+				BackgroundDaoWorker.AddBookToQueue(item.Id);
 			}
 		}
 
@@ -46,7 +49,7 @@ namespace Snowinmars.Dao
 					throw new ObjectNotFoundException();
 				}
 
-				Book book = this.MapBook(reader);
+				Book book = LocalCommon.MapBook(reader);
 
 				sqlConnection.Close();
 
@@ -74,20 +77,6 @@ namespace Snowinmars.Dao
 			}
 		}
 
-		private Book MapBook(SqlDataReader reader)
-		{
-			Guid bookId = (Guid)reader[LocalConst.Book.Column.Id];
-			string title = (string)reader[LocalConst.Book.Column.Title];
-			int year = (int)reader[LocalConst.Book.Column.Year];
-			int pageCount = (int)reader[LocalConst.Book.Column.PageCount];
-
-			return new Book(title, pageCount)
-			{
-				Id = bookId,
-				Year = year,
-			};
-		}
-
 		public IEnumerable<Book> Get(Expression<Func<Book, bool>> filter)
 		{
 			IEnumerable<Book> books = this.GetAll();
@@ -110,14 +99,14 @@ namespace Snowinmars.Dao
 
 				sqlConnection.Open();
 				var reader = command.ExecuteReader();
-				var authors = this.MapAuthors(reader);
+				var authors = this.MapAuthorFromIds(reader);
 				sqlConnection.Close();
 
 				return authors;
 			}
 		}
 
-		private IEnumerable<Author> MapAuthors(SqlDataReader reader)
+		private IEnumerable<Author> MapAuthorFromIds(IDataReader reader)
 		{
 			List<Author> authors = new List<Author>();
 
@@ -130,6 +119,7 @@ namespace Snowinmars.Dao
 
 			return authors;
 		}
+
 
 		public void Remove(Guid id)
 		{
@@ -158,6 +148,7 @@ namespace Snowinmars.Dao
 				command.Parameters.AddWithValue(LocalConst.Book.Column.Title, item.Title);
 				command.Parameters.AddWithValue(LocalConst.Book.Column.PageCount, item.PageCount);
 				command.Parameters.AddWithValue(LocalConst.Book.Column.Year, item.Year);
+				command.Parameters.AddWithValue(LocalConst.Book.Column.AuthorsShortcuts, string.Join(",", item.AuthorShortcuts));
 
 				sqlConnection.Open();
 				command.ExecuteNonQuery();
@@ -166,6 +157,8 @@ namespace Snowinmars.Dao
 				//handle with authors
 
 				this.HandleAuthorUpdate(item, sqlConnection);
+
+				BackgroundDaoWorker.AddBookToQueue(item.Id);
 			}
 		}
 
@@ -210,6 +203,7 @@ namespace Snowinmars.Dao
 			command.Parameters.AddWithValue(LocalConst.Book.Parameter.Title, book.Title);
 			command.Parameters.AddWithValue(LocalConst.Book.Parameter.Year, book.Year);
 			command.Parameters.AddWithValue(LocalConst.Book.Parameter.PageCount, book.PageCount);
+			command.Parameters.AddWithValue(LocalConst.Book.Parameter.AuthorsShortcuts, book.AuthorShortcuts);
 
 			sqlConnection.Open();
 			command.ExecuteNonQuery();
@@ -260,6 +254,30 @@ namespace Snowinmars.Dao
 			sqlConnection.Close();
 		}
 
+		public IEnumerable<Guid> SelectBooksUnindexedByShortcutsCommand()
+		{
+			using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
+			{
+				var command = new SqlCommand(LocalConst.Book.SelectBooksUnindexedByShortcutsCommand, sqlConnection);
+
+				List<Guid> ids = new List<Guid>();
+
+				sqlConnection.Open();
+				var reader = command.ExecuteReader();
+
+				while (reader.Read())
+				{
+					Guid id = (Guid)reader[LocalConst.Book.Column.Id];
+					ids.Add(id);
+				}
+
+				sqlConnection.Close();
+
+				return ids;
+			}
+		}
+	
+
 		private IEnumerable<Book> GetAll()
 		{
 			using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
@@ -268,25 +286,13 @@ namespace Snowinmars.Dao
 
 				sqlConnection.Open();
 				var reader = command.ExecuteReader();
-				var books = this.MapBooks(reader);
+				var books = LocalCommon.MapBooks(reader);
 				sqlConnection.Close();
 
 				return books;
 			}
 		}
 
-		private IEnumerable<Book> MapBooks(SqlDataReader reader)
-		{
-			List<Book> books = new List<Book>();
-
-			while (reader.Read())
-			{
-				Book book = this.MapBook(reader);
-
-				books.Add(book);
-			}
-
-			return books;
-		}
+	
 	}
 }

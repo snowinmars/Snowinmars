@@ -9,26 +9,26 @@ namespace Snowinmars.Ui.Models
 		//Given Name(First Name)
 		//Full Middle Name(If applicable)
 
-		[DisplayName("First name")]
-		public string FirstName { get; set; }
+		[DisplayName("Given name")]
+		public string GivenName { get; set; }
 
-		[DisplayName("Last name")]
-		public string LastName { get; set; }
+		[DisplayName("Full middle name")]
+		public string FullMiddleName { get; set; }
 
 		[DisplayName("Shortcut")]
 		public string Shortcut { get; set; }
 
-		[DisplayName("Surname")]
-		public string Surname { get; set; }
+		[DisplayName("Family name")]
+		public string FamilyName { get; set; }
 
 		public static AuthorModel Map(Author author)
 		{
 			AuthorModel authorModel = new AuthorModel
 			{
 				Id = author.Id,
-				FirstName = author.FirstName,
-				LastName = author.LastName,
-				Surname = author.Surname,
+				GivenName = author.GivenName,
+				FullMiddleName = author.FullMiddleName,
+				FamilyName = author.FamilyName,
 				Shortcut = author.Shortcut,
 			};
 

@@ -20,6 +20,8 @@ namespace Snowinmars.Ui.Models
 		[DisplayName("Year")]
 		public int Year { get; set; }
 
+		public IEnumerable<string> AuthorShortcuts { get; set; }
+
 		public static BookModel Map(Book book)
 		{
 			BookModel bookModel = new BookModel
@@ -29,6 +31,7 @@ namespace Snowinmars.Ui.Models
 				Title = book.Title,
 				Year = book.Year,
 				AuthorModelIds = book.AuthorIds.ToList(),
+				AuthorShortcuts = book.AuthorShortcuts.ToList(),
 			};
 
 			return bookModel;

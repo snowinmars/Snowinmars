@@ -26,6 +26,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Snowinmars.BackgroundWorkers\Snowinmars.BackgroundWorkers.csproj">
+      <Project>{34D1BAEF-F526-4F52-927C-9DB769EA8C2F}</Project>
+      <Name>Snowinmars.BackgroundWorkers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Snowinmars.Common\Snowinmars.Common.csproj">
       <Project>{b672661f-888c-4da2-bd4f-8ab7c78d8bc3}</Project>
       <Name>Snowinmars.Common</Name>
@@ -48,6 +52,7 @@
   <ItemGroup>
     <Compile Include="AuthorDao.cs" />
     <Compile Include="BookDao.cs" />
+    <Compile Include="LocalCommon.cs" />
     <Compile Include="LocalConst.cs" />
     <Compile Include="Validation.cs" />
   </ItemGroup>
