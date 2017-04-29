@@ -26,5 +26,10 @@ namespace Snowinmars.Entities
 		public string Title { get; set; }
 		public int Year { get; set; }
 		public IList<string> AuthorShortcuts { get; }
+		public string Bookshelf { get; set; }
+		public string AdditionalInfo { get; set; }
+		public string LiveLibUrl { get; set; }
+		public string LibRusEcUrl { get; set; }
+		public string FlibustaUrl { get; set; }
 	}
 }

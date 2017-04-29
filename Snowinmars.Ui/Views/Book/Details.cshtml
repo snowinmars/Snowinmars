@@ -5,6 +5,12 @@
 	Layout = "~/Views/Layouts/DefaultLayout.cshtml";
 }
 
+@section Content
+{
+	
+<link href="~/Content/snowinmars/bookDetails.css" rel="stylesheet" />
+}
+
 <h2>About</h2>
 
 <div>
@@ -13,6 +19,42 @@
 	<hr />
 	<div class="mainBlock clearfix" data-id="@Model.Id">
 		@Html.HiddenFor(model => model.Id)
+		
+		<div class="col-xs-12 urls">
+
+			<div class="btn-group" role="group" aria-label="...">
+				@if (string.IsNullOrWhiteSpace(Model.LiveLibUrl))
+				{
+					<button type="button" class="btn btn-default liveLibUrlButton disabled">LiveLib</button>
+				}
+				else
+				{
+					<a href="@Model.LiveLibUrl" target="_blank" type="button" class="btn btn-default liveLibUrlButton">LiveLib</a>
+				}
+			</div>
+
+			<div class="btn-group" role="group" aria-label="...">
+				@if (string.IsNullOrWhiteSpace(Model.LibRusEcUrl))
+				{
+					<button type="button" class="btn btn-default liveLibUrlButton disabled">Lib.Rus.Ec</button>
+				}
+				else
+				{
+					<a href="@Model.LibRusEcUrl" target="_blank" type="button" class="btn btn-default liveLibUrlButton">Lib.Rus.Ec</a>
+				}
+			</div>
+
+			<div class="btn-group" role="group" aria-label="...">
+				@if (string.IsNullOrWhiteSpace(Model.FlibustaUrl))
+				{
+					<button type="button" class="btn btn-default liveLibUrlButton disabled">Flibusta</button>
+				}
+				else
+				{
+					<a href="@Model.FlibustaUrl" target="_blank" type="button" class="btn btn-default liveLibUrlButton">Flibusta</a>
+				}
+			</div>
+		</div>
 
 		<div class="col-xs-12">
 			<div class="col-xs-6">

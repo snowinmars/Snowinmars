@@ -159,6 +159,11 @@ namespace Snowinmars.Dao
 				var title = LocalCommon.ConvertToDbValue(item.Title);
 				var pageCount = LocalCommon.ConvertToDbValue(item.PageCount);
 				var mustInformAboutWarnings = LocalCommon.ConvertToDbValue(item.MustInformAboutWarnings);
+				var bookshelf = LocalCommon.ConvertToDbValue(item.Bookshelf);
+				var additionalInfo = LocalCommon.ConvertToDbValue(item.AdditionalInfo);
+				var liveLibUrl = LocalCommon.ConvertToDbValue(item.LiveLibUrl);
+				var libRusEcUrl = LocalCommon.ConvertToDbValue(item.LibRusEcUrl);
+				var flibustaUrl = LocalCommon.ConvertToDbValue(item.FlibustaUrl);
 
 				command.Parameters.AddWithValue(LocalConst.Book.Column.Id, id);
 				command.Parameters.AddWithValue(LocalConst.Book.Column.Title, title);
@@ -166,6 +171,11 @@ namespace Snowinmars.Dao
 				command.Parameters.AddWithValue(LocalConst.Book.Column.Year, year);
 				command.Parameters.AddWithValue(LocalConst.Book.Column.AuthorsShortcuts, authorsShortcuts);
 				command.Parameters.AddWithValue(LocalConst.Book.Column.MustInformAboutWarnings, mustInformAboutWarnings);
+				command.Parameters.AddWithValue(LocalConst.Book.Column.Bookshelf, bookshelf);
+				command.Parameters.AddWithValue(LocalConst.Book.Column.AdditionalInfo, additionalInfo);
+				command.Parameters.AddWithValue(LocalConst.Book.Column.LiveLibUrl, liveLibUrl);
+				command.Parameters.AddWithValue(LocalConst.Book.Column.LibRusEcUrl, libRusEcUrl);
+				command.Parameters.AddWithValue(LocalConst.Book.Column.FlibustaUrl, flibustaUrl);
 
 				sqlConnection.Open();
 				command.ExecuteNonQuery();
@@ -222,6 +232,11 @@ namespace Snowinmars.Dao
 			var pageCount = LocalCommon.ConvertToDbValue(book.PageCount);
 			var authorsShortcuts = LocalCommon.ConvertToDbValue(string.Join(",", book.AuthorShortcuts));
 			var mustInformAboutWarnings = LocalCommon.ConvertToDbValue(book.MustInformAboutWarnings);
+			var bookshelf = LocalCommon.ConvertToDbValue(book.Bookshelf);
+			var additionalInfo = LocalCommon.ConvertToDbValue(book.AdditionalInfo);
+			var liveLibUrl = LocalCommon.ConvertToDbValue(book.LiveLibUrl);
+			var libRusEcUrl = LocalCommon.ConvertToDbValue(book.LibRusEcUrl);
+			var flibustaUrl = LocalCommon.ConvertToDbValue(book.FlibustaUrl);
 
 			command.Parameters.AddWithValue(LocalConst.Book.Column.Id, id);
 			command.Parameters.AddWithValue(LocalConst.Book.Column.Title, title);
@@ -229,6 +244,11 @@ namespace Snowinmars.Dao
 			command.Parameters.AddWithValue(LocalConst.Book.Column.Year, year);
 			command.Parameters.AddWithValue(LocalConst.Book.Column.AuthorsShortcuts, authorsShortcuts);
 			command.Parameters.AddWithValue(LocalConst.Book.Column.MustInformAboutWarnings, mustInformAboutWarnings);
+			command.Parameters.AddWithValue(LocalConst.Book.Column.Bookshelf, bookshelf);
+			command.Parameters.AddWithValue(LocalConst.Book.Column.AdditionalInfo, additionalInfo);
+			command.Parameters.AddWithValue(LocalConst.Book.Column.LiveLibUrl, liveLibUrl);
+			command.Parameters.AddWithValue(LocalConst.Book.Column.LibRusEcUrl, libRusEcUrl);
+			command.Parameters.AddWithValue(LocalConst.Book.Column.FlibustaUrl, flibustaUrl);
 
 			sqlConnection.Open();
 			command.ExecuteNonQuery();

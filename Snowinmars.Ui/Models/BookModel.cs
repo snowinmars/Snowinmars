@@ -21,7 +21,12 @@ namespace Snowinmars.Ui.Models
 		public int Year { get; set; }
 
 		public IEnumerable<string> AuthorShortcuts { get; set; }
-
+		public string Bookshelf { get; set; }
+		public string AdditionalInfo { get; set; }
+		public string LiveLibUrl { get; set; }
+		public string LibRusEcUrl { get; set; }
+		public string FlibustaUrl { get; set; }
+		public bool MustInformAboutWarnings { get; set; }
 		public static BookModel Map(Book book)
 		{
 			BookModel bookModel = new BookModel
@@ -32,6 +37,12 @@ namespace Snowinmars.Ui.Models
 				Year = book.Year,
 				AuthorModelIds = book.AuthorIds.ToList(),
 				AuthorShortcuts = book.AuthorShortcuts.ToList(),
+				AdditionalInfo = book.AdditionalInfo,
+				Bookshelf = book.Bookshelf,
+				FlibustaUrl = book.FlibustaUrl,
+				LibRusEcUrl = book.LibRusEcUrl,
+				LiveLibUrl = book.LiveLibUrl,
+				MustInformAboutWarnings = book.MustInformAboutWarnings,
 			};
 
 			return bookModel;

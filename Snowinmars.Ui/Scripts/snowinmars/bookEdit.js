@@ -28,4 +28,8 @@
 			});
 		}
 	});
+
+	$(".btn-closeUrlModal").click(function (e) {
+		$(e.target.parentElement.parentElement).find("input").val("");
+	});
 })();

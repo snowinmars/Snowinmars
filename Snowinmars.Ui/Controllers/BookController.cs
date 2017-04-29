@@ -71,10 +71,30 @@ namespace Snowinmars.Ui.Controllers
 		[Route("create")]
 		public ActionResult Create(BookModel bookModel)
 		{
-			Book book = new Book(bookModel.Title, bookModel.PageCount)
+			Book book = Map(bookModel);
+
+			this.bookLogic.Create(book);
+
+			return new RedirectResult(Url.Action("Index", "Book"));
+		}
+
+		private static Book Map(BookModel bookModel)
+		{
+			var book = new Book(bookModel.Title, bookModel.PageCount)
 			{
 				Year = bookModel.Year,
+				AdditionalInfo = bookModel.AdditionalInfo,
+				Bookshelf = bookModel.Bookshelf,
+				FlibustaUrl = bookModel.FlibustaUrl,
+				LibRusEcUrl = bookModel.LibRusEcUrl,
+				LiveLibUrl = bookModel.LiveLibUrl,
+				MustInformAboutWarnings = bookModel.MustInformAboutWarnings,
 			};
+
+			if (bookModel.Id != Guid.Empty)
+			{
+				book.Id = bookModel.Id;
+			}
 
 			if (bookModel.AuthorModelIds != null &&
 				bookModel.AuthorModelIds.Any())
@@ -82,9 +102,13 @@ namespace Snowinmars.Ui.Controllers
 				book.AuthorIds.AddRange(bookModel.AuthorModelIds);
 			}
 
-			this.bookLogic.Create(book);
+			if (book.AuthorShortcuts != null &&
+			    book.AuthorShortcuts.Any())
+			{
+				book.AuthorShortcuts.AddRange(bookModel.AuthorShortcuts);
+			}
 
-			return new RedirectResult(Url.Action("Index", "Book"));
+			return book;
 		}
 
 		[HttpGet]
@@ -131,13 +155,7 @@ namespace Snowinmars.Ui.Controllers
 		[Route("edit")]
 		public ActionResult Edit(BookModel bookModel)
 		{
-			Book book = new Book(bookModel.Title, bookModel.PageCount)
-			{
-				Id = bookModel.Id,
-				Year = bookModel.Year,
-			};
-
-			book.AuthorIds.AddRange(bookModel.AuthorModelIds);
+			Book book = Map(bookModel);
 
 			this.bookLogic.Update(book);
 

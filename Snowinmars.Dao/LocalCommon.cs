@@ -70,6 +70,11 @@ namespace Snowinmars.Dao
 			Guid bookId = LocalCommon.ConvertFromDbValue<Guid>(reader[LocalConst.Book.Column.Id]);
 			string title = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.Title]);
 			int pageCount = LocalCommon.ConvertFromDbValue<int>(reader[LocalConst.Book.Column.PageCount]);
+			string bookshelf = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.Bookshelf]);
+			string liveLibUrl = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.LiveLibUrl]);
+			string libRusEcUrl = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.LibRusEcUrl]);
+			string flibustaUrl = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.FlibustaUrl]);
+			string additionalInfo = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.AdditionalInfo]);
 			string authorShortcuts = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.AuthorsShortcuts]);
 			bool mustInformAboutWarnings = LocalCommon.ConvertFromDbValue<bool>(reader[LocalConst.Book.Column.MustInformAboutWarnings]);
 
@@ -78,6 +83,11 @@ namespace Snowinmars.Dao
 				Id = bookId,
 				Year = year,
 				MustInformAboutWarnings = mustInformAboutWarnings,
+				Bookshelf = bookshelf,
+				AdditionalInfo = additionalInfo,
+				LiveLibUrl = liveLibUrl,
+				LibRusEcUrl = libRusEcUrl,
+				FlibustaUrl = flibustaUrl,
 			};
 
 			book.AuthorShortcuts.AddRange(authorShortcuts.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries));

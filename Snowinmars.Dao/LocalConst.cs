@@ -107,6 +107,11 @@ namespace Snowinmars.Dao
 							"," + Column.Year +
 							"," + Column.AuthorsShortcuts +
 							"," + Column.MustInformAboutWarnings +
+							"," + Column.Bookshelf +
+							"," + Column.AdditionalInfo+
+							"," + Column.LiveLibUrl+
+							"," + Column.LibRusEcUrl+
+							"," + Column.FlibustaUrl+
 						 @")
 					values
 							( " + Parameter.Id +
@@ -115,6 +120,11 @@ namespace Snowinmars.Dao
 							"," + Parameter.Year +
 							"," + Parameter.AuthorsShortcuts +
 							"," + Parameter.MustInformAboutWarnings +
+							"," + Parameter.Bookshelf +
+							"," + Parameter.AdditionalInfo +
+							"," + Parameter.LiveLibUrl +
+							"," + Parameter.LibRusEcUrl +
+							"," + Parameter.FlibustaUrl +
 							" ) ";
 
 			internal const string SelectAllCommand =
@@ -124,6 +134,11 @@ namespace Snowinmars.Dao
 							"," + Column.Year +
 							"," + Column.AuthorsShortcuts +
 							"," + Column.MustInformAboutWarnings +
+							"," + Column.Bookshelf +
+							"," + Column.AdditionalInfo +
+							"," + Column.LiveLibUrl +
+							"," + Column.LibRusEcUrl +
+							"," + Column.FlibustaUrl +
 					" from " + Book.TableName;
 
 			internal const string SelectCommand =
@@ -146,6 +161,11 @@ namespace Snowinmars.Dao
 									"," + Column.PageCount + " = " + Parameter.PageCount +
 									"," + Column.Year + " = " + Parameter.Year +
 									"," + Column.MustInformAboutWarnings + " = " + Parameter.MustInformAboutWarnings + 
+									"," + Column.Bookshelf + " = " + Parameter.Bookshelf + 
+									"," + Column.AdditionalInfo + " = " + Parameter.AdditionalInfo + 
+									"," + Column.LiveLibUrl + " = " + Parameter.LiveLibUrl + 
+									"," + Column.LibRusEcUrl + " = " + Parameter.LibRusEcUrl + 
+									"," + Column.FlibustaUrl + " = " + Parameter.FlibustaUrl +
 						" where ( " + Column.Id + " = " + Parameter.Id + " ) " +
 					" end " +
 					" else " +
@@ -156,6 +176,11 @@ namespace Snowinmars.Dao
 									"," + Column.Year + " = " + Parameter.Year +
 									"," + Column.AuthorsShortcuts + " = " + Parameter.AuthorsShortcuts +
 									"," + Column.MustInformAboutWarnings + " = " + Parameter.MustInformAboutWarnings +
+									"," + Column.Bookshelf + " = " + Parameter.Bookshelf +
+									"," + Column.AdditionalInfo + " = " + Parameter.AdditionalInfo +
+									"," + Column.LiveLibUrl + " = " + Parameter.LiveLibUrl +
+									"," + Column.LibRusEcUrl + " = " + Parameter.LibRusEcUrl +
+									"," + Column.FlibustaUrl + " = " + Parameter.FlibustaUrl +
 						" where ( " + Column.Id + " = " + Parameter.Id + " ) " +
 					" end ";
 
@@ -168,6 +193,12 @@ namespace Snowinmars.Dao
 				internal const string Year = "Year";
 				internal const string AuthorsShortcuts = "AuthorShortcuts";
 				internal const string MustInformAboutWarnings = "MustInformAboutWarnings";
+				internal const string Bookshelf = "Bookshelf";
+				internal const string AdditionalInfo = "AdditionalInfo";
+				internal const string LiveLibUrl = "LiveLibUrl";
+				internal const string LibRusEcUrl = "LibRusEcUrl";
+				internal const string FlibustaUrl = "FlibustaUrl";
+
 			}
 
 			internal class Parameter
@@ -179,6 +210,11 @@ namespace Snowinmars.Dao
 				internal const string Year = "@year";
 				internal const string AuthorsShortcuts = "@authorShortcuts";
 				internal const string MustInformAboutWarnings = "@mustInformAboutWarnings";
+				internal const string Bookshelf = "@bookshelf";
+				internal const string AdditionalInfo = "@additionalInfo";
+				internal const string LiveLibUrl = "@liveLibUrl";
+				internal const string LibRusEcUrl = "@libRusEcUrl";
+				internal const string FlibustaUrl = "@flibustaUrl";
 			}
 		}
 

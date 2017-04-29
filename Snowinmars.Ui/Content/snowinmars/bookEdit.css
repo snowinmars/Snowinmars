@@ -1,0 +1,17 @@
+﻿.flibustaUrlButton,
+.libRusEcUrlButton,
+.liveLibUrlButton {
+	top: 1px;
+}
+
+.urls {
+	margin-bottom: 3ex;
+}
+
+.urls > div {
+	margin-right: 2ex;
+}
+
+.urlSaveMessage {
+	color: #a29200;
+}
