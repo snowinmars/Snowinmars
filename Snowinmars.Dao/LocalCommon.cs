@@ -50,12 +50,12 @@ namespace Snowinmars.Dao
 
 			var pseudonym = LocalCommon.MapPseudonym(reader);
 
-			Author author = new Author(givenName)
+			Author author = new Author(shortcut)
 			{
 				Id = authorId,
+				GivenName = givenName,
 				FullMiddleName = fullMiddleName,
 				FamilyName = familyName,
-				Shortcut = shortcut,
 				Pseudonym = pseudonym,
 			};
 
