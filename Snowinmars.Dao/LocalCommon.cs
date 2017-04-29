@@ -3,6 +3,7 @@ using Snowinmars.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace Snowinmars.Dao
 {
@@ -135,6 +136,27 @@ namespace Snowinmars.Dao
 			}
 
 			return Pseudonym.None;
+		}
+
+		public static User MapUser(IDataRecord reader)
+		{
+			Guid id = LocalCommon.ConvertFromDbValue<Guid>(reader[LocalConst.User.Column.Id]);
+			string username = ConvertFromDbValueToString(reader[LocalConst.User.Column.Username]);
+			string passwordHash = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.User.Column.PasswordHash]);
+			UserRoles roles = ConvertFromDbValue<UserRoles>(reader[LocalConst.User.Column.Roles]);
+			string email = ConvertFromDbValueToString(reader[LocalConst.User.Column.Email]);
+			string salt = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.User.Column.Salt]);
+
+			User user = new User(username)
+			{
+				Id = id,
+				PasswordHash = passwordHash,
+				Roles = roles,
+				Email = email,
+				Salt = salt,
+			};
+
+			return user;
 		}
 	}
 }

@@ -37,12 +37,15 @@ namespace Snowinmars.Bll
 
 		public static void CheckPassword(string password)
 		{
-			throw new NotImplementedException();
 		}
 
 		public static void CheckUsername(string username)
 		{
-			throw new NotImplementedException();
+		}
+
+		public static void CheckSalt(string salt)
+		{
+			
 		}
 	}
 }

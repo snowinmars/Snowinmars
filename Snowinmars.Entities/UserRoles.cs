@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Snowinmars.Entities
 {
+	[Flags]
 	public enum UserRoles
 	{
 		None = 0,

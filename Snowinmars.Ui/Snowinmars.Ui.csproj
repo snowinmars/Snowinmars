@@ -435,6 +435,7 @@
     <Content Include="Views\Book\Edit.cshtml" />
     <Content Include="Views\Layouts\_EditDetailsDeleteActionPartialPanel.cshtml" />
     <Content Include="Views\Layouts\_EditDeleteActionPartialPanel.cshtml" />
+    <Content Include="Views\Layouts\_EnterPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -444,7 +445,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Snowinmars.Bll.Interfaces\Snowinmars.Bll.Interfaces.csproj">

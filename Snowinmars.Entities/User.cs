@@ -10,13 +10,15 @@ namespace Snowinmars.Entities
 	{
 		public string Username { get; set; }
 
-		public byte[] PasswordHash { get; set; }
+		public string PasswordHash { get; set; }
+
+		public string Salt { get; set; }
 
 		public UserRoles Roles { get; set; }
 
 		public string Email { get; set; }
 
-		public User(string username)
+		public User(string username) : base()
 		{
 			this.Username = username;
 		}

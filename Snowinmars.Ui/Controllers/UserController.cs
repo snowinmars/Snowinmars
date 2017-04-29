@@ -30,6 +30,10 @@ namespace Snowinmars.Ui.Controllers
 
 		    User user = Map(userModel);
 
+			this.userLogic.SetupCryptography(user);
+
+			user.PasswordHash = this.userLogic.CalculateHash(userModel.Password, user.Salt);
+
 			this.userLogic.Create(user);
 
 			return new RedirectResult(Url.Action("Index", "Home"));
@@ -47,8 +51,8 @@ namespace Snowinmars.Ui.Controllers
 	    public ActionResult Authenticate(UserModel userModel)
 	    {
 		    User candidate = Map(userModel);
-
-		    if (this.userLogic.Authenticate(candidate))
+			
+		    if (this.userLogic.Authenticate(candidate, userModel.Password))
 		    {
 				FormsAuthentication.SetAuthCookie(candidate.Username, createPersistentCookie: true);
 			    return Redirect(Url.Action("Index", "Home"));
@@ -57,15 +61,46 @@ namespace Snowinmars.Ui.Controllers
 			throw new Exception("Can't login");
 	    }
 
-		private User Map(UserModel userModel)
+	    [HttpGet]
+	    [Route("deauthenticate")]
+	    public RedirectResult Deauthenticate()
 	    {
-		    return new User(userModel.Username)
-		    {
-			    Id = userModel.Id,
-			    Email = userModel.Email,
-			    PasswordHash = this.userLogic.CalculateHash(userModel.Password),
+		    FormsAuthentication.SignOut();
+
+			return new RedirectResult(Url.Action("Index", "Home"));
+	    }
+
+		private User Map(UserModel userModel)
+		{
+			var user = new User(userModel.Username)
+			{
+				Email = userModel.Email,
 				Roles = userModel.Roles,
 			};
+
+			if (userModel.Id != Guid.Empty)
+			{
+				user.Id = userModel.Id;
+			}
+
+			return user;
+		}
+
+		[HttpPost]
+		[Route("enter")]
+	    public RedirectResult Enter(UserModel userModel)
+	    {
+		    if (string.IsNullOrWhiteSpace(userModel.PasswordConfirm))
+		    {
+			    this.Authenticate(userModel);
+		    }
+		    else
+		    {
+			    this.Create(userModel);
+			    this.Authenticate(userModel);
+		    }
+
+			return new RedirectResult(Url.Action("Index", "Home"));
 	    }
     }
 }

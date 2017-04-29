@@ -1,7 +1,85 @@
-﻿namespace Snowinmars.Dao
+﻿using System.Security.Cryptography;
+
+namespace Snowinmars.Dao
 {
 	internal static class LocalConst
 	{
+		internal class User
+		{
+			internal const string InsertCommand =
+				" insert into " + User.TableName +
+						" ( " + Column.Id +
+							"," + Column.Username +
+							"," + Column.PasswordHash +
+							"," + Column.Roles +
+							"," + Column.Email +
+							"," + Column.Salt + " ) " +
+				" values ( " + Parameter.Id +
+							"," + Parameter.Username +
+							"," + Parameter.PasswordHash +
+							"," + Parameter.Roles +
+							"," + Parameter.Email +
+							"," + Parameter.Salt + " ) ";
+
+			internal const string SelectAllCommand =
+				" select " + Column.Id +
+							"," + Column.Username +
+							"," + Column.PasswordHash +
+							"," + Column.Roles +
+							"," + Column.Email +
+							"," + Column.Salt +
+				" from " + User.TableName;
+
+			internal const string SelectById =
+				User.SelectAllCommand +
+				" where " + Column.Id + " = " + Parameter.Id;
+
+			internal const string SelectByUsername =
+				User.SelectAllCommand +
+				" where " + Column.Username + " = " + Parameter.Username;
+
+			internal const string DeleteByIdCommand =
+				" delete " +
+				" from " + User.TableName +
+				" where " + Column.Id + " = " + Parameter.Id;
+
+			internal const string DeleteByUsernameCommand =
+				" delete " +
+				" from " + User.TableName +
+				" where " + Column.Username + " = " + Parameter.Username;
+
+			internal const string UpdateCommand =
+				" update " + User.TableName +
+					" set " + Column.Username + " = " + Parameter.Username +
+								Column.PasswordHash + " = " + Parameter.PasswordHash +
+								Column.Roles + " = " + Parameter.Roles +
+								Column.Email + " = " + Parameter.Email +
+								Column.Salt + " = " + Parameter.Salt +
+				" where " + Column.Id + " = " + Parameter.Id;
+
+			internal const string TableName = "[Users]";
+
+			internal class Column
+			{
+				internal const string Id = "Id";
+				internal const string Username = "Username";
+				internal const string PasswordHash = "PasswordHash";
+				internal const string Roles = "Roles";
+				internal const string Email = "Email";
+				internal const string Salt = "Salt";
+			}
+
+			internal class Parameter
+			{
+				internal const string Id = "@id";
+				internal const string Username = "@username";
+				internal const string PasswordHash = "@passwordHash";
+				internal const string Roles = "@roles";
+				internal const string Email = "@email";
+				internal const string Salt = "@salt";
+			}
+		}
+
 		internal class Author
 		{
 			internal const string DeleteCommand = @"

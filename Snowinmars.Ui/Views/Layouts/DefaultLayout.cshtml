@@ -1,4 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@using Snowinmars.Bll.Interfaces
+@using Snowinmars.Entities
+@using Snowinmars.Ui.Provider
+
+@{
+	bool isAuthenticated = User.Identity.IsAuthenticated;
+}
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -34,34 +42,35 @@
 						<li class="active" data-id="author">@Html.ActionLink("Library authors", "Index", "Author")</li>
 					</ul>
 					
-					<ul class="nav navbar-nav navbar-right">
-						<li class="btn btn-default enter" data-toggle="modal" data-target="#enterModal">Enter</li>
-					</ul>
+					@{
+						if (User.Identity.IsAuthenticated)
+						{
+							<ul class="nav navbar-nav navbar-right">
+								<a href="@Url.Action("Deauthenticate", "User")">
+									<li class="btn btn-default enter">
+										<div>You're logged as <i>@User.Identity.Name</i></div>
+										<div>Press to exit</div>
+									</li>
+								</a>
+							</ul>
+						}
+						else
+						{
+							<ul class="nav navbar-nav navbar-right">
+								<li class="btn btn-default enter" data-toggle="modal" data-target="#enterModal">Enter</li>
+							</ul>
+						}
+					}
 				</div>
 			</div>
 		</nav>
 	</header>
 
-<section class="col-md-offset-1 col-md-10 clearfix">
-	<div class="modal fade" id="enterModal" tabindex="-1" role="dialog" aria-labelledby="enterModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">Enter</h4>
-				</div>
-				<div class="modal-body">
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Save changes</button>
-				</div>
-			</div>
-		</div>
-	</div>
+	<section class="col-md-offset-1 col-md-10 clearfix">
+		@RenderPage("~/Views/Layouts/_EnterPage.cshtml")
 
-	@RenderBody()
-</section>
+		@RenderBody()
+	</section>
 
 	<script src="~/Scripts/jquery-1.9.1.min.js"></script>
 	<script src="~/Scripts/bootstrap.min.js"></script>

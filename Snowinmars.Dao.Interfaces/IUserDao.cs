@@ -12,9 +12,10 @@ namespace Snowinmars.Dao.Interfaces
 		void RemoveUsersFromRoles(IEnumerable<string> usernames, IEnumerable<UserRoles> roles);
 		bool IsUserInRole(string username, UserRoles role);
 		IEnumerable<string> GetUsersInRole(UserRoles role);
-		IEnumerable<UserRoles> GetRolesForUser(string username);
+		UserRoles GetRolesForUser(string username);
 		void AddUsersToRoles(IEnumerable<string> usernames, IEnumerable<UserRoles> roles);
 		bool IsUsernameExist(string username);
 		User Get(string username);
+		void Remove(string username);
 	}
 }

@@ -44,9 +44,9 @@ namespace Snowinmars.Ui.Provider
 
 		public override string[] GetRolesForUser(string username)
 		{
-			IEnumerable<UserRoles> roles = this.userLogic.GetRolesForUser(username);
+			UserRoles roles = this.userLogic.GetRolesForUser(username);
 
-			return roles.Select(p => p.ToString()).ToArray();
+			return roles.ToString().Split(new [] {',',}, StringSplitOptions.RemoveEmptyEntries);
 		}
 
 		public override string[] GetUsersInRole(string roleName)

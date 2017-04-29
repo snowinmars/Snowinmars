@@ -3,6 +3,7 @@ using Snowinmars.Dao.Interfaces;
 using Snowinmars.Entities;
 using System;
 using System.Collections.Generic;
+using DevOne.Security.Cryptography.BCrypt;
 
 namespace Snowinmars.Bll
 {
@@ -22,22 +23,35 @@ namespace Snowinmars.Bll
 			this.userDao.AddUsersToRoles(usernames, roles);
 		}
 
-		public bool Authenticate(User candidate)
+		public bool Authenticate(User candidate, string userModelPassword)
 		{
 			Validation.Check(candidate);
 
-			throw new NotImplementedException();
+			var existingUser = this.Get(candidate.Username);
+
+			return BCryptHelper.HashPassword(userModelPassword, existingUser.Salt) == existingUser.PasswordHash;
 		}
 
-		public byte[] CalculateHash(string password)
+		public string CalculateHash(string password, string salt)
 		{
-			Validation.CheckPassword(password);
+			if (string.IsNullOrWhiteSpace(salt))
+			{
+				salt = BCryptHelper.GenerateSalt();
+			}
 
-			throw new NotImplementedException();
+			Validation.CheckPassword(password);
+			Validation.CheckSalt(salt);
+
+			return BCryptHelper.HashPassword(password, salt);
 		}
 
 		public void Create(User item)
 		{
+			if (string.IsNullOrWhiteSpace(item.Salt))
+			{
+				item.Salt = BCryptHelper.GenerateSalt();
+			}
+
 			Validation.Check(item);
 
 			this.userDao.Create(item);
@@ -57,7 +71,7 @@ namespace Snowinmars.Bll
 			return this.userDao.Get(username);
 		}
 
-		public IEnumerable<UserRoles> GetRolesForUser(string username)
+		public UserRoles GetRolesForUser(string username)
 		{
 			Validation.CheckUsername(username);
 
@@ -102,6 +116,19 @@ namespace Snowinmars.Bll
 			Validation.Check(item);
 
 			this.userDao.Update(item);
+		}
+
+		public void Remove(string username)
+		{
+			this.userDao.Remove(username);
+		}
+
+		public void SetupCryptography(User user)
+		{
+			if (string.IsNullOrWhiteSpace(user.Salt))
+			{
+				user.Salt = BCryptHelper.GenerateSalt();
+			}
 		}
 	}
 }
