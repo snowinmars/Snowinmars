@@ -16,7 +16,17 @@
 <p>
 	@Html.ActionLink("Create new book", "Create")
 </p>
-<table class="table">
+
+<div class="sk-folding-cube-parent">
+	<div class="sk-folding-cube">
+		<div class="sk-cube1 sk-cube"></div>
+		<div class="sk-cube2 sk-cube"></div>
+		<div class="sk-cube4 sk-cube"></div>
+		<div class="sk-cube3 sk-cube"></div>
+	</div>
+</div>
+
+<table class="table hidden">
 	<thead>
 		<tr>
 			<th class="col-xs-3 noOverflow">
@@ -37,7 +47,7 @@
 	<tbody>
 		@foreach (var item in Model)
 		{
-			<tr class="book" data-id="@item.Id">
+			<tr data-id="@item.Id">
 				<td class="col-xs-3 noOverflow">
 					@Html.DisplayFor(modelItem => item.Title)
 				</td>
