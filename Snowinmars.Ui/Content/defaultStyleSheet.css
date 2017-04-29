@@ -14,9 +14,8 @@
 	margin-left: 2px;
 }
 
-
 .table {
-	table-layout: fixed;	
+	table-layout: fixed;
 }
 
 .table,
@@ -89,8 +88,7 @@ hr {
 }
 
 .noOverflow {
-	overflow:hidden; 
+	overflow:hidden;
     white-space:nowrap;
     text-overflow: ellipsis;
 }
-

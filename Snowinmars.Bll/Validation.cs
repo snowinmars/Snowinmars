@@ -1,5 +1,5 @@
-using System;
 using Snowinmars.Entities;
+using System;
 
 namespace Snowinmars.Bll
 {
@@ -15,7 +15,6 @@ namespace Snowinmars.Bll
 
 		public static void Check(Guid id)
 		{
-			
 		}
 	}
 }

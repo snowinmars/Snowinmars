@@ -1,12 +1,8 @@
-﻿using System;
+﻿using Snowinmars.Common;
+using Snowinmars.Entities;
+using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Snowinmars.Common;
-using Snowinmars.Entities;
 
 namespace Snowinmars.Dao
 {
@@ -20,7 +16,7 @@ namespace Snowinmars.Dao
 			}
 			else
 			{
-				return (T) obj;
+				return (T)obj;
 			}
 		}
 
@@ -39,7 +35,6 @@ namespace Snowinmars.Dao
 			return LocalCommon.ConvertFromDbValue<string>(obj)?.Trim() ?? string.Empty;
 		}
 
-	
 		internal static Author MapAuthor(IDataRecord reader)
 		{
 			bool mustInformAboutWarnings = LocalCommon.ConvertFromDbValue<bool>(reader[LocalConst.Book.Column.MustInformAboutWarnings]);
@@ -95,7 +90,6 @@ namespace Snowinmars.Dao
 			return book;
 		}
 
-
 		internal static IEnumerable<Author> MapAuthors(IDataReader reader)
 		{
 			List<Author> authors = new List<Author>();
@@ -142,6 +136,5 @@ namespace Snowinmars.Dao
 
 			return Pseudonym.None;
 		}
-
 	}
 }

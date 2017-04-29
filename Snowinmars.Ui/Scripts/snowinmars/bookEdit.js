@@ -24,6 +24,8 @@
 					}
 
 					authorModelIds.chosen({ no_results_text: "Oops, nothing found!" });
+
+					$(".chosen-container").prop("style", "");
 				}
 			});
 		}

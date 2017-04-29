@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Threading;
-using System.Web.Hosting;
-using System.Web.Mvc;
-using Snowinmars.BackgroundWorkers;
+﻿using Snowinmars.BackgroundWorkers;
 using Snowinmars.Common;
 using Snowinmars.Dao.Interfaces;
 using Snowinmars.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Web.Mvc;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(BackgroundDaoWorker), "Start")]
 
@@ -139,9 +137,9 @@ namespace Snowinmars.BackgroundWorkers
 		private static void Trim(Author author)
 		{
 			if (author.GivenName.NeedToBeTrimed() ||
-			    author.FullMiddleName.NeedToBeTrimed() ||
-			    author.FamilyName.NeedToBeTrimed() ||
-			    (author.Pseudonym?.GivenName.NeedToBeTrimed() ?? false) ||
+				author.FullMiddleName.NeedToBeTrimed() ||
+				author.FamilyName.NeedToBeTrimed() ||
+				(author.Pseudonym?.GivenName.NeedToBeTrimed() ?? false) ||
 				(author.Pseudonym?.FullMiddleName.NeedToBeTrimed() ?? false) ||
 				(author.Pseudonym?.FamilyName.NeedToBeTrimed() ?? false))
 			{

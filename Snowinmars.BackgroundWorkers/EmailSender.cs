@@ -1,13 +1,11 @@
-﻿using System;
+﻿using Snowinmars.Entities;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Security;
 using System.Text;
-using System.Threading.Tasks;
-using Snowinmars.Entities;
 
 namespace Snowinmars.BackgroundWorkers
 {
@@ -35,7 +33,7 @@ namespace Snowinmars.BackgroundWorkers
 				Port = 587,
 				Host = ConfigurationManager.AppSettings["emailHost"],
 				EnableSsl = true,
-				Timeout = (int) TimeSpan.FromMinutes(10).TotalMilliseconds,
+				Timeout = (int)TimeSpan.FromMinutes(10).TotalMilliseconds,
 				DeliveryMethod = SmtpDeliveryMethod.Network,
 				UseDefaultCredentials = false,
 				Credentials = new NetworkCredential(this.username, this.password)
@@ -110,7 +108,7 @@ namespace Snowinmars.BackgroundWorkers
 		{
 			foreach (var t in to)
 			{
-				this.Send(message,t);
+				this.Send(message, t);
 			}
 		}
 
@@ -119,10 +117,10 @@ namespace Snowinmars.BackgroundWorkers
 		public void Send(Warning warning, string to, string re = EmailSender.WarningRe)
 		{
 			string message = "Snowinmars system warning: " + Environment.NewLine +
-			                 $"Warning id: {warning.Id}" + Environment.NewLine +
-			                 $"Entity id: {warning.EntityId}" + Environment.NewLine +
-			                 warning.Message + Environment.NewLine + Environment.NewLine +
-			                 "check " + Common.Constant.SiteUrl + " for details";
+							 $"Warning id: {warning.Id}" + Environment.NewLine +
+							 $"Entity id: {warning.EntityId}" + Environment.NewLine +
+							 warning.Message + Environment.NewLine + Environment.NewLine +
+							 "check " + Common.Constant.SiteUrl + " for details";
 
 			this.Send(message, to, re);
 		}

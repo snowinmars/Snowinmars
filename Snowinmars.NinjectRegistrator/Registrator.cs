@@ -1,5 +1,4 @@
 ﻿using Ninject;
-using Snowinmars.BackgroundWorkers;
 using Snowinmars.Bll;
 using Snowinmars.Bll.Interfaces;
 using Snowinmars.Dao;

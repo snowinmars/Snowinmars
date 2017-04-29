@@ -7,7 +7,6 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Linq.Expressions;
-using Snowinmars.BackgroundWorkers;
 
 namespace Snowinmars.Dao
 {
@@ -117,7 +116,6 @@ namespace Snowinmars.Dao
 
 			return authors;
 		}
-
 
 		public void Remove(Guid id)
 		{
@@ -283,7 +281,7 @@ namespace Snowinmars.Dao
 			{
 				var command = new SqlCommand(LocalConst.BookAuthor.SelectAllCommand, sqlConnection);
 
-				IList<KeyValuePair<Guid,Guid>> result = new List<KeyValuePair<Guid, Guid>>();
+				IList<KeyValuePair<Guid, Guid>> result = new List<KeyValuePair<Guid, Guid>>();
 
 				sqlConnection.Open();
 				var reader = command.ExecuteReader();
@@ -346,7 +344,6 @@ namespace Snowinmars.Dao
 				return ids;
 			}
 		}
-	
 
 		private IEnumerable<Book> GetAll()
 		{

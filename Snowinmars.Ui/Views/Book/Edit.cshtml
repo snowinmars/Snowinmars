@@ -35,7 +35,7 @@
 					<div class="modal-body">
 						@Html.LabelFor(model => model.LiveLibUrl, htmlAttributes: new { @class = "control-label col-md-2" })
 						<div class="col-md-6">
-							@Html.EditorFor(model => model.LiveLibUrl, new { htmlAttributes = new { @class = "form-control" }})
+							@Html.EditorFor(model => model.LiveLibUrl, new { htmlAttributes = new { @class = "form-control" } })
 							@Html.ValidationMessageFor(model => model.LiveLibUrl, "", new { @class = "text-danger" })
 						</div>
 					</div>
@@ -46,7 +46,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="modal fade" id="addLibRusEcUrlModal" tabindex="-1" role="dialog" aria-labelledby="addLibRusEcUrlModalLabel">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
@@ -68,7 +68,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="modal fade" id="addFlibustaUrlModal" tabindex="-1" role="dialog" aria-labelledby="addFlibustaUrlModalLabel">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
@@ -92,7 +92,7 @@
 		</div>
 
 		<div class="col-xs-12 urls">
-			
+
 			<div class="btn-group" role="group" aria-label="...">
 				@if (string.IsNullOrWhiteSpace(Model.LiveLibUrl))
 				{
@@ -118,7 +118,7 @@
 					<button type="button" class="btn btn-default editLibRusEcUrlButton glyphicon glyphicon-pencil" data-toggle="modal" data-target="#addLibRusEcUrlModal"></button>
 				}
 			</div>
-			
+
 			<div class="btn-group" role="group" aria-label="...">
 				@if (string.IsNullOrWhiteSpace(Model.FlibustaUrl))
 				{
@@ -131,17 +131,9 @@
 					<button type="button" class="btn btn-default editFlibustaUrlButton glyphicon glyphicon-pencil" data-toggle="modal" data-target="#addFlibustaUrlModal"></button>
 				}
 			</div>
-			
+
 			<div class="urlSaveMessage">
 				<span>To save urls' changes, push the Save button below</span>
-			</div>
-		</div>
-
-		<div class="form-group">
-			@Html.LabelFor(model => model.PageCount, htmlAttributes: new { @class = "control-label col-md-2" })
-			<div class="col-md-6">
-				@Html.EditorFor(model => model.PageCount, new { htmlAttributes = new { @class = "form-control" } })
-				@Html.ValidationMessageFor(model => model.PageCount, "", new { @class = "text-danger" })
 			</div>
 		</div>
 
@@ -154,6 +146,21 @@
 		</div>
 
 		<div class="form-group">
+			@Html.LabelFor(model => model.AuthorModelIds, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-6">
+				@Html.DropDownList("authorModelIds", new SelectListItem[0], new Dictionary<string, object> { { "class", "authorModelIds" }, { "multiple", "multiple" }, })
+			</div>
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.PageCount, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-6">
+				@Html.EditorFor(model => model.PageCount, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(model => model.PageCount, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+		<div class="form-group">
 			@Html.LabelFor(model => model.Year, htmlAttributes: new { @class = "control-label col-md-2" })
 			<div class="col-md-6">
 				@Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control" } })
@@ -162,9 +169,18 @@
 		</div>
 
 		<div class="form-group">
-			@Html.LabelFor(model => model.AuthorModelIds, htmlAttributes: new { @class = "control-label col-md-2" })
+			@Html.LabelFor(model => model.Bookshelf, htmlAttributes: new { @class = "control-label col-md-2" })
 			<div class="col-md-6">
-				@Html.DropDownList("authorModelIds", new SelectListItem[0], new Dictionary<string, object> { { "class", "authorModelIds" }, { "multiple", "multiple" }, })
+				@Html.EditorFor(model => model.Bookshelf, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(model => model.Bookshelf, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.AdditionalInfo, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-6">
+				@Html.EditorFor(model => model.AdditionalInfo, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(model => model.AdditionalInfo, "", new { @class = "text-danger" })
 			</div>
 		</div>
 

@@ -1,4 +1,4 @@
-﻿(function() {
+﻿(function () {
 	var table = $(".table");
 
 	$(".sk-folding-cube-parent").addClass("hidden");

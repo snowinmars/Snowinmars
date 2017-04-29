@@ -37,7 +37,6 @@ namespace Snowinmars.Ui.Controllers
 			this.bookLogic.StopInformAboutWarnings(bookId);
 
 			return new RedirectResult(Url.Action("Index", "Book"));
-
 		}
 
 		[HttpPost]
@@ -57,8 +56,6 @@ namespace Snowinmars.Ui.Controllers
 
 			return new RedirectResult(Url.Action("Index", "Book"));
 		}
-
-
 
 		[HttpGet]
 		[Route("create")]
@@ -103,7 +100,7 @@ namespace Snowinmars.Ui.Controllers
 			}
 
 			if (book.AuthorShortcuts != null &&
-			    book.AuthorShortcuts.Any())
+				book.AuthorShortcuts.Any())
 			{
 				book.AuthorShortcuts.AddRange(bookModel.AuthorShortcuts);
 			}

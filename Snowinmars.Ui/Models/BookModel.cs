@@ -27,6 +27,7 @@ namespace Snowinmars.Ui.Models
 		public string LibRusEcUrl { get; set; }
 		public string FlibustaUrl { get; set; }
 		public bool MustInformAboutWarnings { get; set; }
+
 		public static BookModel Map(Book book)
 		{
 			BookModel bookModel = new BookModel

@@ -1,9 +1,9 @@
 using Snowinmars.Bll.Interfaces;
+using Snowinmars.Dao.Interfaces;
 using Snowinmars.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Snowinmars.Dao.Interfaces;
 
 namespace Snowinmars.Bll
 {
