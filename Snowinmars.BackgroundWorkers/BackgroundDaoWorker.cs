@@ -272,7 +272,7 @@ namespace Snowinmars.BackgroundWorkers
 		private static void DoWork(Guid bookId)
 		{
 			var book = BackgroundDaoWorker.bookDao.Get(bookId);
-			var authors = BackgroundDaoWorker.bookDao.GetAuthors(bookId);
+			var authors = BackgroundDaoWorker.bookDao.GetAuthorsForBook(bookId);
 
 			book.AuthorShortcuts.AddRange(authors.Select(a => a.Shortcut));
 

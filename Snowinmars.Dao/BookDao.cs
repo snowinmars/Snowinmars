@@ -83,13 +83,13 @@ namespace Snowinmars.Dao
 
 			foreach (var book in books)
 			{
-				book.AuthorIds.AddRange(this.GetAuthors(book.Id).Select(a => a.Id));
+				book.AuthorIds.AddRange(this.GetAuthorsForBook(book.Id).Select(a => a.Id));
 			}
 
 			return books;
 		}
 
-		public IEnumerable<Author> GetAuthors(Guid bookId)
+		public IEnumerable<Author> GetAuthorsForBook(Guid bookId)
 		{
 			using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
 			{
@@ -149,12 +149,14 @@ namespace Snowinmars.Dao
 				var title = LocalCommon.ConvertToDbValue(item.Title);
 				var pageCount = LocalCommon.ConvertToDbValue(item.PageCount);
 				var authorsShortcuts = LocalCommon.ConvertToDbValue(string.Join(",", item.AuthorShortcuts));
+				var mustInformAboutWarnings = LocalCommon.ConvertToDbValue(item.MustInformAboutWarnings);
 
 				command.Parameters.AddWithValue(LocalConst.Book.Column.Id, id);
 				command.Parameters.AddWithValue(LocalConst.Book.Column.Title, title);
 				command.Parameters.AddWithValue(LocalConst.Book.Column.PageCount, pageCount);
 				command.Parameters.AddWithValue(LocalConst.Book.Column.Year, year);
 				command.Parameters.AddWithValue(LocalConst.Book.Column.AuthorsShortcuts, authorsShortcuts);
+				command.Parameters.AddWithValue(LocalConst.Book.Column.MustInformAboutWarnings, mustInformAboutWarnings);
 
 				sqlConnection.Open();
 				command.ExecuteNonQuery();
@@ -173,7 +175,7 @@ namespace Snowinmars.Dao
 			// Authors can be updated with three ways: one can add new ones, can remove old ones and can don't touch authors at all
 
 			// I want to compare the old and the new one collections.
-			List<Guid> oldAuthors = this.GetAuthors(item.Id).Select(a => a.Id).ToList();
+			List<Guid> oldAuthors = this.GetAuthorsForBook(item.Id).Select(a => a.Id).ToList();
 			List<Guid> newAuthors = item.AuthorIds.ToList();
 
 			// I remove all matching entries from both of them
@@ -210,12 +212,14 @@ namespace Snowinmars.Dao
 			var title = LocalCommon.ConvertToDbValue(book.Title);
 			var pageCount = LocalCommon.ConvertToDbValue(book.PageCount);
 			var authorsShortcuts = LocalCommon.ConvertToDbValue(string.Join(",", book.AuthorShortcuts));
+			var mustInformAboutWarnings = LocalCommon.ConvertToDbValue(book.MustInformAboutWarnings);
 
 			command.Parameters.AddWithValue(LocalConst.Book.Column.Id, id);
 			command.Parameters.AddWithValue(LocalConst.Book.Column.Title, title);
 			command.Parameters.AddWithValue(LocalConst.Book.Column.PageCount, pageCount);
 			command.Parameters.AddWithValue(LocalConst.Book.Column.Year, year);
 			command.Parameters.AddWithValue(LocalConst.Book.Column.AuthorsShortcuts, authorsShortcuts);
+			command.Parameters.AddWithValue(LocalConst.Book.Column.MustInformAboutWarnings, mustInformAboutWarnings);
 
 			sqlConnection.Open();
 			command.ExecuteNonQuery();

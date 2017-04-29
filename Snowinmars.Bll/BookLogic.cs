@@ -41,7 +41,7 @@ namespace Snowinmars.Bll
 		{
 			Validation.Check(bookId);
 
-			return this.bookDao.GetAuthors(bookId);
+			return this.bookDao.GetAuthorsForBook(bookId);
 		}
 
 		public void Remove(Guid id)
@@ -56,6 +56,46 @@ namespace Snowinmars.Bll
 			Validation.Check(item);
 
 			this.bookDao.Update(item);
+		}
+
+		public void StartInformAboutWarnings(Guid bookId)
+		{
+			var book = this.bookDao.Get(bookId);
+
+			book.MustInformAboutWarnings = true;
+
+			this.bookDao.Update(book);
+		}
+
+		public void StopInformAboutWarnings(Guid bookId)
+		{
+			var book = this.bookDao.Get(bookId);
+
+			book.MustInformAboutWarnings = false;
+
+			this.bookDao.Update(book);
+		}
+
+		public void StartInformAboutWarnings()
+		{
+			var books = this.bookDao.Get(b => true);
+
+			foreach (var book in books)
+			{
+				book.MustInformAboutWarnings = true;
+				this.bookDao.Update(book);
+			}
+		}
+
+		public void StopInformAboutWarnings()
+		{
+			var books = this.bookDao.Get(b => true);
+
+			foreach (var book in books)
+			{
+				book.MustInformAboutWarnings = false;
+				this.bookDao.Update(book);
+			}
 		}
 	}
 }

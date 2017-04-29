@@ -27,6 +27,7 @@ namespace Snowinmars.Dao
 				var pseudonymGivenName = LocalCommon.ConvertToDbValue(item.Pseudonym.GivenName);
 				var pseudonymFullMiddleName = LocalCommon.ConvertToDbValue(item.Pseudonym.FullMiddleName);
 				var pseudonymFamilyName = LocalCommon.ConvertToDbValue(item.Pseudonym.FamilyName);
+				var mustInformAboutWarnings = LocalCommon.ConvertToDbValue(item.MustInformAboutWarnings);
 
 				command.Parameters.AddWithValue(LocalConst.Author.Column.Id, id);
 				command.Parameters.AddWithValue(LocalConst.Author.Column.GivenName, givenName);
@@ -36,6 +37,7 @@ namespace Snowinmars.Dao
 				command.Parameters.AddWithValue(LocalConst.Author.Parameter.PseudonymGivenName, pseudonymGivenName);
 				command.Parameters.AddWithValue(LocalConst.Author.Parameter.PseudonymFullMiddleName, pseudonymFullMiddleName);
 				command.Parameters.AddWithValue(LocalConst.Author.Parameter.PseudonymFamilyName, pseudonymFamilyName);
+				command.Parameters.AddWithValue(LocalConst.Book.Column.MustInformAboutWarnings, mustInformAboutWarnings);
 
 				sqlConnection.Open();
 				command.ExecuteNonQuery();
@@ -111,6 +113,7 @@ namespace Snowinmars.Dao
 				var pseudonymGivenName = LocalCommon.ConvertToDbValue(item.Pseudonym?.GivenName);
 				var pseudonymFullMiddleName = LocalCommon.ConvertToDbValue(item.Pseudonym?.FullMiddleName);
 				var pseudonymFamilyName = LocalCommon.ConvertToDbValue(item.Pseudonym?.FamilyName);
+				var mustInformAboutWarnings = LocalCommon.ConvertToDbValue(item.MustInformAboutWarnings);
 
 				command.Parameters.AddWithValue(LocalConst.Author.Column.Id, id);
 				command.Parameters.AddWithValue(LocalConst.Author.Column.GivenName, givenName);
@@ -120,6 +123,7 @@ namespace Snowinmars.Dao
 				command.Parameters.AddWithValue(LocalConst.Author.Parameter.PseudonymGivenName, pseudonymGivenName);
 				command.Parameters.AddWithValue(LocalConst.Author.Parameter.PseudonymFullMiddleName, pseudonymFullMiddleName);
 				command.Parameters.AddWithValue(LocalConst.Author.Parameter.PseudonymFamilyName, pseudonymFamilyName);
+				command.Parameters.AddWithValue(LocalConst.Book.Column.MustInformAboutWarnings, mustInformAboutWarnings);
 
 				sqlConnection.Open();
 				command.ExecuteNonQuery();

@@ -10,6 +10,8 @@ namespace Snowinmars.Entities
 			this.Title = title;
 			this.PageCount = pageCount;
 
+			this.MustInformAboutWarnings = true;
+
 			this.AuthorIds = new List<Guid>();
 			this.AuthorShortcuts = new List<string>();
 		}
@@ -20,6 +22,7 @@ namespace Snowinmars.Entities
 
 		public ICollection<Guid> AuthorIds { get; }
 		public int PageCount { get; set; }
+		public bool MustInformAboutWarnings { get; set; }
 		public string Title { get; set; }
 		public int Year { get; set; }
 		public IList<string> AuthorShortcuts { get; }

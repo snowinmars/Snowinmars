@@ -10,5 +10,10 @@ namespace Snowinmars.Bll.Interfaces
 		IEnumerable<Book> Get(Expression<Func<Book, bool>> filter);
 
 		IEnumerable<Author> GetAuthors(Guid bookId);
+
+		void StartInformAboutWarnings(Guid bookId);
+		void StopInformAboutWarnings(Guid bookId);
+		void StartInformAboutWarnings();
+		void StopInformAboutWarnings();
 	}
 }

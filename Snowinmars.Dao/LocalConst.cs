@@ -22,6 +22,7 @@ namespace Snowinmars.Dao
 						"," + Column.PseudonymGivenName +
 						"," + Column.PseudonymFullMiddleName +
 						"," + Column.PseudonymFamilyName +
+						"," + Column.MustInformAboutWarnings +
 						@")
 				values
 					( " + Parameter.Id +
@@ -31,7 +32,8 @@ namespace Snowinmars.Dao
 						"," + Parameter.Shortcut +
 						"," + Parameter.PseudonymGivenName +
 						"," + Parameter.PseudonymFullMiddleName +
-						"," + Parameter.PseudonymFamilyName + " ) ";
+						"," + Parameter.PseudonymFamilyName +
+						"," + Parameter.MustInformAboutWarnings + " ) ";
 
 			internal const string SelectAllCommand = 
 				" select " + Column.Id +
@@ -42,6 +44,7 @@ namespace Snowinmars.Dao
 			            "," + Column.PseudonymGivenName +
 			            "," + Column.PseudonymFullMiddleName +
 			            "," + Column.PseudonymFamilyName +
+						"," + Column.MustInformAboutWarnings +
 			    " from " + Author.TableName;
 
 			internal const string SelectCommand =
@@ -59,6 +62,7 @@ namespace Snowinmars.Dao
 						"," + Column.PseudonymGivenName + " = " + Parameter.PseudonymGivenName +
 						"," + Column.PseudonymFullMiddleName + " = " + Parameter.PseudonymFullMiddleName +
 						"," + Column.PseudonymFamilyName + " = " + Parameter.PseudonymFamilyName +
+						"," + Column.MustInformAboutWarnings + " = " + Parameter.MustInformAboutWarnings +
 				" where ( " + Column.Id + " = " + Parameter.Id + " ) ";
 
 			internal class Column
@@ -71,6 +75,7 @@ namespace Snowinmars.Dao
 				internal const string PseudonymFullMiddleName = "PseudonymFullMiddleName";
 				internal const string PseudonymFamilyName = "PseudonymFamilyName";
 				internal const string PseudonymGivenName = "PseudonymGivenName";
+				internal const string MustInformAboutWarnings = "MustInformAboutWarnings";
 			}
 
 			internal class Parameter
@@ -83,6 +88,7 @@ namespace Snowinmars.Dao
 				internal const string PseudonymFullMiddleName = "@pseudonymFullMiddleName";
 				internal const string PseudonymFamilyName = "@pseudonymFamilyName";
 				internal const string PseudonymGivenName = "@pseudonymGivenName";
+				internal const string MustInformAboutWarnings = "@mustInformAboutWarnings";
 			}
 		}
 
@@ -100,6 +106,7 @@ namespace Snowinmars.Dao
 							"," + Column.PageCount +
 							"," + Column.Year +
 							"," + Column.AuthorsShortcuts +
+							"," + Column.MustInformAboutWarnings +
 						 @")
 					values
 							( " + Parameter.Id +
@@ -107,6 +114,7 @@ namespace Snowinmars.Dao
 							"," + Parameter.PageCount +
 							"," + Parameter.Year +
 							"," + Parameter.AuthorsShortcuts +
+							"," + Parameter.MustInformAboutWarnings +
 							" ) ";
 
 			internal const string SelectAllCommand =
@@ -115,6 +123,7 @@ namespace Snowinmars.Dao
 							"," + Column.PageCount +
 							"," + Column.Year +
 							"," + Column.AuthorsShortcuts +
+							"," + Column.MustInformAboutWarnings +
 					" from " + Book.TableName;
 
 			internal const string SelectCommand =
@@ -135,6 +144,7 @@ namespace Snowinmars.Dao
 								"," + Column.PageCount + " = " + Parameter.PageCount +
 								"," + Column.Year + " = " + Parameter.Year +
 								"," + Column.AuthorsShortcuts + " = " + Parameter.AuthorsShortcuts +
+								"," + Column.MustInformAboutWarnings + " = " + Parameter.MustInformAboutWarnings + 
 					" where ( " + Column.Id + " = " + Parameter.Id + " ) ";
 
 			internal class Column
@@ -145,6 +155,7 @@ namespace Snowinmars.Dao
 				internal const string Title = "Title";
 				internal const string Year = "Year";
 				internal const string AuthorsShortcuts = "AuthorShortcuts";
+				internal const string MustInformAboutWarnings = "MustInformAboutWarnings";
 			}
 
 			internal class Parameter
@@ -155,6 +166,7 @@ namespace Snowinmars.Dao
 				internal const string Title = "@title";
 				internal const string Year = "@year";
 				internal const string AuthorsShortcuts = "@authorShortcuts";
+				internal const string MustInformAboutWarnings = "@mustInformAboutWarnings";
 			}
 		}
 

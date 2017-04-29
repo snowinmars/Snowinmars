@@ -20,6 +20,45 @@ namespace Snowinmars.Ui.Controllers
 			this.bookLogic = bookLogic;
 		}
 
+		[HttpPost]
+		[Route("startInformAboutWarnings")]
+		public ActionResult StartInformAboutWarnings(Guid bookId)
+		{
+			this.bookLogic.StartInformAboutWarnings(bookId);
+
+			return new EmptyResult();
+		}
+
+		[HttpPost]
+		[Route("stopInformAboutWarnings")]
+		public ActionResult StopInformAboutWarnings(Guid bookId)
+		{
+			this.bookLogic.StopInformAboutWarnings(bookId);
+
+			return new EmptyResult();
+
+		}
+
+		[HttpPost]
+		[Route("startInformAboutWarnings")]
+		public ActionResult StartInformAboutWarnings()
+		{
+			this.bookLogic.StartInformAboutWarnings();
+
+			return new EmptyResult();
+		}
+
+		[HttpPost]
+		[Route("stopInformAboutWarnings")]
+		public ActionResult StopInformAboutWarnings()
+		{
+			this.bookLogic.StopInformAboutWarnings();
+
+			return new EmptyResult();
+		}
+
+
+
 		[HttpGet]
 		[Route("create")]
 		public ActionResult Create()

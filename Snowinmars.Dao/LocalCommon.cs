@@ -42,6 +42,7 @@ namespace Snowinmars.Dao
 	
 		internal static Author MapAuthor(IDataRecord reader)
 		{
+			bool mustInformAboutWarnings = LocalCommon.ConvertFromDbValue<bool>(reader[LocalConst.Book.Column.MustInformAboutWarnings]);
 			string fullMiddleName = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Author.Column.FullMiddleName]);
 			string familyName = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Author.Column.FamilyName]);
 			string givenName = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Author.Column.GivenName]);
@@ -57,6 +58,7 @@ namespace Snowinmars.Dao
 				FullMiddleName = fullMiddleName,
 				FamilyName = familyName,
 				Pseudonym = pseudonym,
+				MustInformAboutWarnings = mustInformAboutWarnings,
 			};
 
 			return author;
@@ -64,17 +66,18 @@ namespace Snowinmars.Dao
 
 		internal static Book MapBook(IDataRecord reader)
 		{
+			int year = LocalCommon.ConvertFromDbValue<int>(reader[LocalConst.Book.Column.Year]);
 			Guid bookId = LocalCommon.ConvertFromDbValue<Guid>(reader[LocalConst.Book.Column.Id]);
 			string title = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.Title]);
-			int year = LocalCommon.ConvertFromDbValue<int>(reader[LocalConst.Book.Column.Year]);
 			int pageCount = LocalCommon.ConvertFromDbValue<int>(reader[LocalConst.Book.Column.PageCount]);
-
 			string authorShortcuts = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.AuthorsShortcuts]);
+			bool mustInformAboutWarnings = LocalCommon.ConvertFromDbValue<bool>(reader[LocalConst.Book.Column.MustInformAboutWarnings]);
 
 			var book = new Book(title, pageCount)
 			{
 				Id = bookId,
 				Year = year,
+				MustInformAboutWarnings = mustInformAboutWarnings,
 			};
 
 			book.AuthorShortcuts.AddRange(authorShortcuts.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries));
