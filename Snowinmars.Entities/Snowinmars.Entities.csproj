@@ -39,6 +39,7 @@
     <Compile Include="Book.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Pseudonym.cs" />
+    <Compile Include="Warning.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

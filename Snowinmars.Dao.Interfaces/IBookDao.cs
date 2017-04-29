@@ -12,5 +12,7 @@ namespace Snowinmars.Dao.Interfaces
 		IEnumerable<Author> GetAuthors(Guid bookId);
 
 		IEnumerable<Guid> SelectBooksUnindexedByShortcutsCommand();
+
+		IEnumerable<KeyValuePair<Guid, Guid>> GetAllBookAuthorConnections();
 	}
 }

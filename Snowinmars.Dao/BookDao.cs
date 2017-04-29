@@ -244,6 +244,31 @@ namespace Snowinmars.Dao
 			sqlConnection.Close();
 		}
 
+		public IEnumerable<KeyValuePair<Guid, Guid>> GetAllBookAuthorConnections()
+		{
+			using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
+			{
+				var command = new SqlCommand(LocalConst.BookAuthor.SelectAllCommand, sqlConnection);
+
+				IList<KeyValuePair<Guid,Guid>> result = new List<KeyValuePair<Guid, Guid>>();
+
+				sqlConnection.Open();
+				var reader = command.ExecuteReader();
+
+				while (reader.Read())
+				{
+					Guid bookId = LocalCommon.ConvertFromDbValue<Guid>(reader[LocalConst.BookAuthor.Column.BookId]);
+					Guid authorId = LocalCommon.ConvertFromDbValue<Guid>(reader[LocalConst.BookAuthor.Column.AuthorId]);
+
+					result.Add(new KeyValuePair<Guid, Guid>(bookId, authorId));
+				}
+
+				sqlConnection.Close();
+
+				return result;
+			}
+		}
+
 		private void DeleteBookAuthorConnections(Guid bookId, IEnumerable<Guid> authorIds, SqlConnection sqlConnection)
 		{
 			var command = new SqlCommand(LocalConst.BookAuthor.DeleteBookAuthorCommand, sqlConnection);

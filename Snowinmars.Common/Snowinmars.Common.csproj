@@ -12,7 +12,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
-    <ProjectGuid>{b672661f-888c-4da2-bd4f-8ab7c78d8bc3}</ProjectGuid>
+    <ProjectGuid>{B672661F-888C-4DA2-BD4F-8AB7C78D8BC3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>Snowinmars.Common</RootNamespace>
     <TargetFrameworkVersion>4.6.2</TargetFrameworkVersion>
@@ -30,6 +30,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constant.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

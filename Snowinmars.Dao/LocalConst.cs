@@ -184,6 +184,11 @@ namespace Snowinmars.Dao
 						"," + Parameter.AuthorId +
 						" ) ";
 
+			internal const string SelectAllCommand =
+				" select " + Column.BookId +
+						"," + Column.AuthorId +
+				" from " + BookAuthor.TableName;
+
 			internal const string SelectByAuthorCommand =
 				" select " + Column.BookId +
 						"," + Column.AuthorId +
