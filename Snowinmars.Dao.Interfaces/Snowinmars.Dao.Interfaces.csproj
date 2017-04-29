@@ -12,7 +12,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
-    <ProjectGuid>{c27c80af-707f-4035-86d9-6a88ec5cd645}</ProjectGuid>
+    <ProjectGuid>{C27C80AF-707F-4035-86D9-6A88EC5CD645}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>Snowinmars.Dao.Interfaces</RootNamespace>
     <TargetFrameworkVersion>4.6.2</TargetFrameworkVersion>
@@ -42,6 +42,10 @@
     <Compile Include="IAuthorDao.cs" />
     <Compile Include="IBookDao.cs" />
     <Compile Include="ICRUD.cs" />
+    <Compile Include="IUserDao.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

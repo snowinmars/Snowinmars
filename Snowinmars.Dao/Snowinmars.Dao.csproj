@@ -54,6 +54,7 @@
     <Compile Include="BookDao.cs" />
     <Compile Include="LocalCommon.cs" />
     <Compile Include="LocalConst.cs" />
+    <Compile Include="UserDao.cs" />
     <Compile Include="Validation.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

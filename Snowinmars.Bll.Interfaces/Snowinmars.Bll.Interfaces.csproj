@@ -12,7 +12,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
-    <ProjectGuid>{67ac64ca-13cb-4bab-8ae8-fa7cc557b796}</ProjectGuid>
+    <ProjectGuid>{67AC64CA-13CB-4BAB-8AE8-FA7CC557B796}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>Snowinmars.Bll.Interfaces</RootNamespace>
     <TargetFrameworkVersion>4.6.2</TargetFrameworkVersion>
@@ -42,6 +42,10 @@
     <Compile Include="IAuthorLogic.cs" />
     <Compile Include="IBookLogic.cs" />
     <Compile Include="ICRUD.cs" />
+    <Compile Include="IUserLogic.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

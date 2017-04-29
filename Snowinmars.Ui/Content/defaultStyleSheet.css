@@ -92,3 +92,7 @@ hr {
     white-space:nowrap;
     text-overflow: ellipsis;
 }
+
+.enter {
+	margin-top: 1ex;
+}

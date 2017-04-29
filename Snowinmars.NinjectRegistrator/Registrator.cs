@@ -14,6 +14,8 @@ namespace Snowinmars.NinjectRegistrator
 			kernel.Bind<IBookDao>().To<BookDao>();
 			kernel.Bind<IAuthorLogic>().To<AuthorLogic>();
 			kernel.Bind<IAuthorDao>().To<AuthorDao>();
+			kernel.Bind<IUserLogic>().To<UserLogic>();
+			kernel.Bind<IUserDao>().To<UserDao>();
 		}
 	}
 }

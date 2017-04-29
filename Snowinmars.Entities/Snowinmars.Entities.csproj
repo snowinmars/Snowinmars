@@ -39,6 +39,8 @@
     <Compile Include="Book.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Pseudonym.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="UserRoles.cs" />
     <Compile Include="Warning.cs" />
   </ItemGroup>
   <ItemGroup>
