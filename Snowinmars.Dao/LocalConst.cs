@@ -51,10 +51,10 @@ namespace Snowinmars.Dao
 			internal const string UpdateCommand =
 				" update " + User.TableName +
 					" set " + Column.Username + " = " + Parameter.Username +
-								Column.PasswordHash + " = " + Parameter.PasswordHash +
-								Column.Roles + " = " + Parameter.Roles +
-								Column.Email + " = " + Parameter.Email +
-								Column.Salt + " = " + Parameter.Salt +
+								"," + Column.PasswordHash + " = " + Parameter.PasswordHash +
+								"," + Column.Roles + " = " + Parameter.Roles +
+								"," + Column.Email + " = " + Parameter.Email +
+								"," + Column.Salt + " = " + Parameter.Salt +
 				" where " + Column.Id + " = " + Parameter.Id;
 
 			internal const string TableName = "[Users]";

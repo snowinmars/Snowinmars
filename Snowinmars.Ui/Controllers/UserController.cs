@@ -49,6 +49,19 @@ namespace Snowinmars.Ui.Controllers
 			return new RedirectResult(Url.Action("Index", "Home"));
 	    }
 
+	    [HttpPost]
+	    [Route("setEmail")]
+	    public JsonResult SetEmail(string email)
+	    {
+		    var user = this.userLogic.Get(User.Identity.Name);
+
+		    user.Email = email;
+
+			this.userLogic.Update(user);
+
+		    return Json(true);
+	    }
+
 		[HttpPost]
 		[Route("isUsernameExist")]
 	    public JsonResult IsUsernameExist(string username)

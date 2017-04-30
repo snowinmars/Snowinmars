@@ -12,3 +12,12 @@
 	color:lightblue;
 	text-align: left;
 }
+
+.emailInputSuccessMessage {
+	color: #a29200;
+}
+
+.emailInputClientFailMessage,
+.emailInputServerFailMessage {
+	color: red;
+}

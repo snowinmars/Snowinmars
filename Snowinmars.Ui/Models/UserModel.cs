@@ -26,6 +26,8 @@ namespace Snowinmars.Ui.Models
 
 		public UserRoles Roles { get; set; }
 
+		[DataType(DataType.EmailAddress)]
+		[RegularExpression(@".*\@.*\..*", ErrorMessage = "This field must be email")]
 		public string Email { get; set; }
 
 		public static UserModel Map(User user)
