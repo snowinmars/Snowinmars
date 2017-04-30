@@ -1,0 +1,14 @@
+﻿.username {
+	color: #a29200;
+	margin-left: 5ex;
+}
+
+.tooltip {
+	white-space: pre-wrap
+}
+
+.tooltip-inner {
+	background-color: #050612;
+	color:lightblue;
+	text-align: left;
+}

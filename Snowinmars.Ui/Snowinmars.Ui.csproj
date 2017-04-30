@@ -293,6 +293,7 @@
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Content\defaultStyleSheet.css" />
     <Content Include="Content\snowinmars\loadingCube.css" />
+    <Content Include="Content\snowinmars\userDetails.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -436,6 +437,7 @@
     <Content Include="Views\Layouts\_EditDetailsDeleteActionPartialPanel.cshtml" />
     <Content Include="Views\Layouts\_EditDeleteActionPartialPanel.cshtml" />
     <Content Include="Views\Layouts\_EnterPage.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

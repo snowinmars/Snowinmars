@@ -19,6 +19,16 @@ namespace Snowinmars.Ui.Controllers
 			this.userLogic = userLogic1;
 		}
 
+	    [HttpGet]
+	    [Route("")]
+	    public ActionResult Index()
+	    {
+		    var user = this.userLogic.Get(User.Identity.Name);
+			UserModel userModel = UserModel.Map(user);
+
+		    return View(userModel);
+	    }
+
 		[HttpPost]
 		[Route("create")]
 	    public RedirectResult Create(UserModel userModel)

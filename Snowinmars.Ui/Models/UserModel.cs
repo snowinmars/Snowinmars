@@ -27,5 +27,16 @@ namespace Snowinmars.Ui.Models
 		public UserRoles Roles { get; set; }
 
 		public string Email { get; set; }
+
+		public static UserModel Map(User user)
+		{
+			return new UserModel
+			{
+				Id = user.Id,
+				Username = user.Username,
+				Roles = user.Roles,
+				Email = user.Email,
+			};
+		}
 	}
 }

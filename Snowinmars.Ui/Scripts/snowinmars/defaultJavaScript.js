@@ -1,4 +1,6 @@
 ﻿(function () {
+	$("[data-toggle='tooltip']").tooltip();
+
 	// toggle navbar buttons
 
 	var parser = document.createElement("a");
