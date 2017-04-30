@@ -40,5 +40,17 @@ namespace Snowinmars.Ui.Models
 				Email = user.Email,
 			};
 		}
+
+		private static readonly UserModel EmptyUser = new UserModel
+		{
+			Username = "",
+			Email = "",
+			Password = "",
+			PasswordConfirm = "",
+			Roles = UserRoles.None,
+			Id = Guid.Empty,
+		};
+
+		public static UserModel Empty => UserModel.EmptyUser;
 	}
 }
