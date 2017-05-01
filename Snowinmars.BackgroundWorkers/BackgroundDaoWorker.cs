@@ -8,9 +8,8 @@ using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 
-//[assembly: WebActivatorEx.PostApplicationStartMethod(typeof(Snowinmars.BackgroundWorkers.BackgroundDaoWorker), "Start")]
+[assembly: WebActivatorEx.PostApplicationStartMethod(typeof(Snowinmars.BackgroundWorkers.BackgroundDaoWorker), "Start")]
 
-	[assembly: PreApplicationStartMethod(typeof(Snowinmars.BackgroundWorkers.BackgroundDaoWorker), "Start")]
 namespace Snowinmars.BackgroundWorkers
 {
 	public static class BackgroundDaoWorker
@@ -31,8 +30,15 @@ namespace Snowinmars.BackgroundWorkers
 		private static IBookDao bookDao;
 		private static IAuthorDao authorDao;
 
+		/// <summary>
+		/// Sometimes WebActivatorEx.PostApplicationStartMethod doen't start bg worker, so I starts it manually
+		/// </summary>
+		public static bool WasStarted { get; set; }
+
 		public static void Start()
 		{
+			WasStarted = true;
+
 			BackgroundDaoWorker.bookDao = DependencyResolver.Current.GetService<IBookDao>();
 			BackgroundDaoWorker.authorDao = DependencyResolver.Current.GetService<IAuthorDao>();
 
