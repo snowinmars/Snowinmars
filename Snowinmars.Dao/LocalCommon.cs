@@ -127,17 +127,12 @@ namespace Snowinmars.Dao
 			string pseudonymFamilyName = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Author.Column.PseudonymFamilyName]);
 			string pseudonymGivenName = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Author.Column.PseudonymGivenName]);
 
-			if (pseudonymGivenName != string.Empty)
+			return new Pseudonym()
 			{
-				return new Pseudonym()
-				{
-					GivenName = pseudonymGivenName,
-					FullMiddleName = pseudonymFullMiddleName,
-					FamilyName = pseudonymFamilyName,
-				};
-			}
-
-			return Pseudonym.None;
+				GivenName = pseudonymGivenName,
+				FullMiddleName = pseudonymFullMiddleName,
+				FamilyName = pseudonymFamilyName,
+			};
 		}
 
 		public static User MapUser(IDataRecord reader)
