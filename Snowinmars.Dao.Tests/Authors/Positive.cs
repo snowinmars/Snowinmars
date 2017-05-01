@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Snowinmars.Dao.Tests.Authors
 {
-	public class Smoke : BaseTest
+	public class Positive : BaseTest
 	{
 		[Theory, CombinatorialData]
 		public void Author_Create_MustWork(

@@ -18,7 +18,10 @@ namespace Snowinmars.Bll
 
 		public void AddUsersToRoles(IEnumerable<string> usernames, IEnumerable<UserRoles> roles)
 		{
-			Validation.ChackAll(usernames);
+			foreach (var username in usernames)
+			{
+				Validation.CheckUsername(username);
+			}
 
 			this.userDao.AddUsersToRoles(usernames, roles);
 		}
@@ -106,7 +109,10 @@ namespace Snowinmars.Bll
 
 		public void RemoveUsersFromRoles(IEnumerable<string> usernames, IEnumerable<UserRoles> roles)
 		{
-			Validation.ChackAll(usernames);
+			foreach (var username in usernames)
+			{
+				Validation.CheckUsername(username);
+			}
 
 			this.userDao.RemoveUsersFromRoles(usernames, roles);
 		}

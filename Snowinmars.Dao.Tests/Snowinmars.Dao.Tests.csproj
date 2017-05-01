@@ -167,7 +167,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Authors\Smoke.cs" />
+    <Compile Include="Authors\Negative.cs" />
+    <Compile Include="Authors\Positive.cs" />
     <Compile Include="BaseTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
