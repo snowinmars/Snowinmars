@@ -6,7 +6,18 @@ namespace Snowinmars.Entities
 		{
 			this.Shortcut = shortcut;
 
-			this.MustInformAboutWarnings = false;
+			this.GivenName = "";
+			this.FullMiddleName = "";
+			this.FamilyName = "";
+
+			this.Pseudonym = new Pseudonym()
+			{
+				GivenName = "",
+				FullMiddleName = "",
+				FamilyName = "",
+			};
+
+			this.MustInformAboutWarnings = true;
 		}
 
 		private Author()
