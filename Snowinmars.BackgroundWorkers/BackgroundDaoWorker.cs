@@ -1,15 +1,16 @@
-﻿using Snowinmars.BackgroundWorkers;
-using Snowinmars.Common;
+﻿using Snowinmars.Common;
 using Snowinmars.Dao.Interfaces;
 using Snowinmars.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Web;
 using System.Web.Mvc;
 
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(BackgroundDaoWorker), "Start")]
+//[assembly: WebActivatorEx.PostApplicationStartMethod(typeof(Snowinmars.BackgroundWorkers.BackgroundDaoWorker), "Start")]
 
+	[assembly: PreApplicationStartMethod(typeof(Snowinmars.BackgroundWorkers.BackgroundDaoWorker), "Start")]
 namespace Snowinmars.BackgroundWorkers
 {
 	public static class BackgroundDaoWorker
@@ -32,6 +33,9 @@ namespace Snowinmars.BackgroundWorkers
 
 		public static void Start()
 		{
+			BackgroundDaoWorker.bookDao = DependencyResolver.Current.GetService<IBookDao>();
+			BackgroundDaoWorker.authorDao = DependencyResolver.Current.GetService<IAuthorDao>();
+
 			BackgroundDaoWorker.TinyTimer.Change(TimeSpan.Zero, TimeSpan.FromMinutes(1));
 
 			// Figure how much time until the night time

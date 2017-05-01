@@ -73,6 +73,7 @@ namespace Snowinmars.Dao
 			string additionalInfo = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.AdditionalInfo]);
 			string authorShortcuts = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.AuthorsShortcuts]);
 			bool mustInformAboutWarnings = LocalCommon.ConvertFromDbValue<bool>(reader[LocalConst.Book.Column.MustInformAboutWarnings]);
+			string owner = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.Owner]);
 
 			var book = new Book(title, pageCount)
 			{
@@ -84,6 +85,7 @@ namespace Snowinmars.Dao
 				LiveLibUrl = liveLibUrl,
 				LibRusEcUrl = libRusEcUrl,
 				FlibustaUrl = flibustaUrl,
+				Owner = owner,
 			};
 
 			book.AuthorShortcuts.AddRange(authorShortcuts.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries));

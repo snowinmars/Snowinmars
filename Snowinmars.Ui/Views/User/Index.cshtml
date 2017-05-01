@@ -11,30 +11,26 @@
 }
 
 <div>
-	<h4>Personal page</h4>
+	<h4>Personal page: <span class="username">@Html.DisplayFor(model => model.Username)</span></h4>
 	<hr />
 	<div class="dl-horizontal">
 		@using (Html.BeginForm())
 		{
 			@Html.ValidationSummary(true)
 
-			<h2 class="username col-xs-12">
-				@Html.DisplayFor(model => model.Username)
-			</h2>
-
 			<div>
-				<div class="col-xs-8">
-					<div class="col-sm-1 col-xs-11">@Html.DisplayNameFor(model => model.Email)</div>
-					<div class="col-xs-3">
+				<div class="col-xs-12">
+					<div class="col-xs-12 col-sm-1">@Html.DisplayNameFor(model => model.Email)</div>
+					<div class="col-xs-8 col-sm-2">
 						<span class="emailInputSuccessMessage hidden">saved</span>
 						<span class="emailInputClientFailMessage hidden">'s wrong format</span>
 						<span class="emailInputServerFailMessage hidden">wasn't saved</span>
 					</div>
-					<div class="col-sm-6 col-xs-12">@Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control emailInput" } })</div>
-						<span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="right"
+					<div class="col-xs-11 col-sm-6">@Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control emailInput" } })</div>
+					<span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="right"
 							  title="System can send you notification about your books' unfinished specification and errors in book processing.
-	You can't setup this notification now.
-	You can erase this field any time."></span>
+You can't setup this notification now.
+You can erase this field any time."></span>
 				</div>
 			</div>
 		}

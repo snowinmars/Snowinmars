@@ -28,6 +28,27 @@ namespace Snowinmars.Ui.Models
 		public string FlibustaUrl { get; set; }
 		public bool MustInformAboutWarnings { get; set; }
 
+		public string Owner { get; set; }
+
+		private static readonly BookModel EmptyBook = new BookModel
+		{
+			Owner = "",
+			AdditionalInfo = "",
+			AuthorModelIds = new List<Guid>(),
+			AuthorShortcuts = new List<string>(),
+			Bookshelf = "",
+			FlibustaUrl = "",
+			LibRusEcUrl = "",
+			LiveLibUrl = "",
+			MustInformAboutWarnings = true,
+			PageCount = 0,
+			Title = "",
+			Year = 0,
+			Id = Guid.Empty,
+		};
+
+		public static BookModel Empty => BookModel.EmptyBook;
+
 		public static BookModel Map(Book book)
 		{
 			BookModel bookModel = new BookModel
@@ -43,6 +64,7 @@ namespace Snowinmars.Ui.Models
 				FlibustaUrl = book.FlibustaUrl,
 				LibRusEcUrl = book.LibRusEcUrl,
 				LiveLibUrl = book.LiveLibUrl,
+				Owner = book.Owner,
 				MustInformAboutWarnings = book.MustInformAboutWarnings,
 			};
 

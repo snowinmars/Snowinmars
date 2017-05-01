@@ -187,6 +187,7 @@ namespace Snowinmars.Dao
 							"," + Column.LiveLibUrl +
 							"," + Column.LibRusEcUrl +
 							"," + Column.FlibustaUrl +
+							"," + Column.Owner +
 						 @")
 					values
 							( " + Parameter.Id +
@@ -200,6 +201,7 @@ namespace Snowinmars.Dao
 							"," + Parameter.LiveLibUrl +
 							"," + Parameter.LibRusEcUrl +
 							"," + Parameter.FlibustaUrl +
+							"," + Parameter.Owner +
 							" ) ";
 
 			internal const string SelectAllCommand =
@@ -214,6 +216,7 @@ namespace Snowinmars.Dao
 							"," + Column.LiveLibUrl +
 							"," + Column.LibRusEcUrl +
 							"," + Column.FlibustaUrl +
+							"," + Column.Owner +
 					" from " + Book.TableName;
 
 			internal const string SelectCommand =
@@ -241,6 +244,7 @@ namespace Snowinmars.Dao
 									"," + Column.LiveLibUrl + " = " + Parameter.LiveLibUrl +
 									"," + Column.LibRusEcUrl + " = " + Parameter.LibRusEcUrl +
 									"," + Column.FlibustaUrl + " = " + Parameter.FlibustaUrl +
+									"," + Column.Owner + " = " + Parameter.Owner +
 						" where ( " + Column.Id + " = " + Parameter.Id + " ) " +
 					" end " +
 					" else " +
@@ -256,6 +260,7 @@ namespace Snowinmars.Dao
 									"," + Column.LiveLibUrl + " = " + Parameter.LiveLibUrl +
 									"," + Column.LibRusEcUrl + " = " + Parameter.LibRusEcUrl +
 									"," + Column.FlibustaUrl + " = " + Parameter.FlibustaUrl +
+									"," + Column.Owner + " = " + Parameter.Owner +
 						" where ( " + Column.Id + " = " + Parameter.Id + " ) " +
 					" end ";
 
@@ -273,6 +278,7 @@ namespace Snowinmars.Dao
 				internal const string LiveLibUrl = "LiveLibUrl";
 				internal const string LibRusEcUrl = "LibRusEcUrl";
 				internal const string FlibustaUrl = "FlibustaUrl";
+				internal const string Owner = "Owner";
 			}
 
 			internal class Parameter
@@ -289,6 +295,7 @@ namespace Snowinmars.Dao
 				internal const string LiveLibUrl = "@liveLibUrl";
 				internal const string LibRusEcUrl = "@libRusEcUrl";
 				internal const string FlibustaUrl = "@flibustaUrl";
+				internal const string Owner = "@owner";
 			}
 		}
 

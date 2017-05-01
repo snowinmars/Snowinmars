@@ -61,7 +61,7 @@ namespace Snowinmars.Ui.Controllers
 		[Route("create")]
 		public ActionResult Create()
 		{
-			return View();
+			return View(BookModel.Empty);
 		}
 
 		[HttpPost]
@@ -86,6 +86,7 @@ namespace Snowinmars.Ui.Controllers
 				LibRusEcUrl = bookModel.LibRusEcUrl,
 				LiveLibUrl = bookModel.LiveLibUrl,
 				MustInformAboutWarnings = bookModel.MustInformAboutWarnings,
+				Owner = bookModel.Owner,
 			};
 
 			if (bookModel.Id != Guid.Empty)

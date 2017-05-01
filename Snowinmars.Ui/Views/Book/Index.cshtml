@@ -8,7 +8,7 @@
 @section Content
 {
 	<link href="~/Content/snowinmars/bookIndex.css" rel="stylesheet" />
-<link href="~/Content/snowinmars/loadingCube.css" rel="stylesheet" />
+	<link href="~/Content/snowinmars/loadingCube.css" rel="stylesheet" />
 }
 
 <h2>All books</h2>
@@ -41,17 +41,25 @@
 			<th class="col-xs-4 hidden-sm hidden-xs">
 				@Html.DisplayNameFor(model => model.AuthorModelIds)
 			</th>
-			<th class="col-xs-3 no-sort"></th>
+			<th class="col-sm-4 col-xs-2 no-sort"></th>
 		</tr>
 	</thead>
 	<tbody>
 		@foreach (var item in Model)
 		{
-			<tr data-id="@item.Id">
-				<td class="col-xs-3 noOverflow">
+			if (User.Identity.Name == item.Owner)
+			{
+				@:<tr data-id="@item.Id" class="myBook">
+			}
+			else
+			{
+				@:<tr data-id="@item.Id">
+			}
+				<td class="col-xs-3 noOverflow titleColumn">
+					<span class="myBookIcon glyphicon glyphicon-book" data-toggle="tooltip" data-placement="left" title="Your book"></span>
 					@Html.DisplayFor(modelItem => item.Title)
 				</td>
-				<td class="col-xs-1">
+				<td class="col-xs-1 ">
 					@Html.DisplayFor(modelItem => item.Year)
 				</td>
 				<td class="col-xs-1 hidden-xs">
@@ -63,7 +71,7 @@
 				<td class="col-sm-4 col-xs-2">
 					@RenderPage("~/Views/Layouts/_EditDetailsDeleteActionPartialPanel.cshtml", item.Id)
 				</td>
-			</tr>
+			@:</tr>
 		}
 	</tbody>
 </table>

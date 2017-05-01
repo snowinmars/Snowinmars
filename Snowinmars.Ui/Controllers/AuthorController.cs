@@ -40,11 +40,13 @@ namespace Snowinmars.Ui.Controllers
 			};
 		}
 
+	
+
 		[HttpGet]
 		[Route("create")]
 		public ActionResult Create()
 		{
-			return View();
+			return View(AuthorModel.Emtpy);
 		}
 
 		[HttpGet]

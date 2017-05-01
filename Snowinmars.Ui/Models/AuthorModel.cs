@@ -1,4 +1,5 @@
-﻿using Snowinmars.Entities;
+﻿using System;
+using Snowinmars.Entities;
 using System.ComponentModel;
 
 namespace Snowinmars.Ui.Models
@@ -20,6 +21,17 @@ namespace Snowinmars.Ui.Models
 
 		[DisplayName("Family name")]
 		public string FamilyName { get; set; }
+
+		private static readonly AuthorModel EmptyAuthor = new AuthorModel
+		{
+			Id = Guid.Empty,
+			Shortcut = "",
+			FamilyName = "",
+			GivenName = "",
+			FullMiddleName = "",
+		};
+
+		public static AuthorModel Emtpy => AuthorModel.EmptyAuthor;
 
 		public static AuthorModel Map(Author author)
 		{

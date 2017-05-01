@@ -30,6 +30,7 @@ namespace Snowinmars.Entities
 		public string AdditionalInfo { get; set; }
 		public string LiveLibUrl { get; set; }
 		public string LibRusEcUrl { get; set; }
+		public string Owner { get; set; }
 		public string FlibustaUrl { get; set; }
 	}
 }
