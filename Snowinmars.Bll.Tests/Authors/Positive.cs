@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using Xunit;
 
-namespace Snowinmars.Dao.Tests.Authors
+namespace Snowinmars.Bll.Tests.Authors
 {
 	public class Positive : BaseTest
 	{
@@ -22,7 +22,8 @@ namespace Snowinmars.Dao.Tests.Authors
 			{
 				int authorsCount = this.authorDao.Get(a => true).Count();
 
-				Author author = CreateAuthor(givenName,
+				Author author = CreateAuthor(UnexistingAuthor,
+					givenName,
 					fullMiddleName,
 					familyName,
 					shortcut,
@@ -117,31 +118,45 @@ namespace Snowinmars.Dao.Tests.Authors
 		[Fact]
 		public void Author_Get_MustWork()
 		{
-			var author = this.CreateAnyAuthor();
+			try
+			{
+				var author = this.CreateAnyAuthor();
 
-			int authorsCount = this.authorDao.Get(a => true).Count();
+				int authorsCount = this.authorDao.Get(a => true).Count();
 
-			var createdAuthor = this.authorDao.Get(author.Id);
-			int newAuthorsCount = this.authorDao.Get(a => true).Count();
+				var createdAuthor = this.authorDao.Get(author.Id);
+				int newAuthorsCount = this.authorDao.Get(a => true).Count();
 
-			Assert.Equal(authorsCount, newAuthorsCount);
+				Assert.Equal(authorsCount, newAuthorsCount);
 
-			Assert.NotNull(createdAuthor);
-			Assert.True(!string.IsNullOrWhiteSpace(author.Shortcut));
-			Assert.NotEqual(Guid.Empty, createdAuthor.Id);
-			Assert.NotNull(createdAuthor.Pseudonym);
+				Assert.NotNull(createdAuthor);
+				Assert.True(!string.IsNullOrWhiteSpace(author.Shortcut));
+				Assert.NotEqual(Guid.Empty, createdAuthor.Id);
+				Assert.NotNull(createdAuthor.Pseudonym);
+			}
+			catch
+			{
+				this.Dispose();
+			}
 		}
 
 		[Fact]
 		public void Author_Remove_MustWork()
 		{
-			var author = this.CreateAnyAuthor();
-			int authorsCount = this.authorDao.Get(a => true).Count();
+			try
+			{
+				var author = this.CreateAnyAuthor();
+				int authorsCount = this.authorDao.Get(a => true).Count();
 
-			this.authorDao.Remove(author.Id);
-			int newAuthorsCount = this.authorDao.Get(a => true).Count();
+				this.authorDao.Remove(author.Id);
+				int newAuthorsCount = this.authorDao.Get(a => true).Count();
 
-			Assert.True(newAuthorsCount == authorsCount - 1);
+				Assert.True(newAuthorsCount == authorsCount - 1);
+			}
+			catch
+			{
+				this.Dispose();
+			}
 		}
 
 		[Theory, CombinatorialData]
@@ -157,7 +172,8 @@ namespace Snowinmars.Dao.Tests.Authors
 		{
 			try
 			{
-				var author = CreateAuthor(givenName,
+				var author = CreateAuthor(UnexistingAuthor,
+					givenName,
 					fullMiddleName,
 					familyName,
 					shortcut,
@@ -212,29 +228,6 @@ namespace Snowinmars.Dao.Tests.Authors
 			}
 		}
 
-		private Author CreateAnyAuthor()
-		{
-			return CreateAuthor(AnyWord, AnyWord, AnyWord, AnyWord, AnyWord, AnyWord, AnyWord, false);
-		}
-
-		private Author CreateAuthor(string givenName, string fullMiddleName, string familyName, string shortcut, string pseudonymGivenName, string pseudonymFullMiddleName, string pseudonymFamilyName, bool mustInformAboutWarnings)
-		{
-			Author author = new Author(shortcut)
-			{
-				GivenName = givenName,
-				FullMiddleName = fullMiddleName,
-				FamilyName = familyName,
-				Pseudonym = new Pseudonym
-				{
-					GivenName = pseudonymGivenName,
-					FullMiddleName = pseudonymFullMiddleName,
-					FamilyName = pseudonymFamilyName,
-				},
-				MustInformAboutWarnings = mustInformAboutWarnings,
-				Id = UnexistingAuthor,
-			};
-			this.authorDao.Create(author);
-			return author;
-		}
+		
 	}
 }

@@ -17,6 +17,8 @@ namespace Snowinmars.Dao
 		public BookDao(IAuthorDao authorDao)
 		{
 			this.authorDao = authorDao;
+
+			Validation.Set(this);
 		}
 
 		public void Create(Book item)

@@ -1,9 +1,16 @@
+using System;
+
 namespace Snowinmars.Entities
 {
 	public class Author : Entity
 	{
 		public Author(string shortcut)
 		{
+			if (string.IsNullOrWhiteSpace(shortcut))
+			{
+				throw new ArgumentException("Shortcut can't be empty");
+			}
+
 			this.Shortcut = shortcut;
 
 			this.GivenName = "";

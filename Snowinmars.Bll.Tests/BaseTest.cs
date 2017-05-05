@@ -2,8 +2,10 @@
 using Snowinmars.Dao.Interfaces;
 using System;
 using System.Data;
+using Snowinmars.Dao;
+using Snowinmars.Entities;
 
-namespace Snowinmars.Dao.Tests
+namespace Snowinmars.Bll.Tests
 {
 	public class BaseTest
 	{
@@ -16,7 +18,30 @@ namespace Snowinmars.Dao.Tests
 			this.UnexistingAuthor = Guid.NewGuid();
 			this.EnsureThatAuthorDoesntExist();
 		}
+		protected Author CreateAnyAuthor()
+		{
+			return CreateAuthor(UnexistingAuthor, AnyWord, AnyWord, AnyWord, AnyWord, AnyWord, AnyWord, AnyWord, false);
+		}
 
+		protected Author CreateAuthor(Guid id, string givenName, string fullMiddleName, string familyName, string shortcut, string pseudonymGivenName, string pseudonymFullMiddleName, string pseudonymFamilyName, bool mustInformAboutWarnings)
+		{
+			Author author = new Author(shortcut)
+			{
+				Id = id,
+				GivenName = givenName,
+				FullMiddleName = fullMiddleName,
+				FamilyName = familyName,
+				Pseudonym = new Pseudonym
+				{
+					GivenName = pseudonymGivenName,
+					FullMiddleName = pseudonymFullMiddleName,
+					FamilyName = pseudonymFamilyName,
+				},
+				MustInformAboutWarnings = mustInformAboutWarnings,
+			};
+			this.authorDao.Create(author);
+			return author;
+		}
 		protected static Random Random { get; } = new Random();
 
 		protected static TextGenerator TextGenerator { get; } = new TextGenerator();

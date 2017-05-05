@@ -11,6 +11,11 @@ namespace Snowinmars.Dao
 {
 	public class AuthorDao : IAuthorDao, ICRUD<Author>
 	{
+		public AuthorDao()
+		{
+			Validation.Set(this);
+		}
+
 		public void Create(Author item)
 		{
 			Validation.Check(item);
@@ -99,7 +104,7 @@ namespace Snowinmars.Dao
 
 		public void Update(Author item)
 		{
-			Validation.Check(item);
+			Validation.Check(item, mustbeUnique: false);
 
 			using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
 			{

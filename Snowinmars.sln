@@ -20,7 +20,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snowinmars.NinjectRegistrat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snowinmars.BackgroundWorkers", "Snowinmars.BackgroundWorkers\Snowinmars.BackgroundWorkers.csproj", "{34D1BAEF-F526-4F52-927C-9DB769EA8C2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snowinmars.Dao.Tests", "Snowinmars.Dao.Tests\Snowinmars.Dao.Tests.csproj", "{B43D40DC-BF8C-4BE5-BFB9-2F65F0793CDE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snowinmars.Bll.Tests", "Snowinmars.Bll.Tests\Snowinmars.Bll.Tests.csproj", "{B43D40DC-BF8C-4BE5-BFB9-2F65F0793CDE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

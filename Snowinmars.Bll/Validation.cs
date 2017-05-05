@@ -31,11 +31,6 @@ namespace Snowinmars.Bll
 
 		private static void CheckShortcut(string shortcut)
 		{
-			if (shortcut == null)
-			{
-				throw new ValidationException("Author's shortcut is null");
-			}
-
 			if (string.IsNullOrWhiteSpace(shortcut))
 			{
 				throw new ValidationException("Author's shortcut can't be empty");
@@ -372,5 +367,7 @@ namespace Snowinmars.Bll
 				throw new ValidationException("You can't use this salt: it's too short");
 			}
 		}
+
+		
 	}
 }
