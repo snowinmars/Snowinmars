@@ -1,6 +1,5 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
-using Snowinmars.BackgroundWorkers;
 
 namespace Snowinmars.Ui
 {
@@ -10,11 +9,6 @@ namespace Snowinmars.Ui
 		{
 			AreaRegistration.RegisterAllAreas();
 			RouteConfig.RegisterRoutes(RouteTable.Routes);
-
-			if (!BackgroundDaoWorker.WasStarted)
-			{
-				BackgroundDaoWorker.Start();
-			}
 		}
 	}
 }

@@ -52,10 +52,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Snowinmars.BackgroundWorkers\Snowinmars.BackgroundWorkers.csproj">
-      <Project>{34D1BAEF-F526-4F52-927C-9DB769EA8C2F}</Project>
-      <Name>Snowinmars.BackgroundWorkers</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Snowinmars.Bll.Interfaces\Snowinmars.Bll.Interfaces.csproj">
       <Project>{67ac64ca-13cb-4bab-8ae8-fa7cc557b796}</Project>
       <Name>Snowinmars.Bll.Interfaces</Name>
