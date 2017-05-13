@@ -4,6 +4,10 @@ namespace Snowinmars.Entities
 {
 	public class Author : Entity
 	{
+		private static readonly Author EmptyAuthor = new Author();
+
+		public static Author Empty => Author.EmptyAuthor;
+
 		public Author(string shortcut)
 		{
 			if (string.IsNullOrWhiteSpace(shortcut))
@@ -27,7 +31,7 @@ namespace Snowinmars.Entities
 			this.MustInformAboutWarnings = true;
 		}
 
-		private Author()
+		private Author() : this("")
 		{
 		}
 
