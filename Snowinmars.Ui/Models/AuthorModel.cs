@@ -53,7 +53,11 @@ namespace Snowinmars.Ui.Models
 				FamilyName = author.FamilyName,
 				Shortcut = author.Shortcut,
                 IsSynchronized = author.IsSynchronized,
-			};
+                MustInformAboutWarnings = author.MustInformAboutWarnings,
+                PseudonymGivenName = author.Pseudonym?.GivenName ?? "",
+                PseudonymFullMiddleName= author.Pseudonym?.FullMiddleName ?? "",
+                PseudonymFamilyName= author.Pseudonym?.FamilyName ?? "",
+            };
 		}
 	}
 }

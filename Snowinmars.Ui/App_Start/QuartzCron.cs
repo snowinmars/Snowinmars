@@ -197,7 +197,9 @@ namespace Snowinmars.Ui
                 }
             }
 
-            foreach (var warning in Cron.Warnings)
+            var copy = Cron.Warnings.ToList();
+
+            foreach (var warning in copy)
             {
                 Cron.EmailSender.Send(warning);
                 Cron.Warnings.Remove(warning);
@@ -323,7 +325,7 @@ namespace Snowinmars.Ui
 
             this.smtpClient = new SmtpClient
             {
-                Port = 25,
+                Port = 587,
                 Host = ConfigurationManager.AppSettings["emailHost"],
                 EnableSsl = true,
                 Timeout = (int)TimeSpan.FromMinutes(10).TotalMilliseconds,

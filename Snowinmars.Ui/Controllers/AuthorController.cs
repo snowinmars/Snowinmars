@@ -54,9 +54,9 @@ namespace Snowinmars.Ui.Controllers
 	    {
 	        return new Pseudonym
 	        {
-	            GivenName = authorModel.PseudonymGivenName,
-	            FullMiddleName = authorModel.PseudonymFullMiddleName,
-	            FamilyName = authorModel.PseudonymFamilyName,
+	            GivenName = ControllerHelper.Convert(authorModel.PseudonymGivenName),
+	            FullMiddleName = ControllerHelper.Convert(authorModel.PseudonymFullMiddleName),
+	            FamilyName = ControllerHelper.Convert(authorModel.PseudonymFamilyName),
 	        };
 	    }
 

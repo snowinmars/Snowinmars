@@ -33,16 +33,18 @@ namespace Snowinmars.Dao
 				var pseudonymFullMiddleName = LocalCommon.ConvertToDbValue(item.Pseudonym.FullMiddleName);
 				var pseudonymFamilyName = LocalCommon.ConvertToDbValue(item.Pseudonym.FamilyName);
 				var mustInformAboutWarnings = LocalCommon.ConvertToDbValue(item.MustInformAboutWarnings);
+				var isSynchronized = LocalCommon.ConvertToDbValue(false);
 
-				command.Parameters.AddWithValue(LocalConst.Author.Column.Id, id);
-				command.Parameters.AddWithValue(LocalConst.Author.Column.GivenName, givenName);
-				command.Parameters.AddWithValue(LocalConst.Author.Column.FullMiddleName, fullMiddleName);
-				command.Parameters.AddWithValue(LocalConst.Author.Column.Shortcut, shortcut);
-				command.Parameters.AddWithValue(LocalConst.Author.Column.FamilyName, familyName);
+				command.Parameters.AddWithValue(LocalConst.Author.Parameter.Id, id);
+				command.Parameters.AddWithValue(LocalConst.Author.Parameter.GivenName, givenName);
+				command.Parameters.AddWithValue(LocalConst.Author.Parameter.FullMiddleName, fullMiddleName);
+				command.Parameters.AddWithValue(LocalConst.Author.Parameter.Shortcut, shortcut);
+				command.Parameters.AddWithValue(LocalConst.Author.Parameter.FamilyName, familyName);
 				command.Parameters.AddWithValue(LocalConst.Author.Parameter.PseudonymGivenName, pseudonymGivenName);
 				command.Parameters.AddWithValue(LocalConst.Author.Parameter.PseudonymFullMiddleName, pseudonymFullMiddleName);
 				command.Parameters.AddWithValue(LocalConst.Author.Parameter.PseudonymFamilyName, pseudonymFamilyName);
-				command.Parameters.AddWithValue(LocalConst.Book.Column.MustInformAboutWarnings, mustInformAboutWarnings);
+				command.Parameters.AddWithValue(LocalConst.Author.Parameter.MustInformAboutWarnings, mustInformAboutWarnings);
+				command.Parameters.AddWithValue(LocalConst.Author.Parameter.IsSynchronized, isSynchronized);
 
 				sqlConnection.Open();
 				command.ExecuteNonQuery();
@@ -119,18 +121,20 @@ namespace Snowinmars.Dao
 				var pseudonymFullMiddleName = LocalCommon.ConvertToDbValue(item.Pseudonym?.FullMiddleName);
 				var pseudonymFamilyName = LocalCommon.ConvertToDbValue(item.Pseudonym?.FamilyName);
 				var mustInformAboutWarnings = LocalCommon.ConvertToDbValue(item.MustInformAboutWarnings);
+                var isSynchronized = LocalCommon.ConvertToDbValue(false);
 
-				command.Parameters.AddWithValue(LocalConst.Author.Column.Id, id);
-				command.Parameters.AddWithValue(LocalConst.Author.Column.GivenName, givenName);
-				command.Parameters.AddWithValue(LocalConst.Author.Column.FullMiddleName, fullMiddleName);
-				command.Parameters.AddWithValue(LocalConst.Author.Column.Shortcut, shortcut);
-				command.Parameters.AddWithValue(LocalConst.Author.Column.FamilyName, familyName);
+                command.Parameters.AddWithValue(LocalConst.Author.Parameter.Id, id);
+				command.Parameters.AddWithValue(LocalConst.Author.Parameter.GivenName, givenName);
+				command.Parameters.AddWithValue(LocalConst.Author.Parameter.FullMiddleName, fullMiddleName);
+				command.Parameters.AddWithValue(LocalConst.Author.Parameter.Shortcut, shortcut);
+				command.Parameters.AddWithValue(LocalConst.Author.Parameter.FamilyName, familyName);
 				command.Parameters.AddWithValue(LocalConst.Author.Parameter.PseudonymGivenName, pseudonymGivenName);
 				command.Parameters.AddWithValue(LocalConst.Author.Parameter.PseudonymFullMiddleName, pseudonymFullMiddleName);
 				command.Parameters.AddWithValue(LocalConst.Author.Parameter.PseudonymFamilyName, pseudonymFamilyName);
-				command.Parameters.AddWithValue(LocalConst.Book.Column.MustInformAboutWarnings, mustInformAboutWarnings);
+				command.Parameters.AddWithValue(LocalConst.Author.Parameter.MustInformAboutWarnings, mustInformAboutWarnings);
+                command.Parameters.AddWithValue(LocalConst.Author.Parameter.IsSynchronized, isSynchronized);
 
-				sqlConnection.Open();
+                sqlConnection.Open();
 				command.ExecuteNonQuery();
 				sqlConnection.Close();
 			}

@@ -58,7 +58,7 @@
 				<td class="col-xs-3 noOverflow titleColumn">
 				    <span class="myBookIcon glyphicon glyphicon-book" data-toggle="tooltip" data-placement="top" title="Yours"></span>
                     
-				    @Html.DisplayFor(modelItem => item.Title)
+                    @Html.DisplayFor(modelItem => item.Title)
 				</td>
 				<td class="col-xs-1 ">
 					@Html.DisplayFor(modelItem => item.Year)
@@ -66,9 +66,18 @@
 				<td class="col-xs-1 hidden-xs">
 					@Html.DisplayFor(modelItem => item.PageCount)
 				</td>
-				<td class="col-xs-4 hidden-sm hidden-xs">
-					@Html.DropDownList("authorModelIds_" + item.Id, item.AuthorShortcuts.Select(s => new SelectListItem { Text = s, Selected = true, }), new Dictionary<string, object> { { "class", "authorModelIds" }, { "multiple", "multiple" }, })
-				</td>
+		    <td class="col-xs-4 hidden-sm hidden-xs">
+                @Html.DropDownList("authorModelIds_" + item.Id, item.AuthorShortcuts.Select(s => new SelectListItem { Text = s, Selected = true, }), new Dictionary<string, object> { { "class", "authorModelIds col-xs-10" }, { "multiple", "multiple" }, })
+		       
+                @if (!item.IsSynchronized)
+                {
+                    <span class="synchronizationIcon glyphicon glyphicon-refresh glyphicon-spin col-xs-1" data-toggle="tooltip" data-placement="top" title="Sync"></span>
+                }
+                else
+                {
+                    <span class="hidden synchronizationIcon glyphicon glyphicon-refresh glyphicon-spin col-xs-1" data-toggle="tooltip" data-placement="top" title="Sync"></span>
+                }
+		    </td>
 				<td class="col-sm-4 col-xs-2">
 					@RenderPage("~/Views/Layouts/_EditDetailsDeleteActionPartialPanel.cshtml", item.Id)
 				</td>

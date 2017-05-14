@@ -139,7 +139,7 @@ namespace Snowinmars.Dao
 
 			using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
 			{
-				bool haveToUpdateAuthorShortcuts = this.HandleAuthorUpdate(item, sqlConnection);
+				this.HandleAuthorUpdate(item, sqlConnection);
 
 				var authorsShortcuts = LocalCommon.ConvertToDbValue(string.Join(",", item.AuthorShortcuts));
 
@@ -179,43 +179,13 @@ namespace Snowinmars.Dao
 			}
 		}
 
-		private bool HandleAuthorUpdate(Book item, SqlConnection sqlConnection)
+		private void HandleAuthorUpdate(Book item, SqlConnection sqlConnection)
 		{
-			// Authors can be updated with three ways: one can add new ones, can remove old ones and can don't touch authors at all
-
-			// I want to compare the old and the new one collections.
 			List<Guid> oldAuthors = this.GetAuthorsForBook(item.Id).Select(a => a.Id).ToList();
 			List<Guid> newAuthors = item.AuthorIds.ToList();
 
-			// I remove all matching entries from both of them
-			for (var i = 0; i < oldAuthors.Count; i++)
-			{
-				var oldAuthor = oldAuthors[i];
-
-				if (newAuthors.Contains(oldAuthor))
-				{
-					newAuthors.Remove(oldAuthor);
-					oldAuthors.Remove(oldAuthor);
-				}
-			}
-
-			// and then if there's something in remainder in old author's collection  - I remove em.
-			if (oldAuthors.Any())
-			{
-				this.DeleteBookAuthorConnections(item.Id, oldAuthors, sqlConnection);
-
-				return true;
-			}
-
-			// or add if there is something in new author's collection.
-			if (newAuthors.Any())
-			{
-				this.AddBookAuthorConnections(item.Id, newAuthors, sqlConnection);
-
-				return true;
-			}
-
-			return false;
+			this.DeleteBookAuthorConnections(item.Id, oldAuthors, sqlConnection);
+			this.AddBookAuthorConnections(item.Id, newAuthors, sqlConnection);
 		}
 
 		private void AddBook(Book book, SqlConnection sqlConnection)

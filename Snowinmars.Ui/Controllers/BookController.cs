@@ -155,7 +155,19 @@ namespace Snowinmars.Ui.Controllers
 			return View(bookModel);
 		}
 
-		[HttpGet]
+        [HttpPost]
+        [Route("details")]
+        [ActionName("Details")]
+        [AllowAnonymous]
+        public JsonResult DetailsPost(Guid id)
+        {
+            var book = this.bookLogic.Get(id);
+            var bookModel = BookModel.Map(book);
+
+            return Json(bookModel);
+        }
+
+        [HttpGet]
 		[Route("edit")]
 		public ActionResult Edit(Guid id)
 		{

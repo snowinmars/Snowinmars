@@ -102,9 +102,9 @@ namespace Snowinmars.Dao
                         @")
 				values
 					( " + Parameter.Id +
-						"," + Parameter.FirstName +
-						"," + Parameter.LastName +
-						"," + Parameter.Surname +
+						"," + Parameter.GivenName +
+						"," + Parameter.FullMiddleName +
+						"," + Parameter.FamilyName +
 						"," + Parameter.Shortcut +
 						"," + Parameter.PseudonymGivenName +
 						"," + Parameter.PseudonymFullMiddleName +
@@ -133,9 +133,9 @@ namespace Snowinmars.Dao
 
 			internal const string UpdateCommand = @"
 				update " + Author.TableName + @"
-				set " + Column.GivenName + " = " + Parameter.FirstName +
-						"," + Column.FullMiddleName + " = " + Parameter.LastName +
-						"," + Column.FamilyName + " = " + Parameter.Surname +
+				set " + Column.GivenName + " = " + Parameter.GivenName +
+						"," + Column.FullMiddleName + " = " + Parameter.FullMiddleName +
+						"," + Column.FamilyName + " = " + Parameter.FamilyName +
 						"," + Column.Shortcut + " = " + Parameter.Shortcut +
 						"," + Column.PseudonymGivenName + " = " + Parameter.PseudonymGivenName +
 						"," + Column.PseudonymFullMiddleName + " = " + Parameter.PseudonymFullMiddleName +
@@ -160,11 +160,11 @@ namespace Snowinmars.Dao
 
 			internal class Parameter
 			{
-				internal const string FirstName = "@givenName";
+				internal const string GivenName = "@givenName";
 				internal const string Id = "@authorId";
-				internal const string LastName = "@fullMiddleName";
+				internal const string FullMiddleName = "@fullMiddleName";
 				internal const string Shortcut = "@shortcut";
-				internal const string Surname = "@familyName";
+				internal const string FamilyName = "@familyName";
 				internal const string PseudonymFullMiddleName = "@pseudonymFullMiddleName";
 				internal const string PseudonymFamilyName = "@pseudonymFamilyName";
 				internal const string PseudonymGivenName = "@pseudonymGivenName";
