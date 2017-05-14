@@ -17,7 +17,19 @@ namespace Snowinmars.Ui.Models
         [Required]
         public string Shortcut { get; set; }
 
-		[DisplayName("Family name")]
+		[DisplayName("Pseudonym given name")]
+	    public string PseudonymGivenName { get; set; }
+
+        [DisplayName("Pseudonym full middle name")]
+	    public string PseudonymFullMiddleName { get; set; }
+
+		[DisplayName("Pseudonym family name")]
+	    public string PseudonymFamilyName { get; set; }
+
+		[DisplayName("Have I inform you about warnings?")]
+        public bool MustInformAboutWarnings { get; set; }
+
+        [DisplayName("Family name")]
 		public string FamilyName { get; set; }
 
 		private static readonly AuthorModel EmptyAuthor = new AuthorModel
@@ -33,16 +45,15 @@ namespace Snowinmars.Ui.Models
 
 		public static AuthorModel Map(Author author)
 		{
-			AuthorModel authorModel = new AuthorModel
+            return new AuthorModel
 			{
 				Id = author.Id,
 				GivenName = author.GivenName,
 				FullMiddleName = author.FullMiddleName,
 				FamilyName = author.FamilyName,
 				Shortcut = author.Shortcut,
+                IsSynchronized = author.IsSynchronized,
 			};
-
-			return authorModel;
 		}
 	}
 }

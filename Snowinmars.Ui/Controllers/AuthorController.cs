@@ -37,7 +37,10 @@ namespace Snowinmars.Ui.Controllers
 		        GivenName = ControllerHelper.Convert(authorModel.GivenName),
 		        FullMiddleName = ControllerHelper.Convert(authorModel.FullMiddleName),
 		        FamilyName = ControllerHelper.Convert(authorModel.FamilyName),
-		    };
+                IsSynchronized = authorModel.IsSynchronized,
+                MustInformAboutWarnings = authorModel.MustInformAboutWarnings,
+                Pseudonym = MapPseudonym(authorModel),
+            };
 
 		    if (authorModel.Id != Guid.Empty)
 		    {
@@ -47,7 +50,16 @@ namespace Snowinmars.Ui.Controllers
 		    return author;
 		}
 
-	    
+	    private static Pseudonym MapPseudonym(AuthorModel authorModel)
+	    {
+	        return new Pseudonym
+	        {
+	            GivenName = authorModel.PseudonymGivenName,
+	            FullMiddleName = authorModel.PseudonymFullMiddleName,
+	            FamilyName = authorModel.PseudonymFamilyName,
+	        };
+	    }
+
 
 	    [HttpGet]
 		[Route("create")]

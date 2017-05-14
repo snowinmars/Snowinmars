@@ -141,15 +141,7 @@ namespace Snowinmars.Dao
 			{
 				bool haveToUpdateAuthorShortcuts = this.HandleAuthorUpdate(item, sqlConnection);
 
-				object authorsShortcuts;
-				if (haveToUpdateAuthorShortcuts)
-				{
-					authorsShortcuts = LocalCommon.ConvertToDbValue(""); // tiny worker will update everything that have this field empty
-				}
-				else
-				{
-					authorsShortcuts = LocalCommon.ConvertToDbValue("__ignore");
-				}
+				var authorsShortcuts = LocalCommon.ConvertToDbValue(string.Join(",", item.AuthorShortcuts));
 
 				// updating usual fields
 				var command = new SqlCommand(LocalConst.Book.UpdateCommand, sqlConnection);
@@ -165,21 +157,23 @@ namespace Snowinmars.Dao
 				var libRusEcUrl = LocalCommon.ConvertToDbValue(item.LibRusEcUrl);
 				var flibustaUrl = LocalCommon.ConvertToDbValue(item.FlibustaUrl);
 				var owner = LocalCommon.ConvertToDbValue(item.Owner);
+                var isSynchronized = LocalCommon.ConvertToDbValue(item.IsSynchronized);
 
-				command.Parameters.AddWithValue(LocalConst.Book.Column.Id, id);
-				command.Parameters.AddWithValue(LocalConst.Book.Column.Title, title);
-				command.Parameters.AddWithValue(LocalConst.Book.Column.PageCount, pageCount);
-				command.Parameters.AddWithValue(LocalConst.Book.Column.Year, year);
-				command.Parameters.AddWithValue(LocalConst.Book.Column.AuthorsShortcuts, authorsShortcuts);
-				command.Parameters.AddWithValue(LocalConst.Book.Column.MustInformAboutWarnings, mustInformAboutWarnings);
-				command.Parameters.AddWithValue(LocalConst.Book.Column.Bookshelf, bookshelf);
-				command.Parameters.AddWithValue(LocalConst.Book.Column.AdditionalInfo, additionalInfo);
-				command.Parameters.AddWithValue(LocalConst.Book.Column.LiveLibUrl, liveLibUrl);
-				command.Parameters.AddWithValue(LocalConst.Book.Column.LibRusEcUrl, libRusEcUrl);
-				command.Parameters.AddWithValue(LocalConst.Book.Column.FlibustaUrl, flibustaUrl);
-				command.Parameters.AddWithValue(LocalConst.Book.Column.Owner, owner);
+                command.Parameters.AddWithValue(LocalConst.Book.Parameter.Id, id);
+				command.Parameters.AddWithValue(LocalConst.Book.Parameter.Title, title);
+				command.Parameters.AddWithValue(LocalConst.Book.Parameter.PageCount, pageCount);
+				command.Parameters.AddWithValue(LocalConst.Book.Parameter.Year, year);
+				command.Parameters.AddWithValue(LocalConst.Book.Parameter.AuthorsShortcuts, authorsShortcuts);
+				command.Parameters.AddWithValue(LocalConst.Book.Parameter.MustInformAboutWarnings, mustInformAboutWarnings);
+				command.Parameters.AddWithValue(LocalConst.Book.Parameter.Bookshelf, bookshelf);
+				command.Parameters.AddWithValue(LocalConst.Book.Parameter.AdditionalInfo, additionalInfo);
+				command.Parameters.AddWithValue(LocalConst.Book.Parameter.LiveLibUrl, liveLibUrl);
+				command.Parameters.AddWithValue(LocalConst.Book.Parameter.LibRusEcUrl, libRusEcUrl);
+				command.Parameters.AddWithValue(LocalConst.Book.Parameter.FlibustaUrl, flibustaUrl);
+				command.Parameters.AddWithValue(LocalConst.Book.Parameter.Owner, owner);
+                command.Parameters.AddWithValue(LocalConst.Book.Parameter.IsSynchronized, isSynchronized);
 
-				sqlConnection.Open();
+                sqlConnection.Open();
 				command.ExecuteNonQuery();
 				sqlConnection.Close();
 			}
@@ -240,19 +234,21 @@ namespace Snowinmars.Dao
 			var libRusEcUrl = LocalCommon.ConvertToDbValue(book.LibRusEcUrl);
 			var flibustaUrl = LocalCommon.ConvertToDbValue(book.FlibustaUrl);
 			var owner = LocalCommon.ConvertToDbValue(book.Owner);
+			var isSynchronized = LocalCommon.ConvertToDbValue(book.IsSynchronized);
 
-			command.Parameters.AddWithValue(LocalConst.Book.Column.Id, id);
-			command.Parameters.AddWithValue(LocalConst.Book.Column.Title, title);
-			command.Parameters.AddWithValue(LocalConst.Book.Column.PageCount, pageCount);
-			command.Parameters.AddWithValue(LocalConst.Book.Column.Year, year);
-			command.Parameters.AddWithValue(LocalConst.Book.Column.AuthorsShortcuts, authorsShortcuts);
-			command.Parameters.AddWithValue(LocalConst.Book.Column.MustInformAboutWarnings, mustInformAboutWarnings);
-			command.Parameters.AddWithValue(LocalConst.Book.Column.Bookshelf, bookshelf);
-			command.Parameters.AddWithValue(LocalConst.Book.Column.AdditionalInfo, additionalInfo);
-			command.Parameters.AddWithValue(LocalConst.Book.Column.LiveLibUrl, liveLibUrl);
-			command.Parameters.AddWithValue(LocalConst.Book.Column.LibRusEcUrl, libRusEcUrl);
-			command.Parameters.AddWithValue(LocalConst.Book.Column.FlibustaUrl, flibustaUrl);
-			command.Parameters.AddWithValue(LocalConst.Book.Column.Owner, owner);
+            command.Parameters.AddWithValue(LocalConst.Book.Parameter.Id, id);
+			command.Parameters.AddWithValue(LocalConst.Book.Parameter.Title, title);
+			command.Parameters.AddWithValue(LocalConst.Book.Parameter.PageCount, pageCount);
+			command.Parameters.AddWithValue(LocalConst.Book.Parameter.Year, year);
+			command.Parameters.AddWithValue(LocalConst.Book.Parameter.AuthorsShortcuts, authorsShortcuts);
+			command.Parameters.AddWithValue(LocalConst.Book.Parameter.MustInformAboutWarnings, mustInformAboutWarnings);
+			command.Parameters.AddWithValue(LocalConst.Book.Parameter.Bookshelf, bookshelf);
+			command.Parameters.AddWithValue(LocalConst.Book.Parameter.AdditionalInfo, additionalInfo);
+			command.Parameters.AddWithValue(LocalConst.Book.Parameter.LiveLibUrl, liveLibUrl);
+			command.Parameters.AddWithValue(LocalConst.Book.Parameter.LibRusEcUrl, libRusEcUrl);
+			command.Parameters.AddWithValue(LocalConst.Book.Parameter.FlibustaUrl, flibustaUrl);
+			command.Parameters.AddWithValue(LocalConst.Book.Parameter.Owner, owner);
+			command.Parameters.AddWithValue(LocalConst.Book.Parameter.IsSynchronized, isSynchronized);
 
 			sqlConnection.Open();
 			command.ExecuteNonQuery();

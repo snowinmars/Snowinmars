@@ -63,7 +63,7 @@ namespace Snowinmars.Ui.Models
 
 		public static BookModel Map(Book book)
 		{
-			BookModel bookModel = new BookModel
+            return new BookModel
 			{
 				Id = book.Id,
 				PageCount = book.PageCount,
@@ -78,9 +78,8 @@ namespace Snowinmars.Ui.Models
 				LiveLibUrl = book.LiveLibUrl,
 				Owner = book.Owner,
 				MustInformAboutWarnings = book.MustInformAboutWarnings,
+                IsSynchronized = book.IsSynchronized,
 			};
-
-			return bookModel;
 		}
 	}
 }

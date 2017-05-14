@@ -10,5 +10,7 @@ namespace Snowinmars.Entities
 		}
 
 		public Guid Id { get; set; }
+
+	    public bool IsSynchronized { get; set; }
 	}
 }

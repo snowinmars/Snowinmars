@@ -98,7 +98,8 @@ namespace Snowinmars.Dao
 						"," + Column.PseudonymFullMiddleName +
 						"," + Column.PseudonymFamilyName +
 						"," + Column.MustInformAboutWarnings +
-						@")
+						"," + Column.IsSynchronized +
+                        @")
 				values
 					( " + Parameter.Id +
 						"," + Parameter.FirstName +
@@ -108,7 +109,8 @@ namespace Snowinmars.Dao
 						"," + Parameter.PseudonymGivenName +
 						"," + Parameter.PseudonymFullMiddleName +
 						"," + Parameter.PseudonymFamilyName +
-						"," + Parameter.MustInformAboutWarnings + " ) ";
+						"," + Parameter.MustInformAboutWarnings +
+                        "," + Parameter.IsSynchronized + " ) ";
 
 			internal const string SelectAllCommand =
 				" select " + Column.Id +
@@ -120,6 +122,7 @@ namespace Snowinmars.Dao
 						"," + Column.PseudonymFullMiddleName +
 						"," + Column.PseudonymFamilyName +
 						"," + Column.MustInformAboutWarnings +
+						"," + Column.IsSynchronized +
 				" from " + Author.TableName;
 
 			internal const string SelectCommand =
@@ -138,7 +141,8 @@ namespace Snowinmars.Dao
 						"," + Column.PseudonymFullMiddleName + " = " + Parameter.PseudonymFullMiddleName +
 						"," + Column.PseudonymFamilyName + " = " + Parameter.PseudonymFamilyName +
 						"," + Column.MustInformAboutWarnings + " = " + Parameter.MustInformAboutWarnings +
-				" where ( " + Column.Id + " = " + Parameter.Id + " ) ";
+                        "," + Column.IsSynchronized + " = " + Parameter.IsSynchronized +
+                " where ( " + Column.Id + " = " + Parameter.Id + " ) ";
 
 			internal class Column
 			{
@@ -151,7 +155,8 @@ namespace Snowinmars.Dao
 				internal const string PseudonymFamilyName = "PseudonymFamilyName";
 				internal const string PseudonymGivenName = "PseudonymGivenName";
 				internal const string MustInformAboutWarnings = "MustInformAboutWarnings";
-			}
+                internal const string IsSynchronized = "IsSynchronized";
+            }
 
 			internal class Parameter
 			{
@@ -164,7 +169,8 @@ namespace Snowinmars.Dao
 				internal const string PseudonymFamilyName = "@pseudonymFamilyName";
 				internal const string PseudonymGivenName = "@pseudonymGivenName";
 				internal const string MustInformAboutWarnings = "@mustInformAboutWarnings";
-			}
+                internal const string IsSynchronized = "@isSynchronized";
+            }
 		}
 
 		internal class Book
@@ -188,6 +194,7 @@ namespace Snowinmars.Dao
 							"," + Column.LibRusEcUrl +
 							"," + Column.FlibustaUrl +
 							"," + Column.Owner +
+							"," + Column.IsSynchronized +
 						 @")
 					values
 							( " + Parameter.Id +
@@ -202,6 +209,7 @@ namespace Snowinmars.Dao
 							"," + Parameter.LibRusEcUrl +
 							"," + Parameter.FlibustaUrl +
 							"," + Parameter.Owner +
+							"," + Parameter.IsSynchronized +
 							" ) ";
 
 			internal const string SelectAllCommand =
@@ -217,6 +225,7 @@ namespace Snowinmars.Dao
 							"," + Column.LibRusEcUrl +
 							"," + Column.FlibustaUrl +
 							"," + Column.Owner +
+							"," + Column.IsSynchronized +
 					" from " + Book.TableName;
 
 			internal const string SelectCommand =
@@ -227,7 +236,8 @@ namespace Snowinmars.Dao
 					" select " + Column.Id +
 					" from " + Book.TableName +
 					" where ( " + Column.AuthorsShortcuts + " is null or " +
-								Column.AuthorsShortcuts + " = '' ) ";
+								Column.AuthorsShortcuts + " = '' and " + 
+                                Column.IsSynchronized + " = 0 ) ";
 
 			internal const string TableName = "[Books]";
 
@@ -245,6 +255,7 @@ namespace Snowinmars.Dao
 									"," + Column.LibRusEcUrl + " = " + Parameter.LibRusEcUrl +
 									"," + Column.FlibustaUrl + " = " + Parameter.FlibustaUrl +
 									"," + Column.Owner + " = " + Parameter.Owner +
+                                    "," + Column.IsSynchronized + " = " + Parameter.IsSynchronized +
 						" where ( " + Column.Id + " = " + Parameter.Id + " ) " +
 					" end " +
 					" else " +
@@ -261,6 +272,7 @@ namespace Snowinmars.Dao
 									"," + Column.LibRusEcUrl + " = " + Parameter.LibRusEcUrl +
 									"," + Column.FlibustaUrl + " = " + Parameter.FlibustaUrl +
 									"," + Column.Owner + " = " + Parameter.Owner +
+									"," + Column.IsSynchronized + " = " + Parameter.IsSynchronized +
 						" where ( " + Column.Id + " = " + Parameter.Id + " ) " +
 					" end ";
 
@@ -279,7 +291,8 @@ namespace Snowinmars.Dao
 				internal const string LibRusEcUrl = "LibRusEcUrl";
 				internal const string FlibustaUrl = "FlibustaUrl";
 				internal const string Owner = "Owner";
-			}
+                internal const string IsSynchronized = "IsSynchronized";
+            }
 
 			internal class Parameter
 			{
@@ -296,8 +309,9 @@ namespace Snowinmars.Dao
 				internal const string LibRusEcUrl = "@libRusEcUrl";
 				internal const string FlibustaUrl = "@flibustaUrl";
 				internal const string Owner = "@owner";
-			}
-		}
+                internal const string IsSynchronized = "@isSynchronized";
+            }
+        }
 
 		internal class BookAuthor
 		{

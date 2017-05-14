@@ -89,6 +89,7 @@ namespace Snowinmars.Ui.Controllers
 				LibRusEcUrl = ControllerHelper.Convert(bookModel.LibRusEcUrl),
 				LiveLibUrl =  ControllerHelper.Convert(bookModel.LiveLibUrl),
 				MustInformAboutWarnings = bookModel.MustInformAboutWarnings,
+                IsSynchronized = bookModel.IsSynchronized,
 			};
 
 		    string owner;

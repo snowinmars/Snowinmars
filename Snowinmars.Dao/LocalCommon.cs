@@ -44,6 +44,7 @@ namespace Snowinmars.Dao
 			string givenName = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Author.Column.GivenName]);
 			string shortcut = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Author.Column.Shortcut]);
 			Guid authorId = LocalCommon.ConvertFromDbValue<Guid>(reader[LocalConst.Author.Column.Id]);
+		    bool isSynchronized = LocalCommon.ConvertFromDbValue<bool>(reader[LocalConst.Author.Column.IsSynchronized]);
 
 			var pseudonym = LocalCommon.MapPseudonym(reader);
 
@@ -55,7 +56,8 @@ namespace Snowinmars.Dao
 				FamilyName = familyName,
 				Pseudonym = pseudonym,
 				MustInformAboutWarnings = mustInformAboutWarnings,
-			};
+                IsSynchronized = isSynchronized,
+            };
 
 			return author;
 		}
@@ -64,18 +66,19 @@ namespace Snowinmars.Dao
 		{
 			int year = LocalCommon.ConvertFromDbValue<int>(reader[LocalConst.Book.Column.Year]);
 			Guid bookId = LocalCommon.ConvertFromDbValue<Guid>(reader[LocalConst.Book.Column.Id]);
+			string owner = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.Owner]);
 			string title = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.Title]);
 			int pageCount = LocalCommon.ConvertFromDbValue<int>(reader[LocalConst.Book.Column.PageCount]);
 			string bookshelf = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.Bookshelf]);
 			string liveLibUrl = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.LiveLibUrl]);
 			string libRusEcUrl = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.LibRusEcUrl]);
 			string flibustaUrl = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.FlibustaUrl]);
+            bool isSynchronized = LocalCommon.ConvertFromDbValue<bool>(reader[LocalConst.Book.Column.IsSynchronized]);
 			string additionalInfo = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.AdditionalInfo]);
 			string authorShortcuts = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.AuthorsShortcuts]);
 			bool mustInformAboutWarnings = LocalCommon.ConvertFromDbValue<bool>(reader[LocalConst.Book.Column.MustInformAboutWarnings]);
-			string owner = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.Owner]);
 
-			var book = new Book(title, pageCount)
+            var book = new Book(title, pageCount)
 			{
 				Id = bookId,
 				Year = year,
@@ -86,7 +89,8 @@ namespace Snowinmars.Dao
 				LibRusEcUrl = libRusEcUrl,
 				FlibustaUrl = flibustaUrl,
 				Owner = owner,
-			};
+                IsSynchronized = isSynchronized,
+            };
 
 			book.AuthorShortcuts.AddRange(authorShortcuts.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries));
 
