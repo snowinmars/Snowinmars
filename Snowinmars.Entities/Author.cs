@@ -4,7 +4,7 @@ namespace Snowinmars.Entities
 {
 	public class Author : Entity
 	{
-		private static readonly Author EmptyAuthor = new Author();
+		private static readonly Author EmptyAuthor;
 
 		public static Author Empty => Author.EmptyAuthor;
 
@@ -35,7 +35,15 @@ namespace Snowinmars.Entities
 		{
 		}
 
-		public string GivenName { get; set; }
+	    static Author()
+	    {
+	        Author.EmptyAuthor = new Author("crunch")
+	        {
+	            Shortcut = "",
+	        };
+	    }
+
+	    public string GivenName { get; set; }
 		public string FullMiddleName { get; set; }
 		public string Shortcut { get; set; }
 		public bool MustInformAboutWarnings { get; set; }

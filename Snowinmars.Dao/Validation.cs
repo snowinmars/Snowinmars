@@ -44,17 +44,24 @@ namespace Snowinmars.Dao
 			foreach (var authorId in book.AuthorIds)
 			{
 				var author = AuthorDao.Get(authorId);
-				Check(author);
+				Check(author, false); // TODO this is bug
 			}
 
-			try
-			{
-				BookDao.Get(book.Id);
-			}
-			catch (ObjectNotFoundException)
-			{
-				throw new ValidationException($"Book with id {book.Id} already exists");
-			}
+		    if (mustbeUnique)
+		    {
+		        try
+		        {
+		            BookDao.Get(book.Id);
+		        }
+		        catch (ObjectNotFoundException)
+		        {
+		            return; // there's no book with this ID
+		        }
+
+		        // if there was no exception that means that there is book with that ID, so I have to take care
+
+		        throw new ValidationException($"Book with id {book.Id} already exists");
+		    }
 		}
 
 		public static void Check(Guid id)

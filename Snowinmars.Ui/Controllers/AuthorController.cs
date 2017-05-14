@@ -9,7 +9,8 @@ using System.Web.Routing;
 namespace Snowinmars.Ui.Controllers
 {
 	[Route("author")]
-	public class AuthorController : Controller
+    [Authorize]
+    public class AuthorController : Controller
 	{
 		private readonly IAuthorLogic authorLogic;
 
@@ -20,7 +21,7 @@ namespace Snowinmars.Ui.Controllers
 
 		[HttpPost]
 		[Route("create")]
-		public ActionResult Create(AuthorModel authorModel)
+        public ActionResult Create(AuthorModel authorModel)
 		{
 			Author author = Map(authorModel);
 
@@ -31,18 +32,24 @@ namespace Snowinmars.Ui.Controllers
 
 		private static Author Map(AuthorModel authorModel)
 		{
-			return new Author(authorModel.Shortcut)
-			{
-				GivenName = authorModel.GivenName,
-				FullMiddleName = authorModel.FullMiddleName,
-				FamilyName = authorModel.FamilyName,
-				Id = authorModel.Id,
-			};
+		    var author = new Author(authorModel.Shortcut)
+		    {
+		        GivenName = ControllerHelper.Convert(authorModel.GivenName),
+		        FullMiddleName = ControllerHelper.Convert(authorModel.FullMiddleName),
+		        FamilyName = ControllerHelper.Convert(authorModel.FamilyName),
+		    };
+
+		    if (authorModel.Id != Guid.Empty)
+		    {
+		        author.Id = authorModel.Id;
+		    }
+
+		    return author;
 		}
 
-	
+	    
 
-		[HttpGet]
+	    [HttpGet]
 		[Route("create")]
 		public ActionResult Create()
 		{
@@ -60,7 +67,8 @@ namespace Snowinmars.Ui.Controllers
 
 		[HttpGet]
 		[Route("details")]
-		public ActionResult Details(Guid id)
+        [AllowAnonymous]
+        public ActionResult Details(Guid id)
 		{
 			var author = this.authorLogic.Get(id);
 
@@ -93,14 +101,16 @@ namespace Snowinmars.Ui.Controllers
 
 		[HttpPost]
 		[Route("getAll")]
-		public JsonResult GetAll()
+        [AllowAnonymous]
+        public JsonResult GetAll()
 		{
 			return Json(this.authorLogic.Get(null));
 		}
 
 		[HttpGet]
 		[Route("")]
-		public ActionResult Index()
+        [AllowAnonymous]
+        public ActionResult Index()
 		{
 			var c = this.authorLogic.Get(null).Select(a => new AuthorModel() { Id = a.Id, GivenName = a.GivenName, FullMiddleName = a.FullMiddleName, Shortcut = a.Shortcut, FamilyName = a.FamilyName });
 

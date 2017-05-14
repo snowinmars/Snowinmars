@@ -16,7 +16,7 @@ namespace Snowinmars.Entities
 			this.AuthorShortcuts = new List<string>();
 		}
 
-		private Book()
+		private Book() : this("", 0)
 		{
 		}
 

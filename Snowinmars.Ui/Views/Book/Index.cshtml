@@ -56,8 +56,9 @@
 				@:<tr data-id="@item.Id">
 			}
 				<td class="col-xs-3 noOverflow titleColumn">
-					<span class="myBookIcon glyphicon glyphicon-book" data-toggle="tooltip" data-placement="left" title="Your book"></span>
-					@Html.DisplayFor(modelItem => item.Title)
+				    <span class="myBookIcon glyphicon glyphicon-book" data-toggle="tooltip" data-placement="top" title="Yours"></span>
+                    
+				    @Html.DisplayFor(modelItem => item.Title)
 				</td>
 				<td class="col-xs-1 ">
 					@Html.DisplayFor(modelItem => item.Year)

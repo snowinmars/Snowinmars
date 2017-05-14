@@ -3,12 +3,14 @@
 namespace Snowinmars.Ui.Controllers
 {
 	[Route("Home")]
-	public class HomeController : Controller
+    [Authorize]
+    public class HomeController : Controller
 	{
 		[HttpGet]
 		[Route("")]
+        [AllowAnonymous]
 		public ActionResult Index()
-		{
+        {
 			return View();
 		}
 	}

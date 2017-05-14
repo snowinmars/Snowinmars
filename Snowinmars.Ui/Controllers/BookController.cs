@@ -8,11 +8,14 @@ using System.Data;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Web.Security;
+using System.Web.UI;
 
 namespace Snowinmars.Ui.Controllers
 {
 	[Route("book")]
-	public class BookController : Controller
+    [Authorize]
+    public class BookController : Controller
 	{
 		private readonly IBookLogic bookLogic;
 
@@ -75,19 +78,31 @@ namespace Snowinmars.Ui.Controllers
 			return new RedirectResult(Url.Action("Index", "Book"));
 		}
 
-		private static Book Map(BookModel bookModel)
+        private static Book Map(BookModel bookModel)
 		{
 			var book = new Book(bookModel.Title, bookModel.PageCount)
 			{
 				Year = bookModel.Year,
-				AdditionalInfo = bookModel.AdditionalInfo,
-				Bookshelf = bookModel.Bookshelf,
-				FlibustaUrl = bookModel.FlibustaUrl,
-				LibRusEcUrl = bookModel.LibRusEcUrl,
-				LiveLibUrl = bookModel.LiveLibUrl,
+				AdditionalInfo = ControllerHelper.Convert(bookModel.AdditionalInfo),
+				Bookshelf = ControllerHelper.Convert(bookModel.Bookshelf),
+				FlibustaUrl = ControllerHelper.Convert(bookModel.FlibustaUrl),
+				LibRusEcUrl = ControllerHelper.Convert(bookModel.LibRusEcUrl),
+				LiveLibUrl =  ControllerHelper.Convert(bookModel.LiveLibUrl),
 				MustInformAboutWarnings = bookModel.MustInformAboutWarnings,
-				Owner = bookModel.Owner,
 			};
+
+		    string owner;
+
+		    if (string.IsNullOrWhiteSpace(bookModel.Owner))
+		    {
+		        owner = System.Web.HttpContext.Current.User.Identity.Name;
+            }
+		    else
+		    {
+		        owner = ControllerHelper.Convert(bookModel.Owner);
+		    }
+
+		    book.Owner = owner;
 
 			if (bookModel.Id != Guid.Empty)
 			{
@@ -120,8 +135,9 @@ namespace Snowinmars.Ui.Controllers
 
 		[HttpGet]
 		[Route("details")]
+        [AllowAnonymous]
 		public ActionResult Details(Guid id)
-		{
+        {
 			Book book;
 
 			try
@@ -162,8 +178,9 @@ namespace Snowinmars.Ui.Controllers
 
 		[HttpPost]
 		[Route("getAuthors")]
+        [AllowAnonymous]
 		public JsonResult GetAuthors(Guid id)
-		{
+        {
 			IEnumerable<Author> authorIds = this.bookLogic.GetAuthors(id);
 
 			return Json(new
@@ -175,8 +192,10 @@ namespace Snowinmars.Ui.Controllers
 
 		[HttpGet]
 		[Route("")]
-		public ActionResult Index()
-		{
+        [AllowAnonymous]
+        [OutputCache(Duration = 10, VaryByParam = "none", Location = OutputCacheLocation.Any)]
+        public ActionResult Index()
+        {
 			IEnumerable<Book> c;
 			try
 			{

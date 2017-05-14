@@ -1,15 +1,12 @@
 ﻿using System;
 using Snowinmars.Entities;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Snowinmars.Ui.Models
 {
 	public class AuthorModel : EntityModel
 	{
-		//Family Name(Last Name)
-		//Given Name(First Name)
-		//Full Middle Name(If applicable)
-
 		[DisplayName("Given name")]
 		public string GivenName { get; set; }
 
@@ -17,7 +14,8 @@ namespace Snowinmars.Ui.Models
 		public string FullMiddleName { get; set; }
 
 		[DisplayName("Shortcut")]
-		public string Shortcut { get; set; }
+        [Required]
+        public string Shortcut { get; set; }
 
 		[DisplayName("Family name")]
 		public string FamilyName { get; set; }

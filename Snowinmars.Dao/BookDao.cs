@@ -135,7 +135,7 @@ namespace Snowinmars.Dao
 
 		public void Update(Book item)
 		{
-			Validation.Check(item);
+			Validation.Check(item, mustbeUnique: false);
 
 			using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
 			{

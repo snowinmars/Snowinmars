@@ -34,4 +34,10 @@
 	$(".btn-closeUrlModal").click(function (e) {
 		$(e.target.parentElement.parentElement).find("input").val("");
 	});
+
+	$(".btn-okUrlModal").click(function (e) {
+	    if (!($(e.target.parentElement.parentElement).find("input").valid())) {
+	        return false;
+	    }
+    });
 })();

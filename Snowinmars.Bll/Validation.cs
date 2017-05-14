@@ -36,9 +36,9 @@ namespace Snowinmars.Bll
 				throw new ValidationException("Author's shortcut can't be empty");
 			}
 
-			if (shortcut.Length > Common.Constant.ShortcutLength)
+			if (shortcut.Length > Common.Constant.MaxShortcutLength)
 			{
-				throw new ValidationException("Author's shortcut can't be longer than " + Common.Constant.GivenNameLength);
+				throw new ValidationException("Author's shortcut can't be longer than " + Common.Constant.MaxGivenNameLength);
 			}
 		}
 
@@ -49,9 +49,9 @@ namespace Snowinmars.Bll
 				throw new ValidationException("Author's family name is null");
 			}
 
-			if (familyName.Length > Common.Constant.FamilyNameLength)
+			if (familyName.Length > Common.Constant.MaxFamilyNameLength)
 			{
-				throw new ValidationException("Author's family name can't be longer than " + Common.Constant.GivenNameLength);
+				throw new ValidationException("Author's family name can't be longer than " + Common.Constant.MaxGivenNameLength);
 			}
 		}
 
@@ -62,9 +62,9 @@ namespace Snowinmars.Bll
 				throw new ValidationException("Author full middle name is null");
 			}
 
-			if (fullMiddleName.Length > Common.Constant.FullMiddleNameLength)
+			if (fullMiddleName.Length > Common.Constant.MaxFullMiddleNameLength)
 			{
-				throw new ValidationException("Author's full middle name can't be longer than " + Common.Constant.GivenNameLength);
+				throw new ValidationException("Author's full middle name can't be longer than " + Common.Constant.MaxGivenNameLength);
 			}
 		}
 
@@ -75,9 +75,9 @@ namespace Snowinmars.Bll
 				throw new ValidationException("Author given name is null");
 			}
 
-			if (givenName.Length > Common.Constant.GivenNameLength)
+			if (givenName.Length > Common.Constant.MaxGivenNameLength)
 			{
-				throw new ValidationException("Author's given name can't be longer than " + Common.Constant.GivenNameLength);
+				throw new ValidationException("Author's given name can't be longer than " + Common.Constant.MaxGivenNameLength);
 			}
 		}
 
@@ -110,7 +110,7 @@ namespace Snowinmars.Bll
 				throw new ValidationException("Book's title can't be null");
 			}
 
-			if (title.Length > Common.Constant.TitleLength)
+			if (title.Length > Common.Constant.MaxTitleLength)
 			{
 				throw new ValidationException("Book's title is too long");
 			}
@@ -145,7 +145,7 @@ namespace Snowinmars.Bll
 				throw new ValidationException("Book's bookshelf is null");
 			}
 
-			if (bookshelf.Length > Common.Constant.BookshelfLength)
+			if (bookshelf.Length > Common.Constant.MaxBookshelfLength)
 			{
 				throw new ValidationException("Book's bookshelf is to long");
 			}
@@ -174,7 +174,7 @@ namespace Snowinmars.Bll
 				throw new ValidationException("Book's additional info is null");
 			}
 
-			if (additionalInfo.Length > Common.Constant.AdditionalInfoLength)
+			if (additionalInfo.Length > Common.Constant.MaxAdditionalInfoLength)
 			{
 				throw new ValidationException("Book's additional info is too long");
 			}
@@ -203,7 +203,7 @@ namespace Snowinmars.Bll
 				throw new ValidationException("User's email is null");
 			}
 
-			if (!Regex.IsMatch(email, ".*\\@.*\\..*"))
+			if (!string.IsNullOrWhiteSpace(email) && !Regex.IsMatch(email, ".*\\@.*\\..*"))
 			{
 				throw new ValidationException("User's email have wrong format");
 			}
@@ -339,7 +339,7 @@ namespace Snowinmars.Bll
 				throw new ValidationException("Username is null");
 			}
 
-			if (Regex.IsMatch(username, "[a-zA-Z]*"))
+			if (!Regex.IsMatch(username, "[a-zA-Z]*"))
 			{
 				throw new ValidationException("Username can contains only english letters");
 			}

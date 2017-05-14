@@ -10,6 +10,7 @@ using Snowinmars.Ui.Models;
 
 namespace Snowinmars.Ui.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
 	    private readonly IUserLogic userLogic;
@@ -21,8 +22,9 @@ namespace Snowinmars.Ui.Controllers
 
 	    [HttpGet]
 	    [Route("")]
+        [AllowAnonymous]
 	    public ActionResult Index()
-	    {
+        {
 		    var user = this.userLogic.Get(User.Identity.Name);
 			UserModel userModel = UserModel.Map(user);
 
@@ -31,8 +33,9 @@ namespace Snowinmars.Ui.Controllers
 
 		[HttpPost]
 		[Route("create")]
+        [AllowAnonymous]
 	    public RedirectResult Create(UserModel userModel)
-	    {
+        {
 		    if (userModel.Roles == UserRoles.None)
 		    {
 			    userModel.Roles = UserRoles.User;
@@ -64,15 +67,17 @@ namespace Snowinmars.Ui.Controllers
 
 		[HttpPost]
 		[Route("isUsernameExist")]
+        [AllowAnonymous]
 	    public JsonResult IsUsernameExist(string username)
-	    {
+        {
 		    return Json(this.userLogic.IsUsernameExist(username));
 	    }
 
 		[HttpPost]
 		[Route("authenticate")]
+        [AllowAnonymous]
 	    public ActionResult Authenticate(UserModel userModel)
-	    {
+        {
 		    User candidate = Map(userModel);
 			
 		    if (this.userLogic.Authenticate(candidate, userModel.Password))
@@ -93,11 +98,11 @@ namespace Snowinmars.Ui.Controllers
 			return new RedirectResult(Url.Action("Index", "Home"));
 	    }
 
-		private User Map(UserModel userModel)
+        private User Map(UserModel userModel)
 		{
 			var user = new User(userModel.Username)
 			{
-				Email = userModel.Email,
+				Email = ControllerHelper.Convert(userModel.Email),
 				Roles = userModel.Roles,
 			};
 
@@ -111,8 +116,9 @@ namespace Snowinmars.Ui.Controllers
 
 		[HttpPost]
 		[Route("enter")]
+        [AllowAnonymous]
 	    public RedirectResult Enter(UserModel userModel)
-	    {
+        {
 		    if (string.IsNullOrWhiteSpace(userModel.PasswordConfirm))
 		    {
 			    this.Authenticate(userModel);
