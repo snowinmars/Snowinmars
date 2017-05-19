@@ -13,9 +13,13 @@
 
 <h2>All authors</h2>
 
-<p>
-	@Html.ActionLink("Create new author", "Create", "Author")
-</p>
+@if (User.IsInRole(UserRoles.Admin.ToString()) ||
+     User.IsInRole(UserRoles.Root.ToString()))
+{
+    <p>
+        @Html.ActionLink("Create new author", "Create", "Author")
+    </p>
+}
 
 <div class="sk-folding-cube-parent">
 	<div class="sk-folding-cube">
