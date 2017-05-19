@@ -28,12 +28,18 @@
 				$.ajax({
 					url: "/user/isUsernameExist/?username=" + globalUsernameInputTarget.val(),
 					type: "POST",
-					success: function(data) {
-						if (data) {
-							$(".oldUserHello").removeClass("hidden");
-							$("#Password").prop("disabled", false);
+					success: function (data) {
+                        if (data) {
+                            $(".oldUserHello").removeClass("hidden");
+                            $(".newUserHello").addClass("hidden");
+
+                            $("#Password").prop("disabled", false);
+                            $("#PasswordConfirm").prop("disabled", true);
+                            $("#PasswordConfirm").closest(".form-group").addClass("hidden");
 						} else {
 							$(".newUserHello").removeClass("hidden");
+							$(".oldUserHello").addClass("hidden");
+
 							$("#Password").prop("disabled", false);
 							$("#PasswordConfirm").prop("disabled", false);
 							$("#PasswordConfirm").closest(".form-group").removeClass("hidden");
