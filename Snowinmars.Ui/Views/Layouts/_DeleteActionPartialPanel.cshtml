@@ -1,0 +1,5 @@
+﻿@{
+    var g = (Guid)PageData[0];
+}
+
+<a href="@Url.Action("Delete", new { id = g })"><span class="btn btn-danger col-md-3 col-md-offset-1 hidden-sm hidden-xs glyphicon glyphicon-remove"></span></a>

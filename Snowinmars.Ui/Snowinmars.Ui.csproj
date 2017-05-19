@@ -155,6 +155,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\snowinmars\authorDetails.css" />
+    <Content Include="Content\snowinmars\authorEdit.css" />
     <Content Include="Content\snowinmars\bookDetails.css" />
     <Content Include="Content\snowinmars\bookEdit.css" />
     <Content Include="Content\snowinmars\bookIndex.css" />
@@ -467,7 +469,12 @@
     <Content Include="Views\Layouts\_EditDetailsDeleteActionPartialPanel.cshtml" />
     <Content Include="Views\Layouts\_EditDeleteActionPartialPanel.cshtml" />
     <Content Include="Views\Layouts\_EnterPage.cshtml" />
+    <Content Include="Views\User\Details.cshtml" />
+    <Content Include="Views\Layouts\_DetailsActionPartialPanel.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Layouts\_DeleteActionPartialPanel.cshtml" />
+    <Content Include="Views\Home\Banned.cshtml" />
+    <Content Include="Views\Layouts\_BannedLayout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -95,8 +95,6 @@ namespace Snowinmars.Bll
 
 		public bool IsUsernameExist(string username)
 		{
-			Validation.CheckUsername(username);
-
 			return this.userDao.IsUsernameExist(username);
 		}
 
@@ -136,5 +134,10 @@ namespace Snowinmars.Bll
 				user.Salt = BCryptHelper.GenerateSalt();
 			}
 		}
+
+	    public IEnumerable<User> Get(Func<User, bool> filter)
+	    {
+	        return this.userDao.Get(filter);
+	    }
 	}
 }

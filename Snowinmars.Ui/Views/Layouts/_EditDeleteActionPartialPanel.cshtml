@@ -2,5 +2,5 @@
 	var g = (Guid)PageData[0];
 }
 
-<a href="@Url.Action("Edit", new { id = g })"><span class="btn btn-default col-md-2 col-md-offset-1 col-sm-3 col-sm-offset-2 col-xs-4 col-xs-offset-1">Edit</span></a>
-<a href="@Url.Action("Delete", new { id = g })"><span class="btn btn-danger col-md-2 col-md-offset-5 col-sm-3 col-sm-offset-1 col-xs-4 col-xs-offset-1">Delete</span></a>
+<a href="@Url.Action("Edit", new { id = g })"><span class="btn btn-default col-md-3 hidden-sm hidden-xs glyphicon glyphicon-pencil"></span></a>
+<a href="@Url.Action("Delete", new { id = g })"><span class="btn btn-danger col-md-3 col-md-offset-1 hidden-sm hidden-xs glyphicon glyphicon-remove"></span></a>

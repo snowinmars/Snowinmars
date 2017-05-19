@@ -47,7 +47,7 @@ namespace Snowinmars.Ui.Models
 			Email = "",
 			Password = "",
 			PasswordConfirm = "",
-			Roles = UserRoles.None,
+			Roles = UserRoles.Banned,
 			Id = Guid.Empty,
 		};
 

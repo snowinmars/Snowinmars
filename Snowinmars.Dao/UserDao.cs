@@ -49,7 +49,13 @@ namespace Snowinmars.Dao
 
 				sqlConnection.Open();
 				var reader = command.ExecuteReader();
-				User user = LocalCommon.MapUser(reader);
+
+                if (!reader.Read())
+                {
+                    throw new ObjectNotFoundException();
+                }
+
+                User user = LocalCommon.MapUser(reader);
 				sqlConnection.Close();
 
 				return user;

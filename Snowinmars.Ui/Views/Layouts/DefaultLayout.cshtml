@@ -1,5 +1,12 @@
-﻿@using Snowinmars.Ui.Models
+﻿@using Snowinmars.Entities
+@using Snowinmars.Ui.Models
 
+@{
+    if (User.IsInRole(UserRoles.Banned.ToString()))
+    {
+        Response.Redirect(Url.Action("Banned", "Home"));
+    }
+}
 
 <!DOCTYPE html>
 
@@ -38,8 +45,13 @@
 
 					<ul class="nav navbar-nav navbar-right">
 						@if (User.Identity.IsAuthenticated)
-						{
-							<li>@Html.ActionLink("Personal page", "Index", "User")</li>
+                        {
+                            if (User.IsInRole(UserRoles.Root.ToString()))
+                            {
+                                <li>@Html.ActionLink("All users", "Index", "User")</li>
+                            }
+
+                            <li>@Html.ActionLink("Personal page", "Details", "User")</li>
 							<li>@Html.ActionLink("Press to exit", "Deauthenticate", "User")</li>
 						}
 						else

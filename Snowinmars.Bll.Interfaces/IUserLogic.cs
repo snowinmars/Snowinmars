@@ -18,7 +18,9 @@ namespace Snowinmars.Bll.Interfaces
 		bool IsUsernameExist(string username);
 		void Remove(string username);
 		User Get(string username);
-		bool Authenticate(User candidate, string userModelPassword);
+        bool Authenticate(User candidate, string userModelPassword);
 		void SetupCryptography(User user);
+	    IEnumerable<User> Get(Func<User, bool> filter);
+
 	}
 }

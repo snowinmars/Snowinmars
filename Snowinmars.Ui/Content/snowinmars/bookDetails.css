@@ -5,3 +5,11 @@
 .urls > div {
 	margin-right: 2ex;
 }
+
+.search-choice-close {
+    visibility: hidden;
+}
+
+.chosen-container-multi .chosen-choices li.search-choice {
+    padding-right: 5px;
+}

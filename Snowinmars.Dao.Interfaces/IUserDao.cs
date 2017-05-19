@@ -16,6 +16,8 @@ namespace Snowinmars.Dao.Interfaces
 		void AddUsersToRoles(IEnumerable<string> usernames, IEnumerable<UserRoles> roles);
 		bool IsUsernameExist(string username);
 		User Get(string username);
-		void Remove(string username);
+        void Remove(string username);
+	    IEnumerable<User> Get(Func<User, bool> filter);
+
 	}
 }

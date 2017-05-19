@@ -1,0 +1,65 @@
+﻿@using Snowinmars.Entities
+@using Snowinmars.Ui.Models
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DefaultLayout</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/chosen.min.css" rel="stylesheet" />
+    <link href="~/Content/cyborg.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+
+    @RenderSection("Content", required: false)
+
+    <link href="~/Content/defaultStyleSheet.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="@Url.Action("Index", "Home")">Snowinmars</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li>@Html.ActionLink("Personal page", "Details", "User")</li>
+                            <li>@Html.ActionLink("Press to exit", "Deauthenticate", "User")</li>
+                        }
+                        else
+                        {
+                            <li data-toggle="modal" data-target="#enterModal"><a href="#">Enter</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="col-md-offset-1 col-md-10 clearfix">
+        @Html.Partial("~/Views/Layouts/_EnterPage.cshtml", UserModel.Empty)
+
+        @RenderBody()
+    </section>
+
+    <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/chosen.jquery.min.js"></script>
+    <script src="~/Scripts/chosen.proto.min.js"></script>
+    <script src="~/Scripts/snowinmars/defaultJavaScript.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -13,5 +13,13 @@ namespace Snowinmars.Ui.Controllers
         {
 			return View();
 		}
+
+	    [HttpGet]
+	    [Route("banned")]
+	    [AllowAnonymous]
+	    public ActionResult Banned()
+	    {
+	        return View();
+	    }
 	}
 }

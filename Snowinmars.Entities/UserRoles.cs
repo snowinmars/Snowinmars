@@ -9,7 +9,7 @@ namespace Snowinmars.Entities
 	[Flags]
 	public enum UserRoles
 	{
-		None = 0,
+		Banned = 0,
 		User = 1,
 		Admin = 2,
 		Root = 4,

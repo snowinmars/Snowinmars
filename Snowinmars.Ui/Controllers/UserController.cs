@@ -20,10 +20,24 @@ namespace Snowinmars.Ui.Controllers
 			this.userLogic = userLogic1;
 		}
 
+        [HttpGet]
+        [Route("")]
+        public ActionResult Index()
+        {
+            if (!User.IsInRole(UserRoles.Root.ToString()))
+            {
+                throw new UnauthorizedAccessException("You are not root");
+            }
+
+            var users = this.userLogic.Get(u => true);
+
+            return View(users);
+        }
+
 	    [HttpGet]
-	    [Route("")]
+	    [Route("details")]
         [AllowAnonymous]
-	    public ActionResult Index()
+	    public ActionResult Details()
         {
 		    var user = this.userLogic.Get(User.Identity.Name);
 			UserModel userModel = UserModel.Map(user);
@@ -36,7 +50,7 @@ namespace Snowinmars.Ui.Controllers
         [AllowAnonymous]
 	    public RedirectResult Create(UserModel userModel)
         {
-		    if (userModel.Roles == UserRoles.None)
+		    if (userModel.Roles == UserRoles.Banned)
 		    {
 			    userModel.Roles = UserRoles.User;
 		    }
@@ -131,5 +145,49 @@ namespace Snowinmars.Ui.Controllers
 
 			return new RedirectResult(Url.Action("Index", "Home"));
 	    }
+
+        [HttpGet]
+        [Route("delete")]
+        [ActionName("DeleteById")]
+        public RedirectResult Delete(Guid id)
+        {
+            this.userLogic.Remove(id);
+
+			return new RedirectResult(Url.Action("Index", "User"));
+        }
+
+        [HttpGet]
+        [Route("delete")]
+        [ActionName("DeleteByUsername")]
+        public RedirectResult Delete(string username)
+        {
+            this.userLogic.Remove(username);
+
+            return new RedirectResult(Url.Action("Index", "User"));
+        }
+
+        [HttpGet]
+        [Route("ban")]
+        [ActionName("BanById")]
+        public RedirectResult Ban(Guid id)
+        {
+            var user = this.userLogic.Get(id);
+            user.Roles = UserRoles.Banned;
+            this.userLogic.Update(user);
+
+            return new RedirectResult(Url.Action("Index", "User"));
+        }
+
+        [HttpGet]
+        [Route("ban")]
+        [ActionName("BanByUsername")]
+        public RedirectResult Ban(string username)
+        {
+            var user = this.userLogic.Get(username);
+            user.Roles = UserRoles.Banned;
+            this.userLogic.Update(user);
+
+            return new RedirectResult(Url.Action("Index", "User"));
+        }
     }
 }

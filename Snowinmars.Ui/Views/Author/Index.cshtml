@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Snowinmars.Ui.Models.AuthorModel>
+﻿@using Snowinmars.Entities
+@model IEnumerable<Snowinmars.Ui.Models.AuthorModel>
 
 @{
 	ViewBag.Title = "Index";
@@ -59,9 +60,17 @@
 				<td class="col-xs-3 noOverflow">
 					@Html.DisplayFor(modelItem => item.Shortcut)
 				</td>
-				<td class="col-xs-2 actions">
-					@RenderPage("~/Views/Layouts/_EditDetailsDeleteActionPartialPanel.cshtml", item.Id)
-				</td>
+			    <td class="col-xs-2 actions">
+                    @if (User.IsInRole(UserRoles.Admin.ToString()) ||
+                            User.IsInRole(UserRoles.Root.ToString()))
+                    {
+                        @RenderPage("~/Views/Layouts/_EditDetailsDeleteActionPartialPanel.cshtml", item.Id)
+                    }
+                    else
+                    {
+                        @RenderPage("~/Views/Layouts/_DetailsActionPartialPanel.cshtml", item.Id)
+                    }
+			    </td>
 			</tr>
 		}
 	</tbody>

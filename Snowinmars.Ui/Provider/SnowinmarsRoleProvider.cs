@@ -3,6 +3,7 @@ using Snowinmars.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Mvc;
 using System.Web.Security;
 
 namespace Snowinmars.Ui.Provider
@@ -16,6 +17,10 @@ namespace Snowinmars.Ui.Provider
 		{
 			this.userLogic = userLogic;
 		}
+
+	    public SnowinmarsRoleProvider() : this(DependencyResolver.Current.GetService<IUserLogic>())
+	    {
+	    }
 
 		public override string ApplicationName { get; set; } = "SnowinmarsApp";
 
@@ -46,7 +51,7 @@ namespace Snowinmars.Ui.Provider
 		{
 			UserRoles roles = this.userLogic.GetRolesForUser(username);
 
-			return roles.ToString().Split(new [] {',',}, StringSplitOptions.RemoveEmptyEntries);
+			return roles.ToString().Split(new [] {',',}, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim()).ToArray();
 		}
 
 		public override string[] GetUsersInRole(string roleName)
