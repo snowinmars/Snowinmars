@@ -21,3 +21,29 @@
 .emailInputServerFailMessage {
 	color: red;
 }
+
+.userDetailsMessages {
+    margin-left: 5ex;
+}
+
+.serverFailMessage {
+    display: inline-block;
+
+    visibility:visible;
+    opacity:1;
+    transition:opacity 0.5s linear;
+}
+
+.successMessage {
+    display: inline-block;
+
+    visibility:visible;
+    opacity:1;
+    transition:visibility 0s linear 0.5s, opacity 0.5s linear;
+}
+
+.hiddenElement {
+    visibility:hidden;
+    opacity:0;
+    transition:visibility 0s linear 0.5s, opacity 0.5s linear;
+}

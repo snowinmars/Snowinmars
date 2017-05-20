@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -11,13 +12,14 @@ using Snowinmars.Ui.Models;
 namespace Snowinmars.Ui.Controllers
 {
     [Authorize]
+    [Internationalization]
     public class UserController : Controller
     {
 	    private readonly IUserLogic userLogic;
 
-		public UserController(IUserLogic userLogic1)
+		public UserController(IUserLogic userLogic)
 		{
-			this.userLogic = userLogic1;
+			this.userLogic = userLogic;
 		}
 
         [HttpGet]
@@ -38,8 +40,9 @@ namespace Snowinmars.Ui.Controllers
 	    [Route("details")]
         [AllowAnonymous]
 	    public ActionResult Details()
-        {
-		    var user = this.userLogic.Get(User.Identity.Name);
+	    {
+	        var a = CultureInfo.CurrentCulture;
+            var user = this.userLogic.Get(User.Identity.Name);
 			UserModel userModel = UserModel.Map(user);
 
 		    return View(userModel);
@@ -66,28 +69,35 @@ namespace Snowinmars.Ui.Controllers
 			return new RedirectResult(Url.Action("Index", "Home"));
 	    }
 
-	    [HttpPost]
-	    [Route("setEmail")]
-	    public JsonResult SetEmail(string email)
-	    {
-		    var user = this.userLogic.Get(User.Identity.Name);
+	  //  [HttpPost]
+	  //  [Route("setEmail")]
+	  //  public JsonResult SetEmail(string email)
+	  //  {
+		 //   var user = this.userLogic.Get(User.Identity.Name);
 
-		    user.Email = email;
+		 //   user.Email = email;
 
-			this.userLogic.Update(user);
+			//this.userLogic.Update(user);
 
-		    return Json(true);
-	    }
+		 //   return Json(true);
+	  //  }
 
-		[HttpPost]
-		[Route("isUsernameExist")]
+        [HttpPost]
+        [Route("isUsernameExist")]
         [AllowAnonymous]
-	    public JsonResult IsUsernameExist(string username)
+        public JsonResult IsUsernameExist(string username)
         {
-		    return Json(this.userLogic.IsUsernameExist(username));
-	    }
+            return Json(this.userLogic.IsUsernameExist(username));
+        }
 
-		[HttpPost]
+        [HttpGet]
+        [Route("rootPage")]
+        public ActionResult RootPage()
+        {
+            return View();
+        }
+
+        [HttpPost]
 		[Route("authenticate")]
         [AllowAnonymous]
 	    public ActionResult Authenticate(UserModel userModel)
@@ -118,6 +128,7 @@ namespace Snowinmars.Ui.Controllers
 			{
 				Email = ControllerHelper.Convert(userModel.Email),
 				Roles = userModel.Roles,
+                Language = userModel.Language,
 			};
 
 			if (userModel.Id != Guid.Empty)
@@ -188,6 +199,27 @@ namespace Snowinmars.Ui.Controllers
             this.userLogic.Update(user);
 
             return new RedirectResult(Url.Action("Index", "User"));
+        }
+
+        [HttpPost]
+        [Route("update")]
+        public ActionResult Update(UserModel model)
+        {
+            try
+            {
+                User user = Map(model);
+                this.userLogic.Update(user);
+
+                var cookie = new HttpCookie("lang", user.Language.ToString());
+                HttpContext.Response.SetCookie(cookie);
+            }
+            catch (Exception e)
+            {
+                Response.StatusCode = 500;
+                return Json(new { success = false });
+            }
+
+            return Json(true);
         }
     }
 }

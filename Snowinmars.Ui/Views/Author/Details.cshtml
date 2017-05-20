@@ -1,4 +1,5 @@
-﻿@model Snowinmars.Ui.Models.AuthorModel
+﻿@using Snowinmars.Ui.App_LocalResources
+@model Snowinmars.Ui.Models.AuthorModel
 
 @{
 	ViewBag.Title = "Details";
@@ -10,11 +11,11 @@
     <link href="~/Content/snowinmars/authorDetails.css" rel="stylesheet" />
 }
 
-<h2>About</h2>
+<h2>@Global.AuthorDetails_Header</h2>
 
 <div>
 	<h4>author</h4>
-	<div>@Html.ActionLink("Back to List", "Index", "Author")</div>
+	<div>@Html.ActionLink(Global._BackToList, "Index", "Author")</div>
 	<hr />
 
     <div class="clearfix mainBlock">
@@ -33,7 +34,7 @@
 
         <div class="col-xs-12 authorPropertyBlock">
             <div class="col-xs-12">
-                <div class="col-xs-4" data-toggle = "tooltip" data-placement = "left" title = "The most popular colloquial author's naming">
+                <div class="col-xs-4" data-toggle = "tooltip" data-placement = "left" title = "@Global.Author_ShortcutTooltip">
                     @Html.DisplayNameFor(model => model.GivenName)
                 </div>
                 <div class="col-xs-8">

@@ -101,3 +101,10 @@ hr {
 
 	min-height: 1.5ex;
 }
+
+.beware {
+    color: red !important;
+    font-size: 2ex;
+    text-align: center;
+    text-decoration: underline;
+}

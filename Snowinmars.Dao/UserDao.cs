@@ -25,6 +25,7 @@ namespace Snowinmars.Dao
 				var roles = LocalCommon.ConvertToDbValue(item.Roles);
 				var email = LocalCommon.ConvertToDbValue(item.Email);
 				var salt = LocalCommon.ConvertToDbValue(item.Salt);
+			    var language = LocalCommon.ConvertToDbValue(item.Language);
 
 				command.Parameters.AddWithValue(LocalConst.User.Parameter.Id, id);
 				command.Parameters.AddWithValue(LocalConst.User.Parameter.Username, username);
@@ -32,6 +33,7 @@ namespace Snowinmars.Dao
 				command.Parameters.AddWithValue(LocalConst.User.Parameter.Roles, roles);
 				command.Parameters.AddWithValue(LocalConst.User.Parameter.Email, email);
 				command.Parameters.AddWithValue(LocalConst.User.Parameter.Salt, salt);
+				command.Parameters.AddWithValue(LocalConst.User.Parameter.LanguageCode, language);
 
 				sqlConnection.Open();
 				command.ExecuteNonQuery();
@@ -121,20 +123,18 @@ namespace Snowinmars.Dao
 
 				var id = LocalCommon.ConvertToDbValue(item.Id);
 				var username = LocalCommon.ConvertToDbValue(item.Username);
-				var passwordHash = LocalCommon.ConvertToDbValue(item.PasswordHash);
 				var roles = LocalCommon.ConvertToDbValue(item.Roles);
 				var email = LocalCommon.ConvertToDbValue(item.Email);
-				var salt = LocalCommon.ConvertToDbValue(item.Salt);
+			    var language = LocalCommon.ConvertToDbValue(item.Language);
 
 				command.Parameters.AddWithValue(LocalConst.User.Parameter.Id, id);
 				command.Parameters.AddWithValue(LocalConst.User.Parameter.Username, username);
-				command.Parameters.AddWithValue(LocalConst.User.Parameter.PasswordHash, passwordHash);
 				command.Parameters.AddWithValue(LocalConst.User.Parameter.Roles, roles);
 				command.Parameters.AddWithValue(LocalConst.User.Parameter.Email, email);
-				command.Parameters.AddWithValue(LocalConst.User.Parameter.Salt, salt);
+				command.Parameters.AddWithValue(LocalConst.User.Parameter.LanguageCode, language);
 
 				sqlConnection.Open();
-				command.ExecuteNonQuery();
+                command.ExecuteNonQuery();
 				sqlConnection.Close();
 			}
 		}

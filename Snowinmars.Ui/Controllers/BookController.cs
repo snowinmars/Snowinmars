@@ -15,6 +15,7 @@ namespace Snowinmars.Ui.Controllers
 {
 	[Route("book")]
     [Authorize]
+    [Internationalization]
     public class BookController : Controller
 	{
 		private readonly IBookLogic bookLogic;

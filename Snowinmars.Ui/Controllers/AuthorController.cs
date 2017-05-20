@@ -10,6 +10,7 @@ namespace Snowinmars.Ui.Controllers
 {
 	[Route("author")]
     [Authorize]
+    [Internationalization]
     public class AuthorController : Controller
 	{
 		private readonly IAuthorLogic authorLogic;

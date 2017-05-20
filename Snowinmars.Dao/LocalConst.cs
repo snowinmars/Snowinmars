@@ -13,13 +13,15 @@ namespace Snowinmars.Dao
 							"," + Column.PasswordHash +
 							"," + Column.Roles +
 							"," + Column.Email +
-							"," + Column.Salt + " ) " +
+							"," + Column.Salt +
+                            "," + Column.LanguageCode + " ) " +
 				" values ( " + Parameter.Id +
 							"," + Parameter.Username +
 							"," + Parameter.PasswordHash +
 							"," + Parameter.Roles +
 							"," + Parameter.Email +
-							"," + Parameter.Salt + " ) ";
+							"," + Parameter.Salt +
+                            "," + Parameter.LanguageCode + " ) ";
 
 			internal const string SelectAllCommand =
 				" select " + Column.Id +
@@ -28,7 +30,8 @@ namespace Snowinmars.Dao
 							"," + Column.Roles +
 							"," + Column.Email +
 							"," + Column.Salt +
-				" from " + User.TableName;
+							"," + Column.LanguageCode +
+                " from " + User.TableName;
 
 			internal const string SelectById =
 				User.SelectAllCommand +
@@ -51,11 +54,10 @@ namespace Snowinmars.Dao
 			internal const string UpdateCommand =
 				" update " + User.TableName +
 					" set " + Column.Username + " = " + Parameter.Username +
-								"," + Column.PasswordHash + " = " + Parameter.PasswordHash +
 								"," + Column.Roles + " = " + Parameter.Roles +
 								"," + Column.Email + " = " + Parameter.Email +
-								"," + Column.Salt + " = " + Parameter.Salt +
-				" where " + Column.Id + " = " + Parameter.Id;
+								"," + Column.LanguageCode + " = " + Parameter.LanguageCode +
+                " where " + Column.Id + " = " + Parameter.Id;
 
 			internal const string TableName = "[Users]";
 
@@ -67,7 +69,9 @@ namespace Snowinmars.Dao
 				internal const string Roles = "Roles";
 				internal const string Email = "Email";
 				internal const string Salt = "Salt";
-			}
+				internal const string LanguageCode = "LanguageCode";
+
+            }
 
 			internal class Parameter
 			{
@@ -77,8 +81,9 @@ namespace Snowinmars.Dao
 				internal const string Roles = "@roles";
 				internal const string Email = "@email";
 				internal const string Salt = "@salt";
-			}
-		}
+				internal const string LanguageCode = "@languageCode";
+            }
+        }
 
 		internal class Author
 		{

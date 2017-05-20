@@ -1,4 +1,8 @@
-﻿@using Snowinmars.Entities
+﻿@using System.Globalization
+@using System.Threading
+@using Newtonsoft.Json
+@using Snowinmars.Entities
+@using Snowinmars.Ui.App_LocalResources
 @using Snowinmars.Ui.Models
 
 @{
@@ -6,6 +10,16 @@
     {
         Response.Redirect(Url.Action("Banned", "Home"));
     }
+
+    const string lang = "lang";
+
+    if (ViewData[lang] == null)
+    {
+        ViewData[lang] = Language.En.ToString();
+    }
+
+    Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture((string)ViewData[lang]);
+    Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture((string)ViewData[lang]);
 }
 
 <!DOCTYPE html>
@@ -39,8 +53,8 @@
 
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li class="active" data-id="book">@Html.ActionLink("Library books", "Index", "Book")</li>
-						<li class="active" data-id="author">@Html.ActionLink("Library authors", "Index", "Author")</li>
+						<li class="active" data-id="book">@Html.ActionLink(Global.Layout_LibraryBooks, "Index", "Book")</li>
+						<li class="active" data-id="author">@Html.ActionLink(Global.Layout_LibraryAuthors, "Index", "Author")</li>
 					</ul>
 
 					<ul class="nav navbar-nav navbar-right">
@@ -48,15 +62,16 @@
                         {
                             if (User.IsInRole(UserRoles.Root.ToString()))
                             {
-                                <li>@Html.ActionLink("All users", "Index", "User")</li>
+                                <li>@Html.ActionLink(Global._YouAreRoot, "RootPage", "User", null, htmlAttributes: new { @class = "beware" })</li>
+                                <li>@Html.ActionLink(Global.Layout_AllUsers, "Index", "User")</li>
                             }
 
-                            <li>@Html.ActionLink("Personal page", "Details", "User")</li>
-							<li>@Html.ActionLink("Press to exit", "Deauthenticate", "User")</li>
+                            <li>@Html.ActionLink(Global.Layout_PersonalPage, "Details", "User")</li>
+							<li>@Html.ActionLink(Global.Layout_PressToExit, "Deauthenticate", "User")</li>
 						}
 						else
 						{
-							<li data-toggle="modal" data-target="#enterModal"><a href="#">Enter</a></li>
+							<li data-toggle="modal" data-target="#enterModal"><a href="#">@Global.Layout_Enter</a></li>
 						}
 					</ul>
 				</div>

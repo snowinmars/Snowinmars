@@ -147,6 +147,7 @@ namespace Snowinmars.Dao
 			UserRoles roles = ConvertFromDbValue<UserRoles>(reader[LocalConst.User.Column.Roles]);
 			string email = ConvertFromDbValueToString(reader[LocalConst.User.Column.Email]);
 			string salt = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.User.Column.Salt]);
+		    Language language = LocalCommon.ConvertFromDbValue<Language>(reader[LocalConst.User.Column.LanguageCode]);
 
 			User user = new User(username)
 			{
@@ -155,6 +156,7 @@ namespace Snowinmars.Dao
 				Roles = roles,
 				Email = email,
 				Salt = salt,
+                Language = language,
 			};
 
 			return user;

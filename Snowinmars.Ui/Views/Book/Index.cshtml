@@ -1,4 +1,5 @@
 ﻿@using Snowinmars.Entities
+@using Snowinmars.Ui.App_LocalResources
 @model IEnumerable<Snowinmars.Ui.Models.BookModel>
 
 @{
@@ -12,13 +13,13 @@
 	<link href="~/Content/snowinmars/loadingCube.css" rel="stylesheet" />
 }
 
-<h2>All books</h2>
+<h2>@Global.BookIndex_Header</h2>
 
 @if (User.IsInRole(UserRoles.Admin.ToString()) ||
      User.IsInRole(UserRoles.Root.ToString()))
 {
     <p>
-        @Html.ActionLink("Create new book", "Create")
+        @Html.ActionLink(Global.BookIndex_CreateNewBook, "Create")
     </p>
 }
 
@@ -61,7 +62,7 @@
 				@:<tr data-id="@item.Id">
 			}
 				<td class="col-xs-3 noOverflow titleColumn">
-				    <span class="myBookIcon glyphicon glyphicon-book" data-toggle="tooltip" data-placement="top" title="Yours"></span>
+				    <span class="myBookIcon glyphicon glyphicon-book" data-toggle="tooltip" data-placement="top" title="@Global._Yours"></span>
                     
                     @Html.DisplayFor(modelItem => item.Title)
 				</td>
@@ -76,11 +77,11 @@
 		       
                 @if (!item.IsSynchronized)
                 {
-                    <span class="synchronizationIcon glyphicon glyphicon-refresh glyphicon-spin col-xs-1" data-toggle="tooltip" data-placement="top" title="Sync"></span>
+                    <span class="synchronizationIcon glyphicon glyphicon-refresh glyphicon-spin col-xs-1" data-toggle="tooltip" data-placement="top" title="@Global._Sync"></span>
                 }
                 else
                 {
-                    <span class="hidden synchronizationIcon glyphicon glyphicon-refresh glyphicon-spin col-xs-1" data-toggle="tooltip" data-placement="top" title="Sync"></span>
+                    <span class="hidden synchronizationIcon glyphicon glyphicon-refresh glyphicon-spin col-xs-1" data-toggle="tooltip" data-placement="top" title="@Global._Sync"></span>
                 }
 		    </td>
 		    <td class="col-sm-4 col-xs-2">

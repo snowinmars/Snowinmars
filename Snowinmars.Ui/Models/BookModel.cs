@@ -4,45 +4,55 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Snowinmars.Ui.App_LocalResources;
 
 namespace Snowinmars.Ui.Models
 {
 	public class BookModel : EntityModel
 	{
-		[DisplayName("Authors")]
+		[Display(Name = "BookModel_Authors", ResourceType = typeof(Global))]
 		public IEnumerable<Guid> AuthorModelIds { get; set; }
 
-		[DisplayName("Page count")]
         [Required]
+		[Display(Name = "BookModel_PageCount", ResourceType = typeof(Global))]
         public int PageCount { get; set; }
 
-		[DisplayName("Title")]
         [Required]
+		[Display(Name = "BookModel_Title", ResourceType = typeof(Global))]
         public string Title { get; set; }
 
-		[DisplayName("Year")]
+		[Display(Name = "BookModel_Year", ResourceType = typeof(Global))]
 		public int Year { get; set; }
 
-		public IEnumerable<string> AuthorShortcuts { get; set; }
+		[Display(Name = "BookModel_Authors", ResourceType = typeof(Global))]
+        public IEnumerable<string> AuthorShortcuts { get; set; }
 
-		public string Bookshelf { get; set; }
+		[Display(Name = "BookModel_Bookshelf", ResourceType = typeof(Global))]
+        public string Bookshelf { get; set; }
 
-		public string AdditionalInfo { get; set; }
+		[Display(Name = "BookModel_AdditionalInfo", ResourceType = typeof(Global))]
+        public string AdditionalInfo { get; set; }
 
         [DataType(DataType.Url)]
+		[Display(Name = "BookModel_LiveLibUrl", ResourceType = typeof(Global))]
         public string LiveLibUrl { get; set; }
 
         [DataType(DataType.Url)]
+		[Display(Name = "BookModel_LibRusEcUrl", ResourceType = typeof(Global))]
         public string LibRusEcUrl { get; set; }
 
         [DataType(DataType.Url)]
+		[Display(Name = "BookModel_FlibustaUrl", ResourceType = typeof(Global))]
         public string FlibustaUrl { get; set; }
 
-		public bool MustInformAboutWarnings { get; set; }
+		[Display(Name = "BookModel_InformAboutWarnings", ResourceType = typeof(Global))]
+        public bool MustInformAboutWarnings { get; set; }
 
-		public string Owner { get; set; }
+        [Required]
+		[Display(Name = "BookModel_Owner", ResourceType = typeof(Global))]
+        public string Owner { get; set; }
 
-		private static readonly BookModel EmptyBook = new BookModel
+        private static readonly BookModel EmptyBook = new BookModel
 		{
 			Owner = "",
 			AdditionalInfo = "",

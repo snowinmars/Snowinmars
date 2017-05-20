@@ -1,0 +1,329 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AuthorCreate_Header" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="AuthorDetails_Header" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="AuthorEdit_Header" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="AuthorIndex_CreateNewAuthor" xml:space="preserve">
+    <value>Create new author</value>
+  </data>
+  <data name="AuthorIndex_Header" xml:space="preserve">
+    <value>All authors</value>
+  </data>
+  <data name="AuthorModel_FamilyName" xml:space="preserve">
+    <value>Family name</value>
+  </data>
+  <data name="AuthorModel_FullMiddleName" xml:space="preserve">
+    <value>Full middle name</value>
+  </data>
+  <data name="AuthorModel_GivenName" xml:space="preserve">
+    <value>Given name</value>
+  </data>
+  <data name="AuthorModel_PseudonymFamilyName" xml:space="preserve">
+    <value>Pseudonym family name</value>
+  </data>
+  <data name="AuthorModel_PseudonymFullMiddleName" xml:space="preserve">
+    <value>Pseudonym full middle name</value>
+  </data>
+  <data name="AuthorModel_PseudonymGivenName" xml:space="preserve">
+    <value>Pseudonym given name</value>
+  </data>
+  <data name="AuthorModel_Shortcut" xml:space="preserve">
+    <value>Shortcut</value>
+  </data>
+  <data name="Author_ShortcutTooltip" xml:space="preserve">
+    <value>The most popular colloquial author's naming</value>
+  </data>
+  <data name="BookBroken_Header" xml:space="preserve">
+    <value>BrokenDetails</value>
+  </data>
+  <data name="BookBroken_Message" xml:space="preserve">
+    <value>This book is broken, contact administrator.</value>
+  </data>
+  <data name="BookCreate_Header" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="BookDetails_Header" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="BookEdit_Header" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="BookIndex_CreateNewBook" xml:space="preserve">
+    <value>Create new book</value>
+  </data>
+  <data name="BookIndex_Header" xml:space="preserve">
+    <value>All books</value>
+  </data>
+  <data name="BookModel_AdditionalInfo" xml:space="preserve">
+    <value>Additional info</value>
+  </data>
+  <data name="BookModel_Authors" xml:space="preserve">
+    <value>Authors</value>
+  </data>
+  <data name="BookModel_Bookshelf" xml:space="preserve">
+    <value>Bookshelf</value>
+  </data>
+  <data name="BookModel_FlibustaUrl" xml:space="preserve">
+    <value>Flibusta</value>
+  </data>
+  <data name="BookModel_LibRusEcUrl" xml:space="preserve">
+    <value>LibRusEc</value>
+  </data>
+  <data name="BookModel_LiveLibUrl" xml:space="preserve">
+    <value>LiveLib</value>
+  </data>
+  <data name="BookModel_Owner" xml:space="preserve">
+    <value>Owner</value>
+  </data>
+  <data name="BookModel_PageCount" xml:space="preserve">
+    <value>Page count</value>
+  </data>
+  <data name="BookModel_Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="BookModel_Year" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="Book_SaveUrlHint" xml:space="preserve">
+    <value>To save urls' changes, push the Save button below</value>
+  </data>
+  <data name="EnterPage_NewUserHello" xml:space="preserve">
+    <value>There's no such user with this name. Register then.</value>
+  </data>
+  <data name="EnterPage_OldUserHello" xml:space="preserve">
+    <value>There's user with this login. Enter the password.</value>
+  </data>
+  <data name="HomeBanned_BannedMessage" xml:space="preserve">
+    <value>You are banned.</value>
+  </data>
+  <data name="HomeIndex_HelloMessage" xml:space="preserve">
+    <value>Hello world</value>
+  </data>
+  <data name="Layout_AllUsers" xml:space="preserve">
+    <value>All users</value>
+  </data>
+  <data name="Layout_Enter" xml:space="preserve">
+    <value>Enter</value>
+  </data>
+  <data name="Layout_LibraryAuthors" xml:space="preserve">
+    <value>Library authors</value>
+  </data>
+  <data name="Layout_LibraryBooks" xml:space="preserve">
+    <value>Library books</value>
+  </data>
+  <data name="Layout_PersonalPage" xml:space="preserve">
+    <value>Personal page</value>
+  </data>
+  <data name="Layout_PressToExit" xml:space="preserve">
+    <value>Press to exit</value>
+  </data>
+  <data name="Model_InformAboutWarnings" xml:space="preserve">
+    <value>Have I inform you about warnings?</value>
+  </data>
+  <data name="UserDetails_IsWrongFormat" xml:space="preserve">
+    <value>'s wrong format</value>
+  </data>
+  <data name="UserDetails_PersonalPage" xml:space="preserve">
+    <value>Personal page:</value>
+  </data>
+  <data name="UserDetails_QuestionTooltip" xml:space="preserve">
+    <value>System can send you notification about your books' unfinished specification and errors in book processing.
+You can't setup this notification now.
+You can erase this field any time.</value>
+  </data>
+  <data name="UserDetails_Saved" xml:space="preserve">
+    <value>Saved</value>
+  </data>
+  <data name="UserDetails_WasntSaved" xml:space="preserve">
+    <value>wasn't saved</value>
+  </data>
+  <data name="UserDetails_YouAre" xml:space="preserve">
+    <value>You are</value>
+  </data>
+  <data name="UserIndex_ActionCantBeDone" xml:space="preserve">
+    <value>Beware: actions can't be undone</value>
+  </data>
+  <data name="UserModel_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="UserModel_Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="UserModel_PasswordConfirm" xml:space="preserve">
+    <value>Password сonfirm</value>
+  </data>
+  <data name="UserModel_PasswordConfirmError" xml:space="preserve">
+    <value>Password aren't equals</value>
+  </data>
+  <data name="UserModel_Roles" xml:space="preserve">
+    <value>Roles</value>
+  </data>
+  <data name="UserModel_Username" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="UserRootPage_RootMessagePart1" xml:space="preserve">
+    <value>We trust you have received the usual lecture from the local System Administrator</value>
+  </data>
+  <data name="UserRootPage_RootMessagePart2" xml:space="preserve">
+    <value>It usually boils down to these three things:</value>
+  </data>
+  <data name="UserRootPage_RootMessagePart3" xml:space="preserve">
+    <value>Respect the privacy of others</value>
+  </data>
+  <data name="UserRootPage_RootMessagePart4" xml:space="preserve">
+    <value>Think before you type</value>
+  </data>
+  <data name="UserRootPage_RootMessagePart5" xml:space="preserve">
+    <value>With great power comes great responsibility</value>
+  </data>
+  <data name="_BackToList" xml:space="preserve">
+    <value>Back to list</value>
+  </data>
+  <data name="_Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="_Create" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="_Go" xml:space="preserve">
+    <value>Go</value>
+  </data>
+  <data name="_Ok" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="_Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="_Sync" xml:space="preserve">
+    <value>Sync</value>
+  </data>
+  <data name="_YouAreRoot" xml:space="preserve">
+    <value>You are root</value>
+  </data>
+  <data name="_Yours" xml:space="preserve">
+    <value>Yours</value>
+  </data>
+</root>

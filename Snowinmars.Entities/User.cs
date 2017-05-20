@@ -4,6 +4,8 @@ namespace Snowinmars.Entities
 {
 	public class User : Entity
 	{
+	    public Language Language { get; set; }
+
 		public User(string username) : base()
 		{
 			this.Username = username;

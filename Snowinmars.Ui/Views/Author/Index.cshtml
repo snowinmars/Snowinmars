@@ -1,4 +1,5 @@
 ﻿@using Snowinmars.Entities
+@using Snowinmars.Ui.App_LocalResources
 @model IEnumerable<Snowinmars.Ui.Models.AuthorModel>
 
 @{
@@ -11,13 +12,13 @@
 	<link href="~/Content/snowinmars/loadingCube.css" rel="stylesheet" />
 }
 
-<h2>All authors</h2>
+<h2>@Global.AuthorIndex_Header</h2>
 
 @if (User.IsInRole(UserRoles.Admin.ToString()) ||
      User.IsInRole(UserRoles.Root.ToString()))
 {
     <p>
-        @Html.ActionLink("Create new author", "Create", "Author")
+        @Html.ActionLink(Global.AuthorIndex_CreateNewAuthor, "Create", "Author")
     </p>
 }
 

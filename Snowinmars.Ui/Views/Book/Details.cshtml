@@ -1,4 +1,5 @@
-﻿@model Snowinmars.Ui.Models.BookModel
+﻿@using Snowinmars.Ui.App_LocalResources
+@model Snowinmars.Ui.Models.BookModel
 
 @{
 	ViewBag.Title = "Details";
@@ -11,11 +12,11 @@
 	<link href="~/Content/snowinmars/bookDetails.css" rel="stylesheet" />
 }
 
-<h2>About</h2>
+<h2>@Global.BookDetails_Header</h2>
 
 <div>
 	<h4>book</h4>
-	<div>@Html.ActionLink("Back to List", "Index", "Book")</div>
+	<div>@Html.ActionLink(Global._BackToList, "Index", "Book")</div>
 	<hr />
 	<div class="mainBlock clearfix" data-id="@Model.Id">
 		@Html.HiddenFor(model => model.Id)

@@ -1,4 +1,5 @@
-﻿@model Snowinmars.Ui.Models.BookModel
+﻿@using Snowinmars.Ui.App_LocalResources
+@model Snowinmars.Ui.Models.BookModel
 
 @{
 	ViewBag.Title = "Edit";
@@ -10,7 +11,7 @@
 	<link href="~/Content/snowinmars/bookEdit.css" rel="stylesheet" />
 }
 
-<h2>Edit</h2>
+<h2>@Global.BookEdit_Header</h2>
 
 @using (Html.BeginForm("Edit", "Book", FormMethod.Post))
 {
@@ -19,7 +20,7 @@
 	<div class="form-horizontal">
 
 		<h4>book</h4>
-		<div>@Html.ActionLink("Back to List", "Index", "Book")</div>
+		<div>@Html.ActionLink(Global._BackToList, "Index", "Book")</div>
 		<hr />
 
 		@Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -40,8 +41,8 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default btn-closeUrlModal" data-dismiss="modal">Close</button>
-						<button type="submit" class="btn btn-primary btn-okUrlModal" data-dismiss="modal">Ok</button>
+						<button type="button" class="btn btn-default btn-closeUrlModal" data-dismiss="modal">@Global._Close</button>
+						<button type="submit" class="btn btn-primary btn-okUrlModal" data-dismiss="modal">@Global._Ok</button>
 					</div>
 				</div>
 			</div>
@@ -62,8 +63,8 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default btn-closeUrlModal" data-dismiss="modal">Close</button>
-						<button type="submit" class="btn btn-primary btn-okUrlModal" data-dismiss="modal">Ok</button>
+						<button type="button" class="btn btn-default btn-closeUrlModal" data-dismiss="modal">@Global._Close</button>
+						<button type="submit" class="btn btn-primary btn-okUrlModal" data-dismiss="modal">@Global._Ok</button>
 					</div>
 				</div>
 			</div>
@@ -84,8 +85,8 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default btn-closeUrlModal" data-dismiss="modal">Close</button>
-						<button type="submit" class="btn btn-primary btn-okUrlModal" data-dismiss="modal">Ok</button>
+						<button type="button" class="btn btn-default btn-closeUrlModal" data-dismiss="modal">@Global._Close</button>
+						<button type="submit" class="btn btn-primary btn-okUrlModal" data-dismiss="modal">@Global._Ok</button>
 					</div>
 				</div>
 			</div>
@@ -133,7 +134,7 @@
 			</div>
 
 			<div class="urlSaveMessage">
-				<span>To save urls' changes, push the Save button below</span>
+				<span>@Global.Book_SaveUrlHint</span>
 			</div>
 		</div>
 
@@ -197,7 +198,7 @@
 
 		<div class="form-group">
 			<div class="col-md-offset-2 col-md-10">
-				<input type="submit" value="Save" class="btn btn-default" />
+				<input type="submit" value="@Global._Save" class="btn btn-default" />
 			</div>
 		</div>
 	</div>

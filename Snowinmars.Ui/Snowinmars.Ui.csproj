@@ -426,18 +426,33 @@
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\prototype.js" />
+    <Content Include="Scripts\snowinmars\userDetails.js" />
     <Content Include="Scripts\snowinmars\userIndex.js" />
     <Content Include="Web.config" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_LocalResources\Global.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Global.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\Global.ru.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Global.ru.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\QuartzCron.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ApiController.cs" />
     <Compile Include="Controllers\AuthorController.cs" />
     <Compile Include="Controllers\ControllerHelper.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\BookController.cs" />
+    <Compile Include="Controllers\InternationalizationAttribute .cs" />
+    <Compile Include="Controllers\LangQueryAppenderModule.cs" />
+    <Compile Include="Controllers\LocalizationHelper.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -475,6 +490,7 @@
     <Content Include="Views\Layouts\_DeleteActionPartialPanel.cshtml" />
     <Content Include="Views\Home\Banned.cshtml" />
     <Content Include="Views\Layouts\_BannedLayout.cshtml" />
+    <Content Include="Views\User\RootPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -506,6 +522,16 @@
       <Project>{7ba2cb1b-d02f-4f98-a1ae-f68ec3611da6}</Project>
       <Name>Snowinmars.NinjectRegistrator</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="App_LocalResources\Global.ru.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Global.ru.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\Global.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Global.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,6 +1,10 @@
 ﻿(function() {
 	$("[data-toggle='tooltip']").tooltip();
 
+	$("#enterModal").on("shown.bs.modal", function () {
+        $("#Username").focus();
+	});
+
 	// toggle navbar buttons
 
 	var parser = document.createElement("a");

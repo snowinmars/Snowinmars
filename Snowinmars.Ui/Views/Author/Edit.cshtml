@@ -1,4 +1,5 @@
-﻿@model Snowinmars.Ui.Models.AuthorModel
+﻿@using Snowinmars.Ui.App_LocalResources
+@model Snowinmars.Ui.Models.AuthorModel
 
 @{
 	ViewBag.Title = "Edit";
@@ -10,7 +11,7 @@
     <link href="~/Content/snowinmars/authorEdit.css" rel="stylesheet" />
 }
 
-<h2>Edit</h2>
+<h2>@Global.AuthorEdit_Header</h2>
 
 @using (Html.BeginForm("Edit", "Author", FormMethod.Post))
 {
@@ -19,7 +20,7 @@
 	<div class="form-horizontal">
 
 		<h4>author</h4>
-		<div>@Html.ActionLink("Back to List", "Index", "Author")</div>
+		<div>@Html.ActionLink(Global._BackToList, "Index", "Author")</div>
 		<hr />
 
 		@Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -32,7 +33,7 @@
                @class = "control-label col-md-2",
                data_toggle = "tooltip",
                data_placement = "left",
-               title = "The most popular colloquial author's naming",
+               title = Global.Author_ShortcutTooltip,
            })
 	            <div class="col-md-10">
 	                @Html.EditorFor(model => model.Shortcut, new { htmlAttributes = new { @class = "form-control" } })
@@ -101,7 +102,7 @@
 
 	    <div class="form-group">
 			<div class="col-md-offset-2 col-md-10">
-				<input type="submit" value="Save" class="btn btn-default" />
+				<input type="submit" value="@Global._Save" class="btn btn-default" />
 			</div>
 		</div>
 	</div>

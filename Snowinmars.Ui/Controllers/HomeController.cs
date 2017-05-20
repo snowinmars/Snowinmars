@@ -4,6 +4,7 @@ namespace Snowinmars.Ui.Controllers
 {
 	[Route("Home")]
     [Authorize]
+    [Internationalization]
     public class HomeController : Controller
 	{
 		[HttpGet]
