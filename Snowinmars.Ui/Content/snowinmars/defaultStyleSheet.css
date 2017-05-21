@@ -108,3 +108,7 @@ hr {
     text-align: center;
     text-decoration: underline;
 }
+
+.data-tooltip {
+    cursor: help;
+}
