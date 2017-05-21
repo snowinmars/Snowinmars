@@ -1,4 +1,5 @@
-﻿@using Snowinmars.Ui.App_LocalResources
+﻿@using Snowinmars.Entities
+@using Snowinmars.Ui.App_LocalResources
 @model Snowinmars.Ui.Models.AuthorModel
 
 @{
@@ -96,8 +97,11 @@
             </div>
         </div>
     </div>
-
-    <div class="actions col-xs-12">
-        @RenderPage("~/Views/Layouts/_EditDeleteActionPartialPanel.cshtml", Model.Id)
-    </div>
+    
+    @if (User.IsInRole(UserRoles.Admin.ToString()) || User.IsInRole(UserRoles.Root.ToString()))
+    {
+        <div class="actions col-xs-12">
+            @RenderPage("~/Views/Layouts/_EditDeleteActionPartialPanel.cshtml", Model.Id)
+        </div>
+    }
 </div>
