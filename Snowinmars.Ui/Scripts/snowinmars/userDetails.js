@@ -1,7 +1,6 @@
 ﻿(function () {
     function update() {
         $(".successMessage").addClass("hiddenElement");
-        $(".emailInputClientFailMessage").addClass("hiddenElement");
         $(".serverFailMessage").addClass("hiddenElement");
 
         $.ajax({

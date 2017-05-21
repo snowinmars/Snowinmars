@@ -314,7 +314,7 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
-    <Content Include="Content\defaultStyleSheet.css" />
+    <Content Include="Content\snowinmars\defaultStyleSheet.css" />
     <Content Include="Content\snowinmars\loadingCube.css" />
     <Content Include="Content\snowinmars\userDetails.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

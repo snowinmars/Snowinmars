@@ -18,7 +18,8 @@
 }
 
 .emailInputClientFailMessage,
-.emailInputServerFailMessage {
+.emailInputServerFailMessage,
+.serverFailMessage {
 	color: red;
 }
 
@@ -26,16 +27,20 @@
     margin-left: 5ex;
 }
 
-.serverFailMessage {
+.serverFailMessage,
+.successMessage {
     display: inline-block;
+    
+}
 
+.serverFailMessage {
     visibility:visible;
     opacity:1;
     transition:opacity 0.5s linear;
 }
 
 .successMessage {
-    display: inline-block;
+    color: lightgreen;
 
     visibility:visible;
     opacity:1;
@@ -48,6 +53,8 @@
     transition:visibility 0s linear 0.5s, opacity 0.5s linear;
 }
 
+
+    
 .glyphicon-question-sign {
     padding-right: 0;
 }
