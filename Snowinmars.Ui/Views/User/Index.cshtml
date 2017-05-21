@@ -14,38 +14,44 @@
 
 <table class="table table-bordered">
     <thead>
-        <tr>
-            <th class="col-xs-4 col-sm-3 noOverflow">
-                @Html.DisplayNameFor(model => model.Username)
-            </th>
-            <th class="col-xs-4 col-sm-3 noOverflow">
-                @Html.DisplayNameFor(model => model.Roles)
-            </th>
-            <th class="hidden-xs col-sm-3 noOverflow">
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th class="col-xs-4 col-sm-3"></th>
-        </tr>
+    <tr>
+        <th class="col-xs-4 col-sm-3 noOverflow">
+            @Html.DisplayNameFor(model => model.Username)
+        </th>
+        <th class="col-xs-4 col-sm-3 noOverflow">
+            @Html.DisplayNameFor(model => model.Roles)
+        </th>
+        <th class="hidden-xs col-sm-3 noOverflow">
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th class="col-xs-4 col-sm-3"></th>
+    </tr>
     </thead>
 
     <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td class="col-xs-4 col-sm-3 noOverflow">
-                    @Html.DisplayFor(modelItem => item.Username)
-                </td>
-                <td class="col-xs-4 col-sm-3 noOverflow">
-                    @Html.DisplayFor(modelItem => item.Roles)
-                </td>
-                <td class="hidden-xs col-sm-3 noOverflow">
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td class="col-xs-4 col-sm-3">
-                    <a href="@Url.Action("BanById", "User", new { id = item.Id })"><span class="btn btn-default col-xs-4 col-xs-offset-1 glyphicon glyphicon-lock"></span></a>
-                    <a href="@Url.Action("DeleteById", "User", new { id = item.Id })"><span class="btn btn-danger col-xs-4 col-xs-offset-1 glyphicon glyphicon-remove"></span></a>
-                </td>
-            </tr>
-        }
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="col-xs-4 col-sm-3 noOverflow">
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td class="col-xs-4 col-sm-3 noOverflow">
+                @Html.DisplayFor(modelItem => item.Roles)
+            </td>
+            <td class="hidden-xs col-sm-3 noOverflow">
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td class="col-xs-4 col-sm-3">
+                <a href="@Url.Action("BanById", "User", new { id = item.Id })"><span class="btn btn-default col-xs-4 col-xs-offset-1 glyphicon glyphicon-lock"></span></a>
+                <a href="@Url.Action("DeleteById", "User", new { id = item.Id })"><span class="btn btn-danger col-xs-4 col-xs-offset-1 glyphicon glyphicon-remove"></span></a>
+            </td>
+        </tr>
+    }
     </tbody>
 </table>
+
+@section Scripts
+{ 
+<script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/snowinmars/tableSetup.js"></script>
+}

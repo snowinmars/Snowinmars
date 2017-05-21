@@ -8,16 +8,6 @@
 
     $(".chosen-container").prop("style", "");
 
-    var table = $(".table");
-
-    $(".sk-folding-cube-parent").addClass("hidden");
-
-    table.removeClass("hidden");
-    table.DataTable({
-        columnDefs: [{ targets: "no-sort", orderable: false }],
-        "autoWidth": false
-    });
-
     var rows = $(".synchronizationIcon:not(.hidden)").closest("tr");
     var rowsLength = rows.length;
 
