@@ -36,7 +36,7 @@ namespace Snowinmars.Ui.Controllers
                 throw new InvalidOperationException($"Can't recognize language {language}");
             }
 
-            this.SetLanguage(lang);
+            this.SetLanguage(language);
         }
 
         /// <summary>
@@ -45,8 +45,18 @@ namespace Snowinmars.Ui.Controllers
         /// <param name="language">locale name</param>
         private void SetLanguage(string language)
         {
-            Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(language);
-            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(language);
+                CultureInfo culture;
+            try
+            {
+                culture = CultureInfo.GetCultureInfo(language);
+            }
+            catch (CultureNotFoundException)
+            {
+                culture = CultureInfo.CurrentCulture;
+            }
+
+            Thread.CurrentThread.CurrentCulture = culture;
+            Thread.CurrentThread.CurrentUICulture = culture;
         }
     }
 }

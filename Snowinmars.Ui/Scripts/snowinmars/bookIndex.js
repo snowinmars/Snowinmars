@@ -25,7 +25,7 @@
         global__refreshIntervalId = setInterval(function () {
             for (var i = 0; i < rowsLength; i++) {
                 $.ajax({
-                    url: "/Book/Details/" + $(rows[i]).data().id,
+                    url: "/en/Book/Details/" + $(rows[i]).data().id,
                     type: "POST",
                     success: function (data) {
                         if (data.IsSynchronized) {

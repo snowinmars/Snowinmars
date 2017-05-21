@@ -305,8 +305,14 @@ You can erase this field any time.</value>
   <data name="UserRootPage_RootMessagePart5" xml:space="preserve">
     <value>With great power comes great responsibility</value>
   </data>
+  <data name="_Author" xml:space="preserve">
+    <value>Author</value>
+  </data>
   <data name="_BackToList" xml:space="preserve">
     <value>Back to list</value>
+  </data>
+  <data name="_Book" xml:space="preserve">
+    <value>Book</value>
   </data>
   <data name="_Close" xml:space="preserve">
     <value>Close</value>

@@ -121,13 +121,13 @@
     <value>Создать</value>
   </data>
   <data name="AuthorDetails_Header" xml:space="preserve">
-    <value>Подробнее</value>
+    <value>Детали</value>
   </data>
   <data name="AuthorEdit_Header" xml:space="preserve">
     <value>Редактирование</value>
   </data>
   <data name="AuthorIndex_CreateNewAuthor" xml:space="preserve">
-    <value>Создать нового автор</value>
+    <value>Создать нового автора</value>
   </data>
   <data name="AuthorIndex_Header" xml:space="preserve">
     <value>Все авторы</value>
@@ -208,7 +208,7 @@
     <value>Год</value>
   </data>
   <data name="Book_SaveUrlHint" xml:space="preserve">
-    <value>Чтобы сохранить урлы, нажми "Сохранить"</value>
+    <value>"Сохранить" сохранит урлы</value>
   </data>
   <data name="EnterPage_NewUserHello" xml:space="preserve">
     <value>Не найдено юзера с таким логином. Регайся</value>
@@ -305,8 +305,14 @@
   <data name="UserRootPage_RootMessagePart5" xml:space="preserve">
     <value>С большой силой приходит большая ответственность</value>
   </data>
+  <data name="_Author" xml:space="preserve">
+    <value>Автора</value>
+  </data>
   <data name="_BackToList" xml:space="preserve">
     <value>К списку</value>
+  </data>
+  <data name="_Book" xml:space="preserve">
+    <value>Книгу</value>
   </data>
   <data name="_Close" xml:space="preserve">
     <value>Закрыть</value>

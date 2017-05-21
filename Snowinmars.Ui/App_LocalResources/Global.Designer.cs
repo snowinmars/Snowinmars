@@ -61,11 +61,29 @@ namespace Snowinmars.Ui.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Author.
+        /// </summary>
+        public static string _Author {
+            get {
+                return ResourceManager.GetString("_Author", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Back to list.
         /// </summary>
         public static string _BackToList {
             get {
                 return ResourceManager.GetString("_BackToList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Book.
+        /// </summary>
+        public static string _Book {
+            get {
+                return ResourceManager.GetString("_Book", resourceCulture);
             }
         }
         
