@@ -5,23 +5,25 @@
         $("#Username").focus();
     });
 
-    // toggle navbar buttons
-
-    var parser = document.createElement("a");
-    parser.href = location.href;
-    var page = parser.pathname.split("/")[1];
     var navbar = $(".navbar-nav");
     navbar.children().removeClass("active");
 
-    switch (page) {
-        case "author":
-        case "Author":
-            navbar.children("[data-id=author]").addClass("active");
-            break;
-        case "book":
-        case "Book":
-            navbar.children("[data-id=book]").addClass("active");
-            break;
+    // toggle navbar buttons
+    var urlParts = location.pathname.split("/");
+    var urlPartsLength = urlParts.length;
+    for (var i = 0; i < urlPartsLength; i++) {
+        var urlPart = urlParts[i];
+
+        switch (urlPart) {
+            case "author":
+            case "Author":
+                navbar.children("[data-id=author]").addClass("active");
+                break;
+            case "book":
+            case "Book":
+                navbar.children("[data-id=book]").addClass("active");
+                break;
+        }
     }
 
     $("#Username").keyup(function (e) {
