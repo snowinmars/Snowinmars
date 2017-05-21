@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Snowinmars.Bll.Interfaces;
+using System;
 using System.Web.Mvc;
-using Snowinmars.Bll.Interfaces;
 
 namespace Snowinmars.Ui.Controllers
 {
@@ -30,17 +27,12 @@ namespace Snowinmars.Ui.Controllers
             {
                 var author = this.authorLogic.Get(id);
 
-                return GetSuccessJsonResult(author);
+                return this.GetSuccessJsonResult(author);
             }
             catch
             {
-                return GetFailJsonResult();
+                return ApiController.GetFailJsonResult();
             }
-        }
-
-        private JsonResult GetSuccessJsonResult(object data)
-        {
-            return Json(data, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
@@ -51,13 +43,11 @@ namespace Snowinmars.Ui.Controllers
             {
                 var book = this.bookLogic.Get(id);
 
-
-                return GetSuccessJsonResult(book);
-               
+                return this.GetSuccessJsonResult(book);
             }
             catch
             {
-                return GetFailJsonResult();
+                return ApiController.GetFailJsonResult();
             }
         }
 
@@ -72,13 +62,11 @@ namespace Snowinmars.Ui.Controllers
                 user.PasswordHash = ""; // TODO this is hole. redo
                 user.Salt = "";
 
-
-                return GetSuccessJsonResult(user);
-            
+                return this.GetSuccessJsonResult(user);
             }
             catch
             {
-                return GetFailJsonResult();
+                return ApiController.GetFailJsonResult();
             }
         }
 
@@ -93,18 +81,22 @@ namespace Snowinmars.Ui.Controllers
                 user.PasswordHash = ""; // TODO this is hole. redo
                 user.Salt = "";
 
-                return GetSuccessJsonResult(user);
-             
+                return this.GetSuccessJsonResult(user);
             }
             catch
             {
-                return GetFailJsonResult();
+                return ApiController.GetFailJsonResult();
             }
         }
 
         private static JsonResult GetFailJsonResult()
         {
             return new JsonResult { Data = new { success = false } };
+        }
+
+        private JsonResult GetSuccessJsonResult(object data)
+        {
+            return this.Json(data, JsonRequestBehavior.AllowGet);
         }
     }
 }

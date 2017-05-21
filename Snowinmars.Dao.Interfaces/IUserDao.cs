@@ -1,23 +1,27 @@
-﻿using System;
+﻿using Snowinmars.Entities;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Snowinmars.Entities;
 
 namespace Snowinmars.Dao.Interfaces
 {
-	public interface IUserDao : ICRUD<User>
-	{
-		void RemoveUsersFromRoles(IEnumerable<string> usernames, IEnumerable<UserRoles> roles);
-		bool IsUserInRole(string username, UserRoles role);
-		IEnumerable<string> GetUsersInRole(UserRoles role);
-		UserRoles GetRolesForUser(string username);
-		void AddUsersToRoles(IEnumerable<string> usernames, IEnumerable<UserRoles> roles);
-		bool IsUsernameExist(string username);
-		User Get(string username);
-        void Remove(string username);
-	    IEnumerable<User> Get(Func<User, bool> filter);
+    public interface IUserDao : ICRUD<User>
+    {
+        void AddUsersToRoles(IEnumerable<string> usernames, IEnumerable<UserRoles> roles);
 
-	}
+        User Get(string username);
+
+        IEnumerable<User> Get(Func<User, bool> filter);
+
+        UserRoles GetRolesForUser(string username);
+
+        IEnumerable<string> GetUsersInRole(UserRoles role);
+
+        bool IsUserInRole(string username, UserRoles role);
+
+        bool IsUsernameExist(string username);
+
+        void Remove(string username);
+
+        void RemoveUsersFromRoles(IEnumerable<string> usernames, IEnumerable<UserRoles> roles);
+    }
 }

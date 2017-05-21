@@ -243,6 +243,9 @@
   <data name="Model_InformAboutWarnings" xml:space="preserve">
     <value>Have I inform you about warnings?</value>
   </data>
+  <data name="Model_IsSynchronized" xml:space="preserve">
+    <value>Is synchronized</value>
+  </data>
   <data name="UserDetails_IsWrongFormat" xml:space="preserve">
     <value>'s wrong format</value>
   </data>
@@ -268,6 +271,9 @@ You can erase this field any time.</value>
   </data>
   <data name="UserModel_Email" xml:space="preserve">
     <value>Email</value>
+  </data>
+  <data name="UserModel_Language" xml:space="preserve">
+    <value>Language</value>
   </data>
   <data name="UserModel_Password" xml:space="preserve">
     <value>Password</value>

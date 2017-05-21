@@ -2,25 +2,25 @@
 
 namespace Snowinmars.Ui.Controllers
 {
-	[Route("Home")]
+    [Route("Home")]
     [Authorize]
     [Internationalization]
     public class HomeController : Controller
-	{
-		[HttpGet]
-		[Route("")]
+    {
+        [HttpGet]
+        [Route("banned")]
         [AllowAnonymous]
-		public ActionResult Index()
+        public ActionResult Banned()
         {
-			return View();
-		}
+            return this.View();
+        }
 
-	    [HttpGet]
-	    [Route("banned")]
-	    [AllowAnonymous]
-	    public ActionResult Banned()
-	    {
-	        return View();
-	    }
-	}
+        [HttpGet]
+        [Route("")]
+        [AllowAnonymous]
+        public ActionResult Index()
+        {
+            return this.View();
+        }
+    }
 }

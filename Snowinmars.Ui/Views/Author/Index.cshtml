@@ -3,19 +3,18 @@
 @model IEnumerable<Snowinmars.Ui.Models.AuthorModel>
 
 @{
-	ViewBag.Title = "Index";
-	Layout = "~/Views/Layouts/DefaultLayout.cshtml";
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layouts/DefaultLayout.cshtml";
 }
 
 @section Content
 {
-	<link href="~/Content/snowinmars/loadingCube.css" rel="stylesheet" />
+    <link href="~/Content/snowinmars/loadingCube.css" rel="stylesheet" />
 }
 
 <h2>@Global.AuthorIndex_Header</h2>
 
-@if (User.IsInRole(UserRoles.Admin.ToString()) ||
-     User.IsInRole(UserRoles.Root.ToString()))
+@if (User.IsInRole(UserRoles.Admin.ToString()) || User.IsInRole(UserRoles.Root.ToString()))
 {
     <p>
         @Html.ActionLink(Global.AuthorIndex_CreateNewAuthor, "Create", "Author")
@@ -23,51 +22,51 @@
 }
 
 <div class="sk-folding-cube-parent">
-	<div class="sk-folding-cube">
-		<div class="sk-cube1 sk-cube"></div>
-		<div class="sk-cube2 sk-cube"></div>
-		<div class="sk-cube4 sk-cube"></div>
-		<div class="sk-cube3 sk-cube"></div>
-	</div>
+    <div class="sk-folding-cube">
+        <div class="sk-cube1 sk-cube"></div>
+        <div class="sk-cube2 sk-cube"></div>
+        <div class="sk-cube4 sk-cube"></div>
+        <div class="sk-cube3 sk-cube"></div>
+    </div>
 </div>
 
 <table class="table table-bordered hidden">
-	<thead>
-		<tr>
-			<th class="col-xs-2 noOverflow">
-				@Html.DisplayNameFor(model => model.GivenName)
-			</th>
-			<th class="col-xs-2 hidden-xs noOverflow">
-				@Html.DisplayNameFor(model => model.FullMiddleName)
-			</th>
-			<th class="col-xs-3 noOverflow">
-				@Html.DisplayNameFor(model => model.FamilyName)
-			</th>
-			<th class="col-xs-3 noOverflow">
-				@Html.DisplayNameFor(model => model.Shortcut)
-			</th>
-			<th class="col-xs-2 no-sort"></th>
-		</tr>
-	</thead>
-	<tbody>
-		@foreach (var item in Model)
-		{
-			<tr>
-				<td class="col-xs-2 noOverflow">
-					@Html.DisplayFor(modelItem => item.GivenName)
-				</td>
-				<td class="col-xs-2 hidden-xs noOverflow">
-					@Html.DisplayFor(modelItem => item.FullMiddleName)
-				</td>
-				<td class="col-xs-3 noOverflow">
-					@Html.DisplayFor(modelItem => item.FamilyName)
-				</td>
-				<td class="col-xs-3 noOverflow">
-					@Html.DisplayFor(modelItem => item.Shortcut)
-				</td>
-			    <td class="col-xs-2 actions">
+    <thead>
+        <tr>
+            <th class="col-xs-2 noOverflow">
+                @Html.DisplayNameFor(model => model.GivenName)
+            </th>
+            <th class="col-xs-2 hidden-xs noOverflow">
+                @Html.DisplayNameFor(model => model.FullMiddleName)
+            </th>
+            <th class="col-xs-3 noOverflow">
+                @Html.DisplayNameFor(model => model.FamilyName)
+            </th>
+            <th class="col-xs-3 noOverflow">
+                @Html.DisplayNameFor(model => model.Shortcut)
+            </th>
+            <th class="col-xs-2 no-sort"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="col-xs-2 noOverflow">
+                    @Html.DisplayFor(modelItem => item.GivenName)
+                </td>
+                <td class="col-xs-2 hidden-xs noOverflow">
+                    @Html.DisplayFor(modelItem => item.FullMiddleName)
+                </td>
+                <td class="col-xs-3 noOverflow">
+                    @Html.DisplayFor(modelItem => item.FamilyName)
+                </td>
+                <td class="col-xs-3 noOverflow">
+                    @Html.DisplayFor(modelItem => item.Shortcut)
+                </td>
+                <td class="col-xs-2 actions">
                     @if (User.IsInRole(UserRoles.Admin.ToString()) ||
-                            User.IsInRole(UserRoles.Root.ToString()))
+                        User.IsInRole(UserRoles.Root.ToString()))
                     {
                         @RenderPage("~/Views/Layouts/_EditDetailsDeleteActionPartialPanel.cshtml", item.Id)
                     }
@@ -75,16 +74,15 @@
                     {
                         @RenderPage("~/Views/Layouts/_DetailsActionPartialPanel.cshtml", item.Id)
                     }
-			    </td>
-			</tr>
-		}
-	</tbody>
+                </td>
+            </tr>}
+    </tbody>
 </table>
 
 @section Scripts
 {
-	<script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
-	<script src="~/Scripts/DataTables/dataTables.bootstrap.min.js"></script>
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.bootstrap.min.js"></script>
 
-	<script src="~/Scripts/snowinmars/authorIndex.js"></script>
+    <script src="~/Scripts/snowinmars/authorIndex.js"></script>
 }

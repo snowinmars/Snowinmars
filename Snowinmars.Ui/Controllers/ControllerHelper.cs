@@ -1,12 +1,179 @@
-﻿using System;
+﻿using Snowinmars.Common;
+using Snowinmars.Entities;
+using Snowinmars.Ui.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace Snowinmars.Ui.Controllers
 {
     internal static class ControllerHelper
     {
-        internal static string Convert(string str) => str?.Trim() ?? "";
+        internal static BookModel Map(Book book)
+        {
+            return new BookModel
+            {
+                Id = book.Id,
+                PageCount = book.PageCount,
+                Title = book.Title,
+                Year = book.Year,
+                AuthorModelIds = book.AuthorIds.ToList(),
+                AuthorShortcuts = book.AuthorShortcuts.ToList(),
+                AdditionalInfo = book.AdditionalInfo,
+                Bookshelf = book.Bookshelf,
+                FlibustaUrl = book.FlibustaUrl,
+                LibRusEcUrl = book.LibRusEcUrl,
+                LiveLibUrl = book.LiveLibUrl,
+                Owner = book.Owner,
+                MustInformAboutWarnings = book.MustInformAboutWarnings,
+                IsSynchronized = book.IsSynchronized,
+            };
+        }
+
+        internal static Book Map(BookModel bookModel)
+        {
+            var book = new Book(bookModel.Title, bookModel.PageCount)
+            {
+                Year = bookModel.Year,
+                AdditionalInfo = ControllerHelper.Trim(bookModel.AdditionalInfo),
+                Bookshelf = ControllerHelper.Trim(bookModel.Bookshelf),
+                FlibustaUrl = ControllerHelper.Trim(bookModel.FlibustaUrl),
+                LibRusEcUrl = ControllerHelper.Trim(bookModel.LibRusEcUrl),
+                LiveLibUrl = ControllerHelper.Trim(bookModel.LiveLibUrl),
+                MustInformAboutWarnings = bookModel.MustInformAboutWarnings,
+                IsSynchronized = bookModel.IsSynchronized,
+            };
+
+            ControllerHelper.SetOwner(bookModel.Owner, book.Owner);
+            ControllerHelper.SetId(bookModel, book);
+            ControllerHelper.SetAuthorIds(bookModel.AuthorModelIds, book.AuthorIds);
+            ControllerHelper.SetAuthorShortcuts(bookModel.AuthorShortcuts, book.AuthorShortcuts);
+
+            return book;
+        }
+
+        internal static AuthorModel Map(Author author)
+        {
+            return new AuthorModel
+            {
+                Id = author.Id,
+                GivenName = author.GivenName,
+                FullMiddleName = author.FullMiddleName,
+                FamilyName = author.FamilyName,
+                Shortcut = author.Shortcut,
+                IsSynchronized = author.IsSynchronized,
+                MustInformAboutWarnings = author.MustInformAboutWarnings,
+                PseudonymGivenName = author.Pseudonym?.GivenName ?? "",
+                PseudonymFullMiddleName = author.Pseudonym?.FullMiddleName ?? "",
+                PseudonymFamilyName = author.Pseudonym?.FamilyName ?? "",
+            };
+        }
+
+        internal static Author Map(AuthorModel authorModel)
+        {
+            var author = new Author(authorModel.Shortcut)
+            {
+                GivenName = ControllerHelper.Trim(authorModel.GivenName),
+                FullMiddleName = ControllerHelper.Trim(authorModel.FullMiddleName),
+                FamilyName = ControllerHelper.Trim(authorModel.FamilyName),
+                IsSynchronized = authorModel.IsSynchronized,
+                MustInformAboutWarnings = authorModel.MustInformAboutWarnings,
+                Pseudonym = ControllerHelper.MapPseudonym(authorModel),
+            };
+
+            ControllerHelper.SetId(authorModel, author);
+
+            return author;
+        }
+
+        internal static UserModel Map(User user)
+        {
+            return new UserModel
+            {
+                Id = user.Id,
+                Username = user.Username,
+                Roles = user.Roles,
+                Email = user.Email,
+                Language = user.Language,
+            };
+        }
+
+        internal static User Map(UserModel userModel)
+        {
+            var user = new User(userModel.Username)
+            {
+                Email = ControllerHelper.Trim(userModel.Email),
+                Roles = userModel.Roles,
+                Language = userModel.Language,
+            };
+
+            ControllerHelper.SetId(userModel, user);
+
+            return user;
+        }
+
+        internal static Pseudonym MapPseudonym(AuthorModel authorModel)
+        {
+            return new Pseudonym
+            {
+                GivenName = ControllerHelper.Trim(authorModel.PseudonymGivenName),
+                FullMiddleName = ControllerHelper.Trim(authorModel.PseudonymFullMiddleName),
+                FamilyName = ControllerHelper.Trim(authorModel.PseudonymFamilyName),
+            };
+        }
+
+        internal static string Trim(string str) => str?.Trim() ?? "";
+
+        private static void SetAuthorIds(IEnumerable<Guid> authorModelIds, ICollection<Guid> container)
+        {
+            if (authorModelIds != null && authorModelIds.Any())
+            {
+                container.AddRange(authorModelIds);
+            }
+        }
+
+        private static void SetAuthorShortcuts(IEnumerable<string> authorShortcuts, ICollection<string> container)
+        {
+            if (authorShortcuts != null && authorShortcuts.Any())
+            {
+                container.AddRange(authorShortcuts);
+            }
+        }
+
+        private static void SetId(BookModel bookModel, Book book)
+        {
+            if (bookModel.Id != Guid.Empty)
+            {
+                book.Id = bookModel.Id;
+            }
+        }
+
+        private static void SetId(AuthorModel authorModel, Author author)
+        {
+            if (authorModel.Id != Guid.Empty)
+            {
+                author.Id = authorModel.Id;
+            }
+        }
+
+        private static void SetId(UserModel userModel, User user)
+        {
+            if (userModel.Id != Guid.Empty)
+            {
+                user.Id = userModel.Id;
+            }
+        }
+
+        private static void SetOwner(string owner, string container)
+        {
+            if (string.IsNullOrWhiteSpace(owner))
+            {
+                container = System.Web.HttpContext.Current.User.Identity.Name;
+            }
+            else
+            {
+                container = ControllerHelper.Trim(owner);
+            }
+        }
     }
 }

@@ -5,14 +5,14 @@ using System.Linq.Expressions;
 
 namespace Snowinmars.Dao.Interfaces
 {
-	public interface IBookDao : ICRUD<Book>
-	{
-		IEnumerable<Book> Get(Expression<Func<Book, bool>> filter);
+    public interface IBookDao : ICRUD<Book>
+    {
+        IEnumerable<Book> Get(Expression<Func<Book, bool>> filter);
 
-		IEnumerable<Author> GetAuthorsForBook(Guid bookId);
+        IEnumerable<KeyValuePair<Guid, Guid>> GetAllBookAuthorConnections();
 
-		IEnumerable<Guid> SelectBooksUnindexedByShortcutsCommand();
+        IEnumerable<Author> GetAuthorsForBook(Guid bookId);
 
-		IEnumerable<KeyValuePair<Guid, Guid>> GetAllBookAuthorConnections();
-	}
+        IEnumerable<Guid> SelectBooksUnindexedByShortcutsCommand();
+    }
 }

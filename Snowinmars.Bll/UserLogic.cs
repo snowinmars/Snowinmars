@@ -1,143 +1,143 @@
-﻿using Snowinmars.Bll.Interfaces;
+﻿using DevOne.Security.Cryptography.BCrypt;
+using Snowinmars.Bll.Interfaces;
 using Snowinmars.Dao.Interfaces;
 using Snowinmars.Entities;
 using System;
 using System.Collections.Generic;
-using DevOne.Security.Cryptography.BCrypt;
 
 namespace Snowinmars.Bll
 {
-	public class UserLogic : IUserLogic, Interfaces.ICRUD<User>
-	{
-		private readonly IUserDao userDao;
+    public class UserLogic : IUserLogic, Interfaces.ICRUD<User>
+    {
+        private readonly IUserDao userDao;
 
-		public UserLogic(IUserDao userDao)
-		{
-			this.userDao = userDao;
-		}
+        public UserLogic(IUserDao userDao)
+        {
+            this.userDao = userDao;
+        }
 
-		public void AddUsersToRoles(IEnumerable<string> usernames, IEnumerable<UserRoles> roles)
-		{
-			foreach (var username in usernames)
-			{
-				Validation.CheckUsername(username);
-			}
+        public void AddUsersToRoles(IEnumerable<string> usernames, IEnumerable<UserRoles> roles)
+        {
+            foreach (var username in usernames)
+            {
+                Validation.CheckUsername(username);
+            }
 
-			this.userDao.AddUsersToRoles(usernames, roles);
-		}
+            this.userDao.AddUsersToRoles(usernames, roles);
+        }
 
-		public bool Authenticate(User candidate, string userModelPassword)
-		{
-			Validation.Check(candidate);
+        public bool Authenticate(User candidate, string userModelPassword)
+        {
+            Validation.Check(candidate);
 
-			var existingUser = this.Get(candidate.Username);
+            var existingUser = this.Get(candidate.Username);
 
-			return BCryptHelper.HashPassword(userModelPassword, existingUser.Salt) == existingUser.PasswordHash;
-		}
+            return BCryptHelper.HashPassword(userModelPassword, existingUser.Salt) == existingUser.PasswordHash;
+        }
 
-		public string CalculateHash(string password, string salt)
-		{
-			if (string.IsNullOrWhiteSpace(salt))
-			{
-				salt = BCryptHelper.GenerateSalt();
-			}
+        public string CalculateHash(string password, string salt)
+        {
+            if (string.IsNullOrWhiteSpace(salt))
+            {
+                salt = BCryptHelper.GenerateSalt();
+            }
 
-			Validation.CheckPassword(password);
-			Validation.CheckSalt(salt);
+            Validation.CheckPassword(password);
+            Validation.CheckSalt(salt);
 
-			return BCryptHelper.HashPassword(password, salt);
-		}
+            return BCryptHelper.HashPassword(password, salt);
+        }
 
-		public void Create(User item)
-		{
-			if (string.IsNullOrWhiteSpace(item.Salt))
-			{
-				item.Salt = BCryptHelper.GenerateSalt();
-			}
+        public void Create(User item)
+        {
+            if (string.IsNullOrWhiteSpace(item.Salt))
+            {
+                item.Salt = BCryptHelper.GenerateSalt();
+            }
 
-			Validation.Check(item);
+            Validation.Check(item);
 
-			this.userDao.Create(item);
-		}
+            this.userDao.Create(item);
+        }
 
-		public User Get(Guid id)
-		{
-			Validation.Check(id);
+        public User Get(Guid id)
+        {
+            Validation.Check(id);
 
-			return this.userDao.Get(id);
-		}
+            return this.userDao.Get(id);
+        }
 
-		public User Get(string username)
-		{
-			Validation.CheckUsername(username);
+        public User Get(string username)
+        {
+            Validation.CheckUsername(username);
 
-			return this.userDao.Get(username);
-		}
+            return this.userDao.Get(username);
+        }
 
-		public UserRoles GetRolesForUser(string username)
-		{
-			Validation.CheckUsername(username);
+        public IEnumerable<User> Get(Func<User, bool> filter)
+        {
+            return this.userDao.Get(filter);
+        }
 
-			return this.userDao.GetRolesForUser(username);
-		}
+        public UserRoles GetRolesForUser(string username)
+        {
+            Validation.CheckUsername(username);
 
-		public IEnumerable<string> GetUsersInRole(UserRoles role)
-		{
-			return this.userDao.GetUsersInRole(role);
-		}
+            return this.userDao.GetRolesForUser(username);
+        }
 
-		public bool IsUserInRole(string username, UserRoles role)
-		{
-			Validation.CheckUsername(username);
+        public IEnumerable<string> GetUsersInRole(UserRoles role)
+        {
+            return this.userDao.GetUsersInRole(role);
+        }
 
-			return this.userDao.IsUserInRole(username, role);
-		}
+        public bool IsUserInRole(string username, UserRoles role)
+        {
+            Validation.CheckUsername(username);
 
-		public bool IsUsernameExist(string username)
-		{
-			return this.userDao.IsUsernameExist(username);
-		}
+            return this.userDao.IsUserInRole(username, role);
+        }
 
-		public void Remove(Guid id)
-		{
-			Validation.Check(id);
+        public bool IsUsernameExist(string username)
+        {
+            return this.userDao.IsUsernameExist(username);
+        }
 
-			this.userDao.Remove(id);
-		}
+        public void Remove(Guid id)
+        {
+            Validation.Check(id);
 
-		public void RemoveUsersFromRoles(IEnumerable<string> usernames, IEnumerable<UserRoles> roles)
-		{
-			foreach (var username in usernames)
-			{
-				Validation.CheckUsername(username);
-			}
+            this.userDao.Remove(id);
+        }
 
-			this.userDao.RemoveUsersFromRoles(usernames, roles);
-		}
+        public void Remove(string username)
+        {
+            this.userDao.Remove(username);
+        }
 
-		public void Update(User item)
-		{
-			Validation.Check(item);
+        public void RemoveUsersFromRoles(IEnumerable<string> usernames, IEnumerable<UserRoles> roles)
+        {
+            foreach (var username in usernames)
+            {
+                Validation.CheckUsername(username);
+            }
 
-			this.userDao.Update(item);
-		}
+            this.userDao.RemoveUsersFromRoles(usernames, roles);
+        }
 
-		public void Remove(string username)
-		{
-			this.userDao.Remove(username);
-		}
+        public void SetupCryptography(User user)
+        {
+            if (string.IsNullOrWhiteSpace(user.Salt))
+            {
+                user.Salt = BCryptHelper.GenerateSalt();
+            }
+        }
 
-		public void SetupCryptography(User user)
-		{
-			if (string.IsNullOrWhiteSpace(user.Salt))
-			{
-				user.Salt = BCryptHelper.GenerateSalt();
-			}
-		}
+        public void Update(User item)
+        {
+            Validation.Check(item);
 
-	    public IEnumerable<User> Get(Func<User, bool> filter)
-	    {
-	        return this.userDao.Get(filter);
-	    }
-	}
+            this.userDao.Update(item);
+        }
+    }
 }

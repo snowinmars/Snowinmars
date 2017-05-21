@@ -5,18 +5,18 @@ using System.Linq.Expressions;
 
 namespace Snowinmars.Bll.Interfaces
 {
-	public interface IBookLogic : ICRUD<Book>
-	{
-		IEnumerable<Book> Get(Expression<Func<Book, bool>> filter);
+    public interface IBookLogic : ICRUD<Book>
+    {
+        IEnumerable<Book> Get(Expression<Func<Book, bool>> filter);
 
-		IEnumerable<Author> GetAuthors(Guid bookId);
+        IEnumerable<Author> GetAuthors(Guid bookId);
 
-		void StartInformAboutWarnings(Guid bookId);
+        void StartInformAboutWarnings(Guid bookId);
 
-		void StopInformAboutWarnings(Guid bookId);
+        void StartInformAboutWarnings();
 
-		void StartInformAboutWarnings();
+        void StopInformAboutWarnings(Guid bookId);
 
-		void StopInformAboutWarnings();
-	}
+        void StopInformAboutWarnings();
+    }
 }

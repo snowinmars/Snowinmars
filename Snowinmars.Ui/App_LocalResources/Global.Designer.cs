@@ -520,6 +520,15 @@ namespace Snowinmars.Ui.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Is synchronized.
+        /// </summary>
+        public static string Model_IsSynchronized {
+            get {
+                return ResourceManager.GetString("Model_IsSynchronized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &apos;s wrong format.
         /// </summary>
         public static string UserDetails_IsWrongFormat {
@@ -590,6 +599,15 @@ namespace Snowinmars.Ui.App_LocalResources {
         public static string UserModel_Email {
             get {
                 return ResourceManager.GetString("UserModel_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language.
+        /// </summary>
+        public static string UserModel_Language {
+            get {
+                return ResourceManager.GetString("UserModel_Language", resourceCulture);
             }
         }
         

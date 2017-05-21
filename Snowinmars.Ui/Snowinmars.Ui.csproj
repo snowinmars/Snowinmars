@@ -432,6 +432,9 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppStartHelpers\EmailSender.cs" />
+    <Compile Include="AppStartHelpers\Extensions.cs" />
+    <Compile Include="AppStartHelpers\WarningJob.cs" />
     <Compile Include="App_LocalResources\Global.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -442,17 +445,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Global.ru.resx</DependentUpon>
     </Compile>
+    <Compile Include="AppStartHelpers\Cron.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\QuartzCron.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="AppStartHelpers\ShortcutJob.cs" />
     <Compile Include="Controllers\ApiController.cs" />
     <Compile Include="Controllers\AuthorController.cs" />
     <Compile Include="Controllers\ControllerHelper.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\BookController.cs" />
-    <Compile Include="Controllers\InternationalizationAttribute .cs" />
-    <Compile Include="Controllers\LangQueryAppenderModule.cs" />
-    <Compile Include="Controllers\LocalizationHelper.cs" />
+    <Compile Include="ControllersHelpers\InternationalizationAttribute .cs" />
+    <Compile Include="ControllersHelpers\LangQueryAppenderModule.cs" />
+    <Compile Include="ControllersHelpers\LocalizationHelper.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

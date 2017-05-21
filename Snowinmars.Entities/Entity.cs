@@ -2,15 +2,15 @@
 
 namespace Snowinmars.Entities
 {
-	public abstract class Entity
-	{
-		protected Entity()
-		{
-			this.Id = Guid.NewGuid();
-		}
+    public abstract class Entity
+    {
+        protected Entity()
+        {
+            this.Id = Guid.NewGuid();
+        }
 
-		public Guid Id { get; set; }
+        public Guid Id { get; set; }
 
-	    public bool IsSynchronized { get; set; }
-	}
+        public bool IsSynchronized { get; set; }
+    }
 }

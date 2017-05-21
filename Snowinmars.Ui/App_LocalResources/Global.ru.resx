@@ -243,6 +243,9 @@
   <data name="Model_InformAboutWarnings" xml:space="preserve">
     <value>Информировать о проблемах?</value>
   </data>
+  <data name="Model_IsSynchronized" xml:space="preserve">
+    <value>Синхронизирован</value>
+  </data>
   <data name="UserDetails_IsWrongFormat" xml:space="preserve">
     <value>в неверном формате</value>
   </data>
@@ -268,6 +271,9 @@
   </data>
   <data name="UserModel_Email" xml:space="preserve">
     <value>Email</value>
+  </data>
+  <data name="UserModel_Language" xml:space="preserve">
+    <value>Язык</value>
   </data>
   <data name="UserModel_Password" xml:space="preserve">
     <value>Пароль</value>

@@ -2,46 +2,47 @@
 
 namespace Snowinmars.Entities
 {
-	public class Warning : Entity
-	{
-		public Warning(Guid entityId)
-		{
-			this.EntityId = entityId;
-		}
+    public class Warning : Entity
+    {
+        public Warning(Guid entityId)
+        {
+            this.EntityId = entityId;
+        }
 
-		public Guid EntityId { get; set; }
-		public string Message { get; set; }
+        public Guid EntityId { get; set; }
 
-		public override bool Equals(object obj)
-		{
-			Warning w = obj as Warning;
+        public string Message { get; set; }
 
-			if (w == null)
-			{
-				return false;
-			}
+        public override bool Equals(object obj)
+        {
+            Warning w = obj as Warning;
 
-			return this.Equals(w);
-		}
+            if (w == null)
+            {
+                return false;
+            }
 
-		public override int GetHashCode()
-		{
-			unchecked
-			{
-				return (this.EntityId.GetHashCode() * 397) ^
-					(this.Message?.GetHashCode() ?? 0);
-			}
-		}
+            return this.Equals(w);
+        }
 
-		public override string ToString()
-		{
-			return this.Message;
-		}
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return (this.EntityId.GetHashCode() * 397) ^
+                    (this.Message?.GetHashCode() ?? 0);
+            }
+        }
 
-		protected bool Equals(Warning other)
-		{
-			return this.EntityId.Equals(other.EntityId) &&
-				string.Equals(this.Message, other.Message);
-		}
-	}
+        public override string ToString()
+        {
+            return this.Message;
+        }
+
+        protected bool Equals(Warning other)
+        {
+            return this.EntityId.Equals(other.EntityId) &&
+                string.Equals(this.Message, other.Message);
+        }
+    }
 }

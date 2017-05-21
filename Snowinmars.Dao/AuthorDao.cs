@@ -25,26 +25,26 @@ namespace Snowinmars.Dao
 				var command = new SqlCommand(LocalConst.Author.InsertCommand, sqlConnection);
 
 				var id = LocalCommon.ConvertToDbValue(item.Id);
-				var givenName = LocalCommon.ConvertToDbValue(item.GivenName);
-				var fullMiddleName = LocalCommon.ConvertToDbValue(item.FullMiddleName);
 				var shortcut = LocalCommon.ConvertToDbValue(item.Shortcut);
+				var givenName = LocalCommon.ConvertToDbValue(item.GivenName);
 				var familyName = LocalCommon.ConvertToDbValue(item.FamilyName);
-				var pseudonymGivenName = LocalCommon.ConvertToDbValue(item.Pseudonym.GivenName);
-				var pseudonymFullMiddleName = LocalCommon.ConvertToDbValue(item.Pseudonym.FullMiddleName);
-				var pseudonymFamilyName = LocalCommon.ConvertToDbValue(item.Pseudonym.FamilyName);
-				var mustInformAboutWarnings = LocalCommon.ConvertToDbValue(item.MustInformAboutWarnings);
+				var fullMiddleName = LocalCommon.ConvertToDbValue(item.FullMiddleName);
 				var isSynchronized = LocalCommon.ConvertToDbValue(false);
+				var pseudonymGivenName = LocalCommon.ConvertToDbValue(item.Pseudonym.GivenName);
+				var pseudonymFamilyName = LocalCommon.ConvertToDbValue(item.Pseudonym.FamilyName);
+				var pseudonymFullMiddleName = LocalCommon.ConvertToDbValue(item.Pseudonym.FullMiddleName);
+				var mustInformAboutWarnings = LocalCommon.ConvertToDbValue(item.MustInformAboutWarnings);
 
 				command.Parameters.AddWithValue(LocalConst.Author.Parameter.Id, id);
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.GivenName, givenName);
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.FullMiddleName, fullMiddleName);
 				command.Parameters.AddWithValue(LocalConst.Author.Parameter.Shortcut, shortcut);
+				command.Parameters.AddWithValue(LocalConst.Author.Parameter.GivenName, givenName);
 				command.Parameters.AddWithValue(LocalConst.Author.Parameter.FamilyName, familyName);
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.PseudonymGivenName, pseudonymGivenName);
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.PseudonymFullMiddleName, pseudonymFullMiddleName);
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.PseudonymFamilyName, pseudonymFamilyName);
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.MustInformAboutWarnings, mustInformAboutWarnings);
 				command.Parameters.AddWithValue(LocalConst.Author.Parameter.IsSynchronized, isSynchronized);
+				command.Parameters.AddWithValue(LocalConst.Author.Parameter.FullMiddleName, fullMiddleName);
+				command.Parameters.AddWithValue(LocalConst.Author.Parameter.PseudonymGivenName, pseudonymGivenName);
+				command.Parameters.AddWithValue(LocalConst.Author.Parameter.PseudonymFamilyName, pseudonymFamilyName);
+				command.Parameters.AddWithValue(LocalConst.Author.Parameter.PseudonymFullMiddleName, pseudonymFullMiddleName);
+				command.Parameters.AddWithValue(LocalConst.Author.Parameter.MustInformAboutWarnings, mustInformAboutWarnings);
 
 				sqlConnection.Open();
 				command.ExecuteNonQuery();
@@ -113,26 +113,26 @@ namespace Snowinmars.Dao
 				var command = new SqlCommand(LocalConst.Author.UpdateCommand, sqlConnection);
 
 				var id = LocalCommon.ConvertToDbValue(item.Id);
-				var givenName = LocalCommon.ConvertToDbValue(item.GivenName);
-				var fullMiddleName = LocalCommon.ConvertToDbValue(item.FullMiddleName);
 				var shortcut = LocalCommon.ConvertToDbValue(item.Shortcut);
+				var givenName = LocalCommon.ConvertToDbValue(item.GivenName);
 				var familyName = LocalCommon.ConvertToDbValue(item.FamilyName);
-				var pseudonymGivenName = LocalCommon.ConvertToDbValue(item.Pseudonym?.GivenName);
-				var pseudonymFullMiddleName = LocalCommon.ConvertToDbValue(item.Pseudonym?.FullMiddleName);
-				var pseudonymFamilyName = LocalCommon.ConvertToDbValue(item.Pseudonym?.FamilyName);
-				var mustInformAboutWarnings = LocalCommon.ConvertToDbValue(item.MustInformAboutWarnings);
+				var fullMiddleName = LocalCommon.ConvertToDbValue(item.FullMiddleName);
                 var isSynchronized = LocalCommon.ConvertToDbValue(false);
+				var pseudonymGivenName = LocalCommon.ConvertToDbValue(item.Pseudonym?.GivenName);
+				var pseudonymFamilyName = LocalCommon.ConvertToDbValue(item.Pseudonym?.FamilyName);
+				var pseudonymFullMiddleName = LocalCommon.ConvertToDbValue(item.Pseudonym?.FullMiddleName);
+				var mustInformAboutWarnings = LocalCommon.ConvertToDbValue(item.MustInformAboutWarnings);
 
                 command.Parameters.AddWithValue(LocalConst.Author.Parameter.Id, id);
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.GivenName, givenName);
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.FullMiddleName, fullMiddleName);
 				command.Parameters.AddWithValue(LocalConst.Author.Parameter.Shortcut, shortcut);
+				command.Parameters.AddWithValue(LocalConst.Author.Parameter.GivenName, givenName);
 				command.Parameters.AddWithValue(LocalConst.Author.Parameter.FamilyName, familyName);
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.PseudonymGivenName, pseudonymGivenName);
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.PseudonymFullMiddleName, pseudonymFullMiddleName);
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.PseudonymFamilyName, pseudonymFamilyName);
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.MustInformAboutWarnings, mustInformAboutWarnings);
                 command.Parameters.AddWithValue(LocalConst.Author.Parameter.IsSynchronized, isSynchronized);
+				command.Parameters.AddWithValue(LocalConst.Author.Parameter.FullMiddleName, fullMiddleName);
+				command.Parameters.AddWithValue(LocalConst.Author.Parameter.PseudonymGivenName, pseudonymGivenName);
+				command.Parameters.AddWithValue(LocalConst.Author.Parameter.PseudonymFamilyName, pseudonymFamilyName);
+				command.Parameters.AddWithValue(LocalConst.Author.Parameter.PseudonymFullMiddleName, pseudonymFullMiddleName);
+				command.Parameters.AddWithValue(LocalConst.Author.Parameter.MustInformAboutWarnings, mustInformAboutWarnings);
 
                 sqlConnection.Open();
 				command.ExecuteNonQuery();

@@ -8,118 +8,117 @@ using System.Web.Security;
 
 namespace Snowinmars.Ui.Provider
 {
-	public class SnowinmarsRoleProvider : RoleProvider
-	{
-		private readonly string[] allRoles = Enum.GetNames(typeof(UserRoles));
-		private readonly IUserLogic userLogic;
+    public class SnowinmarsRoleProvider : RoleProvider
+    {
+        private readonly string[] allRoles = Enum.GetNames(typeof(UserRoles));
+        private readonly IUserLogic userLogic;
 
-		public SnowinmarsRoleProvider(IUserLogic userLogic)
-		{
-			this.userLogic = userLogic;
-		}
+        public SnowinmarsRoleProvider(IUserLogic userLogic)
+        {
+            this.userLogic = userLogic;
+        }
 
-	    public SnowinmarsRoleProvider() : this(DependencyResolver.Current.GetService<IUserLogic>())
-	    {
-	    }
+        public SnowinmarsRoleProvider() : this(DependencyResolver.Current.GetService<IUserLogic>())
+        {
+        }
 
-		public override string ApplicationName { get; set; } = "SnowinmarsApp";
+        public override string ApplicationName { get; set; } = "SnowinmarsApp";
 
-		public override void AddUsersToRoles(string[] usernames, string[] roleNames)
-		{
-			List<UserRoles> roles = new List<UserRoles>();
+        public override void AddUsersToRoles(string[] usernames, string[] roleNames)
+        {
+            IEnumerable<UserRoles> roles = SnowinmarsRoleProvider.GetRoles(roleNames);
 
-			foreach (var roleName in roleNames)
-			{
-				UserRoles role;
-				if (!Enum.TryParse(roleName, out role))
-				{
-					throw new InvalidOperationException($"Can't recognize role {roleName}");
-				}
+            this.userLogic.AddUsersToRoles(usernames, roles);
+        }
 
-				roles.Add(role);
-			}
+        public override string[] GetAllRoles()
+        {
+            return this.allRoles;
+        }
 
-			this.userLogic.AddUsersToRoles(usernames, roles);
-		}
+        public override string[] GetRolesForUser(string username)
+        {
+            UserRoles roles = this.userLogic.GetRolesForUser(username);
 
-		public override string[] GetAllRoles()
-		{
-			return allRoles;
-		}
+            return roles.ToString().Split(new[] { ',', }, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim()).ToArray();
+        }
 
-		public override string[] GetRolesForUser(string username)
-		{
-			UserRoles roles = this.userLogic.GetRolesForUser(username);
+        public override string[] GetUsersInRole(string roleName)
+        {
+            UserRoles role = SnowinmarsRoleProvider.GetRole(roleName);
 
-			return roles.ToString().Split(new [] {',',}, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim()).ToArray();
-		}
+            IEnumerable<string> usernames = this.userLogic.GetUsersInRole(role);
 
-		public override string[] GetUsersInRole(string roleName)
-		{
-			UserRoles role;
-			if (!Enum.TryParse(roleName, out role))
-			{
-				throw new InvalidOperationException($"Can't recognize role {roleName}");
-			}
+            return usernames.ToArray();
+        }
 
-			IEnumerable<string> usernames = this.userLogic.GetUsersInRole(role);
+        public override bool IsUserInRole(string username, string roleName)
+        {
+            UserRoles role;
 
-			return usernames.ToArray();
-		}
+            if (!Enum.TryParse(roleName, out role))
+            {
+                return false;
+            }
 
-		public override bool IsUserInRole(string username, string roleName)
-		{
-			UserRoles role;
+            return this.userLogic.IsUserInRole(username, role);
+        }
 
-			if (!Enum.TryParse(roleName, out role))
-			{
-				return false;
-			}
+        public override void RemoveUsersFromRoles(string[] usernames, string[] roleNames)
+        {
+            IEnumerable<UserRoles> roles = SnowinmarsRoleProvider.GetRoles(roleNames);
 
-			return this.userLogic.IsUserInRole(username, role);
-		}
+            this.userLogic.RemoveUsersFromRoles(usernames, roles);
+        }
 
-		public override void RemoveUsersFromRoles(string[] usernames, string[] roleNames)
-		{
-			List<UserRoles> roles = new List<UserRoles>();
+        public override bool RoleExists(string roleName)
+        {
+            UserRoles userRole;
+            return Enum.TryParse(roleName, out userRole);
+        }
 
-			foreach (var roleName in roleNames)
-			{
-				UserRoles role;
-				if (!Enum.TryParse(roleName, out role))
-				{
-					throw new InvalidOperationException($"Can't recognize role {roleName}");
-				}
+        private static UserRoles GetRole(string roleName)
+        {
+            UserRoles role;
+            if (!Enum.TryParse(roleName, out role))
+            {
+                throw new InvalidOperationException($"Can't recognize role {roleName}");
+            }
 
-				roles.Add(role);
-			}
+            return role;
+        }
 
-			this.userLogic.RemoveUsersFromRoles(usernames, roles);
-		}
+        private static IEnumerable<UserRoles> GetRoles(string[] roleNames)
+        {
+            IList<UserRoles> roles = new List<UserRoles>();
 
-		public override bool RoleExists(string roleName)
-		{
-			UserRoles userRole;
-			return Enum.TryParse(roleName, out userRole);
-		}
+            foreach (var roleName in roleNames)
+            {
+                UserRoles role = SnowinmarsRoleProvider.GetRole(roleName);
 
-		#region NotImplementedException
+                roles.Add(role);
+            }
 
-		public override void CreateRole(string roleName)
-		{
-			throw new NotImplementedException();
-		}
+            return roles;
+        }
 
-		public override bool DeleteRole(string roleName, bool throwOnPopulatedRole)
-		{
-			throw new NotImplementedException();
-		}
+        #region NotImplementedException
 
-		public override string[] FindUsersInRole(string roleName, string usernameToMatch)
-		{
-			throw new NotImplementedException();
-		}
+        public override void CreateRole(string roleName)
+        {
+            throw new NotImplementedException();
+        }
 
-		#endregion NotImplementedException
-	}
+        public override bool DeleteRole(string roleName, bool throwOnPopulatedRole)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string[] FindUsersInRole(string roleName, string usernameToMatch)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion NotImplementedException
+    }
 }
