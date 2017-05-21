@@ -42,4 +42,51 @@
             }
         });
     });
+
+
+
+
+    $("#warningJobForm").submit(function (e) {
+        e.preventDefault();
+
+        var jobName = $(e.currentTarget).find("#WarningJobName").val();
+        var entropy = $(e.currentTarget).find("#WarningJobSmtpEntropy").val();
+
+        $.ajax({
+            url: "/en/user/setSmtpEntropies",
+            type: "POST",
+            dataType: "json",
+            data: {
+                'jobName': jobName,
+                'entropy': entropy,
+            },
+            success: function (data) {
+                var button;
+
+                if (data) {
+                    button = $("#warningJobForm").find(".glyphicon-off");
+
+                    button.removeClass("fail");
+                    button.removeClass("success");
+
+                    button.addClass("success");
+                } else {
+                    button = $("#warningJobForm").find(".glyphicon-off");
+
+                    button.removeClass("fail");
+                    button.removeClass("success");
+
+                    button.addClass("fail");
+                }
+            },
+            error: function () {
+                var button = $("#warningJobForm").find(".glyphicon-off");
+
+                button.removeClass("fail");
+                button.removeClass("success");
+
+                button.addClass("fail");
+            }
+        });
+    });
 })();

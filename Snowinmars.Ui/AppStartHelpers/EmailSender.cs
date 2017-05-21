@@ -16,7 +16,7 @@ namespace Snowinmars.Ui.AppStartHelpers
     {
         private const string DefaultRe = "Snowinmars system message";
         private const string WarningRe = "Snowinmars system warning you";
-        private byte[] entropy = Encoding.Unicode.GetBytes(ConfigurationManager.AppSettings["emailSalt"]);
+        private byte[] entropy;
         private readonly string from;
         private SmtpClient smtpClient;
         private readonly string toAdmin;
