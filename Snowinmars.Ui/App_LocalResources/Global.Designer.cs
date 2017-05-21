@@ -142,6 +142,15 @@ namespace Snowinmars.Ui.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Users.
+        /// </summary>
+        public static string _Users {
+            get {
+                return ResourceManager.GetString("_Users", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You are root.
         /// </summary>
         public static string _YouAreRoot {
@@ -547,6 +556,17 @@ namespace Snowinmars.Ui.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to System can send you notification about your books&apos; unfinished specification and errors in book processing.
+        ///You can&apos;t setup this notification now.
+        ///You can erase this field any time..
+        /// </summary>
+        public static string UserDetails_EmailQuestionTooltip {
+            get {
+                return ResourceManager.GetString("UserDetails_EmailQuestionTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &apos;s wrong format.
         /// </summary>
         public static string UserDetails_IsWrongFormat {
@@ -556,22 +576,20 @@ namespace Snowinmars.Ui.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Contact root if you want more languages.
+        /// </summary>
+        public static string UserDetails_LanguageQuestionTooltip {
+            get {
+                return ResourceManager.GetString("UserDetails_LanguageQuestionTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Personal page:.
         /// </summary>
         public static string UserDetails_PersonalPage {
             get {
                 return ResourceManager.GetString("UserDetails_PersonalPage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to System can send you notification about your books&apos; unfinished specification and errors in book processing.
-        ///You can&apos;t setup this notification now.
-        ///You can erase this field any time..
-        /// </summary>
-        public static string UserDetails_QuestionTooltip {
-            get {
-                return ResourceManager.GetString("UserDetails_QuestionTooltip", resourceCulture);
             }
         }
         

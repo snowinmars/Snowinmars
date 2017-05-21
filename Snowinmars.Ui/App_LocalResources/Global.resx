@@ -246,16 +246,19 @@
   <data name="Model_IsSynchronized" xml:space="preserve">
     <value>Is synchronized</value>
   </data>
-  <data name="UserDetails_IsWrongFormat" xml:space="preserve">
-    <value>'s wrong format</value>
-  </data>
-  <data name="UserDetails_PersonalPage" xml:space="preserve">
-    <value>Personal page:</value>
-  </data>
-  <data name="UserDetails_QuestionTooltip" xml:space="preserve">
+  <data name="UserDetails_EmailQuestionTooltip" xml:space="preserve">
     <value>System can send you notification about your books' unfinished specification and errors in book processing.
 You can't setup this notification now.
 You can erase this field any time.</value>
+  </data>
+  <data name="UserDetails_IsWrongFormat" xml:space="preserve">
+    <value>'s wrong format</value>
+  </data>
+  <data name="UserDetails_LanguageQuestionTooltip" xml:space="preserve">
+    <value>Contact root if you want more languages</value>
+  </data>
+  <data name="UserDetails_PersonalPage" xml:space="preserve">
+    <value>Personal page:</value>
   </data>
   <data name="UserDetails_Saved" xml:space="preserve">
     <value>Saved</value>
@@ -331,6 +334,9 @@ You can erase this field any time.</value>
   </data>
   <data name="_Sync" xml:space="preserve">
     <value>Sync</value>
+  </data>
+  <data name="_Users" xml:space="preserve">
+    <value>Users</value>
   </data>
   <data name="_YouAreRoot" xml:space="preserve">
     <value>You are root</value>

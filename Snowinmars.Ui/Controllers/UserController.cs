@@ -2,6 +2,7 @@
 using Snowinmars.Entities;
 using Snowinmars.Ui.Models;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Web;
 using System.Web.Mvc;
@@ -146,9 +147,11 @@ namespace Snowinmars.Ui.Controllers
         [Route("")]
         public ActionResult Index()
         {
-            var users = this.userLogic.Get(u => true);
+            IEnumerable<User> users = this.userLogic.Get(u => true);
 
-            return this.View(users);
+            IEnumerable<UserModel> userModels = ControllerHelper.Map(users);
+
+            return this.View(userModels);
         }
 
         [HttpPost]

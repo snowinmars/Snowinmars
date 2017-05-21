@@ -1,12 +1,12 @@
 ﻿@using Snowinmars.Ui.App_LocalResources
-@model IEnumerable<Snowinmars.Entities.User>
+@model IEnumerable<Snowinmars.Ui.Models.UserModel>
 
 @{
     ViewBag.Title = "Users";
     Layout = "~/Views/Layouts/DefaultLayout.cshtml";
 }
 
-<h2>Users</h2>
+<h2>@Global._Users</h2>
 
 <div class="beware">
     <span>@Global.UserIndex_ActionCantBeDone</span>

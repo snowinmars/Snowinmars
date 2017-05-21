@@ -175,5 +175,10 @@ namespace Snowinmars.Ui.Controllers
                 container = ControllerHelper.Trim(owner);
             }
         }
+
+        public static IEnumerable<UserModel> Map(IEnumerable<User> users)
+        {
+            return users.Select(ControllerHelper.Map).ToList();
+        }
     }
 }

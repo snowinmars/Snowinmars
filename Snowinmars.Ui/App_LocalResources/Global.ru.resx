@@ -246,16 +246,19 @@
   <data name="Model_IsSynchronized" xml:space="preserve">
     <value>Синхронизирован</value>
   </data>
-  <data name="UserDetails_IsWrongFormat" xml:space="preserve">
-    <value>в неверном формате</value>
-  </data>
-  <data name="UserDetails_PersonalPage" xml:space="preserve">
-    <value>Личный кабинет</value>
-  </data>
-  <data name="UserDetails_QuestionTooltip" xml:space="preserve">
+  <data name="UserDetails_EmailQuestionTooltip" xml:space="preserve">
     <value>Система может информировать о недооформленных книгах и об ошибках в работе системы.
 Сейчас их нельзя кастомизировать.
 Можешь очистить это поле в любой момент.</value>
+  </data>
+  <data name="UserDetails_IsWrongFormat" xml:space="preserve">
+    <value>в неверном формате</value>
+  </data>
+  <data name="UserDetails_LanguageQuestionTooltip" xml:space="preserve">
+    <value>Скажи администратору,если хочешь больше языков</value>
+  </data>
+  <data name="UserDetails_PersonalPage" xml:space="preserve">
+    <value>Личный кабинет</value>
   </data>
   <data name="UserDetails_Saved" xml:space="preserve">
     <value>сохранено</value>
@@ -300,7 +303,7 @@
     <value>Уважай личное пространство других</value>
   </data>
   <data name="UserRootPage_RootMessagePart4" xml:space="preserve">
-    <value>Подумай перед вводом команды</value>
+    <value>Думай перед вводом команды</value>
   </data>
   <data name="UserRootPage_RootMessagePart5" xml:space="preserve">
     <value>С большой силой приходит большая ответственность</value>
@@ -331,6 +334,9 @@
   </data>
   <data name="_Sync" xml:space="preserve">
     <value>Синхронизируется</value>
+  </data>
+  <data name="_Users" xml:space="preserve">
+    <value>Пользователи</value>
   </data>
   <data name="_YouAreRoot" xml:space="preserve">
     <value>Ты - рут</value>
