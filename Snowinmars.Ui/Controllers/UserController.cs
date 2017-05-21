@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using Snowinmars.Ui.AppStartHelpers;
 
 namespace Snowinmars.Ui.Controllers
 {
@@ -19,6 +20,9 @@ namespace Snowinmars.Ui.Controllers
         public UserController(IUserLogic userLogic)
         {
             this.userLogic = userLogic;
+
+            shortcutJobName = nameof(ShortcutJob).ToLowerInvariant();
+            warningJobName = nameof(WarningJob).ToLowerInvariant();
         }
 
         [HttpPost]
@@ -166,7 +170,44 @@ namespace Snowinmars.Ui.Controllers
         [Route("rootPage")]
         public ActionResult RootPage()
         {
-            return this.View();
+            var isShortcutJobSmtpReady = QuartzCron.ShortcutJob?.IsSmtpReady ?? false;
+            var isWarningJobSmtpReady = QuartzCron.WarningJob?.IsSmtpReady ?? false;
+
+            GetSystemSettings systemSettings = new GetSystemSettings
+            {
+                IsShortcutJobSmtpServerReady = isShortcutJobSmtpReady,
+                IsWarningJobSmtpServerReady = isWarningJobSmtpReady,
+            };
+
+            return this.View(systemSettings);
+        }
+
+        private string shortcutJobName;
+        private string warningJobName;
+
+        [HttpPost]
+        [Route("setSmtpEntropies")]
+        public JsonResult SetSmtpEntropies(string jobName, string entropy)
+        {
+            jobName = jobName.ToLowerInvariant();
+
+            if (jobName == shortcutJobName)
+            {
+                return ControllerHelper.GetSuccessJsonResult(Login(QuartzCron.ShortcutJob, entropy));
+            }
+
+            if (jobName == warningJobName)
+            {
+                return ControllerHelper.GetSuccessJsonResult(Login(QuartzCron.WarningJob, entropy));
+            }
+
+            return ControllerHelper.GetFailJsonResult();
+        }
+
+        private bool Login<T>(Cron<T> cronService, string entropy)
+        {
+            cronService.TryLogin(entropy);
+            return cronService.IsSmtpReady;
         }
 
         [HttpPost]

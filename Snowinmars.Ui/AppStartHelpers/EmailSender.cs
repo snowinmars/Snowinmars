@@ -16,18 +16,25 @@ namespace Snowinmars.Ui.AppStartHelpers
     {
         private const string DefaultRe = "Snowinmars system message";
         private const string WarningRe = "Snowinmars system warning you";
-        private static readonly byte[] Entropy = Encoding.Unicode.GetBytes(ConfigurationManager.AppSettings["emailSalt"]);
+        private byte[] entropy = Encoding.Unicode.GetBytes(ConfigurationManager.AppSettings["emailSalt"]);
         private readonly string from;
-        private readonly SmtpClient smtpClient;
+        private SmtpClient smtpClient;
         private readonly string toAdmin;
+
+        public bool IsReady => this.entropy != null && this.smtpClient?.Credentials != null;
 
         public EmailSender()
         {
             this.toAdmin = ConfigurationManager.AppSettings["emailUsername"];
             this.from = ConfigurationManager.AppSettings["emailUsername"];
+        }
+
+        public void TryLogin(string entropy)
+        {
+            this.entropy = Encoding.Unicode.GetBytes(entropy);
 
             var username = ConfigurationManager.AppSettings["emailUsername"];
-            var password = EmailSender.DecryptString(ConfigurationManager.AppSettings["emailPassword"]);
+            var password = EmailSender.DecryptString(ConfigurationManager.AppSettings["emailPassword"], this.entropy);
 
             this.smtpClient = new SmtpClient
             {
@@ -39,14 +46,24 @@ namespace Snowinmars.Ui.AppStartHelpers
                 UseDefaultCredentials = false,
                 Credentials = new NetworkCredential(username, password)
             };
+
+            try
+            {
+                this.Send("Smtp server works", this.toAdmin, "Snowinmars system notification");
+            }
+            catch (SmtpException)
+            {
+                this.smtpClient = null;
+                this.entropy = null;
+            }
         }
 
-        public static SecureString DecryptString(string encryptedData)
+        public static SecureString DecryptString(string encryptedData, byte[] entropy)
         {
             try
             {
                 byte[] decryptedData = ProtectedData.Unprotect(Convert.FromBase64String(encryptedData),
-                                                                EmailSender.Entropy,
+                                                                entropy,
                                                                 DataProtectionScope.CurrentUser);
                 return EmailSender.ToSecureString(Encoding.Unicode.GetString(decryptedData));
             }
@@ -56,10 +73,10 @@ namespace Snowinmars.Ui.AppStartHelpers
             }
         }
 
-        public static string EncryptString(SecureString input)
+        public static string EncryptString(SecureString input, byte[] entropy)
         {
             byte[] encryptedData = ProtectedData.Protect(Encoding.Unicode.GetBytes(EmailSender.ToInsecureString(input)),
-                                                            EmailSender.Entropy,
+                                                            entropy,
                                                             DataProtectionScope.CurrentUser);
             return Convert.ToBase64String(encryptedData);
         }

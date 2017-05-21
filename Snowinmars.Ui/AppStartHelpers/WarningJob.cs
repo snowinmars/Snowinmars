@@ -4,27 +4,32 @@ using System.Linq;
 
 namespace Snowinmars.Ui.AppStartHelpers
 {
-    public class WarningJob : Cron, IJob
+    public class WarningJob : Cron<Warning>
     {
-        public void Execute(IJobExecutionContext context)
+        public override void Execute(IJobExecutionContext context)
         {
-            if (!Cron.CanDoWork())
+            if (QuartzCron.WarningJob == null)
+            {
+                QuartzCron.WarningJob = this;
+            }
+
+            if (!CanDoWork())
             {
                 return;
             }
 
-            WarningJob.CheckBooks();
-            WarningJob.CheckAuthors();
-            WarningJob.CheckBookAuthorConnection();
+            CheckBooks();
+            CheckAuthors();
+            CheckBookAuthorConnection();
 
-            WarningJob.SendAllEmails();
+            SendAllEmails();
         }
 
-        private static void Check(Author author)
+        private void Check(Author author)
         {
             if (string.IsNullOrWhiteSpace(author.FamilyName))
             {
-                Cron.Warnings.Add(new Warning(author.Id)
+                Queue.Add(new Warning(author.Id)
                 {
                     Message = $"Author '{author.Shortcut}' has empty family name",
                 });
@@ -32,18 +37,18 @@ namespace Snowinmars.Ui.AppStartHelpers
 
             if (string.IsNullOrWhiteSpace(author.GivenName))
             {
-                Cron.Warnings.Add(new Warning(author.Id)
+                Queue.Add(new Warning(author.Id)
                 {
                     Message = $"Author '{author.Shortcut}' has empty given name",
                 });
             }
         }
 
-        private static void Check(Book book)
+        private void Check(Book book)
         {
             if (book.PageCount <= 0)
             {
-                Cron.Warnings.Add(new Warning(book.Id)
+                Queue.Add(new Warning(book.Id)
                 {
                     Message = $"Book '{book.Title}'/{book.Year} y. has less or equals to zero pages",
                 });
@@ -51,7 +56,7 @@ namespace Snowinmars.Ui.AppStartHelpers
 
             if (string.IsNullOrWhiteSpace(book.Title))
             {
-                Cron.Warnings.Add(new Warning(book.Id)
+                Queue.Add(new Warning(book.Id)
                 {
                     Message = $"Book '{book.Title}'/{book.Year} y. has empty title",
                 });
@@ -59,7 +64,7 @@ namespace Snowinmars.Ui.AppStartHelpers
 
             if (book.Year == 0)
             {
-                Cron.Warnings.Add(new Warning(book.Id)
+                Queue.Add(new Warning(book.Id)
                 {
                     Message = $"Book '{book.Title}'/{book.Year} y. was published in 0 year. Is it ok or you just forgot to add the year?"
                 });
@@ -67,91 +72,91 @@ namespace Snowinmars.Ui.AppStartHelpers
 
             if (!book.AuthorIds.Any())
             {
-                Cron.Warnings.Add(new Warning(book.Id)
+                Queue.Add(new Warning(book.Id)
                 {
                     Message = $"Book '{book.Title}'/{book.Year} y. has no authors",
                 });
             }
         }
 
-        private static void CheckAuthors()
+        private void CheckAuthors()
         {
-            var authors = Cron.AuthorDao.Get(a => true);
+            var authors = AuthorDao.Get(a => true);
 
             foreach (var author in authors)
             {
-                WarningJob.Check(author);
-                WarningJob.Trim(author);
+                Check(author);
+                Trim(author);
             }
         }
 
-        private static void CheckBookAuthorConnection()
+        private void CheckBookAuthorConnection()
         {
-            var connections = Cron.BookDao.GetAllBookAuthorConnections();
+            var connections = BookDao.GetAllBookAuthorConnections();
 
             foreach (var connection in connections)
             {
                 var bookId = connection.Key;
                 var authorId = connection.Value;
 
-                WarningJob.CheckIsBookExists(bookId);
-                WarningJob.CheckIsAuthorExists(authorId);
+                CheckIsBookExists(bookId);
+                CheckIsAuthorExists(authorId);
             }
         }
 
-        private static void CheckBooks()
+        private void CheckBooks()
         {
-            var books = Cron.BookDao.Get(b => true);
+            var books = BookDao.Get(b => true);
 
             foreach (var book in books)
             {
-                WarningJob.Check(book);
-                WarningJob.Trim(book);
+                Check(book);
+                Trim(book);
             }
         }
 
-        private static void CheckIsAuthorExists(System.Guid authorId)
+        private  void CheckIsAuthorExists(System.Guid authorId)
         {
             try
             {
-                var checker = Cron.AuthorDao.Get(authorId);
+                var checker = AuthorDao.Get(authorId);
             }
             catch
             {
-                Cron.Warnings.Add(new Warning(authorId)
+                Queue.Add(new Warning(authorId)
                 {
                     Message = "Can't get author by id",
                 });
             }
         }
 
-        private static void CheckIsBookExists(System.Guid bookId)
+        private void CheckIsBookExists(System.Guid bookId)
         {
             try
             {
-                var checker = Cron.BookDao.Get(bookId);
+                var checker = BookDao.Get(bookId);
             }
             catch
             {
-                Cron.Warnings.Add(new Warning(bookId)
+                Queue.Add(new Warning(bookId)
                 {
                     Message = "Can't get book by id",
                 });
             }
         }
 
-        private static void SendAllEmails()
+        private void SendAllEmails()
         {
-            var copy = Cron.Warnings.ToList();
+            var copy = Queue.ToList();
 
             foreach (var warning in copy)
             {
-                Cron.EmailSender.Send(warning);
-                Cron.Warnings.Remove(warning);
+                EmailSender.Send(warning);
+                Queue.Remove(warning);
             }
         }
 
-        private static void Trim(Author author)
+        private void Trim(Author author)
         {
             if (author.GivenName.NeedToBeTrimed() ||
                 author.FullMiddleName.NeedToBeTrimed() ||
@@ -167,17 +172,17 @@ namespace Snowinmars.Ui.AppStartHelpers
                 author.Pseudonym.FamilyName = author.Pseudonym?.FamilyName.Trim();
                 author.Pseudonym.FullMiddleName = author.Pseudonym?.FullMiddleName.Trim();
 
-                Cron.AuthorDao.Update(author);
+                AuthorDao.Update(author);
             }
         }
 
-        private static void Trim(Book book)
+        private void Trim(Book book)
         {
             if (book.Title.NeedToBeTrimed())
             {
                 book.Title = book.Title.Trim();
 
-                Cron.BookDao.Update(book);
+                BookDao.Update(book);
             }
         }
     }

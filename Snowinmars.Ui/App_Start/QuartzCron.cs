@@ -7,9 +7,12 @@ using System;
 
 namespace Snowinmars.Ui
 {
-    public class QuartzCron : Cron, IDisposable
+    public class QuartzCron : IDisposable
     {
         private static IScheduler scheduler;
+
+        internal static WarningJob WarningJob { get; set; }
+        internal static ShortcutJob ShortcutJob { get; set; }
 
         public void Dispose()
         {
@@ -31,7 +34,7 @@ namespace Snowinmars.Ui
                 IJobDetail warningJob = JobBuilder.Create<WarningJob>()
                     .WithIdentity("warningJob", "basicGroup")
                     .Build();
-
+                
                 // Trigger the job to run now, and then repeat every 60 seconds
                 ITrigger shortcutTrigger = TriggerBuilder.Create()
                     .WithIdentity("shortcutTrigger", "basicGroup")

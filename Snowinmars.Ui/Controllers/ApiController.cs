@@ -27,11 +27,11 @@ namespace Snowinmars.Ui.Controllers
             {
                 var author = this.authorLogic.Get(id);
 
-                return this.GetSuccessJsonResult(author);
+                return ControllerHelper.GetSuccessJsonResult(author);
             }
             catch
             {
-                return ApiController.GetFailJsonResult();
+                return ControllerHelper.GetFailJsonResult();
             }
         }
 
@@ -43,11 +43,11 @@ namespace Snowinmars.Ui.Controllers
             {
                 var book = this.bookLogic.Get(id);
 
-                return this.GetSuccessJsonResult(book);
+                return ControllerHelper.GetSuccessJsonResult(book);
             }
             catch
             {
-                return ApiController.GetFailJsonResult();
+                return ControllerHelper.GetFailJsonResult();
             }
         }
 
@@ -62,11 +62,11 @@ namespace Snowinmars.Ui.Controllers
                 user.PasswordHash = ""; // TODO this is hole. redo
                 user.Salt = "";
 
-                return this.GetSuccessJsonResult(user);
+                return ControllerHelper.GetSuccessJsonResult(user);
             }
             catch
             {
-                return ApiController.GetFailJsonResult();
+                return ControllerHelper.GetFailJsonResult();
             }
         }
 
@@ -81,22 +81,14 @@ namespace Snowinmars.Ui.Controllers
                 user.PasswordHash = ""; // TODO this is hole. redo
                 user.Salt = "";
 
-                return this.GetSuccessJsonResult(user);
+                return ControllerHelper.GetSuccessJsonResult(user);
             }
             catch
             {
-                return ApiController.GetFailJsonResult();
+                return ControllerHelper.GetFailJsonResult();
             }
         }
 
-        private static JsonResult GetFailJsonResult()
-        {
-            return new JsonResult { Data = new { success = false } };
-        }
-
-        private JsonResult GetSuccessJsonResult(object data)
-        {
-            return this.Json(data, JsonRequestBehavior.AllowGet);
-        }
+       
     }
 }

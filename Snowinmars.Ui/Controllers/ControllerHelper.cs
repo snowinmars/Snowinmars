@@ -4,11 +4,22 @@ using Snowinmars.Ui.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Mvc;
 
 namespace Snowinmars.Ui.Controllers
 {
     internal static class ControllerHelper
     {
+        internal static JsonResult GetFailJsonResult()
+        {
+            return new JsonResult { Data = new { success = false } };
+        }
+
+        internal static JsonResult GetSuccessJsonResult(object data)
+        {
+            return new JsonResult {Data = data, JsonRequestBehavior = JsonRequestBehavior.AllowGet};
+        }
+
         internal static BookModel Map(Book book)
         {
             return new BookModel

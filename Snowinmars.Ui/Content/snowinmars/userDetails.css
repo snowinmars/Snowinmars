@@ -13,16 +13,6 @@
 	text-align: left;
 }
 
-.emailInputSuccessMessage {
-	color: #a29200;
-}
-
-.emailInputClientFailMessage,
-.emailInputServerFailMessage,
-.serverFailMessage {
-	color: red;
-}
-
 .userDetailsMessages {
     margin-left: 5ex;
 }
@@ -30,7 +20,6 @@
 .serverFailMessage,
 .successMessage {
     display: inline-block;
-    
 }
 
 .serverFailMessage {
@@ -39,8 +28,8 @@
     transition:opacity 0.5s linear;
 }
 
+
 .successMessage {
-    color: lightgreen;
 
     visibility:visible;
     opacity:1;

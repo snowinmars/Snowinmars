@@ -112,3 +112,11 @@ hr {
 .data-tooltip {
     cursor: help;
 }
+
+.fail {
+	color: red;
+}
+
+.success {
+    color: lightgreen;
+}

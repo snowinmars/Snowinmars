@@ -1,4 +1,5 @@
-﻿using Snowinmars.Dao.Interfaces;
+﻿using Quartz;
+using Snowinmars.Dao.Interfaces;
 using Snowinmars.Entities;
 using System;
 using System.Collections.Generic;
@@ -6,33 +7,39 @@ using System.Web.Mvc;
 
 namespace Snowinmars.Ui.AppStartHelpers
 {
-    public abstract class Cron
+    public abstract class Cron<T> : IJob
     {
-        protected static readonly IList<Guid> BookQueue;
+        protected readonly IList<T> Queue;
 
-        protected static readonly IList<Warning> Warnings;
+        protected  IAuthorDao AuthorDao;
 
-        protected static IAuthorDao AuthorDao;
+        protected  IBookDao BookDao;
 
-        protected static IBookDao BookDao;
+        protected  EmailSender EmailSender;
 
-        protected static EmailSender EmailSender;
+        public bool IsSmtpReady => EmailSender.IsReady;
 
-        static Cron()
+        public void TryLogin(string entropy) => EmailSender.TryLogin(entropy);
+
+        protected Cron()
         {
-            Cron.ResolveDependencies();
+            ResolveDependencies();
 
-            Cron.BookQueue = new List<Guid>();
-            Cron.Warnings = new List<Warning>();
+            this.Queue = new List<T>();
         }
 
-        protected static bool CanDoWork()
+        protected bool CanDoWork()
         {
-            if (Cron.BookDao == null || Cron.AuthorDao == null)
+            if (!IsSmtpReady)
             {
-                Cron.ResolveDependencies();
+                return false;
+            }
 
-                if (Cron.BookDao == null || Cron.AuthorDao == null)
+            if (BookDao == null || AuthorDao == null)
+            {
+                ResolveDependencies();
+
+                if (BookDao == null || AuthorDao == null)
                 {
                     return false;
                 }
@@ -41,11 +48,13 @@ namespace Snowinmars.Ui.AppStartHelpers
             return true;
         }
 
-        protected static void ResolveDependencies()
+        protected void ResolveDependencies()
         {
-            Cron.BookDao = DependencyResolver.Current.GetService<IBookDao>();
-            Cron.AuthorDao = DependencyResolver.Current.GetService<IAuthorDao>();
-            Cron.EmailSender = new EmailSender();
+            BookDao = DependencyResolver.Current.GetService<IBookDao>();
+            AuthorDao = DependencyResolver.Current.GetService<IAuthorDao>();
+            EmailSender = new EmailSender();
         }
+
+        public abstract void Execute(IJobExecutionContext context);
     }
 }

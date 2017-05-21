@@ -5,40 +5,45 @@ using System.Linq;
 
 namespace Snowinmars.Ui.AppStartHelpers
 {
-    public class ShortcutJob : Cron, IJob
+    public class ShortcutJob : Cron<Guid>
     {
-        public void Execute(IJobExecutionContext context)
+        public override void Execute(IJobExecutionContext context)
         {
-            if (!Cron.CanDoWork())
+            if (QuartzCron.ShortcutJob == null)
+            {
+                QuartzCron.ShortcutJob = this;
+            }
+
+            if (!CanDoWork())
             {
                 return;
             }
 
-            var unindexedBookIds = Cron.BookDao.SelectBooksUnindexedByShortcutsCommand().ToList();
+            var unindexedBookIds = BookDao.SelectBooksUnindexedByShortcutsCommand().ToList();
 
-            Cron.BookQueue.AddRange(unindexedBookIds);
+            Queue.AddRange(unindexedBookIds);
 
             // I need copy due to I want to remove books from queue during enumeration on this queue
-            var copy = Cron.BookQueue.ToList();
+            var copy = Queue.ToList();
 
             foreach (var bookId in copy)
             {
-                ShortcutJob.HandleBook(bookId);
+                HandleBook(bookId);
             }
         }
 
-        private static void HandleBook(Guid bookId)
+        private void HandleBook(Guid bookId)
         {
-            var book = Cron.BookDao.Get(bookId);
-            var authors = Cron.BookDao.GetAuthorsForBook(bookId);
+            var book = BookDao.Get(bookId);
+            var authors = BookDao.GetAuthorsForBook(bookId);
 
             book.AuthorShortcuts.Clear();
             book.AuthorShortcuts.AddRange(authors.Select(a => a.Shortcut));
             book.IsSynchronized = true;
 
-            Cron.BookDao.Update(book);
+            BookDao.Update(book);
 
-            Cron.BookQueue.Remove(bookId);
+            Queue.Remove(bookId);
         }
     }
 }
