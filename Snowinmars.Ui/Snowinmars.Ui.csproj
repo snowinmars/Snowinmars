@@ -450,6 +450,7 @@
       <DependentUpon>Global.ru.resx</DependentUpon>
     </Compile>
     <Compile Include="AppStartHelpers\Cron.cs" />
+    <Compile Include="App_Start\EmailService.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\QuartzCron.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
