@@ -8,7 +8,7 @@ namespace Snowinmars.Bll.Interfaces
     {
         void AddUsersToRoles(IEnumerable<string> usernames, IEnumerable<UserRoles> roles);
 
-        bool Authenticate(User candidate, string userModelPassword);
+        bool Authenticate(string username, string userModelPassword);
 
         string CalculateHash(string password, string salt);
 
@@ -27,6 +27,6 @@ namespace Snowinmars.Bll.Interfaces
         void Remove(string username);
 
         void RemoveUsersFromRoles(IEnumerable<string> usernames, IEnumerable<UserRoles> roles);
-        void SetupCryptography(User user);
+        void WriteCryptographicData(string basePassword, User toUser);
     }
 }

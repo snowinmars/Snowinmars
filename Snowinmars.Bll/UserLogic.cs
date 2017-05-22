@@ -26,16 +26,16 @@ namespace Snowinmars.Bll
             this.userDao.AddUsersToRoles(usernames, roles);
         }
 
-        public bool Authenticate(User candidate, string userModelPassword)
+        public bool Authenticate(string username, string userModelPassword)
         {
-            Validation.Check(candidate);
+            Validation.CheckUsername(username);
 
-            var existingUser = this.Get(candidate.Username);
+            var existingUser = this.Get(username);
 
             return BCryptHelper.HashPassword(userModelPassword, existingUser.Salt) == existingUser.PasswordHash;
         }
 
-        public string CalculateHash(string password, string salt)
+        public string CalculateHash(string password, string salt = null)
         {
             if (string.IsNullOrWhiteSpace(salt))
             {
@@ -50,11 +50,6 @@ namespace Snowinmars.Bll
 
         public void Create(User item)
         {
-            if (string.IsNullOrWhiteSpace(item.Salt))
-            {
-                item.Salt = BCryptHelper.GenerateSalt();
-            }
-
             Validation.Check(item);
 
             this.userDao.Create(item);
@@ -125,19 +120,19 @@ namespace Snowinmars.Bll
             this.userDao.RemoveUsersFromRoles(usernames, roles);
         }
 
-        public void SetupCryptography(User user)
-        {
-            if (string.IsNullOrWhiteSpace(user.Salt))
-            {
-                user.Salt = BCryptHelper.GenerateSalt();
-            }
-        }
+       
 
         public void Update(User item)
         {
             Validation.Check(item);
 
             this.userDao.Update(item);
+        }
+
+        public void WriteCryptographicData(string basePassword, User toUser)
+        {
+            toUser.Salt = BCryptHelper.GenerateSalt();
+            toUser.PasswordHash = this.CalculateHash(basePassword, toUser.Salt);
         }
     }
 }

@@ -97,19 +97,20 @@ namespace Snowinmars.Ui.Controllers
             return author;
         }
 
-        internal static UserModel Map(User user)
+        internal static UpdateUserModel Map(User user)
         {
-            return new UserModel
+            return new UpdateUserModel()
             {
                 Id = user.Id,
                 Username = user.Username,
                 Roles = user.Roles,
                 Email = user.Email,
                 Language = user.Language,
+                IsSynchronized = user.IsSynchronized,
             };
         }
 
-        internal static User Map(UserModel userModel)
+        internal static User Map(CreateUserModel userModel)
         {
             var user = new User(userModel.Username)
             {
@@ -123,6 +124,19 @@ namespace Snowinmars.Ui.Controllers
             return user;
         }
 
+        internal static User Map(UpdateUserModel userModel)
+        {
+            var user = new User("")
+            {
+                Email = ControllerHelper.Trim(userModel.Email),
+                Roles = userModel.Roles,
+                Language = userModel.Language,
+            };
+
+            ControllerHelper.SetId(userModel, user);
+
+            return user;
+        }
         internal static Pseudonym MapPseudonym(AuthorModel authorModel)
         {
             return new Pseudonym
@@ -151,27 +165,11 @@ namespace Snowinmars.Ui.Controllers
             }
         }
 
-        private static void SetId(BookModel bookModel, Book book)
+        private static void SetId(EntityModel model, Entity user)
         {
-            if (bookModel.Id != Guid.Empty)
+            if (model.Id != Guid.Empty)
             {
-                book.Id = bookModel.Id;
-            }
-        }
-
-        private static void SetId(AuthorModel authorModel, Author author)
-        {
-            if (authorModel.Id != Guid.Empty)
-            {
-                author.Id = authorModel.Id;
-            }
-        }
-
-        private static void SetId(UserModel userModel, User user)
-        {
-            if (userModel.Id != Guid.Empty)
-            {
-                user.Id = userModel.Id;
+                user.Id = model.Id;
             }
         }
 
@@ -187,7 +185,7 @@ namespace Snowinmars.Ui.Controllers
             }
         }
 
-        public static IEnumerable<UserModel> Map(IEnumerable<User> users)
+        public static IEnumerable<UpdateUserModel> Map(IEnumerable<User> users)
         {
             return users.Select(ControllerHelper.Map).ToList();
         }

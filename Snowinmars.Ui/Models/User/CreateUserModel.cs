@@ -5,9 +5,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Snowinmars.Ui.Models
 {
-    public class UserModel
+    public class CreateUserModel : EntityModel
     {
-        private static readonly UserModel EmptyUser = new UserModel
+        private static readonly CreateUserModel EmptyUser = new CreateUserModel
         {
             Id = Guid.Empty,
             Email = "",
@@ -23,7 +23,7 @@ namespace Snowinmars.Ui.Models
         [Display(Name = "UserModel_Email", ResourceType = typeof(Global))]
         public string Email { get; set; }
 
-        public static UserModel Empty => UserModel.EmptyUser;
+        public static CreateUserModel Empty => CreateUserModel.EmptyUser;
 
         [Required]
         public Guid Id { get; set; }

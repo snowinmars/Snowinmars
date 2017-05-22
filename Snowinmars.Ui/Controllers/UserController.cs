@@ -28,13 +28,11 @@ namespace Snowinmars.Ui.Controllers
         [HttpPost]
         [Route("authenticate")]
         [AllowAnonymous]
-        public ActionResult Authenticate(UserModel userModel)
+        private ActionResult Authenticate(string username, string password)
         {
-            User candidate = ControllerHelper.Map(userModel);
-
-            if (this.userLogic.Authenticate(candidate, userModel.Password))
+            if (this.userLogic.Authenticate(username, password))
             {
-                FormsAuthentication.SetAuthCookie(candidate.Username, createPersistentCookie: true);
+                FormsAuthentication.SetAuthCookie(username, createPersistentCookie: true);
                 return this.Redirect(this.Url.Action("Index", "Home"));
             }
 
@@ -48,7 +46,7 @@ namespace Snowinmars.Ui.Controllers
         {
             var user = this.userLogic.Get(id);
 
-            user.Roles = UserRoles.Banned;
+            user.Roles = user.Roles == UserRoles.Banned ? UserRoles.User : UserRoles.Banned;
 
             this.userLogic.Update(user);
 
@@ -61,7 +59,9 @@ namespace Snowinmars.Ui.Controllers
         public RedirectResult Ban(string username)
         {
             var user = this.userLogic.Get(username);
-            user.Roles = UserRoles.Banned;
+
+            user.Roles = user.Roles == UserRoles.Banned ? UserRoles.User : UserRoles.Banned;
+
             this.userLogic.Update(user);
 
             return new RedirectResult(this.Url.Action("Index", "User"));
@@ -70,19 +70,16 @@ namespace Snowinmars.Ui.Controllers
         [HttpPost]
         [Route("create")]
         [AllowAnonymous]
-        public RedirectResult Create(UserModel userModel)
+        private RedirectResult Create(CreateUserModel userModel)
         {
-            if (userModel.Roles == UserRoles.Banned)
+            if (userModel.Roles == default(UserRoles))
             {
                 userModel.Roles = UserRoles.User;
             }
 
             User user = ControllerHelper.Map(userModel);
 
-            this.userLogic.SetupCryptography(user);
-
-            user.PasswordHash = this.userLogic.CalculateHash(userModel.Password, user.Salt);
-
+            this.userLogic.WriteCryptographicData(userModel.Password, user);
             this.userLogic.Create(user);
 
             return new RedirectResult(this.Url.Action("Index", "Home"));
@@ -124,7 +121,7 @@ namespace Snowinmars.Ui.Controllers
         {
             var a = CultureInfo.CurrentCulture;
             var user = this.userLogic.Get(this.User.Identity.Name);
-            UserModel userModel = ControllerHelper.Map(user);
+            UpdateUserModel userModel = ControllerHelper.Map(user);
 
             return this.View(userModel);
         }
@@ -132,17 +129,16 @@ namespace Snowinmars.Ui.Controllers
         [HttpPost]
         [Route("enter")]
         [AllowAnonymous]
-        public RedirectResult Enter(UserModel userModel)
+        public RedirectResult Enter(CreateUserModel userModel)
         {
-            if (string.IsNullOrWhiteSpace(userModel.PasswordConfirm))
-            {
-                this.Authenticate(userModel);
-            }
-            else
+            bool isUserAlreadyRegistred = string.IsNullOrWhiteSpace(userModel.PasswordConfirm);
+
+            if (!isUserAlreadyRegistred)
             {
                 this.Create(userModel);
-                this.Authenticate(userModel);
             }
+
+            this.Authenticate(userModel.Username, userModel.Password);
 
             return new RedirectResult(this.Url.Action("Index", "Home"));
         }
@@ -153,7 +149,7 @@ namespace Snowinmars.Ui.Controllers
         {
             IEnumerable<User> users = this.userLogic.Get(u => true);
 
-            IEnumerable<UserModel> userModels = ControllerHelper.Map(users);
+            IEnumerable<UpdateUserModel> userModels = ControllerHelper.Map(users);
 
             return this.View(userModels);
         }
@@ -212,7 +208,7 @@ namespace Snowinmars.Ui.Controllers
 
         [HttpPost]
         [Route("update")]
-        public ActionResult Update(UserModel model)
+        public ActionResult Update(UpdateUserModel model)
         {
             try
             {
