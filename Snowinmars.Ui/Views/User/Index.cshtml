@@ -19,7 +19,17 @@
     <span>@Global.UserIndex_ActionCantBeDone</span>
 </div>
 
-<table class="table table-bordered">
+
+<div class="sk-folding-cube-parent">
+    <div class="sk-folding-cube">
+        <div class="sk-cube1 sk-cube"></div>
+        <div class="sk-cube2 sk-cube"></div>
+        <div class="sk-cube4 sk-cube"></div>
+        <div class="sk-cube3 sk-cube"></div>
+    </div>
+</div>
+
+<table class="table table-bordered hidden">
     <thead>
         <tr>
             <th class="col-xs-4 col-sm-3 noOverflow">
@@ -31,7 +41,7 @@
             <th class="hidden-xs col-sm-3 noOverflow">
                 @Html.DisplayNameFor(model => model.Email)
             </th>
-            <th class="col-xs-4 col-sm-3"></th>
+            <th class="col-xs-4 col-sm-3 no-sort"></th>
         </tr>
     </thead>
 

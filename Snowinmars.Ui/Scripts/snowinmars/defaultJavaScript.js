@@ -26,34 +26,45 @@
         }
     }
 
-    $("#Username").keyup(function (e) {
+    var checkUsernameFunction = function(e) {
         var globalUsernameInputTarget = $(e.target);
 
-        snowinmars_delay(function () {
-            $.ajax({
-                url: "/en/user/isUsernameExist/?username=" + globalUsernameInputTarget.val(),
-                type: "POST",
-                success: function (data) {
-                    if (data) {
-                        $(".oldUserHello").removeClass("hidden");
-                        $(".newUserHello").addClass("hidden");
+        snowinmars_delay(function() {
+                $.ajax({
+                    url: "/en/user/isUsernameExist/?username=" + globalUsernameInputTarget.val(),
+                    type: "POST",
+                    success: function(data) {
+                        if (data) {
+                            $(".oldUserHello").removeClass("hidden");
+                            $(".newUserHello").addClass("hidden");
 
-                        $("#Password").prop("disabled", false);
-                        $("#PasswordConfirm").prop("disabled", true);
-                        $("#PasswordConfirm").closest(".form-group").addClass("hidden");
-                    } else {
-                        $(".newUserHello").removeClass("hidden");
-                        $(".oldUserHello").addClass("hidden");
+                            $("#Password").prop("disabled", false);
+                            $("#PasswordConfirm").prop("disabled", true);
+                            $("#PasswordConfirm").closest(".form-group").addClass("hidden");
+                        } else {
+                            if (!$("#Username").val()) {
+                                $(".oldUserHello").addClass("hidden");
+                                $(".newUserHello").addClass("hidden");
 
-                        $("#Password").prop("disabled", false);
-                        $("#PasswordConfirm").prop("disabled", false);
-                        $("#PasswordConfirm").closest(".form-group").removeClass("hidden");
+                                $("#PasswordConfirm").prop("disabled", true);
+                                $("#PasswordConfirm").closest(".form-group").addClass("hidden");
+                            } else {
+                                $(".newUserHello").removeClass("hidden");
+                                $(".oldUserHello").addClass("hidden");
+
+                                $("#Password").prop("disabled", false);
+                                $("#PasswordConfirm").prop("disabled", false);
+                                $("#PasswordConfirm").closest(".form-group").removeClass("hidden");
+                            }
+                        }
                     }
-                }
-            });
-        },
-			300);
-    });
+                });
+            },
+            300);
+    };
+
+    $("#Username").on("keyup", checkUsernameFunction);
+    $("#Username").on("blur", checkUsernameFunction);
 })();
 
 var snowinmars_delay = (function () {
