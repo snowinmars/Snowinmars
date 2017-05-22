@@ -2,8 +2,11 @@
 using Snowinmars.Entities;
 using Snowinmars.Ui.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Globalization;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -51,6 +54,32 @@ namespace Snowinmars.Ui.Controllers
             this.userLogic.Update(user);
 
             return new RedirectResult(this.Url.Action("Index", "User"));
+        }
+
+        [HttpPost]
+        [Route("promote")]
+        public JsonResult Promote(string username)
+        {
+            var user = this.userLogic.Get(username);
+
+            user.Roles = user.Roles.Promote();
+
+            this.userLogic.Update(user);
+
+            return Json(user.Roles.ToString());
+        }
+
+        [HttpPost]
+        [Route("demote")]
+        public JsonResult Demote(string username)
+        {
+            var user = this.userLogic.Get(username);
+
+            user.Roles = user.Roles.Demote();
+
+            this.userLogic.Update(user);
+
+            return Json(user.Roles.ToString());
         }
 
         [HttpGet]
@@ -119,8 +148,8 @@ namespace Snowinmars.Ui.Controllers
         [AllowAnonymous]
         public ActionResult Details()
         {
-            var a = CultureInfo.CurrentCulture;
             var user = this.userLogic.Get(this.User.Identity.Name);
+
             UpdateUserModel userModel = ControllerHelper.Map(user);
 
             return this.View(userModel);

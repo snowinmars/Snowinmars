@@ -71,10 +71,6 @@ a .btn-danger {
     text-transform: uppercase;
 }
 
-.glyphicon:before {
-	margin-left: -0.4ex;
-}
-
 .detailsBlock {
 	margin-bottom: 10px;
 	padding-bottom: 10px;

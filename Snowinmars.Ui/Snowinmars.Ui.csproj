@@ -318,6 +318,7 @@
     <Content Include="Content\snowinmars\loadingCube.css" />
     <Content Include="Content\snowinmars\rootPage.css" />
     <Content Include="Content\snowinmars\userDetails.css" />
+    <Content Include="Content\snowinmars\userIndex.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

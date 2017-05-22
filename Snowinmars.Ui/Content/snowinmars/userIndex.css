@@ -1,0 +1,10 @@
+﻿.userRoles-flex-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.promoteUser,
+.demoteUser {
+    background-color: #003846;
+    padding: 0.5ex 2ex;
+}

@@ -2,6 +2,7 @@
 using Snowinmars.Entities;
 using Snowinmars.Ui.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -190,4 +191,141 @@ namespace Snowinmars.Ui.Controllers
             return users.Select(ControllerHelper.Map).ToList();
         }
     }
+
+    public static class BinaryConverter
+    {
+        public static BitArray ToBinary(this int numeral)
+        {
+            return new BitArray(new[] { numeral });
+        }
+
+        public static int ToNumeral(this BitArray binary)
+        {
+            if (binary == null)
+                throw new ArgumentNullException("binary");
+            if (binary.Length > 32)
+                throw new ArgumentException("must be at most 32 bits long");
+
+            var result = new int[1];
+            binary.CopyTo(result, 0);
+            return result[0];
+        }
+
+        public static int ToInt32(this bool[] source)
+        {
+            int result = 0;
+            // This assumes the array never contains more than 8 elements!
+            // Loop through the array
+            for (var i = 0; i < 32; i++)
+            {
+                bool b = source[i];
+                // if the element is 'true' set the bit at that position
+
+                if (b)
+                {
+                    result |= 1 << i;
+                }
+            }
+
+            return result;
+        }
+
+
+        public static bool[] ToBoolArray(this int numeral)
+        {
+            return numeral.ToBinary().Cast<bool>().ToArray();
+        }
+
+        public static UserRoles Promote(this UserRoles userRoles)
+        {
+            int maxUserRolesValue = BinaryConverter.GetMaxValue(typeof(UserRoles));
+
+            bool[] array = ((int)userRoles).ToBoolArray();
+
+            int lastIndex = GetEnumLength(array);
+
+            if (lastIndex == 0)
+            {
+                // you can't unban with promotion
+                return UserRoles.Banned;
+            }
+
+            array[lastIndex] = true; // promote
+
+            int int32 = array.ToInt32();
+
+            if (int32 > maxUserRolesValue)
+            {
+                int32 = maxUserRolesValue;
+            }
+
+            return (UserRoles)int32;
+        }
+
+        private static int GetMaxValue(Type enumType)
+        {
+            int maxEnumValue = Enum.GetValues(enumType).Cast<int>().Max();
+
+            var attributes = enumType.GetCustomAttributes(typeof(FlagsAttribute), false);
+
+            if (attributes.Any())
+            {
+                // Geometric progression
+                int n = (int)Math.Log(maxEnumValue, 2) + 1;
+                int q = 2;
+
+                return (int)((1 - Math.Pow(q, n)) / (1 - q));
+            }
+
+            return maxEnumValue;
+        }
+
+        public static UserRoles Demote(this UserRoles userRoles)
+        {
+            int maxUserRolesValue = BinaryConverter.GetMaxValue(typeof(UserRoles));
+
+            bool[] array = ((int)userRoles).ToBoolArray();
+
+            int lastIndex = BinaryConverter.GetEnumLength(array);
+
+            if (lastIndex == 0)
+            {
+                return UserRoles.Banned;
+            }
+
+            // you can't demote less then user status
+            if (lastIndex == 1)
+            {
+                return UserRoles.User;
+            }
+
+            array[lastIndex - 1] = false; // demote
+
+            int int32 = array.ToInt32();
+
+            if (int32 > maxUserRolesValue)
+            {
+                int32 = maxUserRolesValue;
+            }
+
+            return (UserRoles)int32;
+        }
+
+        private static int GetEnumLength(bool[] array)
+        {
+            int lastIndex = 0;
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (!array[i])
+                {
+                    lastIndex = i;
+                    break;
+                }
+            }
+
+            return lastIndex;
+        }
+    }
+
 }
