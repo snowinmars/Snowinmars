@@ -323,6 +323,12 @@
   <data name="_Create" xml:space="preserve">
     <value>Создать</value>
   </data>
+  <data name="_ForgotPassword" xml:space="preserve">
+    <value>Забыл?</value>
+  </data>
+  <data name="_ForgotPasswordHint" xml:space="preserve">
+    <value>Оставь контакты админу,и он с тобой свяжется</value>
+  </data>
   <data name="_Go" xml:space="preserve">
     <value>Вперёд</value>
   </data>

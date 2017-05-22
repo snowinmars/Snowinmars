@@ -9,5 +9,7 @@ namespace Snowinmars.Ui.Models
     {
         public bool IsShortcutJobSmtpServerReady { get; set; }
         public bool IsWarningJobSmtpServerReady { get; set; }
+        public bool IsEmailServiceSmtpServerReady { get; set; }
+        
     }
 }

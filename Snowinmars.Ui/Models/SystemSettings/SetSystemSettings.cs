@@ -9,5 +9,6 @@ namespace Snowinmars.Ui.Models
     {
         public string ShortcutJobSmtpEntropy { get; set; }
         public string WarningJobSmtpEntropy { get; set; }
+        public string EmailServiceSmtpEntropy { get; set; }
     }
 }

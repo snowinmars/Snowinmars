@@ -49,7 +49,7 @@ namespace Snowinmars.Ui.AppStartHelpers
 
             try
             {
-                this.Send($"Smtp server started at {DateTime.Now}", this.toAdmin, "Snowinmars system notification");
+                this.Send($"Smtp server started at {DateTime.Now}", this.toAdmin, "Snowinmars system notification: smtp");
             }
             catch (SmtpException)
             {
@@ -111,6 +111,8 @@ namespace Snowinmars.Ui.AppStartHelpers
 
             return secure;
         }
+
+        public void Send(string message) => Send(message, this.toAdmin);
 
         public void Send(string message, string to, string re = EmailSender.DefaultRe)
         {

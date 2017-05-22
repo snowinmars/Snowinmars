@@ -106,6 +106,24 @@ namespace Snowinmars.Ui.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Forgot?.
+        /// </summary>
+        public static string _ForgotPassword {
+            get {
+                return ResourceManager.GetString("_ForgotPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter some contacts for admin, and he&apos;ll call you.
+        /// </summary>
+        public static string _ForgotPasswordHint {
+            get {
+                return ResourceManager.GetString("_ForgotPasswordHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Go.
         /// </summary>
         public static string _Go {

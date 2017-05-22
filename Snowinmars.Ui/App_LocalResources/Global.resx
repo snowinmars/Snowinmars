@@ -323,6 +323,12 @@ You can erase this field any time.</value>
   <data name="_Create" xml:space="preserve">
     <value>Create</value>
   </data>
+  <data name="_ForgotPassword" xml:space="preserve">
+    <value>Forgot?</value>
+  </data>
+  <data name="_ForgotPasswordHint" xml:space="preserve">
+    <value>Enter some contacts for admin, and he'll call you</value>
+  </data>
   <data name="_Go" xml:space="preserve">
     <value>Go</value>
   </data>

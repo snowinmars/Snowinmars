@@ -54,34 +54,63 @@
             }
         </div>
 
-        <div class="smtpSettingsBlock col-xs-12">
-            @using (Html.BeginForm("SetSmtpEntropies", "User", FormMethod.Post, new { id = "warningJobForm" }))
+    <div class="smtpSettingsBlock col-xs-12">
+        @using (Html.BeginForm("SetSmtpEntropies", "User", FormMethod.Post, new { id = "warningJobForm" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <input id="WarningJobName" name="jobName" data-val="true" data-val-required="The WarningJobName field is required." type="hidden" value="WarningJob">
+
+            <div class="col-xs-1">
+                <button class="btn btn-default noFocus" type="submit">
+                    @if (Model.IsWarningJobSmtpServerReady)
+                    {
+                        <span class="glyphicon glyphicon-off success"></span>
+                    }
+                    else
+                    {
+                        <span class="glyphicon glyphicon-off fail"></span>
+                    }
+                </button>
+            </div>
+
+            <label class="control-label col-xs-2" for="WarningJobSmtpEntropy">WarningJob</label>
+
+            <div class="form-group col-xs-8">
+                <input class="form-control text-box single-line" id="WarningJobSmtpEntropy" name="entropy" type="password">
+            </div>
+        }
+    </div>
+    
+    <div class="smtpSettingsBlock col-xs-12">
+        @using (Html.BeginForm("SetSmtpEntropies", "User", FormMethod.Post, new { id = "emailServiceForm" }))
             {
-                @Html.AntiForgeryToken()
+            @Html.AntiForgeryToken()
 
-                <input id="WarningJobName" name="jobName" data-val="true" data-val-required="The WarningJobName field is required." type="hidden" value="WarningJob">
+            <input id="EmailServiceName" name="jobName" data-val="true" data-val-required="The EmailServiceName field is required." type="hidden" value="EmailService">
 
-                <div class="col-xs-1">
-                    <button class="btn btn-default noFocus" type="submit">
-                        @if (Model.IsWarningJobSmtpServerReady)
-                        {
-                            <span class="glyphicon glyphicon-off success"></span>
-                        }
-                        else
-                        {
-                            <span class="glyphicon glyphicon-off fail"></span>
-                        }
-                    </button>
-                </div>
+            <div class="col-xs-1">
+                <button class="btn btn-default noFocus" type="submit">
+                    @if (Model.IsEmailServiceSmtpServerReady)
+                    {
+                        <span class="glyphicon glyphicon-off success"></span>
+                    }
+                    else
+                    {
+                        <span class="glyphicon glyphicon-off fail"></span>
+                    }
+                </button>
+            </div>
 
-                <label class="control-label col-xs-2" for="WarningJobSmtpEntropy">WarningJob</label>
+                <label class="control-label col-xs-2" for="EmailServiceSmtpEntropy">EmailService</label>
 
                 <div class="form-group col-xs-8">
-                    <input class="form-control text-box single-line" id="WarningJobSmtpEntropy" name="entropy" type="password">
+                    <input class="form-control text-box single-line" id="EmailServiceSmtpEntropy" name="entropy" type="password">
                 </div>
-            }
-        </div>
+        }
     </div>
+
+</div>
 
 @section Scripts
 {

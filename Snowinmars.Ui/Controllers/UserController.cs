@@ -11,6 +11,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using Snowinmars.Ui.AppStartHelpers;
+using Snowinmars.Ui.App_Start;
 
 namespace Snowinmars.Ui.Controllers
 {
@@ -24,8 +25,9 @@ namespace Snowinmars.Ui.Controllers
         {
             this.userLogic = userLogic;
 
-            shortcutJobName = nameof(ShortcutJob).ToLowerInvariant();
-            warningJobName = nameof(WarningJob).ToLowerInvariant();
+            this.shortcutJobName = nameof(ShortcutJob).ToLowerInvariant();
+            this.warningJobName = nameof(WarningJob).ToLowerInvariant();
+            this.emailServiceName = nameof(EmailService).ToLowerInvariant();
         }
 
         [HttpPost]
@@ -66,7 +68,7 @@ namespace Snowinmars.Ui.Controllers
 
             this.userLogic.Update(user);
 
-            return Json(user.Roles.ToString());
+            return this.Json(user.Roles.ToString());
         }
 
         [HttpPost]
@@ -79,7 +81,7 @@ namespace Snowinmars.Ui.Controllers
 
             this.userLogic.Update(user);
 
-            return Json(user.Roles.ToString());
+            return this.Json(user.Roles.ToString());
         }
 
         [HttpGet]
@@ -207,8 +209,9 @@ namespace Snowinmars.Ui.Controllers
             return this.View(systemSettings);
         }
 
-        private string shortcutJobName;
-        private string warningJobName;
+        private readonly string shortcutJobName;
+        private readonly string emailServiceName;
+        private readonly string warningJobName;
 
         [HttpPost]
         [Route("setSmtpEntropies")]
@@ -216,14 +219,28 @@ namespace Snowinmars.Ui.Controllers
         {
             jobName = jobName.ToLowerInvariant();
 
-            if (jobName == shortcutJobName)
+            if (jobName == this.shortcutJobName)
             {
-                return ControllerHelper.GetSuccessJsonResult(Login(QuartzCron.ShortcutJob, entropy));
+                return ControllerHelper.GetSuccessJsonResult(this.Login(QuartzCron.ShortcutJob, entropy));
             }
 
-            if (jobName == warningJobName)
+            if (jobName == this.warningJobName)
             {
-                return ControllerHelper.GetSuccessJsonResult(Login(QuartzCron.WarningJob, entropy));
+                return ControllerHelper.GetSuccessJsonResult(this.Login(QuartzCron.WarningJob, entropy));
+            }
+
+            if (jobName == this.emailServiceName)
+            {
+                EmailService.TryLogin(entropy);
+
+                if (EmailService.IsSmtpReady)
+                {
+                    return ControllerHelper.GetSuccessJsonResult(true);
+                }
+                else
+                {
+                    return ControllerHelper.GetFailJsonResult();
+                }
             }
 
             return ControllerHelper.GetFailJsonResult();

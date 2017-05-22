@@ -65,6 +65,44 @@
 
     $("#Username").on("keyup", checkUsernameFunction);
     $("#Username").on("blur", checkUsernameFunction);
+
+    $(".spoiler-trigger").click(function () {
+        $(this).parent().next().collapse("toggle");
+    });
+
+    $("#ForgotPasswordAdminMessageSubmit").on("click", function() {
+        $.ajax({
+            url: "/en/home/emailAdmin",
+            type: "POST",
+            data: {
+                message: $("#ForgotPasswordAdminMessage").val()
+            },
+            success: function (data) {
+                if (data) {
+                    $(".spoiler-trigger").click();
+                    $(".spoiler-trigger").addClass("success");
+
+                    var currentLanguage = location.pathname.split("/")[1];
+                    switch (currentLanguage) {
+                    case "ru":
+                        $(".spoiler-trigger").text("Отправлено");
+                        break;
+                    default:
+                    case "en":
+                        $(".spoiler-trigger").text("Sended");
+                        break;
+                    }
+
+                    $(".spoiler-trigger").unbind();
+                } else {
+                    $("#ForgotPasswordAdminMessageSubmit").addClass("btn-danger");
+                }
+            },
+            error: function (data) {
+                $("#ForgotPasswordAdminMessageSubmit").addClass("btn-danger");
+            }
+        });
+    });
 })();
 
 var snowinmars_delay = (function () {
