@@ -25,21 +25,21 @@ namespace Snowinmars.Ui.AppStartHelpers
 
         public EmailSender()
         {
-            this.toAdmin = ConfigurationManager.AppSettings["emailUsername"];
-            this.from = ConfigurationManager.AppSettings["emailUsername"];
+            this.toAdmin = Constant.EmailUsername;
+            this.from = Constant.EmailUsername;
         }
 
         public void TryLogin(string entropy)
         {
             this.entropy = Encoding.Unicode.GetBytes(entropy);
 
-            var username = ConfigurationManager.AppSettings["emailUsername"];
-            var password = EmailSender.DecryptString(ConfigurationManager.AppSettings["emailPassword"], this.entropy);
+            var username = Constant.EmailUsername;
+            var password = EmailSender.DecryptString(Constant.EmailPassword, this.entropy);
 
             this.smtpClient = new SmtpClient
             {
                 Port = 587,
-                Host = ConfigurationManager.AppSettings["emailHost"],
+                Host = Constant.EmailHost,
                 EnableSsl = true,
                 Timeout = (int)TimeSpan.FromMinutes(10).TotalMilliseconds,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
@@ -49,7 +49,7 @@ namespace Snowinmars.Ui.AppStartHelpers
 
             try
             {
-                this.Send("Smtp server works", this.toAdmin, "Snowinmars system notification");
+                this.Send($"Smtp server started at {DateTime.Now}", this.toAdmin, "Snowinmars system notification");
             }
             catch (SmtpException)
             {

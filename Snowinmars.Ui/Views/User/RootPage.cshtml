@@ -5,76 +5,83 @@
     Layout = "~/Views/Layouts/DefaultLayout.cshtml";
 }
 
+@section Content
+{
+    
+<link href="~/Content/snowinmars/rootPage.css" rel="stylesheet" />
+}
+
 <h2>@Global._YouAreRoot</h2>
+<div class="rootPhilosophy">
+    <div>
+        <div>@Global.UserRootPage_RootMessagePart1</div>
+        <div>@Global.UserRootPage_RootMessagePart2</div>
 
-<div>
-    <div>@Global.UserRootPage_RootMessagePart1</div>
-    <div>@Global.UserRootPage_RootMessagePart2</div>
-
-    <ol>
-        <li>@Global.UserRootPage_RootMessagePart3</li>
-        <li>@Global.UserRootPage_RootMessagePart4</li>
-        <li>@Global.UserRootPage_RootMessagePart5</li>
-    </ol>
+        <ol>
+            <li>@Global.UserRootPage_RootMessagePart3</li>
+            <li>@Global.UserRootPage_RootMessagePart4</li>
+            <li>@Global.UserRootPage_RootMessagePart5</li>
+        </ol>
+    </div>
 </div>
 
 <div class="col-xs-12">
-    <div class="smtpSettingsBlock col-xs-12">
-        @using (Html.BeginForm("SetSmtpEntropies", "User", FormMethod.Post, new { id = "shortcutJobForm" }))
-        {
-            @Html.AntiForgeryToken()
+        <div class="smtpSettingsBlock col-xs-12">
+            @using (Html.BeginForm("SetSmtpEntropies", "User", FormMethod.Post, new { id = "shortcutJobForm" }))
+            {
+                @Html.AntiForgeryToken()
 
-            <input id="ShortcutJobName" name="jobName" data-val="true" data-val-required="The ShortcutJobName field is required." type="hidden" value="ShortcutJob">
+                <input id="ShortcutJobName" name="jobName" data-val="true" data-val-required="The ShortcutJobName field is required." type="hidden" value="ShortcutJob">
 
-            <div class="col-xs-1">
-                <button class="btn btn-default" type="submit">
-                    @if (Model.IsShortcutJobSmtpServerReady)
-                    {
-                        <span class="glyphicon glyphicon-off success"></span>
-                    }
-                    else
-                    {
-                        <span class="glyphicon glyphicon-off fail"></span>
-                    }
-                </button>
-            </div>
+                <div class="col-xs-1">
+                    <button class="btn btn-default noFocus" type="submit">
+                        @if (Model.IsShortcutJobSmtpServerReady)
+                        {
+                            <span class="glyphicon glyphicon-off success"></span>
+                        }
+                        else
+                        {
+                            <span class="glyphicon glyphicon-off fail"></span>
+                        }
+                    </button>
+                </div>
 
-            <label class="control-label col-xs-2" for="ShortcutJobSmtpEntropy">ShortcutJob</label>
+                <label class="control-label col-xs-2" for="ShortcutJobSmtpEntropy">ShortcutJob</label>
 
-            <div class="form-group col-xs-8">
-                <input class="form-control text-box single-line" id="ShortcutJobSmtpEntropy" name="entropy" type="password">
-            </div>
-        }
+                <div class="form-group col-xs-8">
+                    <input class="form-control text-box single-line" id="ShortcutJobSmtpEntropy" name="entropy" type="password">
+                </div>
+            }
+        </div>
+
+        <div class="smtpSettingsBlock col-xs-12">
+            @using (Html.BeginForm("SetSmtpEntropies", "User", FormMethod.Post, new { id = "warningJobForm" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <input id="WarningJobName" name="jobName" data-val="true" data-val-required="The WarningJobName field is required." type="hidden" value="WarningJob">
+
+                <div class="col-xs-1">
+                    <button class="btn btn-default noFocus" type="submit">
+                        @if (Model.IsWarningJobSmtpServerReady)
+                        {
+                            <span class="glyphicon glyphicon-off success"></span>
+                        }
+                        else
+                        {
+                            <span class="glyphicon glyphicon-off fail"></span>
+                        }
+                    </button>
+                </div>
+
+                <label class="control-label col-xs-2" for="WarningJobSmtpEntropy">WarningJob</label>
+
+                <div class="form-group col-xs-8">
+                    <input class="form-control text-box single-line" id="WarningJobSmtpEntropy" name="entropy" type="password">
+                </div>
+            }
+        </div>
     </div>
-    
-    <div class="smtpSettingsBlock col-xs-12">
-        @using (Html.BeginForm("SetSmtpEntropies", "User", FormMethod.Post, new { id = "warningJobForm" }))
-        {
-            @Html.AntiForgeryToken()
-
-            <input id="WarningJobName" name="jobName" data-val="true" data-val-required="The WarningJobName field is required." type="hidden" value="WarningJob">
-
-            <div class="col-xs-1">
-                <button class="btn btn-default" type="submit">
-                    @if (Model.IsWarningJobSmtpServerReady)
-                    {
-                        <span class="glyphicon glyphicon-off success"></span>
-                    }
-                    else
-                    {
-                        <span class="glyphicon glyphicon-off fail"></span>
-                    }
-                </button>
-            </div>
-
-            <label class="control-label col-xs-2" for="WarningJobSmtpEntropy">WarningJob</label>
-
-            <div class="form-group col-xs-8">
-                <input class="form-control text-box single-line" id="WarningJobSmtpEntropy" name="entropy" type="password">
-            </div>
-        }
-    </div>
-</div>
 
 @section Scripts
 {

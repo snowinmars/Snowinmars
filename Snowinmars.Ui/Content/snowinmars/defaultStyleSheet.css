@@ -120,3 +120,8 @@ hr {
 .success {
     color: lightgreen;
 }
+
+.noFocus:focus  {
+    outline: none;
+
+}
