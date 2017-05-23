@@ -208,7 +208,7 @@
     <value>Год</value>
   </data>
   <data name="Book_SaveUrlHint" xml:space="preserve">
-    <value>"Сохранить" сохранит урлы</value>
+    <value>"Сохранить" сохранит  урлы</value>
   </data>
   <data name="EnterPage_NewUserHello" xml:space="preserve">
     <value>Не найдено юзера с таким логином. Регайся</value>

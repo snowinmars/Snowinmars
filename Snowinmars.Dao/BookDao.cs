@@ -80,10 +80,10 @@ namespace Snowinmars.Dao
         {
             var books = this.GetAll().ToList();
 
-            foreach (var book in books)
-            {
-                book.AuthorIds.AddRange(this.GetAuthorsForBook(book.Id).Select(a => a.Id));
-            }
+            //foreach (var book in books)
+            //{
+            //    book.AuthorIds.AddRange(this.GetAuthorsForBook(book.Id).Select(a => a.Id));
+            //}
 
             return books;
         }

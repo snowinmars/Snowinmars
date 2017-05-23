@@ -16,6 +16,7 @@ namespace Snowinmars.Ui.AppStartHelpers
     {
         private const string DefaultRe = "Snowinmars system message";
         private const string WarningRe = "Snowinmars system warning you";
+        private const string SmtpNotificationRe = "Snowinmars system notification: smtp";
         private byte[] entropy;
         private readonly string from;
         private SmtpClient smtpClient;
@@ -49,7 +50,7 @@ namespace Snowinmars.Ui.AppStartHelpers
 
             try
             {
-                this.Send($"Smtp server started at {DateTime.Now}", this.toAdmin, "Snowinmars system notification: smtp");
+                this.Send($"Smtp server started at {DateTime.Now}", this.toAdmin, SmtpNotificationRe);
             }
             catch (SmtpException)
             {

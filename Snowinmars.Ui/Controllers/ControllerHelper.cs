@@ -56,7 +56,7 @@ namespace Snowinmars.Ui.Controllers
                 IsSynchronized = bookModel.IsSynchronized,
             };
 
-            ControllerHelper.SetOwner(bookModel.Owner, book.Owner);
+            ControllerHelper.SetOwner(bookModel.Owner, book);
             ControllerHelper.SetId(bookModel, book);
             ControllerHelper.SetAuthorIds(bookModel.AuthorModelIds, book.AuthorIds);
             ControllerHelper.SetAuthorShortcuts(bookModel.AuthorShortcuts, book.AuthorShortcuts);
@@ -127,7 +127,9 @@ namespace Snowinmars.Ui.Controllers
 
         internal static User Map(UpdateUserModel userModel)
         {
-            var user = new User("")
+            var username = string.IsNullOrWhiteSpace(userModel.Username) ? "" : userModel.Username;
+
+            var user = new User(username)
             {
                 Email = ControllerHelper.Trim(userModel.Email),
                 Roles = userModel.Roles,
@@ -174,15 +176,15 @@ namespace Snowinmars.Ui.Controllers
             }
         }
 
-        private static void SetOwner(string owner, string container)
+        private static void SetOwner(string owner, Book book)
         {
             if (string.IsNullOrWhiteSpace(owner))
             {
-                container = System.Web.HttpContext.Current.User.Identity.Name;
+                book.Owner = System.Web.HttpContext.Current.User.Identity.Name;
             }
             else
             {
-                container = ControllerHelper.Trim(owner);
+                book.Owner = ControllerHelper.Trim(owner);
             }
         }
 
