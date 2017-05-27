@@ -1,10 +1,6 @@
 ﻿(function () {
     $("[data-toggle='tooltip']").tooltip();
-
-    $("#enterModal").on("shown.bs.modal", function () {
-        $("#Username").focus();
-    });
-
+   
     var navbar = $(".navbar-nav");
     navbar.children().removeClass("active");
 
@@ -26,14 +22,28 @@
         }
     }
 
-    var checkUsernameFunction = function(e) {
-        var globalUsernameInputTarget = $(e.target);
+    function setupEnterModalWindow() {
+        var snowinmarsDelay = (function () {
+            var timer = 0;
 
-        snowinmars_delay(function() {
+            return function (callback, ms) {
+                clearTimeout(timer);
+                timer = setTimeout(callback, ms);
+            };
+        })();
+
+        $("#enterModal").on("shown.bs.modal", function () {
+            $("#Username").focus();
+        });
+
+        var checkUsernameFunction = function (e) {
+            var globalUsernameInputTarget = $(e.target);
+
+            snowinmarsDelay(function () {
                 $.ajax({
                     url: "/en/user/isUsernameExist/?username=" + globalUsernameInputTarget.val(),
                     type: "POST",
-                    success: function(data) {
+                    success: function (data) {
                         if (data) {
                             $(".oldUserHello").removeClass("hidden");
                             $(".newUserHello").addClass("hidden");
@@ -57,59 +67,80 @@
                                 $("#PasswordConfirm").closest(".form-group").removeClass("hidden");
                             }
                         }
+                    },
+                    error: function (data) {
+                        $(".oldUserHello").addClass("hidden");
+                        $(".newUserHello").addClass("hidden");
+                        $(".errorOnLoginProcess").removeClass("hidden");
                     }
                 });
             },
-            300);
-    };
+                300);
+        };
 
-    $("#Username").on("keyup", checkUsernameFunction);
-    $("#Username").on("blur", checkUsernameFunction);
+        $("#Username").on("keyup", checkUsernameFunction);
+        $("#Username").on("blur", checkUsernameFunction);
 
-    $(".spoiler-trigger").click(function () {
-        $(this).parent().next().collapse("toggle");
-    });
+        $(".spoiler-trigger").click(function () {
+            $(this).parent().next().collapse("toggle");
+        });
 
-    $("#ForgotPasswordAdminMessageSubmit").on("click", function() {
-        $.ajax({
-            url: "/en/home/emailAdmin",
-            type: "POST",
-            data: {
-                message: $("#ForgotPasswordAdminMessage").val()
-            },
-            success: function (data) {
-                if (data) {
-                    $(".spoiler-trigger").click();
-                    $(".spoiler-trigger").addClass("success");
+        $("#ForgotPasswordAdminMessageSubmit").on("click", function () {
+            $.ajax({
+                url: "/en/home/emailAdmin",
+                type: "POST",
+                data: {
+                    message: $("#ForgotPasswordAdminMessage").val()
+                },
+                success: function (data) {
+                    if (data) {
+                        $(".spoiler-trigger").click();
+                        $(".spoiler-trigger").addClass("success");
 
-                    var currentLanguage = location.pathname.split("/")[1];
-                    switch (currentLanguage) {
-                    case "ru":
-                        $(".spoiler-trigger").text("Отправлено");
-                        break;
-                    default:
-                    case "en":
-                        $(".spoiler-trigger").text("Sended");
-                        break;
+                        var currentLanguage = location.pathname.split("/")[1];
+                        switch (currentLanguage) {
+                            case "ru":
+                                $(".spoiler-trigger").text("Отправлено");
+                                break;
+                            default:
+                            case "en":
+                                $(".spoiler-trigger").text("Sended");
+                                break;
+                        }
+
+                        $(".spoiler-trigger").unbind();
+                    } else {
+                        $("#ForgotPasswordAdminMessageSubmit").addClass("btn-danger");
                     }
-
-                    $(".spoiler-trigger").unbind();
-                } else {
+                },
+                error: function (data) {
                     $("#ForgotPasswordAdminMessageSubmit").addClass("btn-danger");
                 }
-            },
-            error: function (data) {
-                $("#ForgotPasswordAdminMessageSubmit").addClass("btn-danger");
-            }
+            });
         });
-    });
-})();
 
-var snowinmars_delay = (function () {
-    var timer = 0;
+        $("#EnterForm").on("submit", function (e) {
+            e.preventDefault();
 
-    return function (callback, ms) {
-        clearTimeout(timer);
-        timer = setTimeout(callback, ms);
-    };
+            if (!($(".oldUserHello").hasClass("hidden"))) {
+                if ($("#Username").val() && $("#Password").val()) {
+                    e.target.submit();
+                    return;
+                }
+            }
+
+            if (!($(".newUserHello").hasClass("hidden"))) {
+                if ($("#Username").val() && $("#Password").val() && $("#PasswordConfirm").val()) {
+                    e.target.submit();
+                    return;
+                }
+            }
+
+            $(".oldUserHello").addClass("hidden");
+            $(".newUserHello").addClass("hidden");
+            $(".errorOnLoginProcess").removeClass("hidden");
+        });
+    }
+
+    setupEnterModalWindow();
 })();

@@ -466,6 +466,15 @@ namespace Snowinmars.Ui.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error during login process.
+        /// </summary>
+        public static string EnterPage_ErrorOnLoginProcess {
+            get {
+                return ResourceManager.GetString("EnterPage_ErrorOnLoginProcess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There&apos;s no such user with this name. Register then..
         /// </summary>
         public static string EnterPage_NewUserHello {

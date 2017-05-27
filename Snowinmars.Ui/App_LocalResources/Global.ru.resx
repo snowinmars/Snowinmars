@@ -210,6 +210,9 @@
   <data name="Book_SaveUrlHint" xml:space="preserve">
     <value>"Сохранить" сохранит  урлы</value>
   </data>
+  <data name="EnterPage_ErrorOnLoginProcess" xml:space="preserve">
+    <value>Ошибка процесса логина</value>
+  </data>
   <data name="EnterPage_NewUserHello" xml:space="preserve">
     <value>Не найдено юзера с таким логином. Регайся</value>
   </data>

@@ -10,7 +10,7 @@
                 <h4 class="modal-title" id="myModalLabel">@Global.Layout_Enter</h4>
             </div>
             <div class="modal-body">
-                @using (Html.BeginForm("Enter", "User", FormMethod.Post))
+                @using (Html.BeginForm("Enter", "User", FormMethod.Post, new { @id = "EnterForm" }))
                 {
                     <div class="form-horizontal col-xs-12 col-sm-10 col-sm-offset-1">
 
@@ -32,6 +32,10 @@
 
                             <div class="oldUserHello hidden">
                                 @Global.EnterPage_OldUserHello
+                            </div>
+                            
+                            <div class="errorOnLoginProcess hidden">
+                                @Global.EnterPage_ErrorOnLoginProcess
                             </div>
                         </div>
 

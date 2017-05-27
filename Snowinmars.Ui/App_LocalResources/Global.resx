@@ -210,6 +210,9 @@
   <data name="Book_SaveUrlHint" xml:space="preserve">
     <value>To save urls' changes, push the Save button below</value>
   </data>
+  <data name="EnterPage_ErrorOnLoginProcess" xml:space="preserve">
+    <value>Error during login process</value>
+  </data>
   <data name="EnterPage_NewUserHello" xml:space="preserve">
     <value>There's no such user with this name. Register then.</value>
   </data>
