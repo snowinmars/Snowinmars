@@ -19,9 +19,15 @@ namespace Snowinmars.Common
         public static readonly string EmailPassword = ConfigurationManager.AppSettings["emailPassword"];
         public static readonly string EmailUsername = ConfigurationManager.AppSettings["emailUsername"];
         public static readonly string SiteUrl = ConfigurationManager.AppSettings["siteUrl"];
-    }
 
-    public static class Extensions
+#if DEBUG
+	    public const bool IsDebug = true;
+#else
+	    public const bool IsDebug = false;
+#endif
+	}
+
+	public static class Extensions
     {
         public static void AddRange<T>(this ICollection<T> list, IEnumerable<T> adders)
         {
