@@ -33,15 +33,15 @@ namespace Snowinmars.Ui.Controllers
         [HttpPost]
         [Route("authenticate")]
         [AllowAnonymous]
-        private ActionResult Authenticate(string username, string password)
+        private bool Authenticate(string username, string password)
         {
             if (this.userLogic.Authenticate(username, password))
             {
                 FormsAuthentication.SetAuthCookie(username, createPersistentCookie: true);
-                return this.Redirect(this.Url.Action("Index", "Home"));
+	            return true;
             }
 
-            throw new Exception("Can't login");
+	        return false;
         }
 
         [HttpGet]
@@ -160,7 +160,7 @@ namespace Snowinmars.Ui.Controllers
         [HttpPost]
         [Route("enter")]
         [AllowAnonymous]
-        public RedirectResult Enter(CreateUserModel userModel)
+        public ActionResult Enter(CreateUserModel userModel)
         {
             bool isUserAlreadyRegistred = string.IsNullOrWhiteSpace(userModel.PasswordConfirm);
 
@@ -169,9 +169,14 @@ namespace Snowinmars.Ui.Controllers
                 this.Create(userModel);
             }
 
-            this.Authenticate(userModel.Username, userModel.Password);
+            var result = this.Authenticate(userModel.Username, userModel.Password);
 
-            return new RedirectResult(this.Url.Action("Index", "Home"));
+	        if (result)
+	        {
+				return new RedirectResult(this.Url.Action("Index", "Home"));
+	        }
+
+			return ControllerHelper.GetFailJsonResult();
         }
 
         [HttpGet]
