@@ -1,9 +1,19 @@
-﻿@using Snowinmars.Ui.App_LocalResources
+﻿@using Snowinmars.Entities
+@using Snowinmars.Ui.App_LocalResources
 @model Snowinmars.Ui.Models.BookModel
 
 @{
     ViewBag.Title = Global.BookCreate_Header + Global._Book.ToLowerInvariant();
     Layout = "~/Views/Layouts/DefaultLayout.cshtml";
+
+	var bookStatues = Enum.GetNames(typeof(BookStatus))
+		.Select(name => new SelectListItem
+		{
+			Text = name,
+			Value = name,
+			Selected = Model.Status.ToString() == name,
+		})
+		.ToList();
 }
 
 <h2>@Global.BookCreate_Header</h2>
@@ -183,7 +193,7 @@
 	    <div class="form-group">
 		    @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
 		    <div class="col-md-10">
-			    @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })
+			    @Html.DropDownListFor(model => model.Status, bookStatues)
 			    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
 		    </div>
 	    </div>
