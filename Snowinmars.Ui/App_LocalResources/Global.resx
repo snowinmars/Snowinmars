@@ -201,11 +201,17 @@
   <data name="BookModel_PageCount" xml:space="preserve">
     <value>Page count</value>
   </data>
+  <data name="BookModel_Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
   <data name="BookModel_Title" xml:space="preserve">
     <value>Title</value>
   </data>
   <data name="BookModel_Year" xml:space="preserve">
     <value>Year</value>
+  </data>
+  <data name="BookWishlist_Header" xml:space="preserve">
+    <value>Books wishlist</value>
   </data>
   <data name="Book_SaveUrlHint" xml:space="preserve">
     <value>To save urls' changes, push the Save button below</value>
@@ -236,6 +242,9 @@
   </data>
   <data name="Layout_LibraryBooks" xml:space="preserve">
     <value>Library books</value>
+  </data>
+  <data name="Layout_LibraryWishlist" xml:space="preserve">
+    <value>Book wishlist</value>
   </data>
   <data name="Layout_PersonalPage" xml:space="preserve">
     <value>Personal page</value>

@@ -37,6 +37,7 @@
   <ItemGroup>
     <Compile Include="Author.cs" />
     <Compile Include="Book.cs" />
+    <Compile Include="BookStatus.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Language.cs" />
     <Compile Include="Pseudonym.cs" />

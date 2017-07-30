@@ -11,6 +11,7 @@ namespace Snowinmars.Entities
             this.PageCount = pageCount;
 
             this.MustInformAboutWarnings = true;
+			this.Status = BookStatus.Wished;
 
             this.AuthorIds = new List<Guid>();
             this.AuthorShortcuts = new List<string>();
@@ -20,6 +21,7 @@ namespace Snowinmars.Entities
         {
         }
 
+		public BookStatus Status { get; set; }
         public string AdditionalInfo { get; set; }
         public ICollection<Guid> AuthorIds { get; }
         public IList<string> AuthorShortcuts { get; }

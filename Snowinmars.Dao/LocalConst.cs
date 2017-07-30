@@ -98,7 +98,7 @@
 
         internal class Book
         {
-            internal const string DeleteCommand =
+			internal const string DeleteCommand =
                     " delete " +
                     " from " + Book.TableName +
                     " where ( " + Column.Id + " = " + Parameter.Id + " ) ";
@@ -109,6 +109,7 @@
                             "," + Column.Year +
                             "," + Column.Title +
                             "," + Column.Owner +
+							"," + Column.Status +
                             "," + Column.PageCount +
                             "," + Column.Bookshelf +
                             "," + Column.LiveLibUrl +
@@ -124,6 +125,7 @@
                             "," + Parameter.Year +
                             "," + Parameter.Title +
                             "," + Parameter.Owner +
+							"," + Parameter.Status +
                             "," + Parameter.PageCount +
                             "," + Parameter.Bookshelf +
                             "," + Parameter.LiveLibUrl +
@@ -140,6 +142,7 @@
                             "," + Column.Year +
                             "," + Column.Title +
                             "," + Column.Owner +
+							"," + Column.Status +
                             "," + Column.PageCount +
                             "," + Column.Bookshelf +
                             "," + Column.LiveLibUrl +
@@ -162,7 +165,12 @@
                                 Book.SelectAllCommand +
                     " where ( " + Column.Id + " = " + Parameter.Id + " ) ";
 
-            internal const string TableName = "[Books]";
+	        internal const string GetWishlist =
+		        Book.SelectAllCommand +
+					" where ( " + Column.Owner + " = " + Parameter.Owner + " and " +
+						Column.Status + " = " + Parameter.Status + " ) ";
+
+			internal const string TableName = "[Books]";
 
             internal const string UpdateCommand =
                     " if (" + Parameter.AuthorsShortcuts + " = '__ignore'" + ") " +
@@ -171,6 +179,7 @@
                         " set " + Column.Title + " = " + Parameter.Title +
                                     "," + Column.Year + " = " + Parameter.Year +
                                     "," + Column.Owner + " = " + Parameter.Owner +
+                                    "," + Column.Status + " = " + Parameter.Status +
                                     "," + Column.PageCount + " = " + Parameter.PageCount +
                                     "," + Column.Bookshelf + " = " + Parameter.Bookshelf +
                                     "," + Column.LiveLibUrl + " = " + Parameter.LiveLibUrl +
@@ -187,6 +196,7 @@
                         " set " + Column.Title + " = " + Parameter.Title +
                                     "," + Column.Year + " = " + Parameter.Year +
                                     "," + Column.Owner + " = " + Parameter.Owner +
+                                    "," + Column.Status + " = " + Parameter.Status +
                                     "," + Column.PageCount + " = " + Parameter.PageCount +
                                     "," + Column.Bookshelf + " = " + Parameter.Bookshelf +
                                     "," + Column.LiveLibUrl + " = " + Parameter.LiveLibUrl +
@@ -205,6 +215,7 @@
                 internal const string Year = "Year";
                 internal const string Title = "Title";
                 internal const string Owner = "Owner";
+                internal const string Status = "Status";
                 internal const string Authors = "Authors";
                 internal const string Bookshelf = "Bookshelf";
                 internal const string PageCount = "PageCount";
@@ -223,6 +234,7 @@
                 internal const string Year = "@year";
                 internal const string Title = "@title";
                 internal const string Owner = "@owner";
+                internal const string Status = "@status";
                 internal const string Authors = "@authors";
                 internal const string Bookshelf = "@bookshelf";
                 internal const string PageCount = "@pageCount";

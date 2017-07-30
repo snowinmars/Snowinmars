@@ -18,5 +18,7 @@ namespace Snowinmars.Bll.Interfaces
         void StopInformAboutWarnings(Guid bookId);
 
         void StopInformAboutWarnings();
+
+	    IEnumerable<Book> GetWishlist(string username);
     }
 }

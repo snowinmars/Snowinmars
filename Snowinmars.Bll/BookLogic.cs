@@ -91,7 +91,14 @@ namespace Snowinmars.Bll
             }
         }
 
-        public void Update(Book item)
+	    public IEnumerable<Book> GetWishlist(string username)
+	    {
+		    Validation.CheckUsername(username);
+
+			return this.bookDao.GetWishlist(username, BookStatus.Wished);
+	    }
+
+	    public void Update(Book item)
         {
             Validation.Check(item);
 

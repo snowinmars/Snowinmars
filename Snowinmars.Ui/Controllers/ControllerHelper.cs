@@ -39,6 +39,7 @@ namespace Snowinmars.Ui.Controllers
                 Owner = book.Owner,
                 MustInformAboutWarnings = book.MustInformAboutWarnings,
                 IsSynchronized = book.IsSynchronized,
+				Status = book.Status,
             };
         }
 
@@ -54,6 +55,7 @@ namespace Snowinmars.Ui.Controllers
                 LiveLibUrl = ControllerHelper.Trim(bookModel.LiveLibUrl),
                 MustInformAboutWarnings = bookModel.MustInformAboutWarnings,
                 IsSynchronized = bookModel.IsSynchronized,
+				Status = bookModel.Status,
             };
 
             ControllerHelper.SetOwner(bookModel.Owner, book);

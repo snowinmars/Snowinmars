@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Snowinmars.Entities;
 
 namespace Snowinmars.Ui.Models
 {
@@ -13,6 +14,7 @@ namespace Snowinmars.Ui.Models
             Year = 0,
             Owner = "",
             Title = "",
+			Status = BookStatus.Wished,
             PageCount = 0,
             Bookshelf = "",
             LiveLibUrl = "",
@@ -25,7 +27,10 @@ namespace Snowinmars.Ui.Models
             AuthorShortcuts = new List<string>(),
         };
 
-        [Display(Name = "BookModel_AdditionalInfo", ResourceType = typeof(Global))]
+		[Display(Name = "BookModel_Status", ResourceType = typeof(Global))]
+		public BookStatus Status { get; set; }
+
+		[Display(Name = "BookModel_AdditionalInfo", ResourceType = typeof(Global))]
         public string AdditionalInfo { get; set; }
 
         [Display(Name = "BookModel_Authors", ResourceType = typeof(Global))]
