@@ -6,7 +6,10 @@ namespace Snowinmars.Common
     public static class Constant
     {
         public const string ConnectionString = @"Data Source=(localdb)\ProjectsV13;Initial Catalog=Snowinmars.DataBase;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-        public const int MaxAdditionalInfoLength = 1000;
+
+	    //public const string ConnectionString = @"Data Source=localhost;Integrated Security=False;User ID=u0378526_snowinmarsSqlAdmin;Password=GeniusMSI07842KodakCDRW4x-10x;Connect Timeout=15;Encrypt=False;Packet Size=4096";
+
+		public const int MaxAdditionalInfoLength = 1000;
         public const int MaxBookshelfLength = 50;
         public const int MaxFamilyNameLength = 100;
         public const int MaxFullMiddleNameLength = 100;

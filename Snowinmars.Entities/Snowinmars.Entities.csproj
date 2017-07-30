@@ -37,12 +37,17 @@
   <ItemGroup>
     <Compile Include="Author.cs" />
     <Compile Include="Book.cs" />
-    <Compile Include="Entity.cs" />
+    <Compile Include="Daemon\Daemon.cs" />
+    <Compile Include="Daemon\DaemonScheduler.cs" />
+    <Compile Include="Daemon\DaemonSettings.cs" />
+    <Compile Include="Daemon\DaemonSettingsType.cs" />
+    <Compile Include="Daemon\Entity.cs" />
+    <Compile Include="Daemon\IDaemon.cs" />
     <Compile Include="Language.cs" />
     <Compile Include="Pseudonym.cs" />
-    <Compile Include="User.cs" />
-    <Compile Include="UserIsMoronException.cs" />
-    <Compile Include="UserRoles.cs" />
+    <Compile Include="User\User.cs" />
+    <Compile Include="User\UserIsMoronException.cs" />
+    <Compile Include="User\UserRoles.cs" />
     <Compile Include="Warning.cs" />
   </ItemGroup>
   <ItemGroup>
