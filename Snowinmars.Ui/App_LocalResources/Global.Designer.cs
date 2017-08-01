@@ -448,6 +448,15 @@ namespace Snowinmars.Ui.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        public static string BookModel_Status {
+            get {
+                return ResourceManager.GetString("BookModel_Status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Title.
         /// </summary>
         public static string BookModel_Title {
@@ -462,6 +471,15 @@ namespace Snowinmars.Ui.App_LocalResources {
         public static string BookModel_Year {
             get {
                 return ResourceManager.GetString("BookModel_Year", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Books wishlist.
+        /// </summary>
+        public static string BookWishlist_Header {
+            get {
+                return ResourceManager.GetString("BookWishlist_Header", resourceCulture);
             }
         }
         
@@ -543,6 +561,15 @@ namespace Snowinmars.Ui.App_LocalResources {
         public static string Layout_LibraryBooks {
             get {
                 return ResourceManager.GetString("Layout_LibraryBooks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Book wishlist.
+        /// </summary>
+        public static string Layout_LibraryWishlist {
+            get {
+                return ResourceManager.GetString("Layout_LibraryWishlist", resourceCulture);
             }
         }
         

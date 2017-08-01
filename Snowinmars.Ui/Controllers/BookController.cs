@@ -175,5 +175,26 @@ namespace Snowinmars.Ui.Controllers
 
             return new RedirectResult(this.Url.Action("Index", "Book"));
         }
+
+	    [HttpGet]
+	    [Route("wishlist")]
+		public ActionResult Wishlist()
+	    {
+		    string username = User.Identity.Name;
+
+		    IEnumerable<Book> c;
+		    try
+		    {
+			    c = this.bookLogic.GetWishlist(username);
+		    }
+		    catch (ObjectNotFoundException e)
+		    {
+			    return this.View("BrokenDetails");
+		    }
+
+		    List<BookModel> books = c.Select(ControllerHelper.Map).ToList();
+
+		    return this.View(books);
+	    }
     }
 }

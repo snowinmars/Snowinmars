@@ -17,7 +17,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DefaultLayout</title>
+    <title>@ViewBag.Title</title>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/chosen.min.css" rel="stylesheet" />
     <link href="~/Content/cyborg.bootstrap.min.css" rel="stylesheet" />
@@ -44,7 +44,11 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li class="active" data-id="book">@Html.ActionLink(Global.Layout_LibraryBooks, "Index", "Book")</li>
-                        <li class="active" data-id="author">@Html.ActionLink(Global.Layout_LibraryAuthors, "Index", "Author")</li>
+	                    <li class="active" data-id="author">@Html.ActionLink(Global.Layout_LibraryAuthors, "Index", "Author")</li>
+						@if (User.Identity.IsAuthenticated)
+						{
+							<li class="active" data-id="wishlist">@Html.ActionLink(Global.Layout_LibraryWishlist, "Wishlist", "Book")</li>
+						}
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">

@@ -18,7 +18,11 @@
             case "book":
             case "Book":
                 navbar.children("[data-id=book]").addClass("active");
-                break;
+				break;
+			case "wishlist":
+			case "Wishlist":
+	            navbar.children("[data-id=wishlist]").addClass("active");
+	            break;
         }
     }
 

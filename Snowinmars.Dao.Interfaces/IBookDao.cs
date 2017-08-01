@@ -14,5 +14,7 @@ namespace Snowinmars.Dao.Interfaces
         IEnumerable<Author> GetAuthorsForBook(Guid bookId);
 
         IEnumerable<Guid> SelectBooksUnindexedByShortcutsCommand();
+
+	    IEnumerable<Book> GetWishlist(string username, BookStatus status);
     }
 }

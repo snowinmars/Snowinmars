@@ -43,6 +43,7 @@
     <Compile Include="Daemon\DaemonSettingsType.cs" />
     <Compile Include="Daemon\Entity.cs" />
     <Compile Include="Daemon\IDaemon.cs" />
+    <Compile Include="BookStatus.cs" />
     <Compile Include="Language.cs" />
     <Compile Include="Pseudonym.cs" />
     <Compile Include="User\User.cs" />

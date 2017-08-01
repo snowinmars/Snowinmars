@@ -507,6 +507,7 @@
     <Content Include="Views\Home\Banned.cshtml" />
     <Content Include="Views\Layouts\_BannedLayout.cshtml" />
     <Content Include="Views\User\RootPage.cshtml" />
+    <Content Include="Views\Book\Wishlist.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

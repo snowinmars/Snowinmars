@@ -167,7 +167,28 @@ namespace Snowinmars.Dao
             }
         }
 
-        public void Update(Book item)
+	    public IEnumerable<Book> GetWishlist(string username, BookStatus status)
+	    {
+		    using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
+		    {
+			    var command = new SqlCommand(LocalConst.Book.GetWishlist, sqlConnection);
+
+			    var un = LocalCommon.ConvertToDbValue(username);
+			    var s = LocalCommon.ConvertToDbValue(status);
+
+				command.Parameters.AddWithValue(LocalConst.Book.Parameter.Owner, un);
+				command.Parameters.AddWithValue(LocalConst.Book.Parameter.Status, s);
+
+			    sqlConnection.Open();
+			    var reader = command.ExecuteReader();
+			    var books = LocalCommon.MapBooks(reader);
+			    sqlConnection.Close();
+
+			    return books;
+		    }
+		}
+
+		public void Update(Book item)
         {
             Validation.Check(item, mustbeUnique: false);
 
@@ -184,7 +205,8 @@ namespace Snowinmars.Dao
                 var year = LocalCommon.ConvertToDbValue(item.Year);
                 var title = LocalCommon.ConvertToDbValue(item.Title);
                 var owner = LocalCommon.ConvertToDbValue(item.Owner);
-                var pageCount = LocalCommon.ConvertToDbValue(item.PageCount);
+                var status = LocalCommon.ConvertToDbValue(item.Status);
+				var pageCount = LocalCommon.ConvertToDbValue(item.PageCount);
                 var bookshelf = LocalCommon.ConvertToDbValue(item.Bookshelf);
                 var liveLibUrl = LocalCommon.ConvertToDbValue(item.LiveLibUrl);
                 var libRusEcUrl = LocalCommon.ConvertToDbValue(item.LibRusEcUrl);
@@ -197,7 +219,8 @@ namespace Snowinmars.Dao
                 command.Parameters.AddWithValue(LocalConst.Book.Parameter.Year, year);
                 command.Parameters.AddWithValue(LocalConst.Book.Parameter.Title, title);
                 command.Parameters.AddWithValue(LocalConst.Book.Parameter.Owner, owner);
-                command.Parameters.AddWithValue(LocalConst.Book.Parameter.PageCount, pageCount);
+                command.Parameters.AddWithValue(LocalConst.Book.Parameter.Status, status);
+				command.Parameters.AddWithValue(LocalConst.Book.Parameter.PageCount, pageCount);
                 command.Parameters.AddWithValue(LocalConst.Book.Parameter.Bookshelf, bookshelf);
                 command.Parameters.AddWithValue(LocalConst.Book.Parameter.LiveLibUrl, liveLibUrl);
                 command.Parameters.AddWithValue(LocalConst.Book.Parameter.LibRusEcUrl, libRusEcUrl);
@@ -221,6 +244,7 @@ namespace Snowinmars.Dao
             var year = LocalCommon.ConvertToDbValue(book.Year);
             var title = LocalCommon.ConvertToDbValue(book.Title);
             var owner = LocalCommon.ConvertToDbValue(book.Owner);
+            var status = LocalCommon.ConvertToDbValue(book.Status);
             var pageCount = LocalCommon.ConvertToDbValue(book.PageCount);
             var bookshelf = LocalCommon.ConvertToDbValue(book.Bookshelf);
             var liveLibUrl = LocalCommon.ConvertToDbValue(book.LiveLibUrl);
@@ -235,6 +259,7 @@ namespace Snowinmars.Dao
             command.Parameters.AddWithValue(LocalConst.Book.Parameter.Year, year);
             command.Parameters.AddWithValue(LocalConst.Book.Parameter.Title, title);
             command.Parameters.AddWithValue(LocalConst.Book.Parameter.Owner, owner);
+            command.Parameters.AddWithValue(LocalConst.Book.Parameter.Status, status);
             command.Parameters.AddWithValue(LocalConst.Book.Parameter.PageCount, pageCount);
             command.Parameters.AddWithValue(LocalConst.Book.Parameter.Bookshelf, bookshelf);
             command.Parameters.AddWithValue(LocalConst.Book.Parameter.LiveLibUrl, liveLibUrl);

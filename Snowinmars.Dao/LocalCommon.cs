@@ -102,6 +102,7 @@ namespace Snowinmars.Dao
             Guid bookId = LocalCommon.ConvertFromDbValue<Guid>(reader[LocalConst.Book.Column.Id]);
             string owner = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.Owner]);
             string title = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.Title]);
+	        BookStatus status = LocalCommon.ConvertFromDbValue<BookStatus>(reader[LocalConst.Book.Column.Status]);
             int pageCount = LocalCommon.ConvertFromDbValue<int>(reader[LocalConst.Book.Column.PageCount]);
             string bookshelf = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.Bookshelf]);
             string liveLibUrl = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.LiveLibUrl]);
@@ -117,6 +118,7 @@ namespace Snowinmars.Dao
                 Id = bookId,
                 Year = year,
                 Owner = owner,
+				Status = status,
                 Bookshelf = bookshelf,
                 LiveLibUrl = liveLibUrl,
                 LibRusEcUrl = libRusEcUrl,
