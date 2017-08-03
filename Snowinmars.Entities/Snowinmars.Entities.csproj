@@ -41,7 +41,7 @@
     <Compile Include="Daemon\DaemonScheduler.cs" />
     <Compile Include="Daemon\DaemonSettings.cs" />
     <Compile Include="Daemon\DaemonSettingsType.cs" />
-    <Compile Include="Daemon\Entity.cs" />
+    <Compile Include="Entity.cs" />
     <Compile Include="Daemon\IDaemon.cs" />
     <Compile Include="BookStatus.cs" />
     <Compile Include="Language.cs" />
@@ -52,6 +52,9 @@
     <Compile Include="Warning.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

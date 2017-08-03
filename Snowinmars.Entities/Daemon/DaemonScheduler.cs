@@ -2,29 +2,31 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using Newtonsoft.Json;
 
 namespace Snowinmars.Entities
 {
-	public class DaemonScheduler : IDaemon
+	public class DaemonScheduler
 	{
 		private const int measurmentError = 5;
-		private List<Daemon> daemons;
+
+		public IList<Daemon> Daemons { get; }
 		private bool wasSentInThisHour;
 
 		public DaemonScheduler()
 		{
 			Id = Guid.NewGuid();
-		}
 
+			Daemons = new List<Daemon>();
+		}
+		[JsonIgnore]
 		public Guid Id { get; }
 
 		public string Name { get; } = nameof(DaemonSettings);
 
-		public DaemonSettings Settings { get; }
+		public bool Exclude(string name) => Exclude(this.Daemons.First(d => d.Name == name));
 
-		public bool Exclude(string name) => Exclude(this.daemons.First(d => d.Name == name));
-
-		public bool Exclude(Guid id) => Exclude(this.daemons.First(d => d.Id == id));
+		public bool Exclude(Guid id) => Exclude(this.Daemons.First(d => d.Id == id));
 
 		public void Finit()
 		{
@@ -34,7 +36,7 @@ namespace Snowinmars.Entities
 		{
 			daemon.Init();
 
-			this.daemons.Add(daemon);
+			this.Daemons.Add(daemon);
 
 			return true;
 		}
@@ -54,7 +56,7 @@ namespace Snowinmars.Entities
 
 			if (isCloseToMinuteStart)
 			{
-				foreach (var daemon in this.daemons.Where(d => d.Settings.Type == DaemonSettingsType.Minutes))
+				foreach (var daemon in this.Daemons.Where(d => d.Settings.Type == DaemonSettingsType.Minutes))
 				{
 					ThreadPool.QueueUserWorkItem(_ => daemon.Work());
 				}
@@ -64,7 +66,7 @@ namespace Snowinmars.Entities
 
 			if (isCloseToHourStart && !this.wasSentInThisHour)
 			{
-				foreach (var daemon in this.daemons.Where(d => d.Settings.Type == DaemonSettingsType.Hours))
+				foreach (var daemon in this.Daemons.Where(d => d.Settings.Type == DaemonSettingsType.Hours))
 				{
 					ThreadPool.QueueUserWorkItem(_ => daemon.Work());
 				}
@@ -97,7 +99,7 @@ namespace Snowinmars.Entities
 		{
 			daemon.Finit();
 
-			return this.daemons.Remove(daemon);
+			return this.Daemons.Remove(daemon);
 		}
 	}
 }

@@ -8,7 +8,8 @@ namespace Snowinmars.Entities
 {
 	public enum DaemonSettingsType
 	{
-		Minutes = 0,
-		Hours = 1,
+		Seconds = 0,
+		Minutes = 1,
+		Hours = 2,
 	}
 }

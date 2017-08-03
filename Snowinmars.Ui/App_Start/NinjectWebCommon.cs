@@ -1,3 +1,8 @@
+using System.Collections.Generic;
+using Newtonsoft.Json;
+using Snowinmars.Common;
+using Snowinmars.Entities;
+
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Snowinmars.Ui.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(Snowinmars.Ui.App_Start.NinjectWebCommon), "Stop")]
 
@@ -21,6 +26,23 @@ namespace Snowinmars.Ui.App_Start
             DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
             DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
             bootstrapper.Initialize(CreateKernel);
+
+	        Snowinmars.Entities.DaemonScheduler daemonScheduler = new DaemonScheduler();
+	        Snowinmars.Entities.Daemon daemon1 = new Daemon("ShortcutDaemon", DaemonSettingsType.Minutes);
+
+	        int[] a = new int[60];
+
+	        for (int i = 0; i < 60; i++)
+	        {
+		        a[i] = i;
+	        }
+
+			daemon1.Settings.Minutes.AddRange(a);
+
+	        daemonScheduler.Include(daemon1);
+
+	        var s = Newtonsoft.Json.JsonConvert.SerializeObject(daemonScheduler);
+	        var o = Newtonsoft.Json.JsonConvert.DeserializeObject<DaemonScheduler>(s);
         }
 
         /// <summary>
