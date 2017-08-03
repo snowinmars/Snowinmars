@@ -1,0 +1,14 @@
+﻿.quality {
+	margin: 10px;
+	line-height: 3ex;
+	font-size: 3ex;
+}
+
+.qualitiesForm input[type=submit] {
+	margin-left: 1ex;
+}
+
+.result {
+	margin: 10px;
+	border: 4px #073642 solid;
+}

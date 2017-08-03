@@ -22,7 +22,11 @@
 			case "wishlist":
 			case "Wishlist":
 	            navbar.children("[data-id=wishlist]").addClass("active");
-	            break;
+				break;
+			case "pathofeilxe":
+			case "Pathofeilxe":
+				navbar.children("[data-id=pathofeilxe]").addClass("active");
+				break;
         }
     }
 

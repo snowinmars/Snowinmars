@@ -1,0 +1,47 @@
+﻿@using Snowinmars.Ui.App_LocalResources
+
+@{
+	ViewBag.Title = "Qualities";
+	Layout = "~/Views/Layouts/DefaultLayout.cshtml";
+}
+
+@section Content
+{
+	<link href="~/Content/snowinmars/pathOfExile.css" rel="stylesheet" />
+}
+
+<h2>@Global.Qualities_Header</h2>
+
+<div>
+	@using (Html.BeginForm("Qualities", "PathOfExile", FormMethod.Post, new { @class = "qualitiesForm" }))
+	{
+		<div class="form-group">
+			<div class="col-xs-12">
+				<div id="qualitiesGroup" class="flex flex-row flex-wrap  col-xs-10">
+					<input class="flex-item quality col-xs-2" type="number" step="1" min="1" max="20" />
+					<input class="flex-item quality col-xs-2" type="number" step="1" min="1" max="20" />
+					<input class="flex-item quality col-xs-2" type="number" step="1" min="1" max="20" />
+				</div>
+
+				<div class="overflowErrorHint hidden">
+					This is new functional, and I'm sorry, but you can't add more values now. I'll fix it later
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-xs-12">
+				<div class="col-md-offset-2 col-md-10">
+					<input type="submit" value="@Global._Go" class="btn btn-default"/>
+				</div>
+			</div>
+		</div>
+			}
+	
+	<div class="col-xs-12 result"></div>
+</div>
+
+@section Scripts
+{
+	<script src="~/Scripts/snowinmars/pathOfExile.js"></script>
+}

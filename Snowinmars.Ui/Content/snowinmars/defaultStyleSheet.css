@@ -67,8 +67,8 @@ a .btn-danger {
 	overflow: hidden;
 }
 
-.asd:first-letter{
-    text-transform: uppercase;
+.asd:first-letter {
+	text-transform: uppercase;
 }
 
 .detailsBlock {
@@ -84,29 +84,27 @@ hr {
 }
 
 .noOverflow {
-	overflow:hidden;
-    white-space:nowrap;
-    text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
 .userInfo {
 	margin-bottom: 2ex;
 	margin-left: 12ex;
-
-	color:#a29200;
-
+	color: #a29200;
 	min-height: 1.5ex;
 }
 
 .beware {
-    color: red !important;
-    font-size: 2ex;
-    text-align: center;
-    text-decoration: underline;
+	color: red !important;
+	font-size: 2ex;
+	text-align: center;
+	text-decoration: underline;
 }
 
 .data-tooltip {
-    cursor: help;
+	cursor: help;
 }
 
 .fail {
@@ -114,10 +112,36 @@ hr {
 }
 
 .success {
-    color: lightgreen;
+	color: lightgreen;
 }
 
-.noFocus:focus  {
-    outline: none;
+.noFocus:focus {
+	outline: none;
+}
 
+.flex {
+	display: flex;
+}
+
+.flex-row {
+	flex-direction: row;
+}
+
+.flex-row-reverse {
+	flex-direction: row-reverse;
+}
+
+.flex-column {
+	flex-direction: column;
+}
+
+.flex-column-reverse {
+	flex-direction: column-reverse;
+}
+
+.flex-item {
+}
+
+.flex-wrap {
+	flex-wrap: wrap;
 }

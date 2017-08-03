@@ -317,6 +317,7 @@
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Content\snowinmars\defaultStyleSheet.css" />
     <Content Include="Content\snowinmars\loadingCube.css" />
+    <Content Include="Content\snowinmars\pathOfExile.css" />
     <Content Include="Content\snowinmars\rootPage.css" />
     <Content Include="Content\snowinmars\userDetails.css" />
     <Content Include="Content\snowinmars\userIndex.css" />
@@ -429,6 +430,7 @@
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\prototype.js" />
+    <Content Include="Scripts\snowinmars\pathOfExile.js" />
     <Content Include="Scripts\snowinmars\rootPage.js" />
     <Content Include="Scripts\snowinmars\tableSetup.js" />
     <Content Include="Scripts\snowinmars\userDetails.js" />
@@ -466,6 +468,7 @@
     <Compile Include="ControllersHelpers\InternationalizationAttribute .cs" />
     <Compile Include="ControllersHelpers\LangQueryAppenderModule.cs" />
     <Compile Include="ControllersHelpers\LocalizationHelper.cs" />
+    <Compile Include="Controllers\PathOfExileController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -508,6 +511,7 @@
     <Content Include="Views\Layouts\_BannedLayout.cshtml" />
     <Content Include="Views\User\RootPage.cshtml" />
     <Content Include="Views\Book\Wishlist.cshtml" />
+    <Content Include="Views\PathOfExile\Qualities.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -522,6 +526,10 @@
     <ProjectReference Include="..\Snowinmars.Bll.Interfaces\Snowinmars.Bll.Interfaces.csproj">
       <Project>{67ac64ca-13cb-4bab-8ae8-fa7cc557b796}</Project>
       <Name>Snowinmars.Bll.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Snowinmars.Bll\Snowinmars.Bll.csproj">
+      <Project>{A6737D90-70DB-4C6C-B80F-F4A1613DE137}</Project>
+      <Name>Snowinmars.Bll</Name>
     </ProjectReference>
     <ProjectReference Include="..\Snowinmars.Common\Snowinmars.Common.csproj">
       <Project>{b672661f-888c-4da2-bd4f-8ab7c78d8bc3}</Project>

@@ -574,6 +574,15 @@ namespace Snowinmars.Ui.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to PathOfExile.
+        /// </summary>
+        public static string Layout_PathOfExile {
+            get {
+                return ResourceManager.GetString("Layout_PathOfExile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Personal page.
         /// </summary>
         public static string Layout_PersonalPage {
@@ -606,6 +615,15 @@ namespace Snowinmars.Ui.App_LocalResources {
         public static string Model_IsSynchronized {
             get {
                 return ResourceManager.GetString("Model_IsSynchronized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Qualities.
+        /// </summary>
+        public static string Qualities_Header {
+            get {
+                return ResourceManager.GetString("Qualities_Header", resourceCulture);
             }
         }
         

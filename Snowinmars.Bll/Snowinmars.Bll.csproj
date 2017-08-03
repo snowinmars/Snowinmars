@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="AuthorLogic.cs" />
     <Compile Include="BookLogic.cs" />
+    <Compile Include="PathOfExileLogic.cs" />
     <Compile Include="UserLogic.cs" />
     <Compile Include="Validation.cs" />
   </ItemGroup>

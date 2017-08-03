@@ -246,6 +246,9 @@
   <data name="Layout_LibraryWishlist" xml:space="preserve">
     <value>Желаемые книги</value>
   </data>
+  <data name="Layout_PathOfExile" xml:space="preserve">
+    <value>PathOfExile</value>
+  </data>
   <data name="Layout_PersonalPage" xml:space="preserve">
     <value>Личный кабинет</value>
   </data>
@@ -257,6 +260,9 @@
   </data>
   <data name="Model_IsSynchronized" xml:space="preserve">
     <value>Синхронизирован</value>
+  </data>
+  <data name="Qualities_Header" xml:space="preserve">
+    <value>Qualities</value>
   </data>
   <data name="UserDetails_EmailQuestionTooltip" xml:space="preserve">
     <value>Система может информировать о недооформленных книгах и об ошибках в работе системы.
