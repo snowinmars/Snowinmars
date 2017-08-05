@@ -261,6 +261,12 @@
   <data name="Model_IsSynchronized" xml:space="preserve">
     <value>Is synchronized</value>
   </data>
+  <data name="Qualities_About_Part1" xml:space="preserve">
+    <value>There's vendor recipe system in Path of Exile. You can get Gemcutter's Prism or Glassblower's Bauble selling skill gems or flask respectively with 40 total quanity.</value>
+  </data>
+  <data name="Qualities_About_Part2" xml:space="preserve">
+    <value>Set here your quality values, and you will get below sums, that equals to exactly 40.</value>
+  </data>
   <data name="Qualities_Header" xml:space="preserve">
     <value>Qualities</value>
   </data>
@@ -334,6 +340,9 @@ You can erase this field any time.</value>
   </data>
   <data name="_Book" xml:space="preserve">
     <value>Book</value>
+  </data>
+  <data name="_Clear" xml:space="preserve">
+    <value>Clear</value>
   </data>
   <data name="_Close" xml:space="preserve">
     <value>Close</value>

@@ -13,14 +13,30 @@
 <h2>@Global.Qualities_Header</h2>
 
 <div>
-	@using (Html.BeginForm("Qualities", "PathOfExile", FormMethod.Post, new { @class = "qualitiesForm" }))
+	@Global.Qualities_About_Part1
+</div>
+
+<div>
+	@Global.Qualities_About_Part2
+</div>
+
+<div>
+	<div class="col-xs-12">
+		<div class="col-xs-12">
+			<button class="btn btn-default clearQualities">
+				@Global._Clear
+			</button>
+		</div>
+	</div>
+
+	@using (Html.BeginForm("Qualities", "PathOfExile", FormMethod.Post, new {@class = "qualitiesForm"}))
 	{
 		<div class="form-group">
 			<div class="col-xs-12">
 				<div id="qualitiesGroup" class="flex flex-row flex-wrap  col-xs-10">
-					<input class="flex-item quality col-xs-2" type="number" step="1" min="1" max="20" />
-					<input class="flex-item quality col-xs-2" type="number" step="1" min="1" max="20" />
-					<input class="flex-item quality col-xs-2" type="number" step="1" min="1" max="20" />
+					<input class="flex-item quality col-xs-2" type="number" step="1" min="1" max="20"/>
+					<input class="flex-item quality col-xs-2" type="number" step="1" min="1" max="20"/>
+					<input class="flex-item quality col-xs-2" type="number" step="1" min="1" max="20"/>
 				</div>
 
 				<div class="overflowErrorHint hidden">
@@ -31,13 +47,13 @@
 
 		<div class="form-group">
 			<div class="col-xs-12">
-				<div class="col-md-offset-2 col-md-10">
+				<div class="col-xs-12">
 					<input type="submit" value="@Global._Go" class="btn btn-default"/>
 				</div>
 			</div>
 		</div>
-			}
-	
+	}
+
 	<div class="col-xs-12 result"></div>
 </div>
 

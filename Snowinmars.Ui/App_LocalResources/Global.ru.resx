@@ -261,8 +261,14 @@
   <data name="Model_IsSynchronized" xml:space="preserve">
     <value>Синхронизирован</value>
   </data>
+  <data name="Qualities_About_Part1" xml:space="preserve">
+    <value>В Path of Exile есть система рецептев торговцев. Можно получить Призму камнерезчика или Стекольную массу, продав камни и фласки соответственно с суммарным качеством ровно в 40 единиц.</value>
+  </data>
+  <data name="Qualities_About_Part2" xml:space="preserve">
+    <value>Установи здесь значения качеств,и ниже будут показаны суммы,равные ровно 40.</value>
+  </data>
   <data name="Qualities_Header" xml:space="preserve">
-    <value>Qualities</value>
+    <value>Качество</value>
   </data>
   <data name="UserDetails_EmailQuestionTooltip" xml:space="preserve">
     <value>Система может информировать о недооформленных книгах и об ошибках в работе системы.
@@ -334,6 +340,9 @@
   </data>
   <data name="_Book" xml:space="preserve">
     <value>Книгу</value>
+  </data>
+  <data name="_Clear" xml:space="preserve">
+    <value>Очистить</value>
   </data>
   <data name="_Close" xml:space="preserve">
     <value>Закрыть</value>

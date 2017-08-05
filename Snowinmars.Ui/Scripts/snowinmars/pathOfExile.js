@@ -1,4 +1,12 @@
 ﻿(function () {
+	$(".clearQualities").on("click",
+		function() {
+			$.each($(".quality"),
+				function(index, value) {
+					value.value = "";
+				});
+		});
+
 	var qualityInputHtml = '<input class="flex-item quality col-xs-2" type="number" step="1" min="1" max="20"/>';
 
 	$("#qualitiesGroup").on("blur", ".quality", function () {
@@ -84,7 +92,7 @@
 				
 			},
 			error: function (data) {
-				var a = 2;
+				$(".result").append("<div>Nothigs equals to exactly 40</div>");
 			}
 		});
 	});

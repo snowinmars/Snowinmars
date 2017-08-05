@@ -88,6 +88,15 @@ namespace Snowinmars.Ui.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clear.
+        /// </summary>
+        public static string _Clear {
+            get {
+                return ResourceManager.GetString("_Clear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Close.
         /// </summary>
         public static string _Close {
@@ -615,6 +624,24 @@ namespace Snowinmars.Ui.App_LocalResources {
         public static string Model_IsSynchronized {
             get {
                 return ResourceManager.GetString("Model_IsSynchronized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There&apos;s vendor recipe system in Path of Exile. You can get Gemcutter&apos;s Prism or Glassblower&apos;s Bauble selling skill gems or flask respectively with 40 total quanity..
+        /// </summary>
+        public static string Qualities_About_Part1 {
+            get {
+                return ResourceManager.GetString("Qualities_About_Part1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set here your quality values, and you will get below sums, that equals to exactly 40..
+        /// </summary>
+        public static string Qualities_About_Part2 {
+            get {
+                return ResourceManager.GetString("Qualities_About_Part2", resourceCulture);
             }
         }
         
