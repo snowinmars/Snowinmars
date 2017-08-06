@@ -4,6 +4,10 @@
 	font-size: 3ex;
 }
 
+.afterInputElement:after {
+	content: 'a';
+}
+
 .qualitiesForm input[type=submit] {
 	margin-left: 1ex;
 }

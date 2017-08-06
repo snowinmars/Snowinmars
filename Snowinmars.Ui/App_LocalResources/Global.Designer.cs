@@ -565,7 +565,7 @@ namespace Snowinmars.Ui.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Library books.
+        ///   Looks up a localized string similar to All books.
         /// </summary>
         public static string Layout_LibraryBooks {
             get {

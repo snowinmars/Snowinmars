@@ -241,7 +241,7 @@
     <value>Library authors</value>
   </data>
   <data name="Layout_LibraryBooks" xml:space="preserve">
-    <value>Library books</value>
+    <value>All books</value>
   </data>
   <data name="Layout_LibraryWishlist" xml:space="preserve">
     <value>Book wishlist</value>

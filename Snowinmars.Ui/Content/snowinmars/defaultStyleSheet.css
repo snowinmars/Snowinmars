@@ -145,3 +145,8 @@ hr {
 .flex-wrap {
 	flex-wrap: wrap;
 }
+
+.wishedbook:after {
+	font-family: 'Glyphicons Halflings';
+	content: '\e102';
+}

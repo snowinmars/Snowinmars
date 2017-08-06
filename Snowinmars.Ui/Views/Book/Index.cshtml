@@ -51,50 +51,58 @@
     </thead>
     <tbody>
         @foreach (var item in Model)
-        {
-            if (User.Identity.Name == item.Owner)
-            {
-                @:<tr data-id="@item.Id" class="myBook">
-			}
-            else
-            {
-                @:<tr data-id="@item.Id">
-			}
-            <td class="col-xs-3 noOverflow titleColumn">
-                <span class="myBookIcon glyphicon glyphicon-book data-tooltip" data-toggle="tooltip" data-placement="top" title="@Global._Yours"></span>
+		{
+			string c = "";
 
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-                <td class="col-xs-1 ">
-                    @Html.DisplayFor(modelItem => item.Year)
-                </td>
-                <td class="col-xs-1 hidden-xs">
-                    @Html.DisplayFor(modelItem => item.PageCount)
-                </td>
-                <td class="col-xs-4 hidden-sm hidden-xs">
-                    @Html.DropDownList("authorModelIds_" + item.Id, item.AuthorShortcuts.Select(s => new SelectListItem { Text = s, Selected = true, }), new Dictionary<string, object> { { "class", "authorModelIds col-xs-10" }, { "multiple", "multiple" }, })
+			if (User.Identity.Name == item.Owner)
+			{
+				c += " mybook ";
+			}
 
-                    @if (!item.IsSynchronized)
-                {
-                        <span class="synchronizationIcon glyphicon glyphicon-refresh glyphicon-spin col-xs-1" data-toggle="tooltip" data-placement="top" title="@Global._Sync"></span>
-                    }
-                    else
-                    {
-                        <span class="hidden synchronizationIcon glyphicon glyphicon-refresh glyphicon-spin col-xs-1" data-toggle="tooltip" data-placement="top" title="@Global._Sync"></span>
-                    }
-                </td>
-                <td class="col-sm-4 col-xs-2">
-                    @if (User.IsInRole(UserRoles.Admin.ToString()) ||
-                 User.IsInRole(UserRoles.Root.ToString()))
-                    {
-                        @RenderPage("~/Views/Layouts/_EditDetailsDeleteActionPartialPanel.cshtml", item.Id)
-                    }
-                    else
-                    {
-                        @RenderPage("~/Views/Layouts/_DetailsActionPartialPanel.cshtml", item.Id)
-                    }
-                </td>
-                @:</tr>
+			if (item.Status == BookStatus.Wished)
+			{
+				c += " wishedbook ";
+			}
+
+			<tr data-id="@item.Id" class="@c">
+				<td class="col-xs-3 noOverflow titleColumn">
+					@if (User.Identity.Name == item.Owner)
+					{
+						<span class="myBookIcon glyphicon glyphicon-book data-tooltip" data-toggle="tooltip" data-placement="top" title="@Global._Yours"></span>
+					}
+
+					@Html.DisplayFor(modelItem => item.Title)
+				</td>
+				<td class="col-xs-1 ">
+					@Html.DisplayFor(modelItem => item.Year)
+				</td>
+				<td class="col-xs-1 hidden-xs">
+					@Html.DisplayFor(modelItem => item.PageCount)
+				</td>
+				<td class="col-xs-4 hidden-sm hidden-xs">
+					@Html.DropDownList("authorModelIds_" + item.Id, item.AuthorShortcuts.Select(s => new SelectListItem { Text = s, Selected = true, }), new Dictionary<string, object> { { "class", "authorModelIds col-xs-10" }, { "multiple", "multiple" }, })
+
+					@if (!item.IsSynchronized)
+					{
+						<span class="synchronizationIcon glyphicon glyphicon-refresh glyphicon-spin col-xs-1" data-toggle="tooltip" data-placement="top" title="@Global._Sync"></span>
+					}
+					else
+					{
+						<span class="hidden synchronizationIcon glyphicon glyphicon-refresh glyphicon-spin col-xs-1" data-toggle="tooltip" data-placement="top" title="@Global._Sync"></span>
+					}
+				</td>
+				<td class="col-sm-4 col-xs-2">
+					@if (User.IsInRole(UserRoles.Admin.ToString()) ||
+					     User.IsInRole(UserRoles.Root.ToString()))
+					{
+						@RenderPage("~/Views/Layouts/_EditDetailsDeleteActionPartialPanel.cshtml", item.Id)
+					}
+					else
+					{
+						@RenderPage("~/Views/Layouts/_DetailsActionPartialPanel.cshtml", item.Id)
+					}
+				</td>
+			</tr>
 		}
     </tbody>
 </table>

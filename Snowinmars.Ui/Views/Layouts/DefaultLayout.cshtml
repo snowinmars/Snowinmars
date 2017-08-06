@@ -42,13 +42,18 @@
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li class="active" data-id="book">@Html.ActionLink(Global.Layout_LibraryBooks, "Index", "Book")</li>
-	                    <li class="active" data-id="author">@Html.ActionLink(Global.Layout_LibraryAuthors, "Index", "Author")</li>
-						@if (User.Identity.IsAuthenticated)
-						{
-							<li class="active" data-id="wishlist">@Html.ActionLink(Global.Layout_LibraryWishlist, "Wishlist", "Book")</li>
-						}
+					<ul class="nav navbar-nav">
+						<li class="active dropdown booksDropdown" data-id="book">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@Global.BookIndex_Header<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li>@Html.ActionLink(Global.Layout_LibraryBooks, "Index", "Book")</li>
+								<li>@Html.ActionLink(Global.Layout_LibraryAuthors, "Index", "Author")</li>
+								@if (User.Identity.IsAuthenticated)
+								{
+									<li>@Html.ActionLink(Global.Layout_LibraryWishlist, "Wishlist", "Book")</li>
+								}
+							</ul>
+						</li>
 						<li class="active" data-id="pathofeilxe">@Html.ActionLink(Global.Layout_PathOfExile, "Qualities", "PathOfExile")</li>
                     </ul>
 
