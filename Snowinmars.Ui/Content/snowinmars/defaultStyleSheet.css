@@ -81,6 +81,13 @@ a .btn-danger {
 
 hr {
 	border-color: darkslategrey;
+	border: 0;
+	height: 1px;
+	background: #000;
+	background-image: -webkit-linear-gradient(left, darkslategrey, #2a7198, darkslategrey);
+	background-image: -moz-linear-gradient(left, darkslategrey, #2a7198, darkslategrey);
+	background-image: -ms-linear-gradient(left, darkslategrey, #2a7198, darkslategrey);
+	background-image: -o-linear-gradient(left, darkslategrey, #2a7198, darkslategrey);
 }
 
 .noOverflow {

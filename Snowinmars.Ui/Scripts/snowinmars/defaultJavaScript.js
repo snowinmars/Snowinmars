@@ -10,21 +10,12 @@
     for (var i = 0; i < urlPartsLength; i++) {
         var urlPart = urlParts[i];
 
-        switch (urlPart) {
-            case "author":
-            case "Author":
-                navbar.children("[data-id=author]").addClass("active");
-                break;
+        switch (urlPart.toLocaleLowerCase()) {
             case "book":
-            case "Book":
+			case "author":
                 navbar.children("[data-id=book]").addClass("active");
 				break;
-			case "wishlist":
-			case "Wishlist":
-	            navbar.children("[data-id=wishlist]").addClass("active");
-				break;
-			case "pathofeilxe":
-			case "Pathofeilxe":
+			case "pathofexile":
 				navbar.children("[data-id=pathofeilxe]").addClass("active");
 				break;
         }
@@ -131,8 +122,26 @@
             e.preventDefault();
 
             if (!($(".oldUserHello").hasClass("hidden"))) {
-                if ($("#Username").val() && $("#Password").val()) {
-                    e.target.submit();
+				if ($("#Username").val() && $("#Password").val()) {
+					$.ajax({
+						url: "/en/User/Enter",
+						type: "POST",
+						data: {
+							username: $(e.target).find("#Username").val(),
+							password: $(e.target).find("#Password").val(),
+							PasswordConfirm: $(e.target).find("#PasswordConfirm").val()
+						},
+						success: function (data) {
+							if (data.Success) {
+								location.href = data.Redirect;
+							} else {
+								$(".errorOnLoginProcess").removeClass("hidden");
+							}
+						},
+						error: function (data) {
+							$(".errorOnLoginProcess").removeClass("hidden");
+						}
+					});
                     return;
                 }
             }

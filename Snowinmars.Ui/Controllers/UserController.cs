@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Globalization;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -160,7 +161,7 @@ namespace Snowinmars.Ui.Controllers
         [HttpPost]
         [Route("enter")]
         [AllowAnonymous]
-        public ActionResult Enter(CreateUserModel userModel)
+        public JsonResult Enter(CreateUserModel userModel)
         {
             bool isUserAlreadyRegistred = string.IsNullOrWhiteSpace(userModel.PasswordConfirm);
 
@@ -173,7 +174,14 @@ namespace Snowinmars.Ui.Controllers
 
 	        if (result)
 	        {
-				return new RedirectResult(this.Url.Action("Index", "Home"));
+		        return new JsonResult
+		        {
+			        Data = new
+			        {
+				        Success = true,
+				        Redirect = this.Url.Action("Index", "Home"),
+			        }
+		        };
 	        }
 
 			return ControllerHelper.GetFailJsonResult();

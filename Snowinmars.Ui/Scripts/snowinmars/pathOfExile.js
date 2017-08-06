@@ -72,7 +72,6 @@
 				desiredValue: 40,
 			},
 			success: function (data) {
-
 				var length = data.length;
 				var list = "<ul>";
 
@@ -89,10 +88,11 @@
 				list += "</ul>";
 
 				$(".result").append(list);
-				
+				$(".result").append("<hr />");
 			},
 			error: function (data) {
 				$(".result").append("<div>Nothigs equals to exactly 40</div>");
+				$(".result").append("<hr />");
 			}
 		});
 	});
