@@ -15,7 +15,8 @@
     <ProjectGuid>{864D84A0-E72E-44FD-900E-BAA36CE39D91}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>Snowinmars.Dao</RootNamespace>
-    <TargetFrameworkVersion>4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -27,7 +28,7 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Snowinmars.Common\Snowinmars.Common.csproj">
-      <Project>{b672661f-888c-4da2-bd4f-8ab7c78d8bc3}</Project>
+      <Project>{B672661F-888C-4DA2-BD4F-8AB7C78D8BC3}</Project>
       <Name>Snowinmars.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Snowinmars.Dao.Interfaces\Snowinmars.Dao.Interfaces.csproj">
@@ -35,7 +36,7 @@
       <Name>Snowinmars.Dao.Interfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\Snowinmars.Entities\Snowinmars.Entities.csproj">
-      <Project>{bb0b33b5-a16b-4ad6-a1cb-24dc9981a69d}</Project>
+      <Project>{BB0B33B5-A16B-4AD6-A1CB-24DC9981A69D}</Project>
       <Name>Snowinmars.Entities</Name>
     </ProjectReference>
   </ItemGroup>

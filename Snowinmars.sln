@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snowinmars.Ui", "Snowinmars
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snowinmars.NinjectRegistrator", "Snowinmars.NinjectRegistrator\Snowinmars.NinjectRegistrator.csproj", "{7BA2CB1B-D02F-4F98-A1AE-F68EC3611DA6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snowinmars.Bll.Tests", "Snowinmars.Bll.Tests\Snowinmars.Bll.Tests.csproj", "{896A8EFF-F4D1-41DC-B7AF-2ABC99DC4C82}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,6 +58,10 @@ Global
 		{7BA2CB1B-D02F-4F98-A1AE-F68EC3611DA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7BA2CB1B-D02F-4F98-A1AE-F68EC3611DA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7BA2CB1B-D02F-4F98-A1AE-F68EC3611DA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{896A8EFF-F4D1-41DC-B7AF-2ABC99DC4C82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{896A8EFF-F4D1-41DC-B7AF-2ABC99DC4C82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{896A8EFF-F4D1-41DC-B7AF-2ABC99DC4C82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{896A8EFF-F4D1-41DC-B7AF-2ABC99DC4C82}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

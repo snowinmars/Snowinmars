@@ -15,7 +15,8 @@
     <ProjectGuid>{BB0B33B5-A16B-4AD6-A1CB-24DC9981A69D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>Snowinmars.Entities</RootNamespace>
-    <TargetFrameworkVersion>4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -25,12 +26,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Snowinmars.Common\Snowinmars.Common.csproj">
-      <Project>{b672661f-888c-4da2-bd4f-8ab7c78d8bc3}</Project>
-      <Name>Snowinmars.Common</Name>
-    </ProjectReference>
-  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

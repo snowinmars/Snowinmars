@@ -6,82 +6,52 @@ namespace Snowinmars.Bll
 {
 	public class PathOfExileLogic
 	{
-		IList<IList<int>> qualityCombinations = new List<IList<int>>();
-		
-		/// <summary>
-		/// I didn't write it, sorry.
-		/// I just paste it from one math lovers forum
-		/// Surely, I will rewrite this code, but not now.
-		/// It works combine all input numbers in recursion cycle. Don't try to call this method on large arrays
-		/// </summary>
-		/// <param name="qualities"></param>
-		/// <param name="s"></param>
-		/// <param name="i"></param>
-		/// <param name="p"></param>
-		/// <param name="qualitiesLenght"></param>
-		/// <param name="desiredValue"></param>
-		/// <param name="corsize"></param>
-		/// <returns></returns>
-		private IList<IList<int>> PickQualityCombinationImplementation(IList<int> qualities,
-			IList<int> s,
-			int i,
-			int p,
-			int qualitiesLenght,
-			int desiredValue,
-			int corsize)
+		public IEnumerable<IList<int>> PickQualityCombination(IList<int> qualities, int desiredValue)
 		{
-			for (; i < qualitiesLenght; i++)
+			for (int i = 1; i <= qualities.Count; i++)
 			{
-				if (corsize + qualities[i] == desiredValue)
-				{
-					qualityCombinations.Add(new List<int>());
-					var collection = qualityCombinations[qualityCombinations.Count - 1];
-
-					for (int j = 0; j <= p; j++)
-					{
-						collection.Add(qualities[s[j]]);
-						Console.Write("{0} + ", qualities[s[j]]);
-					}
-
-					collection.Add(qualities[i]);
-					Console.WriteLine("{0} = {1};", qualities[i], desiredValue);
-				}
-				else
-				{
-					if (corsize + qualities[i] < desiredValue)
-					{
-						s[p + 1] = i;
-
-						this.PickQualityCombinationImplementation(qualities,
-							s,
-							i + 1,
-							p + 1,
-							qualitiesLenght,
-							desiredValue,
-							corsize + qualities[i]);
-					}
-				}
+				printCombination(qualities, qualities.Count, i);
 			}
 
-			return qualityCombinations;
+			return combinations.Where(list => list.Sum() == desiredValue);
 		}
 
-		/// <summary>
-		/// At this version it works combine all input numbers in recursion cycle. Don't try to call this method on large arrays
-		/// </summary>
-		/// <param name="qualities">Less then 10 numbers, otherwise InvalidOperationException will be thrown for the server processor's safe</param>
-		/// <param name="desiredValue"></param>
-		/// <returns></returns>
-		public IList<IList<int>> PickQualityCombination(IList<int> qualities, int desiredValue)
+		// The main function that prints all combinations of size r
+		// in arr[] of size n. This function mainly uses combinationUtil()
+		static void printCombination(IList<int> arr, int n, int r)
 		{
-			if (qualities.Count > 10)
+			// A temporary array to store all combination one by one
+			int[] data = new int[r];
+
+			// Print all combination using temprary array 'data[]'
+			combinationUtil(arr, data, 0, n - 1, 0, r);
+		}
+
+		static IList<IList<int>> combinations = new List<IList<int>>();
+
+		/* arr[]  ---> Input Array
+		   data[] ---> Temporary array to store current combination
+		   start & end ---> Staring and Ending indexes in arr[]
+		   index  ---> Current index in data[]
+		   r ---> Size of a combination to be printed */
+		static void combinationUtil(IList<int> arr, IList<int> data, int start, int end, int index, int r)
+		{
+			// Current combination is ready to be printed, print it
+			if (index == r)
 			{
-				throw new InvalidOperationException("This method can't proceed more then 20 numbers. Due to this code is from 2010 math forum. I'm sorry");
+				PathOfExileLogic.combinations.Add(data.Select(a => a).ToList()); // clone
+				return;
 			}
 
-			int[] s = new int[qualities.Count];
-
-			return this.PickQualityCombinationImplementation(qualities.ToArray(), s, 0, -1, qualities.Count, desiredValue, 0);
+			// replace index with all possible elements. The condition
+			// "end-i+1 >= r-index" makes sure that including one element
+			// at index will make a combination with remaining elements
+			// at remaining positions
+			for (int i = start; ((i <= end) && (end - i + 1 >= r - index)); i++)
+			{
+				data[index] = arr[i];
+				combinationUtil(arr, data, i + 1, end, index + 1, r);
+			}
 		}
 	}
 }

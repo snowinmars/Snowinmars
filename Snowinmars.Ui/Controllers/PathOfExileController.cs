@@ -31,7 +31,7 @@ namespace Snowinmars.Ui.Controllers
 		[Route("qualities")]
 		public JsonResult Qualities(IList<int> qualities, int desiredValue)
 		{
-			IList<IList<int>> qualityCombination = this.pathOfExileLogic.PickQualityCombination(qualities, desiredValue);
+			IEnumerable<IList<int>> qualityCombination = this.pathOfExileLogic.PickQualityCombination(qualities, desiredValue);
 
 			return new JsonResult()
 			{

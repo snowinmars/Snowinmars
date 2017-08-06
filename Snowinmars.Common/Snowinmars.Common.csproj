@@ -15,7 +15,8 @@
     <ProjectGuid>{B672661F-888C-4DA2-BD4F-8AB7C78D8BC3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>Snowinmars.Common</RootNamespace>
-    <TargetFrameworkVersion>4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
