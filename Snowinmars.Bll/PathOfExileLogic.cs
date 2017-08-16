@@ -3,34 +3,8 @@ using System.Linq;
 
 namespace Snowinmars.Bll
 {
-	
-
 	public class PathOfExileLogic
 	{
-		private class ListComparer : IEqualityComparer<IList<int>>
-		{
-			public bool Equals(IList<int> x, IList<int> y)
-			{
-				return x.SequenceEqual(y);
-			}
-
-			public int GetHashCode(IList<int> obj)
-			{
-				unchecked
-				{
-					int hash = 19;
-
-					foreach (var item in obj)
-					{
-						hash = hash * 31 + item.GetHashCode();
-					}
-
-					return hash;
-				}
-
-			}
-		}
-
 		private readonly IList<IList<int>> combinations;
 
 		public PathOfExileLogic()
@@ -50,7 +24,8 @@ namespace Snowinmars.Bll
 			return this.combinations // for all combinations
 				.Where(list => list.Sum() == desiredValue) // find some which have correct sum
 				.Select(list => list.OrderBy(_ => _).ToList()) // order it by asc
-				.Distinct(c); // and remove repeated sequence
+				.Distinct(c) // and remove repeated sequence
+				;
 		}
 
 		/// <summary>
@@ -100,6 +75,29 @@ namespace Snowinmars.Bll
 												end: end,
 												index: index + 1,
 												k: k);
+			}
+		}
+
+		private class ListComparer : IEqualityComparer<IList<int>>
+		{
+			public bool Equals(IList<int> x, IList<int> y)
+			{
+				return x.SequenceEqual(y);
+			}
+
+			public int GetHashCode(IList<int> obj)
+			{
+				unchecked
+				{
+					int hash = 19;
+
+					foreach (var item in obj)
+					{
+						hash = hash * 31 + item.GetHashCode();
+					}
+
+					return hash;
+				}
 			}
 		}
 	}
