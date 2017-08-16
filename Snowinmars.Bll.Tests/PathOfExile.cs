@@ -12,6 +12,7 @@ namespace Snowinmars.Bll.Tests
 		[TestCase(new[] { 1, 1 }, 2, 1)]
 		[TestCase(new[] { 1, 1, 1 }, 4, null)]
 		[TestCase(new[] { 19, 13, 15, 9, 17, 7 }, 40, null)]
+		[TestCase(new[] { 10, 10, 10, 10, 5, 5, 5 }, 40, 2)]
 		public void A(int[] values, int desiredValue, int? combinationsCount)
 		{
 			bool isPossible = combinationsCount.HasValue;
