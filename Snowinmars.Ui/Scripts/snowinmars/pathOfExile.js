@@ -23,9 +23,7 @@
 			}
 		}
 
-		// 10 is limit for bll
-
-		if ($("#qualitiesGroup").children().length >= 10) {
+		if ($("#qualitiesGroup").children().length >= 32) {
 			$(".overflowErrorHint").removeClass("hidden");
 			return;
 		}
@@ -69,7 +67,7 @@
 			type: "POST",
 			data: {
 				qualities: arr,
-				desiredValue: 40,
+				desiredValue: 40
 			},
 			success: function (data) {
 				var length = data.length;
