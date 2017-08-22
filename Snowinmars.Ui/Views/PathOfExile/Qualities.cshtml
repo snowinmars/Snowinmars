@@ -40,7 +40,12 @@
 				</div>
 
 				<div class="overflowErrorHint hidden">
-					This is new functional, and I'm sorry, but you can't add more values now. I'll fix it later
+					You can't add more: that's too complex calculations for the algorithm. I'll fix it, or if you have a solution - contact me at snowinmars@yandex.ru
+				</div>
+				<div class="col-xs-2 importExportBlock">
+					@*<span class="col-xs-5 btn btn-default importBtn">Import</span>*@
+					<span class="col-xs-5 col-xs-offset-6 btn btn-default exportBtn">Export</span>
+					<textarea class="importExportTextarea col-xs-11" name="Text1" class="col-xs-11" rows="5"></textarea>
 				</div>
 			</div>
 		</div>
@@ -53,8 +58,12 @@
 			</div>
 		</div>
 	}
-
-	<div class="col-xs-12 result"></div>
+	
+	
+	<div class="col-xs-12 resultBox">
+		<div class="btn btn-default clearResultSetBtn">Clear result set</div>
+		<div class="col-xs-12 result"></div>
+	</div>
 </div>
 
 @section Scripts

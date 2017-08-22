@@ -7,6 +7,28 @@
 				});
 		});
 
+	$(".clearResultSetBtn").on("click",
+		function() {
+			$(".result").empty();
+		});
+
+	$(".importBtn").on("click",
+		function() {
+
+		});
+
+	$(".exportBtn").on("click",
+		function () {
+			var textarea = $(".importExportTextarea");
+
+			textarea.val("");
+
+			$.each($(".quality"),
+				function (index, value) {
+					textarea.val(textarea.val() + " " + value.value);
+				});
+		});
+
 	var qualityInputHtml = '<input class="flex-item quality col-xs-2" type="number" step="1" min="1" max="20"/>';
 
 	$("#qualitiesGroup").on("blur", ".quality", function () {
@@ -23,7 +45,7 @@
 			}
 		}
 
-		if ($("#qualitiesGroup").children().length >= 32) {
+		if ($("#qualitiesGroup").children().length >= 20) {
 			$(".overflowErrorHint").removeClass("hidden");
 			return;
 		}
@@ -70,9 +92,27 @@
 				desiredValue: 40
 			},
 			success: function (data) {
-				var length = data.length;
-				var list = "<ul>";
+				if (data.data === null) {
+					$(".result").prepend("<div>Nothigs equals to exactly 40</div>");
+					$(".result").prepend("<hr />");
+					return;
+				}
 
+				var list = "<span>Input qualities is ";
+
+				var qualities = $(".quality");
+
+				var length = qualities.length;
+
+				for (var i = 0; i < length; i++) {
+					list += qualities[i].value + " ";
+				}
+
+				list += "</span>";
+
+				list += '<ul>';
+
+				length = data.length;
 				for (var i = 0; i < length; i++) {
 					var row = data[i];
 
@@ -85,12 +125,12 @@
 
 				list += "</ul>";
 
-				$(".result").append(list);
-				$(".result").append("<hr />");
+				$(".result").prepend(list);
+				$(".result").prepend("<hr />");
 			},
 			error: function (data) {
-				$(".result").append("<div>Nothigs equals to exactly 40</div>");
-				$(".result").append("<hr />");
+				$(".result").prepend("<div>Error was occured processing the request</div>");
+				$(".result").prepend("<hr />");
 			}
 		});
 	});

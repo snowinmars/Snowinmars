@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Snowinmars.Bll
@@ -14,6 +15,11 @@ namespace Snowinmars.Bll
 
 		public IEnumerable<IList<int>> PickQualityCombination(IList<int> qualities, int desiredValue)
 		{
+			if (qualities.Count > 20)
+			{
+				throw new InvalidOperationException($"Can't handle qualities count: maximum allowed is 20 elements, but input was {qualities.Count} length");
+			}
+
 			for (int i = 1; i <= qualities.Count; i++)
 			{
 				this.FillCombinations(qualities, i);
