@@ -17,7 +17,7 @@ namespace Snowinmars.Ui.Controllers
             return new JsonResult { Data = new { success = false } };
         }
 
-        internal static JsonResult GetSuccessJsonResult(object data)
+        internal static JsonResult GetSuccessJsonResult(object data = null)
         {
 	        return new JsonResult
 	        {

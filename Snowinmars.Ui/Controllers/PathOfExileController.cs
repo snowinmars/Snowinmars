@@ -33,7 +33,7 @@ namespace Snowinmars.Ui.Controllers
 		{
 			if (qualities == null)
 			{
-				return ControllerHelper.GetSuccessJsonResult(null);
+				return ControllerHelper.GetSuccessJsonResult();
 			}
 
 			IEnumerable<IList<int>> qualityCombination = this.pathOfExileLogic.PickQualityCombination(qualities, desiredValue);

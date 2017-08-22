@@ -4,12 +4,12 @@
     $.ajax({
         url: "/en/book/GetAuthors/" + bookId,
         type: "POST",
-        success: function (data) {
+        success: function (result) {
             var authorModelIds = $(".authorModelIds");
-            var l = data.Authors.length;
+            var l = result.data.Authors.length;
 
             for (var i = 0; i < l; i++) {
-                authorModelIds.append("<option value=\"" + data.Authors[i].Id + "\" selected=\"selected\">" + data.Authors[i].Shortcut + "</option>");
+				authorModelIds.append("<option value=\"" + result.data.Authors[i].Id + "\" selected=\"selected\">" + result.data.Authors[i].Shortcut + "</option>");
             }
 
             authorModelIds.prop('disabled', 'disabled');

@@ -80,7 +80,7 @@ namespace Snowinmars.Ui.Controllers
             var book = this.bookLogic.Get(id);
             var bookModel = ControllerHelper.Map(book);
 
-            return this.Json(bookModel);
+            return ControllerHelper.GetSuccessJsonResult(bookModel);
         }
 
         [HttpGet]
@@ -112,7 +112,7 @@ namespace Snowinmars.Ui.Controllers
         {
             IEnumerable<Author> authorIds = this.bookLogic.GetAuthors(id);
 
-            return this.Json(new
+            return ControllerHelper.GetSuccessJsonResult(new
             {
                 BookId = id,
                 Authors = authorIds,

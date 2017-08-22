@@ -86,7 +86,7 @@ namespace Snowinmars.Ui.Controllers
         [AllowAnonymous]
         public JsonResult GetAll()
         {
-            return this.Json(this.authorLogic.Get(null));
+            return ControllerHelper.GetSuccessJsonResult(this.authorLogic.Get(null));
         }
 
         [HttpGet]

@@ -69,7 +69,7 @@ namespace Snowinmars.Ui.Controllers
 
             this.userLogic.Update(user);
 
-            return this.Json(user.Roles.ToString());
+	        return ControllerHelper.GetSuccessJsonResult(user.Roles.ToString());
         }
 
         [HttpPost]
@@ -82,7 +82,7 @@ namespace Snowinmars.Ui.Controllers
 
             this.userLogic.Update(user);
 
-            return this.Json(user.Roles.ToString());
+            return ControllerHelper.GetSuccessJsonResult(user.Roles.ToString());
         }
 
         [HttpGet]
@@ -174,14 +174,10 @@ namespace Snowinmars.Ui.Controllers
 
 	        if (result)
 	        {
-		        return new JsonResult
+		        return ControllerHelper.GetSuccessJsonResult(new
 		        {
-			        Data = new
-			        {
-				        Success = true,
-				        Redirect = this.Url.Action("Index", "Home"),
-			        }
-		        };
+			        Redirect = this.Url.Action("Index", "Home"),
+		        });
 	        }
 
 			return ControllerHelper.GetFailJsonResult();
@@ -203,7 +199,7 @@ namespace Snowinmars.Ui.Controllers
         [AllowAnonymous]
         public JsonResult IsUsernameExist(string username)
         {
-            return this.Json(this.userLogic.IsUsernameExist(username));
+            return ControllerHelper.GetSuccessJsonResult(this.userLogic.IsUsernameExist(username));
         }
 
         [HttpGet]
@@ -280,10 +276,10 @@ namespace Snowinmars.Ui.Controllers
             catch
             {
                 this.Response.StatusCode = 500;
-                return this.Json(new { success = false });
+                return ControllerHelper.GetFailJsonResult();
             }
 
-            return this.Json(true);
+            return ControllerHelper.GetSuccessJsonResult();
         }
     }
 }

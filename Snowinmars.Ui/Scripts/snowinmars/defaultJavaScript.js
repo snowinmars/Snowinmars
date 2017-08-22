@@ -43,7 +43,7 @@
                     url: "/en/user/isUsernameExist/?username=" + globalUsernameInputTarget.val(),
                     type: "POST",
                     success: function (data) {
-                        if (data) {
+                        if (data.data) {
                             $(".oldUserHello").removeClass("hidden");
                             $(".newUserHello").addClass("hidden");
 
@@ -129,11 +129,10 @@
 						data: {
 							username: $(e.target).find("#Username").val(),
 							password: $(e.target).find("#Password").val(),
-							PasswordConfirm: $(e.target).find("#PasswordConfirm").val()
 						},
-						success: function (data) {
-							if (data.Success) {
-								location.href = data.Redirect;
+						success: function (result) {
+							if (result.success) {
+								location.href = result.data.Redirect;
 							} else {
 								$(".errorOnLoginProcess").removeClass("hidden");
 							}
@@ -148,7 +147,25 @@
 
             if (!($(".newUserHello").hasClass("hidden"))) {
                 if ($("#Username").val() && $("#Password").val() && $("#PasswordConfirm").val()) {
-                    e.target.submit();
+	                $.ajax({
+		                url: "/en/User/Enter",
+		                type: "POST",
+		                data: {
+			                username: $(e.target).find("#Username").val(),
+			                password: $(e.target).find("#Password").val(),
+			                PasswordConfirm: $(e.target).find("#PasswordConfirm").val()
+		                },
+		                success: function (result) {
+			                if (result.success) {
+				                location.href = result.data.Redirect;
+			                } else {
+				                $(".errorOnLoginProcess").removeClass("hidden");
+			                }
+		                },
+		                error: function (data) {
+			                $(".errorOnLoginProcess").removeClass("hidden");
+		                }
+	                });
                     return;
                 }
             }

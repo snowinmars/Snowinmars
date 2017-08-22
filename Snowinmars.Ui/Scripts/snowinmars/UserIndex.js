@@ -8,8 +8,8 @@
             data: {
                 username: $(event.target.closest("tr")).find(".login").text().trim()
             },
-            success: function (data) {
-                $(".__target").parent().children(".userRoles").text(data);
+            success: function (result) {
+                $(".__target").parent().children(".userRoles").text(result.data);
                 $(".__target").removeClass("__target");
             }
         });
@@ -24,8 +24,8 @@
             data: {
                 username: $(event.target.closest("tr")).find(".login").text().trim()
             },
-            success: function (data) {
-                $(".__target").parent().children(".userRoles").text(data);
+			success: function (result) {
+                $(".__target").parent().children(".userRoles").text(result.data);
                 $(".__target").removeClass("__target");
             }
         });
