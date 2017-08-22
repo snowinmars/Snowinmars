@@ -91,8 +91,8 @@
 				qualities: arr,
 				desiredValue: 40
 			},
-			success: function (data) {
-				if (data.data === null) {
+			success: function (result) {
+				if (result.data === null) {
 					$(".result").prepend("<div>Nothigs equals to exactly 40</div>");
 					$(".result").prepend("<hr />");
 					return;
@@ -112,9 +112,9 @@
 
 				list += '<ul>';
 
-				length = data.length;
+				length = result.data.length;
 				for (var i = 0; i < length; i++) {
-					var row = data[i];
+					var row = result.data[i];
 
 					list += "<li>";
 
