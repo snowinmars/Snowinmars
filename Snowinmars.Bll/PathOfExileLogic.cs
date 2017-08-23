@@ -20,9 +20,29 @@ namespace Snowinmars.Bll
 				throw new InvalidOperationException($"Can't handle qualities count: maximum allowed is 20 elements, but input was {qualities.Count} length");
 			}
 
-			for (int i = 1; i <= qualities.Count; i++)
+			int completeQualitiesCount = 0;
+			IList<int> incompleteQualities = new List<int>();
+
+			foreach (var quality in qualities)
 			{
-				this.FillCombinations(qualities, i);
+				if (quality == 20) // if you sell single item with 20% quality, you'll get orb as exchange
+				{
+					completeQualitiesCount++;
+				}
+				else
+				{
+					incompleteQualities.Add(quality);
+				}
+			}
+
+			for (int i = 0; i < completeQualitiesCount; i++)
+			{
+				this.combinations.Add(new List<int> { 20 });
+			}
+
+			for (int i = 1; i <= incompleteQualities.Count; i++)
+			{
+				this.FillCombinations(incompleteQualities, i);
 			}
 
 			IEqualityComparer<IList<int>> c = new ListComparer();
@@ -31,6 +51,7 @@ namespace Snowinmars.Bll
 				.Where(list => list.Sum() == desiredValue) // find some which have correct sum
 				.Select(list => list.OrderBy(_ => _).ToList()) // order it by asc
 				.Distinct(c) // and remove repeated sequence
+				.Concat(this.combinations.Where(list => list.Count == 1 && list[0] == 20))
 				;
 		}
 
@@ -41,6 +62,7 @@ namespace Snowinmars.Bll
 		/// <param name="k">Size of a combination to be printed</param>
 		private void FillCombinations(IList<int> arr, int k)
 		{
+			
 			// A temporary array to store all combination one by one
 			int[] data = new int[k];
 
