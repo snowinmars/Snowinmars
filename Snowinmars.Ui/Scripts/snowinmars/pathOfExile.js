@@ -108,24 +108,33 @@
 					list += qualities[i].value + " ";
 				}
 
-				list += "</span>";
+				list += ". You will get 1 orb for each list item below</span>";
 
-				list += '<ul>';
+				list += "<ul>";
+
+				list += '<li class="completeQualitiesCount"></li>';
 
 				length = result.data.length;
+				var completeQualitiesCount = 0;
+
 				for (var i = 0; i < length; i++) {
 					var row = result.data[i];
 
-					list += "<li>";
+					if (row[0] === 20) {
+						completeQualitiesCount++;
+					} else {
+						list += "<li>";
 
-					list += row.join(" + ");
+						list += row.join(" + ");
 
-					list += "</li>";
+						list += "</li>";
+					}
 				}
 
 				list += "</ul>";
 
 				$(".result").prepend(list);
+				$(".completeQualitiesCount").text("20 x " + completeQualitiesCount);
 				$(".result").prepend("<hr />");
 			},
 			error: function (data) {
