@@ -1,4 +1,4 @@
-﻿(function() {
+﻿(function () {
 	var qualityInputHtml = SnowinmarsGlobal.config.qualityInputHtml,
 		renderEngine = SnowinmarsGlobal.renderEngine;
 
@@ -47,8 +47,6 @@
 			qualitiesGroup.append(qualityInputHtml);
 		}
 	});
-
-
 
 	$(".qualitiesForm").on("submit", function (e) {
 		e.preventDefault();

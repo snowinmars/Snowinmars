@@ -5,12 +5,12 @@ renderEngine.showNothingFoundMessage = function () {
 	$(".result").prepend("<hr />");
 }
 
-renderEngine.showErrorMessage = function() {
+renderEngine.showErrorMessage = function () {
 	$(".result").prepend("<div>Error was occured processing the request</div>");
 	$(".result").prepend("<hr />");
 }
 
-renderEngine.showOverflowErrorMessage = function() {
+renderEngine.showOverflowErrorMessage = function () {
 	$(".overflowErrorHint").removeClass("hidden");
 }
 
@@ -18,7 +18,7 @@ renderEngine.showOverflowImportErrorHint = function () {
 	$(".overflowImportErrorHint").removeClass("hidden");
 }
 
-renderEngine.showQualitiesList = function(qualities, data) {
+renderEngine.showQualitiesList = function (qualities, data) {
 	var list = "<div>Input qualities is ",
 		length = qualities.length,
 		i,
