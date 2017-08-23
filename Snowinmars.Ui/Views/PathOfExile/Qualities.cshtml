@@ -29,23 +29,30 @@
 		</div>
 	</div>
 
-	@using (Html.BeginForm("Qualities", "PathOfExile", FormMethod.Post, new {@class = "qualitiesForm"}))
+	@using (Html.BeginForm("Qualities", "PathOfExile", FormMethod.Post, new { @class = "qualitiesForm" }))
 	{
 		<div class="form-group">
 			<div class="col-xs-12">
-				<div id="qualitiesGroup" class="flex flex-row flex-wrap  col-xs-10">
-					<input class="flex-item quality col-xs-2" type="number" step="1" min="1" max="20"/>
-					<input class="flex-item quality col-xs-2" type="number" step="1" min="1" max="20"/>
-					<input class="flex-item quality col-xs-2" type="number" step="1" min="1" max="20"/>
+				<div class="qualitiesGroup flex flex-row flex-wrap  col-xs-10">
+					<input class="flex-item quality col-xs-2" type="number" step="1" min="1" max="20" />
+					<input class="flex-item quality col-xs-2" type="number" step="1" min="1" max="20" />
+					<input class="flex-item quality col-xs-2" type="number" step="1" min="1" max="20" />
 				</div>
 
-				<div class="overflowErrorHint hidden">
-					You can't add more: that's too complex calculations for the algorithm. I'll fix it, or if you have a solution - contact me at snowinmars@yandex.ru
-				</div>
-				<div class="col-xs-2 importExportBlock">
-					@*<span class="col-xs-5 btn btn-default importBtn">Import</span>*@
-					<span class="col-xs-5 col-xs-offset-6 btn btn-default exportBtn">Export</span>
-					<textarea class="importExportTextarea col-xs-11" name="Text1" class="col-xs-11" rows="5"></textarea>
+				<div class="col-xs-2">
+					<div class="col-xs-12 importExportBlock">
+						<span class="col-xs-5 btn btn-default importBtn">Import</span>
+						<span class="col-xs-5 col-xs-offset-1 btn btn-default exportBtn">Export</span>
+						<textarea class="importExportTextarea col-xs-11" name="Text1" class="col-xs-11" rows="5"></textarea>
+					</div>
+
+					<div class="col-xs-12 overflowErrorHint hidden">
+						You can't add more: that's too complex calculations for the algorithm. I'll fix it, or if you have a solution - contact me at snowinmars@yandex.ru
+					</div>
+					
+					<div class="col-xs-12 overflowImportErrorHint hidden">
+						You tried to import more then 20 values. First 20 values was imported, other had been ignored.
+					</div>
 				</div>
 			</div>
 		</div>
@@ -53,13 +60,12 @@
 		<div class="form-group">
 			<div class="col-xs-12">
 				<div class="col-xs-12">
-					<input type="submit" value="@Global._Go" class="btn btn-default"/>
+					<input type="submit" value="@Global._Go" class="btn btn-default" />
 				</div>
 			</div>
 		</div>
 	}
-	
-	
+
 	<div class="col-xs-12 resultBox">
 		<div class="btn btn-default clearResultSetBtn">Clear result set</div>
 		<div class="col-xs-12 result"></div>
@@ -68,5 +74,11 @@
 
 @section Scripts
 {
-	<script src="~/Scripts/snowinmars/pathOfExile.js"></script>
+	<script src="~/Scripts/snowinmars/pathOfExile/default.js"></script>
+
+	<script src="~/Scripts/snowinmars/pathOfExile/config.js"></script>
+	<script src="~/Scripts/snowinmars/pathOfExile/renderEngine.js"></script>
+
+	<script src="~/Scripts/snowinmars/pathOfExile/quality.js"></script>
+	<script src="~/Scripts/snowinmars/pathOfExile/importExport.js"></script>
 }
