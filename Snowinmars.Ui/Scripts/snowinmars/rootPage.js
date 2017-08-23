@@ -2,8 +2,8 @@
     $("#shortcutJobForm").submit(function (e) {
         e.preventDefault();
 
-        var jobName = $(e.currentTarget).find("#ShortcutJobName").val();
-        var entropy = $(e.currentTarget).find("#ShortcutJobSmtpEntropy").val();
+        var jobName = $(e.currentTarget).find("#ShortcutJobName").val(),
+			entropy = $(e.currentTarget).find("#ShortcutJobSmtpEntropy").val();
 
         $.ajax({
             url: "/en/user/setSmtpEntropies",
@@ -49,8 +49,8 @@
     $("#warningJobForm").submit(function (e) {
         e.preventDefault();
 
-        var jobName = $(e.currentTarget).find("#WarningJobName").val();
-        var entropy = $(e.currentTarget).find("#WarningJobSmtpEntropy").val();
+        var jobName = $(e.currentTarget).find("#WarningJobName").val(),
+			entropy = $(e.currentTarget).find("#WarningJobSmtpEntropy").val();
 
         $.ajax({
             url: "/en/user/setSmtpEntropies",
@@ -95,8 +95,8 @@
     $("#emailServiceForm").submit(function (e) {
         e.preventDefault();
 
-        var jobName = $(e.currentTarget).find("#EmailServiceName").val();
-        var entropy = $(e.currentTarget).find("#EmailServiceSmtpEntropy").val();
+        var jobName = $(e.currentTarget).find("#EmailServiceName").val(),
+			entropy = $(e.currentTarget).find("#EmailServiceSmtpEntropy").val();
 
         $.ajax({
             url: "/en/user/setSmtpEntropies",

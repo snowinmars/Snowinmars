@@ -1,14 +1,21 @@
 ﻿(function () {
+	var navbar = $(".navbar-nav"),
+		urlParts = location.pathname.split("/"),
+		urlPartsLength = urlParts.length,
+		urlPart,
+		i;
+
     $("[data-toggle='tooltip']").tooltip();
-   
-    var navbar = $(".navbar-nav");
+
+	/////////////
+
     navbar.children().removeClass("active");
 
+	/////////////
+
     // toggle navbar buttons
-    var urlParts = location.pathname.split("/");
-    var urlPartsLength = urlParts.length;
-    for (var i = 0; i < urlPartsLength; i++) {
-        var urlPart = urlParts[i];
+    for (i = 0; i < urlPartsLength; i++) {
+        urlPart = urlParts[i];
 
         switch (urlPart.toLocaleLowerCase()) {
             case "book":
@@ -29,13 +36,8 @@
                 clearTimeout(timer);
                 timer = setTimeout(callback, ms);
             };
-        })();
-
-        $("#enterModal").on("shown.bs.modal", function () {
-            $("#Username").focus();
-        });
-
-        var checkUsernameFunction = function (e) {
+        })(),
+			checkUsernameFunction = function (e) {
             var globalUsernameInputTarget = $(e.target);
 
             snowinmarsDelay(function () {
@@ -43,22 +45,22 @@
                     url: "/en/user/isUsernameExist/?username=" + globalUsernameInputTarget.val(),
                     type: "POST",
                     success: function (data) {
-                        if (data.data) {
+                        if (data.data) { // if we have user with this login
                             $(".oldUserHello").removeClass("hidden");
                             $(".newUserHello").addClass("hidden");
 
-                            $("#Password").prop("disabled", false);
-                            $("#PasswordConfirm").prop("disabled", true);
+                            $("#Password").prop("disabled", false); // we have to show the password input
+                            $("#PasswordConfirm").prop("disabled", true); // but haven't show the password confirm
                             $("#PasswordConfirm").closest(".form-group").addClass("hidden");
-                        } else {
-                            if (!$("#Username").val()) {
-                                $(".oldUserHello").addClass("hidden");
+						} else { // if we don't know this user
+                            if (!$("#Username").val()) { // if he didn't enter login
+                                $(".oldUserHello").addClass("hidden"); // we hide all password inputs
                                 $(".newUserHello").addClass("hidden");
 
                                 $("#PasswordConfirm").prop("disabled", true);
                                 $("#PasswordConfirm").closest(".form-group").addClass("hidden");
-                            } else {
-                                $(".newUserHello").removeClass("hidden");
+                            } else { // otherwise
+                                $(".newUserHello").removeClass("hidden"); // we allow to type password and password confirm
                                 $(".oldUserHello").addClass("hidden");
 
                                 $("#Password").prop("disabled", false);
@@ -75,7 +77,11 @@
                 });
             },
                 300);
-        };
+		};
+
+	    $("#enterModal").on("shown.bs.modal", function () {
+		    $("#Username").focus();
+		});
 
         $("#Username").on("keyup", checkUsernameFunction);
         $("#Username").on("blur", checkUsernameFunction);

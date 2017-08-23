@@ -12,6 +12,10 @@
 				qualityInputHtml = config.qualityInputHtml,
 				i;
 
+			if (!(importData.trim())) {
+				return;
+			}
+
 			qualitiesGroup.empty();
 
 			if (length > 20) {
@@ -55,11 +59,12 @@
 
 	$(".exportBtn").on("click",
 		function () {
-			var textarea = $(".importExportTextarea");
+			var textarea = $(".importExportTextarea"),
+				quality = $(".quality");
 
 			textarea.val("");
 
-			$.each($(".quality"),
+			$.each(quality,
 				function (index, value) {
 					textarea.val(textarea.val() + " " + value.value);
 				});

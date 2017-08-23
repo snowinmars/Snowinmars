@@ -32,10 +32,9 @@
     });
 
     $(".banUser").on("click", function() {
-        var row = $(event.target.closest("tr"));
-
-        var demoteUser = row.find(".demoteUser");
-        var promoteUser = row.find(".promoteUser");
+        var row = $(event.target.closest("tr")),
+			demoteUser = row.find(".demoteUser"),
+			promoteUser = row.find(".promoteUser");
 
         if (demoteUser.hasClass("disabled")) {
             demoteUser.removeClass("disabled");

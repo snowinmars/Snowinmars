@@ -1,5 +1,8 @@
 ﻿(function () {
-    var authorModelIds = $(".authorModelIds");
+	var authorModelIds = $(".authorModelIds"),
+		rows = $(".synchronizationIcon:not(.hidden)").closest("tr"),
+		rowsLength = rows.length;
+
     authorModelIds.prop("disabled", "disabled");
     authorModelIds.chosen({
         no_results_text: "Oops, nothing found!",
@@ -7,9 +10,6 @@
     });
 
     $(".chosen-container").prop("style", "");
-
-    var rows = $(".synchronizationIcon:not(.hidden)").closest("tr");
-    var rowsLength = rows.length;
 
     if (rowsLength > 0) {
         global__refreshIntervalId = setInterval(function () {
@@ -19,13 +19,14 @@
                     type: "POST",
                     success: function (data) {
                         if (data.IsSynchronized) {
-                            var row = $("tr[data-id='" + data.Id + "']");
+	                        var row = $("tr[data-id='" + data.Id + "']"),
+								select,
+		                        idsLength = data.AuthorShortcuts.length;
 
                             row.find(".synchronizationIcon").addClass("hidden");
 
-                            var select = row.find("select.authorModelIds");
+                            select = row.find("select.authorModelIds");
 
-                            var idsLength = data.AuthorShortcuts.length;
                             for (var j = 0; j < idsLength; j++) {
                                 select.append($("<option>", {
                                     text: data.AuthorShortcuts[j],

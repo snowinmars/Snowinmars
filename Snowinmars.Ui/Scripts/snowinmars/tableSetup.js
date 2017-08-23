@@ -1,12 +1,11 @@
 ﻿(function() {
-    var table = $(".table");
+	var table = $(".table"),
+		currentLanguage = location.pathname.split("/")[1],
+		languageJson;
 
     $(".sk-folding-cube-parent").addClass("hidden");
 
     table.removeClass("hidden");
-
-    var currentLanguage = location.pathname.split("/")[1];
-    var languageJson;
 
     switch (currentLanguage) {
         case "ru":

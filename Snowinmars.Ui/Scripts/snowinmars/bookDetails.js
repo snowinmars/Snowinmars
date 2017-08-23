@@ -5,10 +5,10 @@
         url: "/en/book/GetAuthors/" + bookId,
         type: "POST",
         success: function (result) {
-            var authorModelIds = $(".authorModelIds");
-            var l = result.data.Authors.length;
+            var authorModelIds = $(".authorModelIds"),
+	            length = result.data.Authors.length;
 
-            for (var i = 0; i < l; i++) {
+            for (var i = 0; i < length; i++) {
 				authorModelIds.append("<option value=\"" + result.data.Authors[i].Id + "\" selected=\"selected\">" + result.data.Authors[i].Shortcut + "</option>");
             }
 
