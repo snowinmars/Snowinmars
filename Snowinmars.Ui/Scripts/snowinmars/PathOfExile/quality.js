@@ -67,12 +67,37 @@
 				desiredValue: 40
 			},
 			success: function (result) {
-				if (result.data === null) {
+				var d = JSON.parse(result.data);
+
+				if (d === null ||
+					d === undefined ||
+					d.length === 0 ||
+					d[0] === null ||
+					d[0].length === 0) {
 					renderEngine.showNothingFoundMessage();
 					return;
 				}
 
-				renderEngine.showQualitiesList($(".quality"), JSON.parse(result.data));
+				// object to array
+				var p = [];
+				for (var pair in d) {
+					p.push([pair, d[pair]]);
+				}
+
+				// sort dictionary by ValueArray.Count
+				p.sort(function (lhs, rhs) {
+					if (lhs[1].length > rhs[1].length) {
+						return -1;
+					}
+
+					if (lhs[1].length < rhs[1].length) {
+						return 1;
+					}
+
+					return 0;
+				});
+
+				renderEngine.showQualitiesList($(".quality"), p);
 			},
 			error: function (data) {
 				renderEngine.showErrorMessage();

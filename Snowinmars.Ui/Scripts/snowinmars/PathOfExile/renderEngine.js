@@ -34,17 +34,24 @@ renderEngine.showQualitiesList = function (qualities, data) {
 		"<ul>" +
 		'<li class="completeQualitiesCount"></li>';
 
-	length = data.length;
+	var groupslength = data.length;
+	list += "<li>";
 
-	for (i = 0; i < length; i++) {
-		row = data[i];
+	for (i = 1; i < groupslength; i++) { // first group is 20% qualities
+		list += '<ul class="qualityGroupList"><li>Group ' + i + "</li><li><ul>";
 
-		if (row[0] === 20) {
-			completeQualitiesCount++;
-		} else {
-			list += "<li>" + row.join(" + ") + "</li>";
+		for (var j = 0; j < data[i][1].length; j++) {
+			if (data[i][1][j][0] === 20) {
+				completeQualitiesCount++;
+			} else {
+				list += "<li>" + data[i][1][j].join(" + ") + "</li>";
+			}
 		}
+
+		list += "</ul></li></ul>";
 	}
+
+	list += "</li>";
 
 	list += "</ul>";
 
