@@ -72,7 +72,7 @@
 					return;
 				}
 
-				renderEngine.showQualitiesList($(".quality"), result.data);
+				renderEngine.showQualitiesList($(".quality"), JSON.parse(result.data));
 			},
 			error: function (data) {
 				renderEngine.showErrorMessage();
