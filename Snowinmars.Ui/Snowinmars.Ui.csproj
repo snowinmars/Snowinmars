@@ -430,7 +430,11 @@
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\prototype.js" />
-    <Content Include="Scripts\snowinmars\pathOfExile.js" />
+    <Content Include="Scripts\snowinmars\PathOfExile\config.js" />
+    <Content Include="Scripts\snowinmars\PathOfExile\importExport.js" />
+    <Content Include="Scripts\snowinmars\PathOfExile\default.js" />
+    <Content Include="Scripts\snowinmars\PathOfExile\quality.js" />
+    <Content Include="Scripts\snowinmars\PathOfExile\renderEngine.js" />
     <Content Include="Scripts\snowinmars\rootPage.js" />
     <Content Include="Scripts\snowinmars\tableSetup.js" />
     <Content Include="Scripts\snowinmars\userDetails.js" />

@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web.Mvc;
 
 namespace Snowinmars.Ui.Controllers
@@ -16,9 +17,15 @@ namespace Snowinmars.Ui.Controllers
             return new JsonResult { Data = new { success = false } };
         }
 
-        internal static JsonResult GetSuccessJsonResult(object data)
+        internal static JsonResult GetSuccessJsonResult(object data = null)
         {
-            return new JsonResult {Data = data, JsonRequestBehavior = JsonRequestBehavior.AllowGet};
+	        return new JsonResult
+	        {
+		        Data = new { data, success = true },
+		        JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+		        ContentEncoding = Encoding.UTF8,
+		        ContentType = "application/json",
+			};
         }
 
         internal static BookModel Map(Book book)

@@ -31,14 +31,14 @@ namespace Snowinmars.Ui.Controllers
 		[Route("qualities")]
 		public JsonResult Qualities(IList<int> qualities, int desiredValue)
 		{
+			if (qualities == null)
+			{
+				return ControllerHelper.GetSuccessJsonResult();
+			}
+
 			IEnumerable<IList<int>> qualityCombination = this.pathOfExileLogic.PickQualityCombination(qualities, desiredValue);
 
-			return new JsonResult()
-			{
-				Data = qualityCombination,
-				ContentEncoding = Encoding.UTF8,
-				ContentType = "application/json",
-			};
+			return ControllerHelper.GetSuccessJsonResult(qualityCombination);
 		}
     }
 }
