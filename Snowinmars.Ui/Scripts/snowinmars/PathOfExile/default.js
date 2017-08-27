@@ -11,4 +11,10 @@
 		function () {
 			$(".result").empty();
 		});
+
+	$(".textareaCopyBtn").on("click",
+		function () {
+			$(".importExportTextarea").select();
+			document.execCommand("copy");
+		});
 })();

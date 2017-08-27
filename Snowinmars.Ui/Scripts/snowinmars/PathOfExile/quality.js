@@ -51,6 +51,9 @@
 	$(".qualitiesForm").on("submit", function (e) {
 		e.preventDefault();
 
+		$(".submitLoadIcon").removeClass("hidden");
+		$(".submitButton").addClass("disabled");
+		
 		var arr = [];
 		$.each($(".qualitiesGroup").children(),
 			function (index, value) {
@@ -67,12 +70,40 @@
 				desiredValue: 40
 			},
 			success: function (result) {
-				if (result.data === null) {
+				var d = JSON.parse(result.data),
+					p = [],
+					pair;
+
+				if (d === null ||
+					d === undefined ||
+					d.length === 0 ||
+					d[0] === null ||
+					d[0].length === 0) {
 					renderEngine.showNothingFoundMessage();
+					$(".submitLoadIcon").addClass("hidden");
+					$(".submitButton").removeClass("disabled");
 					return;
 				}
 
-				renderEngine.showQualitiesList($(".quality"), result.data);
+				// object to array
+				for (pair in d) {
+					p.push([pair, d[pair]]);
+				}
+
+				// sort dictionary by ValueArray.Count
+				p.sort(function (lhs, rhs) {
+					if (lhs[1].length > rhs[1].length) {
+						return -1;
+					}
+
+					if (lhs[1].length < rhs[1].length) {
+						return 1;
+					}
+
+					return 0;
+				});
+
+				renderEngine.showQualitiesList($(".quality"), p);
 			},
 			error: function (data) {
 				renderEngine.showErrorMessage();

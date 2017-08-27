@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 using Snowinmars.Bll;
 
 namespace Snowinmars.Ui.Controllers
@@ -36,9 +37,11 @@ namespace Snowinmars.Ui.Controllers
 				return ControllerHelper.GetSuccessJsonResult();
 			}
 
-			IEnumerable<IList<int>> qualityCombination = this.pathOfExileLogic.PickQualityCombination(qualities, desiredValue);
+			IDictionary<int, IList<IList<int>>> qualityCombination = this.pathOfExileLogic.PickQualityCombination(qualities, desiredValue);
 
-			return ControllerHelper.GetSuccessJsonResult(qualityCombination);
+			string str = JsonConvert.SerializeObject(qualityCombination);
+
+			return ControllerHelper.GetSuccessJsonResult(str);
 		}
     }
 }
