@@ -70,7 +70,9 @@
 				desiredValue: 40
 			},
 			success: function (result) {
-				var d = JSON.parse(result.data);
+				var d = JSON.parse(result.data),
+					p = [],
+					pair;
 
 				if (d === null ||
 					d === undefined ||
@@ -84,8 +86,7 @@
 				}
 
 				// object to array
-				var p = [];
-				for (var pair in d) {
+				for (pair in d) {
 					p.push([pair, d[pair]]);
 				}
 

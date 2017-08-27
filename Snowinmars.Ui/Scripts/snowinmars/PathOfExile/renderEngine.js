@@ -22,6 +22,7 @@ renderEngine.showQualitiesList = function (qualities, data) {
 	var list = '<div>Input qualities is <span class="inputQuality">',
 		length = qualities.length,
 		i,
+		j,
 		completeQualitiesCount = 0,
 		groupslength = data.length;
 
@@ -39,7 +40,7 @@ renderEngine.showQualitiesList = function (qualities, data) {
 	for (i = 0; i < groupslength; i++) { // first group is 20% qualities
 		list += '<ul class="qualityGroupList"><li>Group ' + i + "</li><li><ul>";
 
-		for (var j = 0; j < data[i][1].length; j++) {
+		for (j = 0; j < data[i][1].length; j++) {
 			if (data[i][1][j][0] === 20) {
 				completeQualitiesCount++;
 			} else {
