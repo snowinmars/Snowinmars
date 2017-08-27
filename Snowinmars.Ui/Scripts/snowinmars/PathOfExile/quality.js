@@ -51,6 +51,9 @@
 	$(".qualitiesForm").on("submit", function (e) {
 		e.preventDefault();
 
+		$(".submitLoadIcon").removeClass("hidden");
+		$(".submitButton").addClass("disabled");
+		
 		var arr = [];
 		$.each($(".qualitiesGroup").children(),
 			function (index, value) {
@@ -75,6 +78,8 @@
 					d[0] === null ||
 					d[0].length === 0) {
 					renderEngine.showNothingFoundMessage();
+					$(".submitLoadIcon").addClass("hidden");
+					$(".submitButton").removeClass("disabled");
 					return;
 				}
 

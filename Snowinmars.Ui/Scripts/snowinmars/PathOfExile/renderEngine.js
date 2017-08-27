@@ -19,25 +19,24 @@ renderEngine.showOverflowImportErrorHint = function () {
 }
 
 renderEngine.showQualitiesList = function (qualities, data) {
-	var list = "<div>Input qualities is ",
+	var list = '<div>Input qualities is <span class="inputQuality">',
 		length = qualities.length,
 		i,
 		completeQualitiesCount = 0,
-		row;
+		groupslength = data.length;
 
 	for (i = 0; i < length; i++) {
 		list += qualities[i].value + " ";
 	}
 
-	list += "</div>" +
+	list += '</span></div>' +
 		"<div>You will get 1 orb for each list item below</div>" +
 		"<ul>" +
 		'<li class="completeQualitiesCount"></li>';
 
-	var groupslength = data.length;
-	list += "<li>";
+	list += '<li class="qualityGroupLists">';
 
-	for (i = 1; i < groupslength; i++) { // first group is 20% qualities
+	for (i = 0; i < groupslength; i++) { // first group is 20% qualities
 		list += '<ul class="qualityGroupList"><li>Group ' + i + "</li><li><ul>";
 
 		for (var j = 0; j < data[i][1].length; j++) {
@@ -63,4 +62,7 @@ renderEngine.showQualitiesList = function (qualities, data) {
 		$(".completeQualitiesCount").addClass("hidden");
 	}
 	$(".result").prepend("<hr />");
+
+	$(".submitLoadIcon").addClass("hidden");
+	$(".submitButton").removeClass("disabled");
 }

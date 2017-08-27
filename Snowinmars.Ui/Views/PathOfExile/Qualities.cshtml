@@ -21,38 +21,41 @@
 </div>
 
 <div>
-	<div class="col-xs-12">
-		<div class="col-xs-12">
-			<button class="btn btn-default clearQualities">
-				@Global._Clear
-			</button>
-		</div>
-	</div>
-
 	@using (Html.BeginForm("Qualities", "PathOfExile", FormMethod.Post, new { @class = "qualitiesForm" }))
 	{
 		<div class="form-group">
+			<div class="col-xs-12 col-sm-6">
+				<div class="col-xs-12 importExportBlock">
+					<span class="col-xs-4 btn btn-default importBtn">Import</span>
+					<span class="col-xs-2 col-xs-offset-1 btn btn-default textareaCopyBtn">Copy</span>
+					<span class="col-xs-4 col-xs-offset-1 btn btn-default exportBtn">Export</span>
+					<textarea class="importExportTextarea col-xs-12" name="Text1" class="col-xs-11" rows="2"></textarea>
+				</div>
+			</div>
+			
+			<div class="col-xs-12 col-md-12">
+				<div class="col-xs-12 overflowErrorHint hidden">
+					You can't add more: that's too complex calculations for the algorithm. Well, this is variation of <a href="https://en.wikipedia.org/wiki/Coin_problem">coin problem</a>, and coin problem is <a href="https://en.wikipedia.org/wiki/NP-completeness">NP-completeness</a>. Than means that calculations is enormous. You can see source on <a href="https://github.com/snowinmars/Snowinmars/blob/master/Snowinmars.Bll/PathOfExileLogic.cs">my github page</a>, and if you have a solution - contact me at <a href="mailto:snowinmars@yandex.ru">snowinmars@yandex.ru</a>
+				</div>
+
+				<div class="col-xs-12 beware overflowImportErrorHint hidden">
+					You tried to import more then 20 values. First 20 values was imported, other had been ignored.
+				</div>
+			</div>
+			
+			<div class="col-xs-12">
+				<div class="col-xs-12">
+					<button type="reset" class="btn btn-default clearQualities">
+						@Global._Clear
+					</button>
+				</div>
+			</div>
+
 			<div class="col-xs-12">
 				<div class="qualitiesGroup flex flex-row flex-wrap  col-xs-10">
 					<input class="flex-item quality col-xs-2" type="number" step="1" min="1" max="20" />
 					<input class="flex-item quality col-xs-2" type="number" step="1" min="1" max="20" />
 					<input class="flex-item quality col-xs-2" type="number" step="1" min="1" max="20" />
-				</div>
-
-				<div class="col-xs-2">
-					<div class="col-xs-12 importExportBlock">
-						<span class="col-xs-5 btn btn-default importBtn">Import</span>
-						<span class="col-xs-5 col-xs-offset-1 btn btn-default exportBtn">Export</span>
-						<textarea class="importExportTextarea col-xs-11" name="Text1" class="col-xs-11" rows="5"></textarea>
-					</div>
-
-					<div class="col-xs-12 overflowErrorHint hidden">
-						You can't add more: that's too complex calculations for the algorithm. Well, this is variation of <a href="https://en.wikipedia.org/wiki/Coin_problem">coin problem</a>, and coin problem is <a href="https://en.wikipedia.org/wiki/NP-completeness">NP-completeness</a>. Than means that calculations is enormous. You can see source on <a href="https://github.com/snowinmars/Snowinmars/blob/master/Snowinmars.Bll/PathOfExileLogic.cs">my github page</a>, and if you have a solution - contact me at <a href="mailto:snowinmars@yandex.ru">snowinmars@yandex.ru</a>
-					</div>
-					
-					<div class="col-xs-12 beware overflowImportErrorHint hidden">
-						You tried to import more then 20 values. First 20 values was imported, other had been ignored.
-					</div>
 				</div>
 			</div>
 		</div>
@@ -60,14 +63,16 @@
 		<div class="form-group">
 			<div class="col-xs-12">
 				<div class="col-xs-12">
-					<input type="submit" value="@Global._Go" class="btn btn-default" />
+					<button type="submit" class="btn btn-default submitButton">
+						<span class="glyphicon glyphicon-refresh spinning hidden"></span> @Global._Go
+					</button>
 				</div>
 			</div>
 		</div>
 	}
 
 	<div class="col-xs-12 resultBox">
-		<div class="btn btn-default clearResultSetBtn">Clear result set</div>
+		<div type="reset" class="btn btn-default clearResultSetBtn">Clear result set</div>
 		<div class="col-xs-12 result"></div>
 	</div>
 </div>
