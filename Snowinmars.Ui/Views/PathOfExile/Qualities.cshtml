@@ -26,7 +26,7 @@
 		<div class="form-group">
 			<div class="col-xs-12 col-sm-6">
 				<div class="col-xs-12 importExportBlock">
-					<span class="col-xs-4 btn btn-default importBtn">Import</span>
+					<span class="col-xs-4 btn btn-default importBtn" disabled="disabled">Import</span>
 					<span class="col-xs-2 col-xs-offset-1 btn btn-default textareaCopyBtn">Copy</span>
 					<span class="col-xs-4 col-xs-offset-1 btn btn-default exportBtn">Export</span>
 					<textarea class="importExportTextarea col-xs-12" name="Text1" class="col-xs-11" rows="2"></textarea>
@@ -52,10 +52,14 @@
 			</div>
 
 			<div class="col-xs-12">
-				<div class="qualitiesGroup flex flex-row flex-wrap  col-xs-10">
-					<input class="flex-item quality col-xs-2" type="number" step="1" min="1" max="20" />
-					<input class="flex-item quality col-xs-2" type="number" step="1" min="1" max="20" />
-					<input class="flex-item quality col-xs-2" type="number" step="1" min="1" max="20" />
+				<div class="qualitiesGroup flex flex-row flex-wrap col-xs-10">
+					<select class="toSelect"></select>
+					<select class="toSelect"></select>
+					<select class="toSelect"></select>
+					
+					@*<input class="flex-item quality col-xs-2" type="number" step="1" min="1" max="20"/>
+					<input class="flex-item quality col-xs-2" type="number" step="1" min="1" max="20"/>
+					<input class="flex-item quality col-xs-2" type="number" step="1" min="1" max="20"/>*@
 				</div>
 			</div>
 		</div>
@@ -84,6 +88,7 @@
 	<script src="~/Scripts/snowinmars/pathOfExile/config.js"></script>
 	<script src="~/Scripts/snowinmars/pathOfExile/renderEngine.js"></script>
 
+	<script src="~/Scripts/snowinmars/pathOfExile/qualityInputDropdown.js"></script>
 	<script src="~/Scripts/snowinmars/pathOfExile/quality.js"></script>
 	<script src="~/Scripts/snowinmars/pathOfExile/importExport.js"></script>
 }
