@@ -1,4 +1,102 @@
-﻿var renderEngine = SnowinmarsGlobal.namespace("SnowinmarsGlobal.renderEngine");
+﻿var renderEngine = SnowinmarsGlobal.namespace("SnowinmarsGlobal.renderEngine"),
+	config = SnowinmarsGlobal.config;
+
+renderEngine.insertQualityInput = function(wrapper) {
+	wrapper.innerHTML = qualityInputHtml;
+	$(".toSelect").each(renderEngine.convertToSelect);
+	$(".toInput").each(renderEngine.convertToInput);
+}
+
+renderEngine.convertToSelect = function() {
+	var $this = $(this),
+		select = '<select class="toInput">',
+		i;
+
+	for (i = 1; i <= 20; i++) {
+		select += '<option value="' + i + '">' + i + "</option>";
+	}
+
+	select += "</select>";
+
+	$this.after(select);
+
+	$this.remove();
+};
+
+renderEngine.convertToInput = function() {
+	var $this = $(this),
+		numberOfOptions = $(this).children("option").length,
+		$styledSelect,
+		$list,
+		i,
+		$listItems;
+
+	$this.wrap('<div class="select col-xs-2"></div>');
+
+	$this.after(
+		'<input class="styledSelect flex-item quality col-xs-12" type="number" step="1" min="1" max="20"></input>');
+
+	$styledSelect = $this.next(".styledSelect");
+
+	$styledSelect.text($this.children("option").eq(0).text());
+
+	$list = $("<ul />",
+		{
+			'class': "options col-xs-12"
+		}).insertAfter($styledSelect);
+
+	for (i = 0; i < numberOfOptions; i++) {
+		$("<li />",
+			{
+				class: "col-xs-3",
+				text: $this.children("option").eq(i).text(),
+				rel: $this.children("option").eq(i).val()
+			}).appendTo($list);
+	}
+
+	$this.remove();
+
+	$listItems = $list.children("li");
+
+	// Show the unordered list when the styled div is clicked (also hides it if the div is clicked again)
+	$styledSelect.on("click", function(e) {
+		e.stopPropagation();
+
+		var $this = $(this);
+
+		$(".styledSelect.activeInput").each(function() {
+			$this.removeClass("activeInput").next(".options").hide();
+		});
+		$this.toggleClass("activeInput").next("ul.options").toggle();
+	});
+
+	$styledSelect.on("focus", function (e) {
+		e.stopPropagation();
+		$(".styledSelect.activeInput").each(function () {
+			$(this).removeClass("activeInput").next(".options").hide();
+		});
+	});
+
+	// Hides the unordered list when a list item is clicked and updates the styled div to show the selected list item
+	// Updates the select element to have the value of the equivalent option
+	$listItems.on("click", function(e) {
+		e.stopPropagation();
+
+		var $this = $(this);
+
+		$styledSelect.text($this.text());
+		$styledSelect.val($this.text());
+
+		$list.hide();
+		$styledSelect.removeClass("activeInput");
+	});
+
+	// Hides the unordered list when clicking outside of it
+	$(document).click(function () {
+		$styledSelect.removeClass("activeInput");
+		$list.hide();
+	});
+};
 
 renderEngine.showNothingFoundMessage = function () {
 	$(".result").prepend("<div>Nothigs equals to exactly 40</div>");

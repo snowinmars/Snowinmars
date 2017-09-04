@@ -35,20 +35,17 @@
 			if (qualitiesGroup.children().length <= 17) {
 				qualitiesGroup.append(qualityInputHtml);
 				qualitiesGroup.append(qualityInputHtml);
-				return;
 			}
 
 			if (qualitiesGroup.children().length === 18) {
 				renderEngine.showOverflowErrorMessage();
 				qualitiesGroup.append(qualityInputHtml);
 				qualitiesGroup.append(qualityInputHtml);
-				return;
 			}
 
 			if (qualitiesGroup.children().length === 19) {
 				renderEngine.showOverflowErrorMessage();
 				qualitiesGroup.append(qualityInputHtml);
-				return;
 			}
 
 			if (qualitiesGroup.children().length >= 20) {

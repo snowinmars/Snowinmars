@@ -8,6 +8,8 @@
 			emptyQualityInputCount = 0,
 			qualitiesGroup = $(".qualitiesGroup");
 
+		
+
 		// scicers for this value
 		if (this.value) {
 			max = +$(this).attr("max");
@@ -26,16 +28,18 @@
 			return;
 		}
 
+	
+
 		// user don't need more then two empty inputs
 
 		$.each(qualitiesGroup.children(),
 			function (index, value) {
-				if (!value.value) {
+				if (!$(value).find("input").val()) {
 					emptyQualityInputCount++;
 				}
 			});
 
-		if (emptyQualityInputCount >= 2) {
+		if (emptyQualityInputCount > 2) {
 			return;
 		}
 
@@ -43,9 +47,9 @@
 
 		$(".overflowErrorHint").addClass("hidden");
 
-		if (this.value.trim()) {
-			qualitiesGroup.append(qualityInputHtml);
-		}
+		qualitiesGroup.append(qualityInputHtml);
+		$(".toSelect").each(renderEngine.convertToSelect);
+		$(".toInput").each(renderEngine.convertToInput);
 	});
 
 	$(".qualitiesForm").on("submit", function (e) {
@@ -57,8 +61,8 @@
 		var arr = [];
 		$.each($(".qualitiesGroup").children(),
 			function (index, value) {
-				if (value.value) {
-					arr.push(value.value);
+				if ($(value).find("input").val()) {
+					arr.push($(value).find("input").val());
 				}
 			});
 

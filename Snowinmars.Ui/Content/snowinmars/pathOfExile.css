@@ -1,5 +1,4 @@
 ﻿.quality {
-	margin: 10px;
 	line-height: 3ex;
 	font-size: 3ex;
 }
@@ -44,4 +43,31 @@
 
 .clearQualities {
 	margin-top: 10px;
+}
+
+.options {
+    display:none;
+    position:absolute;
+    top:100%;
+    z-index:2;
+    margin:0 0;
+    padding:0 0;
+
+    list-style:none;
+
+    background-color: #073642;
+	
+}
+	.options li {
+		border: #425358 solid 1px;
+		text-align: center;
+		cursor: pointer;
+	}
+	
+	.options li:hover {
+		background-color: #425358;
+	}
+
+.select {
+	margin: 10px;
 }
