@@ -1,0 +1,16 @@
+﻿@import "colorSchema";
+
+.userRoles-flex-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.promoteUser,
+.demoteUser {
+    background-color: $colorBackgroundSecondary;
+    padding: 0.5ex 2ex;
+}
+
+.yourUser {
+    background-color: $personalPageYourUser;
+}

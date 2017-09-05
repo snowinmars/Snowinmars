@@ -1,13 +1,12 @@
-﻿body {
+﻿@import "colorSchema";
+@import "mixins";
+
+body {
 	position: absolute;
 	top: 0;
 	right: 0;
 	bottom: 0;
 	left: 0;
-}
-
-#authorModels_chosen {
-	min-width: 60ex;
 }
 
 .active {
@@ -40,26 +39,22 @@ tbody > tr > th {
 }
 
 .btn-danger {
-	background-color: #6a342d;
+	background-color: $btnDangerBackground;
 	border: 0;
 }
 
 	.btn-danger:hover {
-		background-color: #8a544d;
+		background-color: $btnDangerBackgroundHover;
 	}
 
 a .btn-danger {
-	color: #ffa500;
+	color: $btnDangerText;
 }
 
 .btn-default {
-	background-color: #003B46;
-	color: #2aa198;
+	background-color: $btnDefault;
+	color: $btnDefaultText;
 	border: 0;
-}
-
-#authorModels_chosen {
-	min-width: 100%;
 }
 
 .search-choice {
@@ -67,27 +62,16 @@ a .btn-danger {
 	overflow: hidden;
 }
 
-.asd:first-letter {
-	text-transform: uppercase;
-}
-
-.detailsBlock {
-	margin-bottom: 10px;
-	padding-bottom: 10px;
-	box-sizing: border-box;
-	border: transparent solid 1px;
-	border-bottom: darkslategrey solid 1px;
-}
-
 hr {
-	border-color: darkslategrey;
+	border-color: $hrBorderColor;
 	border: 0;
 	height: 1px;
-	background: #000;
-	background-image: -webkit-linear-gradient(left, darkslategrey, #2a7198, darkslategrey);
-	background-image: -moz-linear-gradient(left, darkslategrey, #2a7198, darkslategrey);
-	background-image: -ms-linear-gradient(left, darkslategrey, #2a7198, darkslategrey);
-	background-image: -o-linear-gradient(left, darkslategrey, #2a7198, darkslategrey);
+	background: $hrBackgound;
+	//background-image: -webkit-linear-gradient(left, #2f4f4f, #2a7198, #2f4f4f); /* hrLinearGradientLeft hrLinearGradientCenter hrLinearGradientRight */
+	//background-image: -moz-linear-gradient(left, #2f4f4f, #2a7198, #2f4f4f); /* hrLinearGradientLeft hrLinearGradientCenter hrLinearGradientRight */
+	//background-image: -ms-linear-gradient(left, #2f4f4f, #2a7198, #2f4f4f); /* hrLinearGradientLeft hrLinearGradientCenter hrLinearGradientRight */
+	//background-image: -o-linear-gradient(left, #2f4f4f, #2a7198, #2f4f4f); /* hrLinearGradientLeft hrLinearGradientCenter hrLinearGradientRight */
+	@include background-image(left, $hrLinearGradientLeft, $hrLinearGradientCenter, $hrLinearGradientRight);
 }
 
 .noOverflow {
@@ -99,12 +83,12 @@ hr {
 .userInfo {
 	margin-bottom: 2ex;
 	margin-left: 12ex;
-	color: #a29200;
+	color: $userInfoTextColor;
 	min-height: 1.5ex;
 }
 
 .beware {
-	color: red !important;
+	color: $colorBeware !important;
 	font-size: 2ex;
 	text-align: center;
 	text-decoration: underline;
@@ -115,11 +99,11 @@ hr {
 }
 
 .fail {
-	color: red;
+	color: $colorFail;
 }
 
 .success {
-	color: lightgreen;
+	color: $colorSuccess;
 }
 
 .noFocus:focus {

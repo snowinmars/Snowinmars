@@ -1,5 +1,7 @@
-﻿.username {
-	color: #a29200;
+﻿@import "colorSchema";
+
+.username {
+	color: $personalPageUsername;
 	margin-left: 1ex;
 }
 
@@ -8,8 +10,8 @@
 }
 
 .tooltip-inner {
-	background-color: #050612;
-	color:lightblue;
+	background-color: $tooltipInnerBackground;
+	color: $tooltipInnerText;
 	text-align: left;
 }
 
@@ -42,8 +44,6 @@
     transition:visibility 0s linear 0.5s, opacity 0.5s linear;
 }
 
-
-    
 .glyphicon-question-sign {
     padding-right: 0;
 }
