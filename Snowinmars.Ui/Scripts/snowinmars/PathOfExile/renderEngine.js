@@ -160,6 +160,7 @@ renderEngine.showQualitiesList = function (qualities, data) {
 
 	if (completeQualitiesCount > 0) {
 		$(".completeQualitiesCount").text("20 × " + completeQualitiesCount);
+		$(".completeQualitiesCount").removeClass("completeQualitiesCount");
 	} else {
 		$(".completeQualitiesCount").addClass("hidden");
 	}
