@@ -130,8 +130,7 @@ renderEngine.showQualitiesList = function (qualities, data) {
 
 	list += '</span></div>' +
 		"<div>You will get 1 orb for each list item below</div>" +
-		"<ul>" +
-		'<li class="completeQualitiesCount"></li>';
+		"<ul>";
 
 	list += '<li class="qualityGroupLists">';
 
@@ -140,6 +139,10 @@ renderEngine.showQualitiesList = function (qualities, data) {
 
 		for (j = 0; j < data[i][1].length; j++) {
 			if (data[i][1][j][0] === 20) {
+				if (completeQualitiesCount === 0) {
+					list += '<li class="completeQualitiesCount"></li>';
+				}
+
 				completeQualitiesCount++;
 			} else {
 				list += "<li>" + data[i][1][j].join(" + ") + "</li>";
@@ -157,6 +160,7 @@ renderEngine.showQualitiesList = function (qualities, data) {
 
 	if (completeQualitiesCount > 0) {
 		$(".completeQualitiesCount").text("20 × " + completeQualitiesCount);
+		$(".completeQualitiesCount").removeClass("completeQualitiesCount");
 	} else {
 		$(".completeQualitiesCount").addClass("hidden");
 	}
