@@ -1,0 +1,61 @@
+@import "colors";
+
+// common colors
+
+$colorBackgroundSecondary: $colorColdSherpaBlue;
+$colorTextSecondary: $colorColdJungleGreen;
+$colorTextInfo: $colorPirateGold;
+$colorBackgroundDanger: $colorColdSpice;
+$colorBackgroundDangerHover: $colorSpicyMix;
+$colorBeware: $colorRed;
+$colorFail: $colorRed;
+$colorSuccess: $colorPastelGreen;
+
+// individual colors
+
+$btnDefault: $colorBackgroundSecondary;
+$btnDefaultText: $colorTextSecondary;
+$btnDangerBackground: $colorBackgroundDanger;
+$btnDangerBackgroundHover: $colorBackgroundDangerHover;
+$btnDangerText: $colorTextInfo;
+
+//
+
+$hrBorderColor: $colorDarkSlateGrey;
+$hrLinearGradientLeft: $colorDarkSlateGrey;
+$hrLinearGradientCenter: $colorColdJellyBean;
+$hrLinearGradientRight: $colorDarkSlateGrey;
+$hrBackgound: $colorBlack;
+
+//
+
+$userInfoTextColor: $colorTextInfo;
+
+//
+
+$urlSaveMessage: $colorTextInfo;
+
+//
+
+$skFoldingCubeBackground: $colorMineShaft;
+
+//
+
+$poeResultBoxBorder: $colorBackgroundSecondary;
+$poeOptionsBackground: $colorBlueTiber;
+$poeOptionBorder: $colorRiverBed;
+$poeOptionBackgroundHover: $colorRiverBed;
+
+//
+
+$personalPageUsername: $colorTextInfo;
+$personalPageYourUser: $colorFirefly;
+
+//
+
+$tooltipInnerBackground: $colorBlack;
+$tooltipInnerText: $colorRegentStBlue;
+
+//
+
+$rootPhilosophyBorder: $colorDarkSlateGrey;

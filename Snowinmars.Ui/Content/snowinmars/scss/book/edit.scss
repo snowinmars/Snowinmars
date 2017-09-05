@@ -1,4 +1,6 @@
-﻿.flibustaUrlButton,
+﻿@import "colorSchema";
+
+.flibustaUrlButton,
 .libRusEcUrlButton,
 .liveLibUrlButton {
 	top: 1px;
@@ -13,5 +15,5 @@
 }
 
 .urlSaveMessage {
-	color: #a29200;
+	color: $urlSaveMessage;
 }

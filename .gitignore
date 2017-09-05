@@ -22,6 +22,8 @@ bin
 obj
 packages
 *.suo
+.sass-cache
+Snowinmars.Ui/Content/snowinmars/css/
 
 # Windows shortcuts
 *.lnk

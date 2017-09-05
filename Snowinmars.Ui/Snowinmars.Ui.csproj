@@ -156,11 +156,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\snowinmars\authorDetails.css" />
-    <Content Include="Content\snowinmars\authorEdit.css" />
-    <Content Include="Content\snowinmars\bookDetails.css" />
-    <Content Include="Content\snowinmars\bookEdit.css" />
-    <Content Include="Content\snowinmars\bookIndex.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -315,12 +310,24 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
-    <Content Include="Content\snowinmars\defaultStyleSheet.css" />
-    <Content Include="Content\snowinmars\loadingCube.css" />
-    <Content Include="Content\snowinmars\pathOfExile.css" />
-    <Content Include="Content\snowinmars\rootPage.css" />
-    <Content Include="Content\snowinmars\userDetails.css" />
-    <Content Include="Content\snowinmars\userIndex.css" />
+    <Content Include="Content\snowinmars\css\author\details.css" />
+    <Content Include="Content\snowinmars\css\author\edit.css" />
+    <Content Include="Content\snowinmars\css\book\details.css" />
+    <Content Include="Content\snowinmars\css\book\edit.css" />
+    <Content Include="Content\snowinmars\css\book\index.css" />
+    <Content Include="Content\snowinmars\css\defaultStyleSheet.css" />
+    <Content Include="Content\snowinmars\css\defaultStyleSheet.css.map" />
+    <Content Include="Content\snowinmars\css\loadingCube.css" />
+    <Content Include="Content\snowinmars\css\loadingCube.css.map" />
+    <Content Include="Content\snowinmars\css\pathOfExile\index.css" />
+    <Content Include="Content\snowinmars\css\root\index.css" />
+    <Content Include="Content\snowinmars\css\user\details.css" />
+    <Content Include="Content\snowinmars\css\user\index.css" />
+    <Content Include="Content\snowinmars\scss\defaultStyleSheet.scss" />
+    <Content Include="Content\snowinmars\scss\loadingCube.scss" />
+    <Content Include="Content\snowinmars\scss\_colors.scss" />
+    <Content Include="Content\snowinmars\scss\_colorSchema.scss" />
+    <Content Include="Content\snowinmars\scss\_mixins.scss" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -334,6 +341,24 @@
     <Content Include="Content\DataTables\css\semanticui.scss" />
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
+    <Content Include="Content\snowinmars\scss\author\details.scss" />
+    <Content Include="Content\snowinmars\scss\author\edit.scss" />
+    <Content Include="Content\snowinmars\scss\book\details.scss" />
+    <Content Include="Content\snowinmars\scss\book\edit.scss" />
+    <Content Include="Content\snowinmars\scss\book\index.scss" />
+    <Content Include="Content\snowinmars\scss\pathOfExile\index.scss" />
+    <Content Include="Content\snowinmars\scss\root\index.scss" />
+    <Content Include="Content\snowinmars\scss\user\details.scss" />
+    <Content Include="Content\snowinmars\scss\user\index.scss" />
+    <Content Include="Content\snowinmars\css\author\details.css.map" />
+    <Content Include="Content\snowinmars\css\author\edit.css.map" />
+    <Content Include="Content\snowinmars\css\book\details.css.map" />
+    <Content Include="Content\snowinmars\css\book\edit.css.map" />
+    <Content Include="Content\snowinmars\css\book\index.css.map" />
+    <Content Include="Content\snowinmars\css\pathOfExile\index.css.map" />
+    <Content Include="Content\snowinmars\css\root\index.css.map" />
+    <Content Include="Content\snowinmars\css\user\details.css.map" />
+    <Content Include="Content\snowinmars\css\user\index.css.map" />
     <None Include="job_scheduling_data_2_0.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -597,6 +622,12 @@
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
     <Error Condition="!Exists('..\packages\MSBuild.Microsoft.VisualStudio.Web.targets.14.0.0.3\build\MSBuild.Microsoft.VisualStudio.Web.targets.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSBuild.Microsoft.VisualStudio.Web.targets.14.0.0.3\build\MSBuild.Microsoft.VisualStudio.Web.targets.props'))" />
   </Target>
+  <PropertyGroup>
+    <PreBuildEvent>rd /s /q "$(SolutionDir)Snowinmars.Ui\Content\snowinmars\css"
+rd /s /q "$(SolutionDir)Snowinmars.Ui\Content\snowinmars\.sass-cache"
+
+sass --update "$(SolutionDir)Snowinmars.Ui\Content\snowinmars\scss":"$(SolutionDir)Snowinmars.Ui\Content\snowinmars\css"</PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
