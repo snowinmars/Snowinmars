@@ -1,4 +1,6 @@
-﻿.quality {
+﻿@import "colorSchema";
+
+.quality {
 	line-height: 3ex;
 	font-size: 3ex;
 }
@@ -13,7 +15,7 @@
 
 .resultBox {
 	margin: 10px;
-	border: 4px #073642 solid;
+	border: 4px $poeResultBoxBorder solid;
 	padding-top: 15px;
 	padding-bottom: 15px;
 }
@@ -55,17 +57,17 @@
 
     list-style:none;
 
-    background-color: #073642;
-	
+    background-color: $poeOptionsBackground;
+
 }
 	.options li {
-		border: #425358 solid 1px;
+		border: $poeOptionBorder solid 1px;
 		text-align: center;
 		cursor: pointer;
 	}
-	
+
 	.options li:hover {
-		background-color: #425358;
+		background-color: $poeOptionBackgroundHover;
 	}
 
 .select {

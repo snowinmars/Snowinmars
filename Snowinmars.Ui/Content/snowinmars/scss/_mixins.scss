@@ -1,0 +1,6 @@
+@mixin background-image($position, $left, $middle, $right) {
+	-webkit-linear-gradient: ($position, $left, $middle, $right);
+	-moz-linear-gradient: ($position, $left, $middle, $right);
+	-ms-linear-gradient: ($position, $left, $middle, $right);
+	-o-linear-gradient: ($position, $left, $middle, $right);
+}
