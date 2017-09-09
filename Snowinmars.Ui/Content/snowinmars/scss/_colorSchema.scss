@@ -16,557 +16,589 @@ $colorDefaultBorder: $colorBlack;
 
 // individual colors
 
+$abbrBorder: $colorBlueTiber;
+
+
+$alertDangerBackground: $colorOrangeRoughy;
+$alertDangerBorder: $colorOrangeRoughy;
+$alertDangerHrBorderTop: $colorFieryOrange;
+$alertDangerLinkText: $colorMercury;
+$alertDangerText: $colorWhite;
+
+$alertInfoBackground: $colorColdCuriousBlue;
+$alertInfoBorder: $colorColdCuriousBlue;
+$alertInfoHrBorderTop: $colorMariner;
+$alertInfoLinkText: $colorMercury;
+$alertInfoText: $colorWhite;
+
+$alertSuccessBackground: $colorColdJungleGreen;
+$alertSuccessBorder: $colorColdJungleGreen;
+$alertSuccessHrBorderTop: $colorLochinvar;
+$alertSuccessLinkText: $colorWhite;
+$alertSuccessText: $colorWhite;
+
+$alertWarningBackground: $colorOrangeRoughy;
+$alertWarningBorder: $colorOrangeRoughy;
+$alertWarningHrBorderTop: $colorFieryOrange;
+$alertWarningLinkText: $colorMercury;
+$alertWarningText: $colorWhite;
+
+
+$badgeBackground: $colorColdCuttySark;
+$badgeText: $colorWhite;
+$badgeTextFocus: $colorWhite;
+
+
+$bgDangerBackgound: $colorBackgroundDanger;
+$bgInfoBackgound: $colorColdCuriousBlue;
+$bgPrimaryBackgound: $colorTextInfo;
+$bgPrimaryText: $colorWhite;
+$bgSuccessBackgound: $colorTextSecondary;
+$bgText: $colorWhite;
+$bgWarningBackgound: $colorOrangeRoughy;
+
+
+$blockquoteBorder: $colorBlueTiber;
+$blockquoteBorder: $colorDustyGray;
+$blockquoteText: $colorTextPrimary;
+
+
+$breadcrumbActiveText: $colorTextPrimary;
+$breadcrumbBackground: $colorBlueTiber;
+$breadcrumbFirstText: $colorTextPrimary;
+
+
 $btnBackground: $colorBackgroundSecondary;
-$btnText: $colorTextSecondary;
-$btnTextFocus: $colorWhite;
 $btnBorder: $colorColdCuttySark;
-
-
-$btnLinkText: $colorTextSecondary;
-$btnLinkTextHover: $colorTextSecondary;
-$btnDisabledLinkTextHover: $colorTextSecondary;
-
-
-$btnDefaultBackground: $colorColdCuttySark;
-$btnDefaultBackgroundFocus: $colorRiverBed;
-$btnDefaultText: $colorTextSecondary;
-$btnDefaultTextFocus: $colorWhite;
-$btnDefaultBorder: $colorColdCuttySark;
-$btnDefaultBorderFocus: $colorOuterSpace;
-
-
-$btnPrimaryBackground: $colorYukonGold;
-$btnPrimaryBackgroundFocus: $colorYukonGold;
-$btnPrimaryText: $colorWhite;
-$btnPrimaryTextFocus: $colorWhite;
-$btnPrimaryBorder: $colorPirateGold;
-$btnPrimaryBorderFocus: $colorCola;
-
-$btnPrimaryActiveBackground: $colorPirateGold;
-$btnPrimaryActiveBackgroundFocus: $colorSaddleBrown;
-$btnPrimaryActiveText: $colorWhite;
-$btnPrimaryActiveTextFocus: $colorWhite;
-$btnPrimaryActiveBorder: $colorCinnamon;
-$btnPrimaryActiveBorderFocus: $colorCola;
-$btnPrimaryDisabledBackgroundFocus: $colorPirateGold;
-$btnPrimaryDisabledBorderFocus: $colorPirateGold;
-
-
-$btnSuccessBackground: $colorColdJungleGreen;
-$btnSuccessBackgroundFocus: $colorElm;
-$btnSuccessText: $colorWhite;
-$btnSuccessTextFocus: $colorWhite;
-$btnSuccessBorder: $colorColdJungleGreen;
-$btnSuccessBorderFocus: $colorFirefly;
-
-$btnSuccessActiveBackground: $colorElm;
-$btnSuccessActiveBackgroundFocus: $colorGreenPea;
-$btnSuccessActiveText: $colorWhite;
-$btnSuccessActiveTextFocus: $colorWhite;
-$btnSuccessActiveBorder: $colorElm;
-$btnSuccessActiveBorderFocus: $colorFirefly;
-$btnSuccessDisabledBackgroundFocus: $colorColdJungleGreen;
-$btnSuccessDisabledBorderFocus: $colorColdJungleGreen;
-
-
-$btnInfoBackground: $colorColdCuriousBlue;
-$btnInfoBackgroundFocus: $colorMatisse;
-$btnInfoText: $colorWhite;
-$btnInfoTextFocus: $colorWhite;
-$btnInfoBorder: $colorColdCuriousBlue;
-$btnInfoBorderFocus: $colorChathamsBlue;
-
-$btnInfoActiveBackground: $colorMatisse;
-$btnInfoActiveBackgroundFocus: $colorBlumine;
-$btnInfoActiveText: $colorWhite;
-$btnInfoActiveTextFocus: $colorWhite;
-$btnInfoActiveBorder: $colorMatisse;
-$btnInfoActiveBorderFocus: $colorChathamsBlue;
-$btnInfoDisabledBackgroundFocus: $colorColdCuriousBlue;
-$btnInfoDisabledBorderFocus: $colorColdCuriousBlue;
-
-
-$btnWarningBackground: $colorOrangeRoughy;
-$btnWarningBackgroundFocus: $colorTabasco;
-$btnWarningText: $colorWhite;
-$btnWarningTextFocus: $colorWhite;
-$btnWarningBorder: $colorOrangeRoughy;
-$btnWarningBorderFocus: $colorCioccolato;
-
-$btnWarningActiveBackground: $colorTabasco;
-$btnWarningActiveBackgroundFocus: $colorPueblo;
-$btnWarningActiveText: $colorWhite;
-$btnWarningActiveTextFocus: $colorWhite;
-$btnWarningActiveBorder: $colorTabasco;
-$btnWarningActiveBorderFocus: $colorCioccolato;
-$btnWarningDisabledBackgroundFocus: $colorOrangeRoughy;
-$btnWarningDisabledBorderFocus: $colorOrangeRoughy;
-
-
-$btnDangerBackground: $colorBackgroundDanger;
-$btnDangerBackgroundHover: $colorBackgroundDangerHover;
-$btnDangerText: $colorTextInfo;
-$btnDangerTextFocus: $colorWhite;
-$btnDangerBorder: $colorOrangeRoughy;
-$btnDangerBorderFocus: $colorCioccolato;
 
 $btnDangerActiveBackground: $colorTabasco;
 $btnDangerActiveBackgroundFocus: $colorPueblo;
-$btnDangerActiveText: $colorWhite;
-$btnDangerActiveTextFocus: $colorWhite;
 $btnDangerActiveBorder: $colorTabasco;
 $btnDangerActiveBorderFocus: $colorCioccolato;
+$btnDangerActiveText: $colorWhite;
+$btnDangerActiveTextFocus: $colorWhite;
+
+$btnDangerBackground: $colorBackgroundDanger;
+$btnDangerBackgroundHover: $colorBackgroundDangerHover;
+$btnDangerBorder: $colorOrangeRoughy;
+$btnDangerBorderFocus: $colorCioccolato;
 $btnDangerDisabledBackgroundFocus: $colorOrangeRoughy;
 $btnDangerDisabledBorderFocus: $colorOrangeRoughy;
+$btnDangerText: $colorTextInfo;
+$btnDangerTextFocus: $colorWhite;
+
+$btnDefaultBackground: $colorColdCuttySark;
+$btnDefaultBackgroundFocus: $colorRiverBed;
+$btnDefaultBorder: $colorColdCuttySark;
+$btnDefaultBorderFocus: $colorOuterSpace;
+$btnDefaultText: $colorTextSecondary;
+$btnDefaultTextFocus: $colorWhite;
+$btnDisabledLinkTextHover: $colorTextSecondary;
+
+$btnInfoActiveBackground: $colorMatisse;
+$btnInfoActiveBackgroundFocus: $colorBlumine;
+$btnInfoActiveBorder: $colorMatisse;
+$btnInfoActiveBorderFocus: $colorChathamsBlue;
+$btnInfoActiveText: $colorWhite;
+$btnInfoActiveTextFocus: $colorWhite;
+
+$btnInfoBackground: $colorColdCuriousBlue;
+$btnInfoBackgroundFocus: $colorMatisse;
+$btnInfoBorder: $colorColdCuriousBlue;
+$btnInfoBorderFocus: $colorChathamsBlue;
+$btnInfoDisabledBackgroundFocus: $colorColdCuriousBlue;
+$btnInfoDisabledBorderFocus: $colorColdCuriousBlue;
+$btnInfoText: $colorWhite;
+$btnInfoTextFocus: $colorWhite;
+
+$btnLinkText: $colorTextSecondary;
+$btnLinkTextHover: $colorTextSecondary;
+
+$btnPrimaryActiveBackground: $colorPirateGold;
+$btnPrimaryActiveBackgroundFocus: $colorSaddleBrown;
+$btnPrimaryActiveBorder: $colorCinnamon;
+$btnPrimaryActiveBorderFocus: $colorCola;
+$btnPrimaryActiveText: $colorWhite;
+$btnPrimaryActiveTextFocus: $colorWhite;
+
+$btnPrimaryBackground: $colorYukonGold;
+$btnPrimaryBackgroundFocus: $colorYukonGold;
+$btnPrimaryBorder: $colorPirateGold;
+$btnPrimaryBorderFocus: $colorCola;
+$btnPrimaryDisabledBackgroundFocus: $colorPirateGold;
+$btnPrimaryDisabledBorderFocus: $colorPirateGold;
+$btnPrimaryText: $colorWhite;
+$btnPrimaryTextFocus: $colorWhite;
+
+$btnSuccessActiveBackground: $colorElm;
+$btnSuccessActiveBackgroundFocus: $colorGreenPea;
+$btnSuccessActiveBorder: $colorElm;
+$btnSuccessActiveBorderFocus: $colorFirefly;
+$btnSuccessActiveText: $colorWhite;
+$btnSuccessActiveTextFocus: $colorWhite;
+
+$btnSuccessBackground: $colorColdJungleGreen;
+$btnSuccessBackgroundFocus: $colorElm;
+$btnSuccessBorder: $colorColdJungleGreen;
+$btnSuccessBorderFocus: $colorFirefly;
+$btnSuccessDisabledBackgroundFocus: $colorColdJungleGreen;
+$btnSuccessDisabledBorderFocus: $colorColdJungleGreen;
+$btnSuccessText: $colorWhite;
+$btnSuccessTextFocus: $colorWhite;
+
+$btnText: $colorTextSecondary;
+$btnTextFocus: $colorWhite;
+
+$btnWarningActiveBackground: $colorTabasco;
+$btnWarningActiveBackgroundFocus: $colorPueblo;
+$btnWarningActiveBorder: $colorTabasco;
+$btnWarningActiveBorderFocus: $colorCioccolato;
+$btnWarningActiveText: $colorWhite;
+$btnWarningActiveTextFocus: $colorWhite;
+
+$btnWarningBackground: $colorOrangeRoughy;
+$btnWarningBackgroundFocus: $colorTabasco;
+$btnWarningBorder: $colorOrangeRoughy;
+$btnWarningBorderFocus: $colorCioccolato;
+$btnWarningDisabledBackgroundFocus: $colorOrangeRoughy;
+$btnWarningDisabledBorderFocus: $colorOrangeRoughy;
+$btnWarningText: $colorWhite;
+$btnWarningTextFocus: $colorWhite;
 
 
-
-//
-
-$linkTextPrimary: $colorTextSecondary;
-$textPrimary: $colorTextInfo;
-$linkTextPrimaryHover: $colorYukonGold;
-$textSuccess: $colorWhite;
-$linkTextSuccess: $colorMercury;
-$textInfo: $colorWhite;
-$linkTextInfoHover: $colorMercury;
-$textWarning: $colorWhite;
-$linkTextWarningHover: $colorMercury;
-$textDanger: $colorWhite;
-$linkTextDangerHover: $colorMercury;
-
-//
-
-$bgPrimaryText: $colorWhite;
-$bgPrimaryBackgound: $colorTextInfo;
-$linkBgPrimaryBackgoundHover: $colorYukonGold;
-$bgSuccessBackgound: $colorTextSecondary;
-$linkBgSuccessBackgoundHover: $colorElm;
-$bgInfoBackgound: $colorColdCuriousBlue;
-$linkBgInfoBackgoundHover: $colorMatisse;
-$bgWarningBackgound: $colorOrangeRoughy;
-$linkBgWarningBackgoundHover: $colorBackgroundDangerHover;
-$bgDangerBackgound: $colorBackgroundDanger;
-$linkBgDangerBackgoundHover: $colorBackgroundDangerHover;
-
-//
-
-$abbrBorder: $colorBlueTiber;
-$blockquoteBorder: $colorBlueTiber;
-$blockquoteText: $colorTextPrimary;
-
-//
-
-$pageHeaderText: $colorBlueTiber;
-
-//
-
-$textMuted: $colorAthsSpecial;
-
-//
-
-$hText: $colorTextPrimary;
-
-//
-
-$hrBorderColor: $colorDarkSlateGrey;
-$hrLinearGradientLeft: $colorDarkSlateGrey;
-$hrLinearGradientCenter: $colorColdJellyBean;
-$hrLinearGradientRight: $colorDarkSlateGrey;
-$hrBackgound: $colorBlack;
-
-//
-
-$userInfoTextColor: $colorTextInfo;
-
-//
-
-$urlSaveMessage: $colorTextInfo;
-
-//
-
-$skFoldingCubeBackground: $colorMineShaft;
-
-//
-
-$poeResultBoxBorder: $colorBackgroundSecondary;
-$poeOptionsBackground: $colorBlueTiber;
-$poeOptionBorder: $colorRiverBed;
-$poeOptionBackgroundHover: $colorRiverBed;
-
-//
-
-$personalPageUsername: $colorTextInfo;
-$personalPageYourUser: $colorFirefly;
-
-//
-
-$tooltipInnerBackground: $colorBlack;
-$tooltipInnerText: $colorRegentStBlue;
-
-//
-
-$rootPhilosophyBorder: $colorDarkSlateGrey;
-
-//
-
-$mediaPrintText: $colorBlack;
-$markBackground: $colorYellow;
-$markText: $colorBlack;
-$markClassBackground: $colorOrangeRoughy;
-$fieldsetBorder: $colorSilver;
-$blockquoteBorder: $colorDustyGray;
-$imgThumbnailBackgound: $colorBackgroundPrimary;
-$imgThumbnailBorder: $colorAlto;
-$codeText: $colorMaroonFlush;
-$codeBackgound: $colorSoftPeach;
-$kbdText: $colorWhite;
-$kbdBackgound: $colorMineShaft;
-$preBackground: $colorMercury;
-$preBorder: $colorWhiteSand;
-$preCodeBackgound: $colorTransparent;
 $captionText: $colorAthsSpecial;
-$legendText: $colorColdGrannySmith;
-$legendBorder: $colorBlueTiber;
-$outputText: $colorBlueTiber;
-$helpBlockText: $colorTiara;
 
-$hasSuccessText: $colorWhite;
-$hasSuccessBackground: $colorTextSecondary;
-$hasSuccessBorder: $colorWhite;
-$hasSuccessBorderFocus: $colorMercury;
-$hasWarningText: $colorWhite;
-$hasWarningBackground: $colorOrangeRoughy;
-$hasWarningBorder: $colorWhite;
-$hasWarningBorderFocus: $colorMercury;
-$hasErrorText: $colorWhite;
-$hasErrorBackground: $colorOrangeRoughy;
-$hasErrorBorder: $colorWhite;
-$hasErrorBorderFocus: $colorMercury;
 
-//
+$carouselCaptionText: $colorWhite;
+$carouselControlText: $colorWhite;
+$carouselControlTextFocus: $colorWhite;
+$carouselIndicatorsActiveBackground: $colorWhite;
+$carouselIndicatorsListItemBorder: $colorWhite;
 
-$tableTdBackground: $colorWhite;
-$tableTrBackground: $colorWhite;
-$tableBorder: $colorAlto;
-$tableBackground: $colorBackgroundPrimary;
-$tableSuccess: $colorColdJungleGreen;
-$tableSuccessHover: $colorLochinvar;
-$tableInfo: $colorColdCuriousBlue;
-$tableInfoHover: $colorMariner;
-$tableWarning: $colorOrangeRoughy;
-$tableWarningHover: $colorFieryOrange;
-$tableDanger: $colorBackgroundDanger;
-$tableDangerHover: $colorBackgroundDangerHover;
 
-//
+$closeText: $colorTextPrimary;
+$closeTextFocus: $colorTextPrimary;
 
-$formControlText: $colorBlueTiber;
-$formControlBackground: $colorTowerGray;
-$formControlBorderHover: $colorLightCornflowerBlue;
-$formControlPlaceholderText: $colorRollingStone;
-$formControlDisabledBackground: $colorRollingStone;
 
-//
+$codeBackgound: $colorSoftPeach;
+$codeText: $colorMaroonFlush;
 
+
+$dropdownActiveMenuLinkBackground: $colorBlueTiber;
+$dropdownActiveMenuLinkText: $colorWhite;
 $dropDownBackground: $colorBlueTiber;
 $dropDownBorder: $colorSilver;
+$dropdownDisabledMenuLinkText: $colorAthsSpecial;
+$dropdownHeaderText: $colorAthsSpecial;
 $dropdownMenuDividerBackground: $colorBackgroundPrimary;
 $dropdownMenuLinkText: $colorTextPrimary;
 $dropdownMenuLinkTextFocus: $colorBackgroundPrimary;
-$dropdownActiveMenuLinkText: $colorWhite;
-$dropdownActiveMenuLinkBackground: $colorBlueTiber;
-$dropdownDisabledMenuLinkText: $colorAthsSpecial;
-$dropdownHeaderText: $colorAthsSpecial;
 
-//
+
+$fieldsetBorder: $colorSilver;
+
+
+$formControlBackground: $colorTowerGray;
+$formControlBorderHover: $colorLightCornflowerBlue;
+$formControlDisabledBackground: $colorRollingStone;
+$formControlPlaceholderText: $colorRollingStone;
+$formControlText: $colorBlueTiber;
+
+
+$hasErrorBackground: $colorOrangeRoughy;
+$hasErrorBorder: $colorOrangeRoughy;
+$hasErrorBorder: $colorWhite;
+$hasErrorBorderFocus: $colorMercury;
+$hasErrorText: $colorOrangeRoughy;
+$hasErrorText: $colorWhite;
+
+$hasSuccessBackground: $colorTextSecondary;
+$hasSuccessBorder: $colorColdJungleGreen;
+$hasSuccessBorder: $colorWhite;
+$hasSuccessBorderFocus: $colorMercury;
+$hasSuccessText: $colorTextSecondary;
+$hasSuccessText: $colorWhite;
+
+$hasWarningBackground: $colorOrangeRoughy;
+$hasWarningBorder: $colorOrangeRoughy;
+$hasWarningBorder: $colorWhite;
+$hasWarningBorderFocus: $colorMercury;
+$hasWarningText: $colorOrangeRoughy;
+$hasWarningText: $colorWhite;
+
+
+$helpBlockText: $colorTiara;
+
+
+$hrBackgound: $colorBlack;
+$hrBorderColor: $colorDarkSlateGrey;
+$hrLinearGradientCenter: $colorColdJellyBean;
+$hrLinearGradientLeft: $colorDarkSlateGrey;
+$hrLinearGradientRight: $colorDarkSlateGrey;
+
+
+$hText: $colorTextPrimary;
+
+
+$imgThumbnailBackgound: $colorBackgroundPrimary;
+$imgThumbnailBorder: $colorAlto;
+
+
+$inputGroupAddonBackground: $colorTextPrimary;
+$inputGroupAddonText: $colorTextPrimary;
+
+
+$jumbotronBackground: $colorBlueTiber;
+$jumbotronBackground: $colorBlueTiber;
+$jumbotronHrBorderTop: $colorBlackPearl;
+
+
+$kbdBackgound: $colorMineShaft;
+$kbdText: $colorWhite;
+
+
+$labelDangerBackground: $colorBackgroundDanger;
+$labelDangerBackgroundFocus: $colorBackgroundDangerHover;
+
+$labelDefault: $colorColdCuttySark;
+$labelDefaultFocus: $colorRiverBed;
+
+$labelInfoBackground: $colorColdCuriousBlue;
+$labelInfoBackgroundFocus: $colorMatisse;
+
+$labelPrimaryBackground: $colorPirateGold;
+$labelPrimaryBackgroundFocus: $colorPirateGold;
+
+$labelSuccessBackground: $colorColdJungleGreen;
+$labelSuccessBackgroundFocus: $colorElm;
+
+$labelText: $colorWhite;
+$labelTextFocus: $colorWhite;
+
+$labelWarningBackground: $colorOrangeRoughy;
+$labelWarningBackgroundFocus: $colorTabasco;
+
+
+$legendBorder: $colorBlueTiber;
+$legendText: $colorColdGrannySmith;
+
+
+$linkBgDangerBackgoundHover: $colorBackgroundDangerHover;
+$linkBgInfoBackgoundHover: $colorMatisse;
+$linkBgPrimaryBackgoundHover: $colorYukonGold;
+$linkBgSuccessBackgoundHover: $colorElm;
+$linkBgWarningBackgoundHover: $colorBackgroundDangerHover;
+
+
+$linkTextDangerHover: $colorMercury;
+$linkTextInfoHover: $colorMercury;
+$linkTextPrimary: $colorTextSecondary;
+$linkTextPrimaryHover: $colorYukonGold;
+$linkTextSuccess: $colorMercury;
+$linkTextWarningHover: $colorMercury;
+
+
+$listGroupItemActiveBackgroundFocus: $colorBlueTiber;
+$listGroupItemActiveBorderFocus: $colorBlueTiber;
+$listGroupItemActiveTextFocus: $colorWhite;
+
+$listGroupItemBackgroundFocus: $colorBlueTiber;
+$listGroupItemBorder: $colorBlueTiber;
+
+$listGroupItemDangerActiveBackgroundFocus: $colorWhite;
+$listGroupItemDangerActiveBorderFocus: $colorWhite;
+$listGroupItemDangerActiveTextFocus: $colorWhite;
+
+$listGroupItemDangerBackground: $colorOrangeRoughy;
+
+$listGroupItemDangerLinkBackgroundFocus: $colorFieryOrange;
+$listGroupItemDangerLinkText: $colorWhite;
+$listGroupItemDangerLinkTextFocus: $colorWhite;
+
+$listGroupItemDangerText: $colorWhite;
+
+$listGroupItemDisabledTextFocus: $colorBlueTiber;
+
+$listGroupItemInfoActiveBackgroundFocus: $colorWhite;
+$listGroupItemInfoActiveBorderFocus: $colorWhite;
+$listGroupItemInfoActiveTextFocus: $colorWhite;
+
+$listGroupItemInfoBackground: $colorColdCuriousBlue;
+
+$listGroupItemInfoLinkBackgroundFocus: $colorMariner;
+$listGroupItemInfoLinkText: $colorWhite;
+$listGroupItemInfoLinkTextFocus: $colorWhite;
+
+$listGroupItemInfoText: $colorWhite;
+
+$listGroupItemSuccessActiveBackgroundFocus: $colorWhite;
+$listGroupItemSuccessActiveBorderFocus: $colorWhite;
+$listGroupItemSuccessActiveTextFocus: $colorWhite;
+
+$listGroupItemSuccessBackground: $colorColdJungleGreen;
+
+$listGroupItemSuccessLinkBackgroundFocus: $colorLochinvar;
+$listGroupItemSuccessLinkText: $colorWhite;
+$listGroupItemSuccessLinkTextFocus: $colorWhite;
+
+$listGroupItemSuccessText: $colorWhite;
+
+$listGroupItemText: $colorTextPrimary;
+$listGroupItemTextFocus: $colorWhite;
+
+$listGroupItemWarningActiveBackgroundFocus: $colorWhite;
+$listGroupItemWarningActiveBorderFocus: $colorWhite;
+$listGroupItemWarningActiveTextFocus: $colorWhite;
+
+$listGroupItemWarningBackground: $colorOrangeRoughy;
+
+$listGroupItemWarningLinkBackgroundFocus: $colorFieryOrange;
+$listGroupItemWarningLinkText: $colorWhite;
+$listGroupItemWarningLinkTextFocus: $colorWhite;
+
+$listGroupItemWarningText: $colorWhite;
+
+
+$markBackground: $colorYellow;
+$markClassBackground: $colorOrangeRoughy;
+$markText: $colorBlack;
+
+
+$mediaPrintText: $colorBlack;
+
+
+$modalBackdropBackground: $colorBlack;
+$modalContentBackground: $colorBlueTiber;
+$modalContentBorder: $colorDantee;
+$modalFooterBorder: $colorDantee;
+$modalHeaderBorder: $colorDantee;
+
+
+$navigationBrandText: $colorWhite;
+$navigationBrandTextFocus: $colorWhite;
+
+$navigationDefaultBackground: $colorBlueTiber;
+$navigationDefaultOpenDropdownBackground: $colorBlueTiber;
+$navigationDefaultOpenDropdownText: $colorWhite;
 
 $navigationDisabledLinkText: $colorTextPrimary;
 $navigationDisabledLinkTextFocus: $colorTextPrimary;
-$navigationOpenLinkBackground: $colorColdJungleGreen;
+
 $navigationDividerBackground: $colorWhiteSand;
-$navigationTabBorder: $colorBlueTiber;
-$navigationTabLinkBorder: $colorBlueTiber;
-$navigationTabLinkActiveText: $colorWhite;
-$navigationTabLinkActiveBackground: $colorBackgroundPrimary;
-$navigationTabLinkActiveBorder: $colorBlueTiber;
-$navigationTabLinkActiveBottomBorder: $colorBackgroundPrimary;
-$navigationPillaActiveLinkText: $colorWhite;
+
+$navigationInverseBackground: $colorPirateGold;
+$navigationInverseBorder: $colorYukonGold;
+$navigationInverseFormBorder: $colorYukonGold;
+
+$navigationInverseNapOpenDropdownActiveBackground: $colorYukonGold;
+$navigationInverseNapOpenDropdownActiveText: $colorWhite;
+$navigationInverseNapOpenDropdownDividerBackground: $colorYukonGold;
+$navigationInverseNapOpenDropdownHeaderBorder: $colorYukonGold;
+$navigationInverseNapOpenLinkBackground: $colorYukonGold;
+$navigationInverseNapOpenLinkText: $colorYukonGold;
+$navigationInverseNavActiveLinkBackground: $colorYukonGold;
+$navigationInverseNavActiveLinkText: $colorWhite;
+
+$navigationInverseText: $colorWhite;
+$navigationInverseTextFocus: $colorWhite;
+$navigationInverseTextText: $colorWhite;
+
+$navigationNavActiveLinkBackground: $colorBlueTiber;
+$navigationNavActiveLinkText: $colorWhite;
+
+$navigationNavOpenLinkBackground: $colorBlueTiber;
+$navigationNavOpenLinkText: $colorWhite;
+
+$navigationOpenLinkBackground: $colorColdJungleGreen;
+
 $navigationPillaActiveLinkBackground: $colorBlueTiber;
+$navigationPillaActiveLinkText: $colorWhite;
+
+$navigationTabBorder: $colorBlueTiber;
+
 $navigationTabJustifiedActiveLinkBorder: $colorBlueTiber;
 $navigationTabJustifiedLinkBorder: $colorBlueTiber;
 $navigationTabJustifiedLinkBorderFocus: $colorDantee;
 
-$navigationDefaultBackground: $colorBlueTiber;
-$navigationBrandText: $colorWhite;
-$navigationBrandTextFocus: $colorWhite;
+$navigationTabLinkActiveBackground: $colorBackgroundPrimary;
+$navigationTabLinkActiveBorder: $colorBlueTiber;
+$navigationTabLinkActiveBottomBorder: $colorBackgroundPrimary;
+$navigationTabLinkActiveText: $colorWhite;
+
+$navigationTabLinkBorder: $colorBlueTiber;
 $navigationTextText: $colorTextPrimary;
-$navigationNavActiveLinkText: $colorWhite;
-$navigationNavActiveLinkBackground: $colorBlueTiber;
-$navigationNavOpenLinkText: $colorWhite;
-$navigationNavOpenLinkBackground: $colorBlueTiber;
-$navigationDefaultOpenDropdownText: $colorWhite;
-$navigationDefaultOpenDropdownBackground: $colorBlueTiber;
 
-$navigationInverseBackground: $colorPirateGold;
-$navigationInverseBorder: $colorYukonGold;
-$navigationInverseText: $colorWhite;
-$navigationInverseTextFocus: $colorWhite;
-$navigationInverseTextText: $colorWhite;
-$navigationInverseNavActiveLinkText: $colorWhite;
-$navigationInverseNavActiveLinkBackground: $colorYukonGold;
-$navigationInverseFormBorder: $colorYukonGold;
-$navigationInverseNapOpenLinkBackground: $colorYukonGold;
-$navigationInverseNapOpenLinkText: $colorYukonGold;
-$navigationInverseNapOpenDropdownHeaderBorder: $colorYukonGold;
-$navigationInverseNapOpenDropdownDividerBackground: $colorYukonGold;
-$navigationInverseNapOpenDropdownActiveText: $colorWhite;
-$navigationInverseNapOpenDropdownActiveBackground: $colorYukonGold;
 
-$breadcrumbBackground: $colorBlueTiber;
-$breadcrumbFirstText: $colorTextPrimary;
-$breadcrumbActiveText: $colorTextPrimary;
-$paginationText: $colorTextSecondary;
-$paginationBorder: $colorBlueTiber;
-$paginationTextFocus: $colorTextSecondary;
-$paginationBackgroundFocus: $colorBlueTiber;
-$paginationBorderFocus: $colorBlueTiber;
-$paginationActiveBackgroundFocus: $colorBlueTiber;
-$paginationActiveBorderFocus: $colorBlueTiber;
-$paginationDisabledText: $colorBlueTiber;
-$paginationDisabledBorder: $colorBlueTiber;
+$outputText: $colorBlueTiber;
+
+
+$pageHeaderText: $colorBlueTiber;
+
 
 $pagerBorder: $colorBlueTiber;
 $pagerBorderFocus: $colorBlueTiber;
 $pagerDisabled: $colorBlueTiber;
 
-$labelText: $colorWhite;
-$labelTextFocus: $colorWhite;
-$labelDefault: $colorColdCuttySark;
-$labelDefaultFocus: $colorRiverBed;
-$labelPrimaryBackground: $colorPirateGold;
-$labelPrimaryBackgroundFocus: $colorPirateGold;
-$labelSuccessBackground: $colorColdJungleGreen;
-$labelSuccessBackgroundFocus: $colorElm;
-$labelInfoBackground: $colorColdCuriousBlue;
-$labelInfoBackgroundFocus: $colorMatisse;
-$labelWarningBackground: $colorOrangeRoughy;
-$labelWarningBackgroundFocus: $colorTabasco;
-$labelDangerBackground: $colorBackgroundDanger;
-$labelDangerBackgroundFocus: $colorBackgroundDangerHover;
 
-$badgeText: $colorWhite;
-$badgeBackground: $colorColdCuttySark;
-$badgeTextFocus: $colorWhite;
-$jumbotronBackground: $colorBlueTiber;
-$jumbotronHrBorderTop: $colorBlackPearl;
-$thumbnailBackground: $colorDantee;
-$thumbnailBorder: $colorAlto;
-$thumbnailLinkBorder: $colorColdJungleGreen;
-$thumbnailCaptionText: $colorTextPrimary;
-
-//
-
-$alertSuccessText: $colorWhite;
-$alertSuccessBackground: $colorColdJungleGreen;
-$alertSuccessBorder: $colorColdJungleGreen;
-$alertSuccessHrBorderTop: $colorLochinvar;
-$alertSuccessLinkText: $colorWhite;
-
-$alertInfoText: $colorWhite;
-$alertInfoBackground: $colorColdCuriousBlue;
-$alertInfoBorder: $colorColdCuriousBlue;
-$alertInfoHrBorderTop: $colorMariner;
-$alertInfoLinkText: $colorMercury;
-
-$alertWarningText: $colorWhite;
-$alertWarningBackground: $colorOrangeRoughy;
-$alertWarningBorder: $colorOrangeRoughy;
-$alertWarningHrBorderTop: $colorFieryOrange;
-$alertWarningLinkText: $colorMercury;
-
-$alertDangerText: $colorWhite;
-$alertDangerBackground: $colorOrangeRoughy;
-$alertDangerBorder: $colorOrangeRoughy;
-$alertDangerHrBorderTop: $colorFieryOrange;
-$alertDangerLinkText: $colorMercury;
-
-//
-
-$progressBackground: $colorBlueTiber;
-$progressBarText: $colorWhite;
-$progressBarBackground: $colorPirateGold;
-$progressBarSuccessBackground: $colorColdJungleGreen;
-$progressBarInfoBackground: $colorColdCuriousBlue;
-$progressBarWarningBackground: $colorOrangeRoughy;
-$progressBarDangerBackground: $colorOrangeRoughy;
-
-$listGroupItemBorder: $colorBlueTiber;
-$listGroupItemText: $colorTextPrimary;
-$listGroupItemTextFocus: $colorWhite;
-$listGroupItemBackgroundFocus: $colorBlueTiber;
-$listGroupItemDisabledTextFocus: $colorBlueTiber;
-
-$listGroupItemActiveTextFocus: $colorWhite;
-$listGroupItemActiveBackgroundFocus: $colorBlueTiber;
-$listGroupItemActiveBorderFocus: $colorBlueTiber;
-
-
-$listGroupItemSuccessText: $colorWhite;
-$listGroupItemSuccessBackground: $colorColdJungleGreen;
-$listGroupItemSuccessLinkText: $colorWhite;
-$listGroupItemSuccessLinkTextFocus: $colorWhite;
-$listGroupItemSuccessLinkBackgroundFocus: $colorLochinvar;
-
-$listGroupItemSuccessActiveTextFocus: $colorWhite;
-$listGroupItemSuccessActiveBackgroundFocus: $colorWhite;
-$listGroupItemSuccessActiveBorderFocus: $colorWhite;
-
-
-$listGroupItemInfoText: $colorWhite;
-$listGroupItemInfoBackground: $colorColdCuriousBlue;
-$listGroupItemInfoLinkText: $colorWhite;
-$listGroupItemInfoLinkTextFocus: $colorWhite;
-$listGroupItemInfoLinkBackgroundFocus: $colorMariner;
-
-$listGroupItemInfoActiveTextFocus: $colorWhite;
-$listGroupItemInfoActiveBackgroundFocus: $colorWhite;
-$listGroupItemInfoActiveBorderFocus: $colorWhite;
-
-
-$listGroupItemWarningText: $colorWhite;
-$listGroupItemWarningBackground: $colorOrangeRoughy;
-$listGroupItemWarningLinkText: $colorWhite;
-$listGroupItemWarningLinkTextFocus: $colorWhite;
-$listGroupItemWarningLinkBackgroundFocus: $colorFieryOrange;
-
-$listGroupItemWarningActiveTextFocus: $colorWhite;
-$listGroupItemWarningActiveBackgroundFocus: $colorWhite;
-$listGroupItemWarningActiveBorderFocus: $colorWhite;
-
-
-$listGroupItemDangerText: $colorWhite;
-$listGroupItemDangerBackground: $colorOrangeRoughy;
-$listGroupItemDangerLinkText: $colorWhite;
-$listGroupItemDangerLinkTextFocus: $colorWhite;
-$listGroupItemDangerLinkBackgroundFocus: $colorFieryOrange;
-
-$listGroupItemDangerActiveTextFocus: $colorWhite;
-$listGroupItemDangerActiveBackgroundFocus: $colorWhite;
-$listGroupItemDangerActiveBorderFocus: $colorWhite;
-
-//
-
-$panelFooterBackground: $colorBlueTiber;
-$panelFooterBorder: $colorBlueTiber;
-$panelTableResponsivePanelBodyBorder: $colorBlueTiber;
-$panelGroupPanelHeadingPanelCollapseListGroupBorderTop: $colorBlueTiber;
-$panelGroupPanelFooterPanelCollapsePanelBodyBorderBottom: $colorBlueTiber;
-$panelDefaultPanelHeadingPanelCollapsePanelBodyBorderTop: $colorBlueTiber;
-$panelDefaultPanelHeadingBadgeText: $colorBlueTiber;
-$panelDefaultPanelHeadingBadgeBackground: $colorWhite;
-$panelDefaultPanelFooterPanelCollapsePanelBodyBorderBottom: $colorBlueTiber;
-$panelPrimaryPanelHeadingPanelCollapsePanelBodyBorderTop: $colorPirateGold;
-$panelPrimaryPanelHeadingBadgeText: $colorTextInfo;
-$panelPrimaryPanelHeadingBadgeBackground: $colorWhite;
-$panelPrimaryPanelFooterPanelCollapsePanelBody: $colorPirateGold;
-$panelSuccessPanelHeadingPanelCollapsePanelBody: $colorColdJungleGreen;
-$panelSuccessPanelFooterPanelCollapsePanelBody: $colorColdJungleGreen;
-$panelInfoPanelHeadingPanelCollapsePanelBody: $colorColdCuriousBlue;
-$panelInfoPanelFooterPanelCollapsePanelBodyBorderBottom: $colorColdCuriousBlue;
-$panelWarningPanelHeadingPanelCollapsePanelBodyBorderTop: $colorOrangeRoughy;
-$panelWarningPanelFooterPanelCollapsePanelBodyBorderBottom: $colorOrangeRoughy;
-$panelDangerPanelHeadingPanelCollapsePanelBodyBorderTop: $colorOrangeRoughy;
-$panelDangerPanelfooterPanelCollapsePanelBodyBorderBottom: $colorFieryOrange;
-
-$panelDefaultBorder: $colorBlueTiber;
-$panelDefaultPanelHeadingText: $colorWhite;
-$panelDefaultPanelHeadingBackground: $colorBlueTiber;
-$panelDefaultPanelHeadingBorder: $colorBlueTiber;
-
-$panelPrimaryBorder: $colorPirateGold;
-$panelPrimaryPanelHeadingText: $colorWhite;
-$panelPrimaryPanelHeadingBackground: $colorPirateGold;
-$panelPrimaryPanelHeadingBorder: $colorPirateGold;
-
-//
-
-$panelSuccessBorder: $colorColdJungleGreen;
-$panelSuccessPanelHeadingText: $colorWhite;
-$panelSuccessPanelHeadingBackground: $colorColdJungleGreen;
-$panelSuccessPanelHeadingBorder: $colorColdJungleGreen;
-$panelSuccessPanelHeadingBadgeText: $colorColdJungleGreen;
-$panelSuccessPanelHeadingBadgeBackground: $colorWhite;
-
-
-$panelInfoBorder: $colorColdCuriousBlue;
-$panelInfoPanelHeadingText: $colorWhite;
-$panelInfoPanelHeadingBackground: $colorColdCuriousBlue;
-$panelInfoPanelHeadingBorder: $colorColdCuriousBlue;
-$panelInfoPanelHeadingBadgeText: $colorColdCuriousBlue;
-$panelInfoPanelHeadingBadgeBackground: $colorWhite;
-
-
-$panelWarningBorder: $colorOrangeRoughy;
-$panelWarningPanelHeadingText: $colorWhite;
-$panelWarningPanelHeadingBackground: $colorOrangeRoughy;
-$panelWarningPanelHeadingBorder: $colorOrangeRoughy;
-$panelWarningPanelHeadingBadgeText: $colorOrangeRoughy;
-$panelWarningPanelHeadingBadgeBackground: $colorWhite;
+$paginationActiveBackgroundFocus: $colorBlueTiber;
+$paginationActiveBorderFocus: $colorBlueTiber;
+$paginationBackgroundFocus: $colorBlueTiber;
+$paginationBorder: $colorBlueTiber;
+$paginationBorderFocus: $colorBlueTiber;
+$paginationDisabledBorder: $colorBlueTiber;
+$paginationDisabledText: $colorBlueTiber;
+$paginationText: $colorTextSecondary;
+$paginationTextFocus: $colorTextSecondary;
 
 
 $panelDangerBorder: $colorOrangeRoughy;
-$panelDangerPanelHeadingText: $colorWhite;
+$panelDangerPanelfooterPanelCollapsePanelBodyBorderBottom: $colorFieryOrange;
 $panelDangerPanelHeadingBackground: $colorOrangeRoughy;
-$panelDangerPanelHeadingBorder: $colorOrangeRoughy;
-$panelDangerPanelHeadingBadgeText: $colorOrangeRoughy;
 $panelDangerPanelHeadingBadgeBackground: $colorWhite;
+$panelDangerPanelHeadingBadgeText: $colorOrangeRoughy;
+$panelDangerPanelHeadingBorder: $colorOrangeRoughy;
+$panelDangerPanelHeadingPanelCollapsePanelBodyBorderTop: $colorOrangeRoughy;
+$panelDangerPanelHeadingText: $colorWhite;
 
-//
+$panelDefaultBorder: $colorBlueTiber;
+$panelDefaultPanelFooterPanelCollapsePanelBodyBorderBottom: $colorBlueTiber;
+$panelDefaultPanelHeadingBackground: $colorBlueTiber;
+$panelDefaultPanelHeadingBadgeBackground: $colorWhite;
+$panelDefaultPanelHeadingBadgeText: $colorBlueTiber;
+$panelDefaultPanelHeadingBorder: $colorBlueTiber;
+$panelDefaultPanelHeadingPanelCollapsePanelBodyBorderTop: $colorBlueTiber;
+$panelDefaultPanelHeadingText: $colorWhite;
 
-$wellBackground: $colorBlueTiber;
-$wellBlockquoteBorder: $colorAlto;
-$closeText: $colorTextPrimary;
-$closeTextFocus: $colorTextPrimary;
-$modalContentBackground: $colorBlueTiber;
-$modalContentBorder: $colorDantee;
-$modalBackdropBackground: $colorBlack;
-$modalHeaderBorder: $colorDantee;
-$modalFooterBorder: $colorDantee;
-$tooltipInnerText: $colorWhite;
-$tooltipInnerBackground: $colorBlack;
-$tooltipBorder: $colorBlack;
+$panelFooterBackground: $colorBlueTiber;
+$panelFooterBorder: $colorBlueTiber;
 
-$popoverBorder: $colorDantee;
+$panelGroupPanelFooterPanelCollapsePanelBodyBorderBottom: $colorBlueTiber;
+$panelGroupPanelHeadingPanelCollapseListGroupBorderTop: $colorBlueTiber;
+
+$panelInfoBorder: $colorColdCuriousBlue;
+$panelInfoPanelFooterPanelCollapsePanelBodyBorderBottom: $colorColdCuriousBlue;
+$panelInfoPanelHeadingBackground: $colorColdCuriousBlue;
+$panelInfoPanelHeadingBadgeBackground: $colorWhite;
+$panelInfoPanelHeadingBadgeText: $colorColdCuriousBlue;
+$panelInfoPanelHeadingBorder: $colorColdCuriousBlue;
+$panelInfoPanelHeadingPanelCollapsePanelBody: $colorColdCuriousBlue;
+$panelInfoPanelHeadingText: $colorWhite;
+
+$panelPrimaryBorder: $colorPirateGold;
+$panelPrimaryPanelFooterPanelCollapsePanelBody: $colorPirateGold;
+$panelPrimaryPanelHeadingBackground: $colorPirateGold;
+$panelPrimaryPanelHeadingBadgeBackground: $colorWhite;
+$panelPrimaryPanelHeadingBadgeText: $colorTextInfo;
+$panelPrimaryPanelHeadingBorder: $colorPirateGold;
+$panelPrimaryPanelHeadingPanelCollapsePanelBodyBorderTop: $colorPirateGold;
+$panelPrimaryPanelHeadingText: $colorWhite;
+
+$panelSuccessBorder: $colorColdJungleGreen;
+$panelSuccessPanelFooterPanelCollapsePanelBody: $colorColdJungleGreen;
+$panelSuccessPanelHeadingBackground: $colorColdJungleGreen;
+$panelSuccessPanelHeadingBadgeBackground: $colorWhite;
+$panelSuccessPanelHeadingBadgeText: $colorColdJungleGreen;
+$panelSuccessPanelHeadingBorder: $colorColdJungleGreen;
+$panelSuccessPanelHeadingPanelCollapsePanelBody: $colorColdJungleGreen;
+$panelSuccessPanelHeadingText: $colorWhite;
+
+$panelTableResponsivePanelBodyBorder: $colorBlueTiber;
+
+$panelWarningBorder: $colorOrangeRoughy;
+$panelWarningPanelFooterPanelCollapsePanelBodyBorderBottom: $colorOrangeRoughy;
+$panelWarningPanelHeadingBackground: $colorOrangeRoughy;
+$panelWarningPanelHeadingBadgeBackground: $colorWhite;
+$panelWarningPanelHeadingBadgeText: $colorOrangeRoughy;
+$panelWarningPanelHeadingBorder: $colorOrangeRoughy;
+$panelWarningPanelHeadingPanelCollapsePanelBodyBorderTop: $colorOrangeRoughy;
+$panelWarningPanelHeadingText: $colorWhite;
+
+
+$personalPageUsername: $colorTextInfo;
+$personalPageYourUser: $colorFirefly;
+
+
+$poeOptionBackgroundHover: $colorRiverBed;
+$poeOptionBorder: $colorRiverBed;
+$poeOptionsBackground: $colorBlueTiber;
+$poeResultBoxBorder: $colorBackgroundSecondary;
+
+
 $popoverBackground: $colorBlueTiber;
+$popoverBorder: $colorDantee;
+$popoverLeftArrowAfterBorder: $colorBlueTiber;
 $popoverTitleBackground: $colorBlueTiber;
 $popoverTitleBorder: $colorBlueTiber;
 $popoverTopArrowBorder: $colorDantee;
-$popoverLeftArrowAfterBorder: $colorBlueTiber;
 
-$carouselControlText: $colorWhite;
-$carouselControlTextFocus: $colorWhite;
-$carouselIndicatorsListItemBorder: $colorWhite;
-$carouselIndicatorsActiveBackground: $colorWhite;
-$carouselCaptionText: $colorWhite;
 
-$textPrimaryText: $colorPirateGold;
-$textSuccessText: $colorColdJungleGreen;
-$textDangerText: $colorOrangeRoughy;
-$textWarningText: $colorOrangeRoughy;
-$textInfoText: $colorColdCuriousBlue;
-
-$bgText: $colorWhite;
-$tableTdText: $colorWhite;
-
-$hasWarningText: $colorOrangeRoughy;
-$hasWarningBorder: $colorOrangeRoughy;
-$hasErrorText: $colorOrangeRoughy;
-$hasErrorBorder: $colorOrangeRoughy;
-$hasSuccessText: $colorTextSecondary;
-$hasSuccessBorder: $colorColdJungleGreen;
-$inputGroupAddonText: $colorTextPrimary;
-$inputGroupAddonBackground: $colorTextPrimary;
-
+$preBackground: $colorMercury;
+$preBorder: $colorWhiteSand;
+$preCodeBackgound: $colorTransparent;
 $preText: $colorBlueTiber;
-$jumbotronBackground: $colorBlueTiber;
+
+
+$progressBackground: $colorBlueTiber;
+$progressBarBackground: $colorPirateGold;
+$progressBarDangerBackground: $colorOrangeRoughy;
+$progressBarInfoBackground: $colorColdCuriousBlue;
+$progressBarSuccessBackground: $colorColdJungleGreen;
+$progressBarText: $colorWhite;
+$progressBarWarningBackground: $colorOrangeRoughy;
+
+
+$rootPhilosophyBorder: $colorDarkSlateGrey;
+
+
+$skFoldingCubeBackground: $colorMineShaft;
+
+
+$tableBackground: $colorBackgroundPrimary;
+$tableBorder: $colorAlto;
+$tableDanger: $colorBackgroundDanger;
+$tableDangerHover: $colorBackgroundDangerHover;
+$tableInfo: $colorColdCuriousBlue;
+$tableInfoHover: $colorMariner;
+$tableSuccess: $colorColdJungleGreen;
+$tableSuccessHover: $colorLochinvar;
+$tableTdBackground: $colorWhite;
+$tableTdText: $colorWhite;
+$tableTrBackground: $colorWhite;
+$tableWarning: $colorOrangeRoughy;
+$tableWarningHover: $colorFieryOrange;
+
+
+$textDanger: $colorWhite;
+$textDangerText: $colorOrangeRoughy;
+$textInfo: $colorWhite;
+$textInfoText: $colorColdCuriousBlue;
+$textMuted: $colorAthsSpecial;
+$textPrimary: $colorTextInfo;
+$textPrimaryText: $colorPirateGold;
+$textSuccess: $colorWhite;
+$textSuccessText: $colorColdJungleGreen;
+$textWarning: $colorWhite;
+$textWarningText: $colorOrangeRoughy;
+
+
+$thumbnailBackground: $colorDantee;
+$thumbnailBorder: $colorAlto;
+$thumbnailCaptionText: $colorTextPrimary;
+$thumbnailLinkBorder: $colorColdJungleGreen;
+
+
+$tooltipBorder: $colorBlack;
+$tooltipInnerBackground: $colorBlack;
+$tooltipInnerBackground: $colorBlack;
+$tooltipInnerText: $colorRegentStBlue;
+$tooltipInnerText: $colorWhite;
+
+
+$urlSaveMessage: $colorTextInfo;
+
+
+$userInfoTextColor: $colorTextInfo;
+
+
+$wellBackground: $colorBlueTiber;
+$wellBlockquoteBorder: $colorAlto;
