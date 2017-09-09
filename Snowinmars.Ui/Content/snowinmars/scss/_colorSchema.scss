@@ -297,6 +297,7 @@ $navigationTabJustifiedActiveLinkBorder: $colorBlueTiber;
 $navigationTabJustifiedLinkBorder: $colorBlueTiber;
 $navigationTabJustifiedLinkBorderFocus: $colorDantee;
 
+$navigationDefaultBackground: $colorBlueTiber;
 $navigationBrandText: $colorWhite;
 $navigationBrandTextFocus: $colorWhite;
 $navigationTextText: $colorTextPrimary;
@@ -523,6 +524,7 @@ $panelDangerPanelHeadingBadgeBackground: $colorWhite;
 
 //
 
+$wellBackground: $colorBlueTiber;
 $wellBlockquoteBorder: $colorAlto;
 $closeText: $colorTextPrimary;
 $closeTextFocus: $colorTextPrimary;
@@ -564,3 +566,7 @@ $hasErrorBorder: $colorOrangeRoughy;
 $hasSuccessText: $colorTextSecondary;
 $hasSuccessBorder: $colorColdJungleGreen;
 $inputGroupAddonText: $colorTextPrimary;
+$inputGroupAddonBackground: $colorTextPrimary;
+
+$preText: $colorBlueTiber;
+$jumbotronBackground: $colorBlueTiber;
