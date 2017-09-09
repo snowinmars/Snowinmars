@@ -34,6 +34,7 @@
     <Compile Include="Book.cs" />
     <Compile Include="BookStatus.cs" />
     <Compile Include="Entity.cs" />
+    <Compile Include="Film.cs" />
     <Compile Include="Language.cs" />
     <Compile Include="Pseudonym.cs" />
     <Compile Include="User.cs" />

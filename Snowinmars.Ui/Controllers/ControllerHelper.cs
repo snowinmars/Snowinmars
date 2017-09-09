@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
+using Snowinmars.Ui.Models.Film;
 
 namespace Snowinmars.Ui.Controllers
 {
@@ -73,7 +74,31 @@ namespace Snowinmars.Ui.Controllers
             return book;
         }
 
-        internal static AuthorModel Map(Author author)
+	    public static Film Map(FilmModel filmModel)
+	    {
+		    var film = new Film(filmModel.Name)
+		    {
+				IsSynchronized = filmModel.IsSynchronized,
+				Year = filmModel.Year,
+		    };
+
+		    ControllerHelper.SetAuthorIds(filmModel.AuthorIds, film.AuthorIds);
+			ControllerHelper.SetId(filmModel, film);
+
+		    return film;
+	    }
+	    public static FilmModel Map(Film film)
+	    {
+		    return new FilmModel
+		    {
+			    Id = film.Id,
+			    Name = film.Name,
+			    IsSynchronized = film.IsSynchronized,
+			    Year = film.Year,
+			    AuthorIds = film.AuthorIds.ToList(),
+		    };
+	    }
+		internal static AuthorModel Map(Author author)
         {
             return new AuthorModel
             {
@@ -120,7 +145,9 @@ namespace Snowinmars.Ui.Controllers
             };
         }
 
-        internal static User Map(CreateUserModel userModel)
+	    
+
+		internal static User Map(CreateUserModel userModel)
         {
             var user = new User(userModel.Username)
             {
@@ -201,6 +228,9 @@ namespace Snowinmars.Ui.Controllers
         {
             return users.Select(ControllerHelper.Map).ToList();
         }
+
+
+	   
     }
 
     public static class BinaryConverter

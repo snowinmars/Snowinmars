@@ -33,6 +33,7 @@
     <Compile Include="IAuthorLogic.cs" />
     <Compile Include="IBookLogic.cs" />
     <Compile Include="ICRUD.cs" />
+    <Compile Include="IFilmLogic.cs" />
     <Compile Include="IUserLogic.cs" />
   </ItemGroup>
   <ItemGroup>

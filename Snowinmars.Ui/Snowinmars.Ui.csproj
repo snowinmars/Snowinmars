@@ -495,6 +495,7 @@
     <Compile Include="Controllers\ApiController.cs" />
     <Compile Include="Controllers\AuthorController.cs" />
     <Compile Include="Controllers\ControllerHelper.cs" />
+    <Compile Include="Controllers\FilmController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\BookController.cs" />
     <Compile Include="ControllersHelpers\InternationalizationAttribute .cs" />
@@ -508,6 +509,7 @@
     <Compile Include="Models\Author\AuthorModel.cs" />
     <Compile Include="Models\Book\BookModel.cs" />
     <Compile Include="Models\EntityModel.cs" />
+    <Compile Include="Models\Film\FilmModel.cs" />
     <Compile Include="Models\SystemSettings\SetSystemSettings.cs" />
     <Compile Include="Models\SystemSettings\GetSystemSettings.cs" />
     <Compile Include="Models\User\CreateUserModel.cs" />
@@ -553,6 +555,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Film\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Snowinmars.Bll.Interfaces\Snowinmars.Bll.Interfaces.csproj">
