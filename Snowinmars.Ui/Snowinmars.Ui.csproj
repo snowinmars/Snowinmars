@@ -164,7 +164,6 @@
     <Content Include="Content\chosen-sprite.png" />
     <Content Include="Content\chosen.css" />
     <Content Include="Content\chosen.min.css" />
-    <Content Include="Content\cyborg.bootstrap.min.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.min.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap4.css" />
@@ -315,6 +314,7 @@
     <Content Include="Content\snowinmars\css\book\details.css" />
     <Content Include="Content\snowinmars\css\book\edit.css" />
     <Content Include="Content\snowinmars\css\book\index.css" />
+    <Content Include="Content\snowinmars\css\cyborg.bootstrap.css" />
     <Content Include="Content\snowinmars\css\defaultStyleSheet.css" />
     <Content Include="Content\snowinmars\css\defaultStyleSheet.css.map" />
     <Content Include="Content\snowinmars\css\loadingCube.css" />
@@ -359,6 +359,8 @@
     <Content Include="Content\snowinmars\css\root\index.css.map" />
     <Content Include="Content\snowinmars\css\user\details.css.map" />
     <Content Include="Content\snowinmars\css\user\index.css.map" />
+    <Content Include="Content\snowinmars\css\cyborg.bootstrap.css.map" />
+    <Content Include="Content\snowinmars\scss\cyborg.bootstrap.scss" />
     <None Include="job_scheduling_data_2_0.xsd">
       <SubType>Designer</SubType>
     </None>
