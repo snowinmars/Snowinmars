@@ -5,10 +5,8 @@ using System.Linq.Expressions;
 
 namespace Snowinmars.Bll.Interfaces
 {
-    public interface IBookLogic : ICRUD<Book>
+    public interface IBookLogic : ILayer<Book>
     {
-        IEnumerable<Book> Get(Expression<Func<Book, bool>> filter);
-
         IEnumerable<Author> GetAuthors(Guid bookId);
 
         void StartInformAboutWarnings(Guid bookId);

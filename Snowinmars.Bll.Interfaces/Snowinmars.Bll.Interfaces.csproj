@@ -32,7 +32,9 @@
   <ItemGroup>
     <Compile Include="IAuthorLogic.cs" />
     <Compile Include="IBookLogic.cs" />
-    <Compile Include="ICRUD.cs" />
+    <Compile Include="ICommandLayer.cs" />
+    <Compile Include="ILayer.cs" />
+    <Compile Include="IQueryLayer.cs" />
     <Compile Include="IUserLogic.cs" />
   </ItemGroup>
   <ItemGroup>

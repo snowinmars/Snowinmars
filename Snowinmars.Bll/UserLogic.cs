@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Snowinmars.Bll
 {
-    public class UserLogic : IUserLogic, Interfaces.ICRUD<User>
+    public class UserLogic : IUserLogic, Interfaces.ILayer<User>
     {
         private readonly IUserDao userDao;
 

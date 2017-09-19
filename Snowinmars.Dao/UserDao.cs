@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace Snowinmars.Dao
 {
-    public class UserDao : IUserDao, ICRUD<User>
+    public class UserDao : IUserDao, ILayer<User>
     {
         public void AddUsersToRoles(IEnumerable<string> usernames, IEnumerable<UserRoles> roles)
         {

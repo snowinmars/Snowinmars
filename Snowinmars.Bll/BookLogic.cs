@@ -9,7 +9,7 @@ namespace Snowinmars.Bll
 {
     // ReSharper disable once RedundantExtendsListEntry
     // ReSharper disable once RedundantNameQualifier
-    public class BookLogic : IBookLogic, Bll.Interfaces.ICRUD<Book>
+    public class BookLogic : IBookLogic, Bll.Interfaces.ILayer<Book>
     {
         private readonly IBookDao bookDao;
 
@@ -32,7 +32,7 @@ namespace Snowinmars.Bll
             return this.bookDao.Get(id);
         }
 
-        public IEnumerable<Book> Get(Expression<Func<Book, bool>> filter)
+        public IEnumerable<Book> Get(Func<Book, bool> filter)
         {
             return this.bookDao.Get(filter);
         }

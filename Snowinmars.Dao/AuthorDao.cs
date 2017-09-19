@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 
 namespace Snowinmars.Dao
 {
-	public class AuthorDao : IAuthorDao, ICRUD<Author>
+	public class AuthorDao : IAuthorDao, ILayer<Author>
 	{
 		public AuthorDao()
 		{
@@ -75,7 +75,7 @@ namespace Snowinmars.Dao
 			}
 		}
 
-		public IEnumerable<Author> Get(Expression<Func<Book, bool>> filter)
+		public IEnumerable<Author> Get(Func<Author, bool> filter)
 		{
 			using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
 			{

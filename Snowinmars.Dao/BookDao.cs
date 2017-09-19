@@ -10,7 +10,7 @@ using System.Linq.Expressions;
 
 namespace Snowinmars.Dao
 {
-    public class BookDao : IBookDao, ICRUD<Book>
+    public class BookDao : IBookDao, ILayer<Book>
     {
         private readonly IAuthorDao authorDao;
 
@@ -76,7 +76,7 @@ namespace Snowinmars.Dao
             }
         }
 
-        public IEnumerable<Book> Get(Expression<Func<Book, bool>> filter)
+        public IEnumerable<Book> Get(Func<Book, bool> filter)
         {
             var books = this.GetAll().ToList();
 

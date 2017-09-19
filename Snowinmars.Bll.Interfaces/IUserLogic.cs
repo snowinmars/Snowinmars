@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Snowinmars.Bll.Interfaces
 {
-    public interface IUserLogic : ICRUD<User>
+    public interface IUserLogic : ILayer<User>
     {
         void AddUsersToRoles(IEnumerable<string> usernames, IEnumerable<UserRoles> roles);
 
@@ -13,8 +13,6 @@ namespace Snowinmars.Bll.Interfaces
         string CalculateHash(string password, string salt);
 
         User Get(string username);
-
-        IEnumerable<User> Get(Func<User, bool> filter);
 
         UserRoles GetRolesForUser(string username);
 

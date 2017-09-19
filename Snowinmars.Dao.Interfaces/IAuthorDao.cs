@@ -5,8 +5,7 @@ using System.Linq.Expressions;
 
 namespace Snowinmars.Dao.Interfaces
 {
-    public interface IAuthorDao : ICRUD<Author>
+    public interface IAuthorDao : ILayer<Author>
     {
-        IEnumerable<Author> Get(Expression<Func<Book, bool>> filter);
     }
 }

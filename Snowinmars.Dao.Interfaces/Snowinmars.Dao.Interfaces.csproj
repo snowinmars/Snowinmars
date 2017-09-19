@@ -32,7 +32,9 @@
   <ItemGroup>
     <Compile Include="IAuthorDao.cs" />
     <Compile Include="IBookDao.cs" />
-    <Compile Include="ICRUD.cs" />
+    <Compile Include="ICommandLayer.cs" />
+    <Compile Include="ILayer.cs" />
+    <Compile Include="IQueryLayer.cs" />
     <Compile Include="IUserDao.cs" />
   </ItemGroup>
   <ItemGroup>

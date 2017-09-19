@@ -4,13 +4,11 @@ using System.Collections.Generic;
 
 namespace Snowinmars.Dao.Interfaces
 {
-    public interface IUserDao : ICRUD<User>
+    public interface IUserDao : ILayer<User>
     {
         void AddUsersToRoles(IEnumerable<string> usernames, IEnumerable<UserRoles> roles);
 
         User Get(string username);
-
-        IEnumerable<User> Get(Func<User, bool> filter);
 
         UserRoles GetRolesForUser(string username);
 
