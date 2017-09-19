@@ -3,6 +3,9 @@ using Snowinmars.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 
 namespace Snowinmars.Dao
 {
@@ -160,5 +163,41 @@ namespace Snowinmars.Dao
                 FamilyName = pseudonymFamilyName,
             };
         }
+
+	    public static IEnumerable<Film> MapFilms(IDataReader reader)
+	    {
+		    List<Film> films = new List<Film>();
+
+		    while (reader.Read())
+		    {
+			    Film film = MapFilm(reader);
+
+				films.Add(film);
+		    }
+
+		    return films;
+	    }
+
+	    public static Film MapFilm(IDataRecord reader)
+	    {
+		    var title = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Film.Column.Title]);
+			var id = LocalCommon.ConvertFromDbValue<Guid>(reader[LocalConst.Film.Column.Id]);
+			var kinopoiskUrl = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Film.Column.KinopoiskUrl]);
+			var year = LocalCommon.ConvertFromDbValue<int>(reader[LocalConst.Film.Column.Year]);
+			var isSynchronized = LocalCommon.ConvertFromDbValue<bool>(reader[LocalConst.Film.Column.IsSynchronized]);
+		    string authorShortcuts = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Film.Column.AuthorsShortcuts]);
+
+			var film = new Film(title)
+		    {
+			    Id = id,
+			    KinopoiskUrl = kinopoiskUrl,
+			    Year = year,
+			    IsSynchronized = isSynchronized,
+		    };
+
+		    film.AuthorShortcuts.AddRange(authorShortcuts.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(i => i.Trim()));
+
+			return film;
+	    }
     }
 }

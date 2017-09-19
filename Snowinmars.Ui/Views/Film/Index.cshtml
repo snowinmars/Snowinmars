@@ -1,0 +1,94 @@
+﻿@using Snowinmars.Entities
+@using Snowinmars.Ui.App_LocalResources
+@model IEnumerable<Snowinmars.Ui.Models.FilmModel>
+
+@{
+	ViewBag.Title = "Films";
+	Layout = "~/Views/Layouts/DefaultLayout.cshtml";
+}
+
+@section Content
+{
+	<link href="~/Content/snowinmars/css/Film/index.css" rel="stylesheet" />
+	<link href="~/Content/snowinmars/css/loadingCube.css" rel="stylesheet" />
+}
+
+<h2>@Global.FilmIndex_Header</h2>
+
+@if (User.IsInRole(UserRoles.Admin.ToString()) || User.IsInRole(UserRoles.Root.ToString()))
+{
+	<p>
+		@Html.ActionLink(Global.FilmIndex_CreateNewFilm, "Create")
+	</p>
+}
+
+<div class="sk-folding-cube-parent">
+	<div class="sk-folding-cube">
+		<div class="sk-cube1 sk-cube"></div>
+		<div class="sk-cube2 sk-cube"></div>
+		<div class="sk-cube4 sk-cube"></div>
+		<div class="sk-cube3 sk-cube"></div>
+	</div>
+</div>
+
+<table class="table hidden">
+	<thead>
+	<tr>
+		<th class="col-xs-3 noOverflow">
+			@Html.DisplayNameFor(model => model.Title)
+		</th>
+		<th class="col-xs-1">
+			@Html.DisplayNameFor(model => model.Year)
+		</th>
+		<th class="col-xs-4 hidden-sm hidden-xs">
+			@Html.DisplayNameFor(model => model.AuthorIds)
+		</th>
+		<th class="col-sm-4 col-xs-2 no-sort"></th>
+	</tr>
+	</thead>
+	<tbody>
+	@foreach (var item in Model)
+	{
+		<tr data-id="@item.Id">
+			<td class="col-xs-3 noOverflow titleColumn">
+				@Html.DisplayFor(modelItem => item.Title)
+			</td>
+			<td class="col-xs-1 ">
+				@Html.DisplayFor(modelItem => item.Year)
+			</td>
+			<td class="col-xs-4 hidden-sm hidden-xs">
+				@Html.DropDownList("authorModelIds_" + item.Id, item.AuthorIds.Select(s => new SelectListItem { Text = s.ToString(), Selected = true, }), new Dictionary<string, object> { { "class", "authorModelIds col-xs-10" }, { "multiple", "multiple" }, })
+
+				@if (!item.IsSynchronized)
+				{
+					<span class="synchronizationIcon glyphicon glyphicon-refresh glyphicon-spin col-xs-1" data-toggle="tooltip" data-placement="top" title="@Global._Sync"></span>
+				}
+				else
+				{
+					<span class="hidden synchronizationIcon glyphicon glyphicon-refresh glyphicon-spin col-xs-1" data-toggle="tooltip" data-placement="top" title="@Global._Sync"></span>
+				}
+			</td>
+			<td class="col-sm-4 col-xs-2">
+				@if (User.IsInRole(UserRoles.Admin.ToString()) ||
+				     User.IsInRole(UserRoles.Root.ToString()))
+				{
+					@RenderPage("~/Views/Layouts/_EditDetailsDeleteActionPartialPanel.cshtml", item.Id)
+				}
+				else
+				{
+					@RenderPage("~/Views/Layouts/_DetailsActionPartialPanel.cshtml", item.Id)
+				}
+			</td>
+		</tr>
+	}
+	</tbody>
+</table>
+
+@section Scripts
+{
+	<script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+	<script src="~/Scripts/DataTables/dataTables.bootstrap.min.js"></script>
+
+	<script src="~/Scripts/snowinmars/filmIndex.js"></script>
+	<script src="~/Scripts/snowinmars/tableSetup.js"></script>
+}

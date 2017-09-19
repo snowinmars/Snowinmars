@@ -160,7 +160,7 @@
     <value>Найдены повреждения</value>
   </data>
   <data name="BookBroken_Message" xml:space="preserve">
-    <value>Книга повреждена,свяжись с админом</value>
+    <value>Книга повреждена, свяжись с админом</value>
   </data>
   <data name="BookCreate_Header" xml:space="preserve">
     <value>Создать</value>
@@ -225,6 +225,42 @@
   <data name="EnterPage_OldUserHello" xml:space="preserve">
     <value>Найден юзер  с таким логином. Вводи пароль.</value>
   </data>
+  <data name="FilmBroken_Header" xml:space="preserve">
+    <value>Найдены повреждения</value>
+  </data>
+  <data name="FilmBroken_Message" xml:space="preserve">
+    <value>Фильм повреждён, свяжись с админом</value>
+  </data>
+  <data name="FilmCreate_Header" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="FilmDetails_Header" xml:space="preserve">
+    <value>Подробнее</value>
+  </data>
+  <data name="FilmEdit_Header" xml:space="preserve">
+    <value>Редактирование</value>
+  </data>
+  <data name="FilmIndex_CreateNewFilm" xml:space="preserve">
+    <value>Создать новый фильм</value>
+  </data>
+  <data name="FilmIndex_Header" xml:space="preserve">
+    <value>Редактирование</value>
+  </data>
+  <data name="FilmModel_Authors" xml:space="preserve">
+    <value>Authors</value>
+  </data>
+  <data name="FilmModel_Description" xml:space="preserve">
+    <value>Описание</value>
+  </data>
+  <data name="FilmModel_KinopoiskUrl" xml:space="preserve">
+    <value>Kinopoisk url</value>
+  </data>
+  <data name="FilmModel_Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="FilmModel_Year" xml:space="preserve">
+    <value>Year</value>
+  </data>
   <data name="HomeBanned_BannedMessage" xml:space="preserve">
     <value>Забанен</value>
   </data>
@@ -236,6 +272,9 @@
   </data>
   <data name="Layout_Enter" xml:space="preserve">
     <value>Вход</value>
+  </data>
+  <data name="Layout_Films" xml:space="preserve">
+    <value>Фильмы</value>
   </data>
   <data name="Layout_LibraryAuthors" xml:space="preserve">
     <value>Авторы библиотеки</value>
@@ -349,6 +388,9 @@
   </data>
   <data name="_Create" xml:space="preserve">
     <value>Создать</value>
+  </data>
+  <data name="_Film" xml:space="preserve">
+    <value>Film</value>
   </data>
   <data name="_ForgotPassword" xml:space="preserve">
     <value>Забыл?</value>

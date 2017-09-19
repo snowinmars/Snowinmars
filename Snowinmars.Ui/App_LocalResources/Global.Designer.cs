@@ -115,6 +115,15 @@ namespace Snowinmars.Ui.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Film.
+        /// </summary>
+        public static string _Film {
+            get {
+                return ResourceManager.GetString("_Film", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Forgot?.
         /// </summary>
         public static string _ForgotPassword {
@@ -156,6 +165,15 @@ namespace Snowinmars.Ui.App_LocalResources {
         public static string _Save {
             get {
                 return ResourceManager.GetString("_Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To save urls&apos; changes, push the Save button below.
+        /// </summary>
+        public static string _SaveUrlHint {
+            get {
+                return ResourceManager.GetString("_SaveUrlHint", resourceCulture);
             }
         }
         
@@ -309,15 +327,6 @@ namespace Snowinmars.Ui.App_LocalResources {
         public static string AuthorModel_Shortcut {
             get {
                 return ResourceManager.GetString("AuthorModel_Shortcut", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to To save urls&apos; changes, push the Save button below.
-        /// </summary>
-        public static string Book_SaveUrlHint {
-            get {
-                return ResourceManager.GetString("Book_SaveUrlHint", resourceCulture);
             }
         }
         
@@ -520,6 +529,114 @@ namespace Snowinmars.Ui.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to BrokenDetails.
+        /// </summary>
+        public static string FilmBroken_Header {
+            get {
+                return ResourceManager.GetString("FilmBroken_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This film is broken, contact administrator..
+        /// </summary>
+        public static string FilmBroken_Message {
+            get {
+                return ResourceManager.GetString("FilmBroken_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create.
+        /// </summary>
+        public static string FilmCreate_Header {
+            get {
+                return ResourceManager.GetString("FilmCreate_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        public static string FilmDetails_Header {
+            get {
+                return ResourceManager.GetString("FilmDetails_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        public static string FilmEdit_Header {
+            get {
+                return ResourceManager.GetString("FilmEdit_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create new film.
+        /// </summary>
+        public static string FilmIndex_CreateNewFilm {
+            get {
+                return ResourceManager.GetString("FilmIndex_CreateNewFilm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All films.
+        /// </summary>
+        public static string FilmIndex_Header {
+            get {
+                return ResourceManager.GetString("FilmIndex_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Authors.
+        /// </summary>
+        public static string FilmModel_Authors {
+            get {
+                return ResourceManager.GetString("FilmModel_Authors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string FilmModel_Description {
+            get {
+                return ResourceManager.GetString("FilmModel_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kinopoisk url.
+        /// </summary>
+        public static string FilmModel_KinopoiskUrl {
+            get {
+                return ResourceManager.GetString("FilmModel_KinopoiskUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title.
+        /// </summary>
+        public static string FilmModel_Title {
+            get {
+                return ResourceManager.GetString("FilmModel_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Year.
+        /// </summary>
+        public static string FilmModel_Year {
+            get {
+                return ResourceManager.GetString("FilmModel_Year", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You are banned..
         /// </summary>
         public static string HomeBanned_BannedMessage {
@@ -552,6 +669,15 @@ namespace Snowinmars.Ui.App_LocalResources {
         public static string Layout_Enter {
             get {
                 return ResourceManager.GetString("Layout_Enter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Films.
+        /// </summary>
+        public static string Layout_Films {
+            get {
+                return ResourceManager.GetString("Layout_Films", resourceCulture);
             }
         }
         

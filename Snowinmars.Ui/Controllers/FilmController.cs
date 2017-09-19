@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Snowinmars.Bll.Interfaces;
 using Snowinmars.Entities;
-using Snowinmars.Ui.Models.Film;
+using Snowinmars.Ui.Models;
 
 namespace Snowinmars.Ui.Controllers
 {

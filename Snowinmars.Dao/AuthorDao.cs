@@ -16,24 +16,24 @@ namespace Snowinmars.Dao
 			Validation.Set(this);
 		}
 
-		public void Create(Author item)
+		public void Create(Author film)
 		{
-			Validation.Check(item);
+			Validation.Check(film);
 
 			using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
 			{
 				var command = new SqlCommand(LocalConst.Author.InsertCommand, sqlConnection);
 
-				var id = LocalCommon.ConvertToDbValue(item.Id);
-				var shortcut = LocalCommon.ConvertToDbValue(item.Shortcut);
-				var givenName = LocalCommon.ConvertToDbValue(item.GivenName);
-				var familyName = LocalCommon.ConvertToDbValue(item.FamilyName);
-				var fullMiddleName = LocalCommon.ConvertToDbValue(item.FullMiddleName);
+				var id = LocalCommon.ConvertToDbValue(film.Id);
+				var shortcut = LocalCommon.ConvertToDbValue(film.Shortcut);
+				var givenName = LocalCommon.ConvertToDbValue(film.GivenName);
+				var familyName = LocalCommon.ConvertToDbValue(film.FamilyName);
+				var fullMiddleName = LocalCommon.ConvertToDbValue(film.FullMiddleName);
 				var isSynchronized = LocalCommon.ConvertToDbValue(false);
-				var pseudonymGivenName = LocalCommon.ConvertToDbValue(item.Pseudonym.GivenName);
-				var pseudonymFamilyName = LocalCommon.ConvertToDbValue(item.Pseudonym.FamilyName);
-				var pseudonymFullMiddleName = LocalCommon.ConvertToDbValue(item.Pseudonym.FullMiddleName);
-				var mustInformAboutWarnings = LocalCommon.ConvertToDbValue(item.MustInformAboutWarnings);
+				var pseudonymGivenName = LocalCommon.ConvertToDbValue(film.Pseudonym.GivenName);
+				var pseudonymFamilyName = LocalCommon.ConvertToDbValue(film.Pseudonym.FamilyName);
+				var pseudonymFullMiddleName = LocalCommon.ConvertToDbValue(film.Pseudonym.FullMiddleName);
+				var mustInformAboutWarnings = LocalCommon.ConvertToDbValue(film.MustInformAboutWarnings);
 
 				command.Parameters.AddWithValue(LocalConst.Author.Parameter.Id, id);
 				command.Parameters.AddWithValue(LocalConst.Author.Parameter.Shortcut, shortcut);

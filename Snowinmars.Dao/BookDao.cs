@@ -21,14 +21,14 @@ namespace Snowinmars.Dao
             Validation.Set(this);
         }
 
-        public void Create(Book item)
+        public void Create(Book film)
         {
-            Validation.Check(item);
+            Validation.Check(film);
 
             using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
             {
-                this.AddBook(item, sqlConnection);
-                this.AddBookAuthorConnections(item.Id, item.AuthorIds, sqlConnection);
+                this.AddBook(film, sqlConnection);
+                this.AddBookAuthorConnections(film.Id, film.AuthorIds, sqlConnection);
             }
         }
 

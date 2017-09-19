@@ -39,7 +39,17 @@ namespace Snowinmars.Bll
             Validation.CheckYear(book.Year);
         }
 
-        public static void Check(Guid id)
+	    public static void Check(Film film)
+	    {
+		    Validation.Check(film.Id);
+
+			Validation.CheckYear(film.Year);
+		    Validation.CheckUrl(film.KinopoiskUrl);
+		    Validation.CheckTitle(film.Title);
+		    Validation.CheckAuthorIds(film.AuthorIds);
+		}
+
+		public static void Check(Guid id)
         {
             if (id == Guid.Empty)
             {

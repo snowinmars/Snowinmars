@@ -24,19 +24,19 @@ namespace Snowinmars.Dao
             }
         }
 
-        public void Create(User item)
+        public void Create(User film)
         {
             using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
             {
                 var command = new SqlCommand(LocalConst.User.InsertCommand, sqlConnection);
 
-                var id = LocalCommon.ConvertToDbValue(item.Id);
-                var username = LocalCommon.ConvertToDbValue(item.Username);
-                var passwordHash = LocalCommon.ConvertToDbValue(item.PasswordHash);
-                var roles = LocalCommon.ConvertToDbValue(item.Roles);
-                var email = LocalCommon.ConvertToDbValue(item.Email);
-                var salt = LocalCommon.ConvertToDbValue(item.Salt);
-                var language = LocalCommon.ConvertToDbValue(item.Language);
+                var id = LocalCommon.ConvertToDbValue(film.Id);
+                var username = LocalCommon.ConvertToDbValue(film.Username);
+                var passwordHash = LocalCommon.ConvertToDbValue(film.PasswordHash);
+                var roles = LocalCommon.ConvertToDbValue(film.Roles);
+                var email = LocalCommon.ConvertToDbValue(film.Email);
+                var salt = LocalCommon.ConvertToDbValue(film.Salt);
+                var language = LocalCommon.ConvertToDbValue(film.Language);
 
                 command.Parameters.AddWithValue(LocalConst.User.Parameter.Id, id);
                 command.Parameters.AddWithValue(LocalConst.User.Parameter.Username, username);

@@ -1,8 +1,10 @@
-﻿namespace Snowinmars.Dao
+﻿using System.Reflection;
+
+namespace Snowinmars.Dao
 {
     internal static class LocalConst
     {
-        internal class Author
+		internal class Author
         {
             internal const string DeleteCommand = @"
 				delete
@@ -96,7 +98,77 @@
             }
         }
 
-        internal class Book
+	    internal class Film
+	    {
+			internal const string TableName = "[Films]";
+
+			internal const string DeleteCommand =
+				" delete " +
+			    " from " + Film.TableName +
+			    " where ( " + Column.Id + " = " + Parameter.Id + " ) ";
+
+		    internal const string InsertCommand =
+			    " insert into " + Film.TableName +
+					" ( " + Column.Id +
+						"," + Column.Title +
+						"," + Column.Year +
+						"," + Column.KinopoiskUrl +
+						"," + Column.Description +
+					@")
+				values
+						( " + Parameter.Id +
+						"," + Parameter.Title +
+						"," + Parameter.Year +
+						"," + Parameter.KinopoiskUrl +
+						"," + Parameter.Description +
+						")";
+
+		    internal const string SelectAllCommand =
+			    " select " + Column.Id +
+					"," + Column.Title +
+					"," + Column.Year +
+					"," + Column.KinopoiskUrl +
+					"," + Column.Description +
+				" from " + Film.TableName;
+
+		    internal const string SelectCommand = 
+					Film.SelectAllCommand +
+			    " where ( " + Column.Id + " = " + Parameter.Id + " ) ";
+
+		    internal const string UpdateCommand =
+			    " update " + TableName +
+			    " set " + Column.Title + " = " + Parameter.Title +
+					"," + Column.Year + " = " + Parameter.Year +
+					"," + Column.KinopoiskUrl + " = " + Parameter.KinopoiskUrl +
+					"," + Column.Description + " = " + Parameter.Description +
+			    " where ( " + Column.Id + " = " + Parameter.Id + " ) ";
+
+			internal class Column
+		    {
+                internal const string Id = "Id";
+			    internal const string Title = "Title";
+			    internal const string Year = "Year";
+			    internal const string KinopoiskUrl = "KinopoiskUrl";
+			    internal const string AuthorIds = "Authors";
+			    internal const string IsSynchronized = "IsSynchronized";
+			    internal const string AuthorsShortcuts = "AuthorsShortcuts";
+			    internal const string Description = "Description";
+			}
+
+		    internal class Parameter
+		    {
+			    internal const string Id = "@filmId";
+				internal const string Title = "@title";
+			    internal const string Year = "@year";
+			    internal const string KinopoiskUrl = "@kinopoiskUrl";
+			    internal const string AuthorIds = "@authors";
+			    internal const string IsSynchronized = "@isSynchronized";
+			    internal const string AuthorsShortcuts = "@authorsShortcuts";
+			    internal const string Description = "@description";
+			}
+		}
+
+		internal class Book
         {
 			internal const string DeleteCommand =
                     " delete " +
@@ -248,7 +320,65 @@
             }
         }
 
-        internal class BookAuthor
+		internal class FilmAuthor
+		{
+			internal const string DeleteFilmAuthorCommand =
+				" delete " +
+				" from " + FilmAuthor.TableName +
+				" where ( " +
+					Column.FilmId + " = " + Parameter.FilmId +
+						" and " +
+							Column.AuthorId + " = " + Parameter.AuthorId +
+				" ) ";
+
+			internal const string DeleteFilmCommand =
+				" delete " +
+				" from " + FilmAuthor.TableName +
+				" where ( " + Column.FilmId + " = " + Parameter.FilmId + " ) ";
+
+			internal const string InsertCommand =
+				" insert into " + FilmAuthor.TableName +
+					" ( " + Column.FilmId +
+						", " + Column.AuthorId +
+					@")
+					 values
+						( " + Parameter.FilmId +
+						"," + Parameter.AuthorId +
+					" ) ";
+
+			internal const string SelectAllCommand =
+				" select " + Column.FilmId +
+					"," + Column.AuthorId +
+				" from " + FilmAuthor.TableName;
+
+			internal const string SelectByAuthorCommand =
+				" select " + Column.FilmId +
+					"," + Column.AuthorId +
+				" from " + FilmAuthor.TableName +
+				" where ( " + Column.AuthorId + " = " + Parameter.AuthorId + " ) ";
+
+			internal const string SelectByFilmCommand =
+				" select " + Column.FilmId +
+					"," + Column.AuthorId +
+				" from " + FilmAuthor.TableName +
+				" where ( " + Column.FilmId + " = " + Parameter.FilmId + " ) ";
+
+			internal const string TableName = "[FilmAuthorConnection]";
+
+			internal class Column
+			{
+				internal const string FilmId = "FilmId";
+				internal const string AuthorId = "AuthorId";
+			}
+
+			internal class Parameter
+			{
+				internal const string FilmId = "@FilmId";
+				internal const string AuthorId = "@authorId";
+			}
+		}
+
+		internal class BookAuthor
         {
             internal const string DeleteBookAuthorCommand =
                 " delete " +

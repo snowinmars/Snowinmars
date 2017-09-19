@@ -1,0 +1,80 @@
+﻿@using Snowinmars.Entities
+@using Snowinmars.Ui.App_LocalResources
+@model Snowinmars.Ui.Models.FilmModel
+
+@{
+	ViewBag.Title = "Details";
+	Layout = "~/Views/Layouts/DefaultLayout.cshtml";
+}
+
+@section Content
+{
+	<link href="~/Content/snowinmars/css/film/details.css" rel="stylesheet" />
+}
+
+<h2>@Global.FilmDetails_Header</h2>
+
+<div>
+	<h4>@Global._Film</h4>
+	<div>@Html.ActionLink(Global._BackToList, "Index", "Film")</div>
+	<hr />
+	<div class="mainBlock clearfix" data-id="@Model.Id">
+		@Html.HiddenFor(model => model.Id)
+
+		<div class="col-xs-12 urls">
+
+			<div class="btn-group" role="group" aria-label="...">
+				@if (string.IsNullOrWhiteSpace(Model.KinopoiskUrl))
+				{
+					<button type="button" class="btn btn-default liveLibUrlButton disabled">LiveLib</button>
+				}
+				else
+				{
+					<a href="@Model.KinopoiskUrl" target="_blank" type="button" class="btn btn-default liveLibUrlButton">LiveLib</a>
+				}
+			</div>
+		</div>
+
+		<div class="col-xs-12">
+			<div class="col-xs-6">
+				@Html.DisplayNameFor(model => model.Title)
+			</div>
+
+			<div class="col-xs-6">
+				@Html.DisplayFor(model => model.Title)
+			</div>
+		</div>
+
+		<div class="col-xs-12">
+			<div class="col-xs-6">
+				@Html.DisplayNameFor(model => model.AuthorIds)
+			</div>
+
+			<div class="col-xs-6">
+				@Html.DropDownList("authorIds", new SelectListItem[0], new Dictionary<string, object> { { "class", "authorIds" }, { "multiple", "multiple" }, })
+			</div>
+		</div>
+
+		<div class="col-xs-12">
+			<div class="col-xs-6">
+				@Html.DisplayNameFor(model => model.Year)
+			</div>
+
+			<div class="col-xs-6">
+				@Html.DisplayFor(model => model.Year)
+			</div>
+		</div>
+	</div>
+    
+	@if (User.IsInRole(UserRoles.Admin.ToString()) || User.IsInRole(UserRoles.Root.ToString()))
+	{
+		<div class="actions col-xs-12">
+			@RenderPage("~/Views/Layouts/_EditDeleteActionPartialPanel.cshtml", Model.Id)
+		</div>
+	}
+</div>
+
+@section Scripts
+{
+	<script src="~/Scripts/snowinmars/filmDetails.js"></script>
+}

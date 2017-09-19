@@ -33,6 +33,7 @@
     <Compile Include="IAuthorDao.cs" />
     <Compile Include="IBookDao.cs" />
     <Compile Include="ICRUD.cs" />
+    <Compile Include="IFilmDao.cs" />
     <Compile Include="IUserDao.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
-using Snowinmars.Ui.Models.Film;
 
 namespace Snowinmars.Ui.Controllers
 {
@@ -76,10 +75,12 @@ namespace Snowinmars.Ui.Controllers
 
 	    public static Film Map(FilmModel filmModel)
 	    {
-		    var film = new Film(filmModel.Name)
+		    var film = new Film(filmModel.Title)
 		    {
 				IsSynchronized = filmModel.IsSynchronized,
 				Year = filmModel.Year,
+				KinopoiskUrl = filmModel.KinopoiskUrl ?? "",
+				Description = filmModel.Description ?? "",
 		    };
 
 		    ControllerHelper.SetAuthorIds(filmModel.AuthorIds, film.AuthorIds);
@@ -92,10 +93,12 @@ namespace Snowinmars.Ui.Controllers
 		    return new FilmModel
 		    {
 			    Id = film.Id,
-			    Name = film.Name,
+			    Title = film.Title,
 			    IsSynchronized = film.IsSynchronized,
 			    Year = film.Year,
 			    AuthorIds = film.AuthorIds.ToList(),
+				KinopoiskUrl = film.KinopoiskUrl,
+				Description = film.Description,
 		    };
 	    }
 		internal static AuthorModel Map(Author author)

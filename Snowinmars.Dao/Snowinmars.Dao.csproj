@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="AuthorDao.cs" />
     <Compile Include="BookDao.cs" />
+    <Compile Include="FilmDao.cs" />
     <Compile Include="LocalCommon.cs" />
     <Compile Include="LocalConst.cs" />
     <Compile Include="UserDao.cs" />

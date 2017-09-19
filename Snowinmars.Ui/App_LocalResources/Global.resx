@@ -213,9 +213,6 @@
   <data name="BookWishlist_Header" xml:space="preserve">
     <value>Books wishlist</value>
   </data>
-  <data name="Book_SaveUrlHint" xml:space="preserve">
-    <value>To save urls' changes, push the Save button below</value>
-  </data>
   <data name="EnterPage_ErrorOnLoginProcess" xml:space="preserve">
     <value>Error during login process</value>
   </data>
@@ -224,6 +221,42 @@
   </data>
   <data name="EnterPage_OldUserHello" xml:space="preserve">
     <value>There's user with this login. Enter the password.</value>
+  </data>
+  <data name="FilmBroken_Header" xml:space="preserve">
+    <value>BrokenDetails</value>
+  </data>
+  <data name="FilmBroken_Message" xml:space="preserve">
+    <value>This film is broken, contact administrator.</value>
+  </data>
+  <data name="FilmCreate_Header" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="FilmDetails_Header" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="FilmEdit_Header" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="FilmIndex_CreateNewFilm" xml:space="preserve">
+    <value>Create new film</value>
+  </data>
+  <data name="FilmIndex_Header" xml:space="preserve">
+    <value>All films</value>
+  </data>
+  <data name="FilmModel_Authors" xml:space="preserve">
+    <value>Authors</value>
+  </data>
+  <data name="FilmModel_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="FilmModel_KinopoiskUrl" xml:space="preserve">
+    <value>Kinopoisk url</value>
+  </data>
+  <data name="FilmModel_Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="FilmModel_Year" xml:space="preserve">
+    <value>Year</value>
   </data>
   <data name="HomeBanned_BannedMessage" xml:space="preserve">
     <value>You are banned.</value>
@@ -236,6 +269,9 @@
   </data>
   <data name="Layout_Enter" xml:space="preserve">
     <value>Enter</value>
+  </data>
+  <data name="Layout_Films" xml:space="preserve">
+    <value>Films</value>
   </data>
   <data name="Layout_LibraryAuthors" xml:space="preserve">
     <value>Library authors</value>
@@ -350,6 +386,9 @@ You can erase this field any time.</value>
   <data name="_Create" xml:space="preserve">
     <value>Create</value>
   </data>
+  <data name="_Film" xml:space="preserve">
+    <value>Film</value>
+  </data>
   <data name="_ForgotPassword" xml:space="preserve">
     <value>Forgot?</value>
   </data>
@@ -364,6 +403,9 @@ You can erase this field any time.</value>
   </data>
   <data name="_Save" xml:space="preserve">
     <value>Save</value>
+  </data>
+  <data name="_SaveUrlHint" xml:space="preserve">
+    <value>To save urls' changes, push the Save button below</value>
   </data>
   <data name="_Sync" xml:space="preserve">
     <value>Sync</value>

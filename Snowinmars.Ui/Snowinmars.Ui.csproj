@@ -324,6 +324,7 @@
     <Content Include="Content\snowinmars\css\user\details.css" />
     <Content Include="Content\snowinmars\css\user\index.css" />
     <Content Include="Content\snowinmars\scss\defaultStyleSheet.scss" />
+    <None Include="Content\snowinmars\scss\film\details.scss" />
     <Content Include="Content\snowinmars\scss\loadingCube.scss" />
     <Content Include="Content\snowinmars\scss\_colors.scss" />
     <Content Include="Content\snowinmars\scss\_colorSchema.scss" />
@@ -361,6 +362,7 @@
     <Content Include="Content\snowinmars\css\user\index.css.map" />
     <Content Include="Content\snowinmars\css\cyborg.bootstrap.css.map" />
     <Content Include="Content\snowinmars\scss\cyborg.bootstrap.scss" />
+    <Content Include="Content\snowinmars\scss\film\edit.scss" />
     <None Include="job_scheduling_data_2_0.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -457,6 +459,10 @@
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\prototype.js" />
+    <Content Include="Scripts\snowinmars\filmCreate.js" />
+    <Content Include="Scripts\snowinmars\filmDetails.js" />
+    <Content Include="Scripts\snowinmars\filmEdit.js" />
+    <Content Include="Scripts\snowinmars\filmIndex.js" />
     <Content Include="Scripts\snowinmars\PathOfExile\config.js" />
     <Content Include="Scripts\snowinmars\PathOfExile\importExport.js" />
     <Content Include="Scripts\snowinmars\PathOfExile\default.js" />
@@ -546,6 +552,11 @@
     <Content Include="Views\User\RootPage.cshtml" />
     <Content Include="Views\Book\Wishlist.cshtml" />
     <Content Include="Views\PathOfExile\Qualities.cshtml" />
+    <Content Include="Views\Film\Create.cshtml" />
+    <Content Include="Views\Film\Details.cshtml" />
+    <Content Include="Views\Film\BrokenDetails.cshtml" />
+    <Content Include="Views\Film\Edit.cshtml" />
+    <Content Include="Views\Film\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -555,7 +566,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Film\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Snowinmars.Bll.Interfaces\Snowinmars.Bll.Interfaces.csproj">
