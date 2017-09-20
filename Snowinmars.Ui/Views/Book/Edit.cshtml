@@ -1,4 +1,5 @@
-﻿@using Snowinmars.Entities
+﻿@using Snowinmars.BookSlice.BookEntities
+@using Snowinmars.Common
 @using Snowinmars.Ui.App_LocalResources
 @model Snowinmars.Ui.Models.BookModel
 
@@ -163,7 +164,7 @@
             </div>
         </div>
 
-        @if (User.IsInRole(Snowinmars.Entities.UserRoles.Root.ToString()))
+        @if (User.IsInRole(UserRoles.Root.ToString()))
         {
             <div class="form-group">
                 @Html.LabelFor(model => model.Owner, htmlAttributes: new { @class = "control-label col-md-2" })

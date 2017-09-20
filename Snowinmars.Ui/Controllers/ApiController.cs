@@ -1,6 +1,8 @@
-﻿using Snowinmars.Bll.Interfaces;
-using System;
+﻿using System;
 using System.Web.Mvc;
+using Snowinmars.AuthorSlice.AuthorBll.Interfaces;
+using Snowinmars.BookSlice.BookBll.Interfaces;
+using Snowinmars.UserSlice.UserBll.Interfaces;
 
 namespace Snowinmars.Ui.Controllers
 {

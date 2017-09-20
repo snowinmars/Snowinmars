@@ -4,3 +4,9 @@
 	-ms-linear-gradient: ($position, $left, $middle, $right);
 	-o-linear-gradient: ($position, $left, $middle, $right);
 }
+
+@mixin box-sizing($data) {
+	-webkit-box-sizing: $data;
+	-moz-box-sizing: $data;
+	box-sizing: $data;
+}

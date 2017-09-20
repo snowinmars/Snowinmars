@@ -1,10 +1,10 @@
-﻿using Snowinmars.Bll.Interfaces;
-using Snowinmars.Entities;
-using Snowinmars.Ui.Models;
+﻿using Snowinmars.Ui.Models;
 using System;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Snowinmars.AuthorSlice.AuthorBll.Interfaces;
+using Snowinmars.AuthorSlice.AuthorEntities;
 
 namespace Snowinmars.Ui.Controllers
 {

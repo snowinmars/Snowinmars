@@ -5,7 +5,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
-using Snowinmars.Bll;
+using Snowinmars.PathOfExileSlice.PathOfExileBll;
 
 namespace Snowinmars.Ui.Controllers
 {

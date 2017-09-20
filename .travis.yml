@@ -1,4 +1,0 @@
-language: csharp
-solution: Snowinmars.sln
-mono: none
-dotnet: 4.6.2
