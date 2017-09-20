@@ -6,6 +6,7 @@ namespace Snowinmars.Ui.Models
 {
     public abstract class EntityModel
     {
+        [Required]
         public Guid Id { get; set; }
 
         [Display(Name = "Model_IsSynchronized", ResourceType = typeof(Global))]

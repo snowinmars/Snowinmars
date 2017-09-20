@@ -218,9 +218,9 @@ namespace Snowinmars.Ui.Controllers
             return this.View(systemSettings);
         }
 
-        private readonly string shortcutJobName;
-        private readonly string emailServiceName;
-        private readonly string warningJobName;
+        //private readonly string shortcutJobName;
+        //private readonly string emailServiceName;
+        //private readonly string warningJobName;
 
         //[HttpPost]
         //[Route("setSmtpEntropies")]

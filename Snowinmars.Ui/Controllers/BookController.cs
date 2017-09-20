@@ -62,7 +62,7 @@ namespace Snowinmars.Ui.Controllers
             {
                 book = this.bookLogic.Get(id);
             }
-            catch (ObjectNotFoundException e)
+            catch (ObjectNotFoundException)
             {
                 return this.View("BrokenDetails");
             }
@@ -131,7 +131,7 @@ namespace Snowinmars.Ui.Controllers
             {
                 c = this.bookLogic.Get(null);
             }
-            catch (ObjectNotFoundException e)
+            catch (ObjectNotFoundException)
             {
                 return this.View("BrokenDetails");
             }
@@ -188,7 +188,7 @@ namespace Snowinmars.Ui.Controllers
 		    {
 			    c = this.bookLogic.GetWishlist(username);
 		    }
-		    catch (ObjectNotFoundException e)
+		    catch (ObjectNotFoundException)
 		    {
 			    return this.View("BrokenDetails");
 		    }

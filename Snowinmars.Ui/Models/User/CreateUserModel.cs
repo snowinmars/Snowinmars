@@ -25,9 +25,6 @@ namespace Snowinmars.Ui.Models
 
         public static CreateUserModel Empty => CreateUserModel.EmptyUser;
 
-        [Required]
-        public Guid Id { get; set; }
-
         [Display(Name = "UserModel_Language", ResourceType = typeof(Global))]
         public Language Language { get; set; }
 
