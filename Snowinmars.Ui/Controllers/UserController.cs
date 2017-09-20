@@ -1,6 +1,4 @@
-﻿using Snowinmars.Bll.Interfaces;
-using Snowinmars.Entities;
-using Snowinmars.Ui.Models;
+﻿using Snowinmars.Ui.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,8 +9,10 @@ using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using Snowinmars.Ui.AppStartHelpers;
+using Snowinmars.Common;
 using Snowinmars.Ui.App_Start;
+using Snowinmars.UserSlice.UserBll.Interfaces;
+using Snowinmars.UserSlice.UserEntites;
 
 namespace Snowinmars.Ui.Controllers
 {
@@ -26,9 +26,9 @@ namespace Snowinmars.Ui.Controllers
         {
             this.userLogic = userLogic;
 
-            this.shortcutJobName = nameof(ShortcutJob).ToLowerInvariant();
-            this.warningJobName = nameof(WarningJob).ToLowerInvariant();
-            this.emailServiceName = nameof(EmailService).ToLowerInvariant();
+            //this.shortcutJobName = nameof(ShortcutJob).ToLowerInvariant();
+            //this.warningJobName = nameof(WarningJob).ToLowerInvariant();
+            //this.emailServiceName = nameof(EmailService).ToLowerInvariant();
         }
 
         [HttpPost]
@@ -109,7 +109,7 @@ namespace Snowinmars.Ui.Controllers
                 userModel.Roles = UserRoles.User;
             }
 
-            User user = ControllerHelper.Map(userModel);
+	        ApplicationUser user = ControllerHelper.Map(userModel);
 
             this.userLogic.WriteCryptographicData(userModel.Password, user);
             this.userLogic.Create(user);
@@ -187,7 +187,7 @@ namespace Snowinmars.Ui.Controllers
         [Route("")]
         public ActionResult Index()
         {
-            IEnumerable<User> users = this.userLogic.Get(u => true);
+            IEnumerable<ApplicationUser> users = this.userLogic.Get(u => true);
 
             IEnumerable<UpdateUserModel> userModels = ControllerHelper.Map(users);
 
@@ -206,13 +206,13 @@ namespace Snowinmars.Ui.Controllers
         [Route("rootPage")]
         public ActionResult RootPage()
         {
-            var isShortcutJobSmtpReady = QuartzCron.ShortcutJob?.IsSmtpReady ?? false;
-            var isWarningJobSmtpReady = QuartzCron.WarningJob?.IsSmtpReady ?? false;
+            //var isShortcutJobSmtpReady = QuartzCron.ShortcutJob?.IsSmtpReady ?? false;
+            //var isWarningJobSmtpReady = QuartzCron.WarningJob?.IsSmtpReady ?? false;
 
             GetSystemSettings systemSettings = new GetSystemSettings
             {
-                IsShortcutJobSmtpServerReady = isShortcutJobSmtpReady,
-                IsWarningJobSmtpServerReady = isWarningJobSmtpReady,
+                IsShortcutJobSmtpServerReady = false,
+                IsWarningJobSmtpServerReady = false,
             };
 
             return this.View(systemSettings);
@@ -222,44 +222,44 @@ namespace Snowinmars.Ui.Controllers
         private readonly string emailServiceName;
         private readonly string warningJobName;
 
-        [HttpPost]
-        [Route("setSmtpEntropies")]
-        public JsonResult SetSmtpEntropies(string jobName, string entropy)
-        {
-            jobName = jobName.ToLowerInvariant();
+        //[HttpPost]
+        //[Route("setSmtpEntropies")]
+        //public JsonResult SetSmtpEntropies(string jobName, string entropy)
+        //{
+            //jobName = jobName.ToLowerInvariant();
 
-            if (jobName == this.shortcutJobName)
-            {
-                return ControllerHelper.GetSuccessJsonResult(this.Login(QuartzCron.ShortcutJob, entropy));
-            }
+            //if (jobName == this.shortcutJobName)
+            //{
+            //    return ControllerHelper.GetSuccessJsonResult(this.Login(QuartzCron.ShortcutJob, entropy));
+            //}
 
-            if (jobName == this.warningJobName)
-            {
-                return ControllerHelper.GetSuccessJsonResult(this.Login(QuartzCron.WarningJob, entropy));
-            }
+            //if (jobName == this.warningJobName)
+            //{
+            //    return ControllerHelper.GetSuccessJsonResult(this.Login(QuartzCron.WarningJob, entropy));
+            //}
 
-            if (jobName == this.emailServiceName)
-            {
-                EmailService.TryLogin(entropy);
+            //if (jobName == this.emailServiceName)
+            //{
+            //    EmailService.TryLogin(entropy);
 
-                if (EmailService.IsSmtpReady)
-                {
-                    return ControllerHelper.GetSuccessJsonResult(true);
-                }
-                else
-                {
-                    return ControllerHelper.GetFailJsonResult();
-                }
-            }
+            //    if (EmailService.IsSmtpReady)
+            //    {
+            //        return ControllerHelper.GetSuccessJsonResult(true);
+            //    }
+            //    else
+            //    {
+            //        return ControllerHelper.GetFailJsonResult();
+            //    }
+            //}
 
-            return ControllerHelper.GetFailJsonResult();
-        }
+            //return ControllerHelper.GetFailJsonResult();
+        //}
 
-        private bool Login<T>(Cron<T> cronService, string entropy)
-        {
-            cronService.TryLogin(entropy);
-            return cronService.IsSmtpReady;
-        }
+        //private bool Login<T>(Cron<T> cronService, string entropy)
+        //{
+        //    cronService.TryLogin(entropy);
+        //    return cronService.IsSmtpReady;
+        //}
 
         [HttpPost]
         [Route("update")]
@@ -267,7 +267,7 @@ namespace Snowinmars.Ui.Controllers
         {
             try
             {
-                User user = ControllerHelper.Map(model);
+	            ApplicationUser user = ControllerHelper.Map(model);
                 this.userLogic.Update(user);
 
                 var cookie = new HttpCookie("lang", user.Language.ToString());

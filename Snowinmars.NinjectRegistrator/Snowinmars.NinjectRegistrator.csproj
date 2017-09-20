@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7BA2CB1B-D02F-4F98-A1AE-F68EC3611DA6}</ProjectGuid>
+    <ProjectGuid>{488E2E71-BCC5-4EB2-897B-5CEEE7ABE053}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Snowinmars.NinjectRegistrator</RootNamespace>
@@ -33,7 +33,6 @@
   <ItemGroup>
     <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.2.0.0\lib\net45-full\Ninject.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -49,32 +48,61 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\Slices\AuthorSlice\Bll.Interfaces\AuthorBll.Interfaces.csproj">
+      <Project>{06c00aab-74d9-4019-b707-cd5a57699ed2}</Project>
+      <Name>AuthorBll.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Slices\AuthorSlice\Bll\AuthorBll.csproj">
+      <Project>{4499A103-5AA3-4DF9-8DDE-31D51043BE31}</Project>
+      <Name>AuthorBll</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Slices\AuthorSlice\Dao.Interfaces\AuthorDao.Interfaces.csproj">
+      <Project>{ac1b696c-02c9-4d31-b5b1-c5cedf761f95}</Project>
+      <Name>AuthorDao.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Slices\AuthorSlice\Dao\AuthorDao.csproj">
+      <Project>{94584E21-F370-43D0-86E1-16A62600A82B}</Project>
+      <Name>AuthorDao</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Slices\BookSlice\Bll.Interfaces\BookBll.Interfaces.csproj">
+      <Project>{f5e0c7a0-4e09-4277-88e4-92c352c127b0}</Project>
+      <Name>BookBll.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Slices\BookSlice\Bll\BookBll.csproj">
+      <Project>{D0221307-D67A-499C-9F10-1DE26546BE20}</Project>
+      <Name>BookBll</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Slices\BookSlice\Dao.Interfaces\BookDao.Interfaces.csproj">
+      <Project>{4cb19d98-f782-4274-80bf-031acb433d76}</Project>
+      <Name>BookDao.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Slices\BookSlice\Dao\BookDao.csproj">
+      <Project>{2E0EBC76-84F2-444C-9FAF-EAC2A699126B}</Project>
+      <Name>BookDao</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Slices\UserSlice\Bll.Interfaces\User.Bll.Interfaces.csproj">
+      <Project>{b88df01a-6208-4644-9c01-914850229b21}</Project>
+      <Name>User.Bll.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Slices\UserSlice\Bll\User.Bll.csproj">
+      <Project>{CC84F04D-0A11-4BBC-8773-DA903B7DE941}</Project>
+      <Name>User.Bll</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Slices\UserSlice\Dao.Interfaces\User.Dao.Interfaces.csproj">
+      <Project>{2800f452-1649-4891-822e-1ba512957540}</Project>
+      <Name>User.Dao.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Slices\UserSlice\Dao\User.Dao.csproj">
+      <Project>{0026643B-51A3-4638-B728-3D38351469F8}</Project>
+      <Name>User.Dao</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Snowinmars.Common\Snowinmars.Common.csproj">
+      <Project>{A7F1ABB3-4273-41D2-8822-21B2E7FA6C6A}</Project>
+      <Name>Snowinmars.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Snowinmars.Bll.Interfaces\Snowinmars.Bll.Interfaces.csproj">
-      <Project>{67ac64ca-13cb-4bab-8ae8-fa7cc557b796}</Project>
-      <Name>Snowinmars.Bll.Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Snowinmars.Bll\Snowinmars.Bll.csproj">
-      <Project>{a6737d90-70db-4c6c-b80f-f4a1613de137}</Project>
-      <Name>Snowinmars.Bll</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Snowinmars.Dao.Interfaces\Snowinmars.Dao.Interfaces.csproj">
-      <Project>{c27c80af-707f-4035-86d9-6a88ec5cd645}</Project>
-      <Name>Snowinmars.Dao.Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Snowinmars.Dao\Snowinmars.Dao.csproj">
-      <Project>{864d84a0-e72e-44fd-900e-baa36ce39d91}</Project>
-      <Name>Snowinmars.Dao</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

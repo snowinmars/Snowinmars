@@ -1,5 +1,4 @@
 ﻿using Snowinmars.Common;
-using Snowinmars.Entities;
 using Snowinmars.Ui.Models;
 using System;
 using System.Collections;
@@ -7,6 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
+using Snowinmars.AuthorSlice.AuthorEntities;
+using Snowinmars.BookSlice.BookEntities;
+using Snowinmars.UserSlice.UserEntites;
 
 namespace Snowinmars.Ui.Controllers
 {
@@ -78,9 +80,9 @@ namespace Snowinmars.Ui.Controllers
             return new AuthorModel
             {
                 Id = author.Id,
-                GivenName = author.GivenName,
-                FullMiddleName = author.FullMiddleName,
-                FamilyName = author.FamilyName,
+                GivenName = author.Name.GivenName,
+                FullMiddleName = author.Name.FullMiddleName,
+                FamilyName = author.Name.FamilyName,
                 Shortcut = author.Shortcut,
                 IsSynchronized = author.IsSynchronized,
                 MustInformAboutWarnings = author.MustInformAboutWarnings,
@@ -94,11 +96,9 @@ namespace Snowinmars.Ui.Controllers
         {
             var author = new Author(authorModel.Shortcut)
             {
-                GivenName = ControllerHelper.Trim(authorModel.GivenName),
-                FullMiddleName = ControllerHelper.Trim(authorModel.FullMiddleName),
-                FamilyName = ControllerHelper.Trim(authorModel.FamilyName),
                 IsSynchronized = authorModel.IsSynchronized,
                 MustInformAboutWarnings = authorModel.MustInformAboutWarnings,
+				Name = ControllerHelper.MapName(authorModel),
                 Pseudonym = ControllerHelper.MapPseudonym(authorModel),
             };
 
@@ -107,7 +107,7 @@ namespace Snowinmars.Ui.Controllers
             return author;
         }
 
-        internal static UpdateUserModel Map(User user)
+        internal static UpdateUserModel Map(ApplicationUser user)
         {
             return new UpdateUserModel()
             {
@@ -120,9 +120,9 @@ namespace Snowinmars.Ui.Controllers
             };
         }
 
-        internal static User Map(CreateUserModel userModel)
+        internal static ApplicationUser Map(CreateUserModel userModel)
         {
-            var user = new User(userModel.Username)
+            var user = new ApplicationUser(userModel.Username)
             {
                 Email = ControllerHelper.Trim(userModel.Email),
                 Roles = userModel.Roles,
@@ -134,11 +134,11 @@ namespace Snowinmars.Ui.Controllers
             return user;
         }
 
-        internal static User Map(UpdateUserModel userModel)
+        internal static ApplicationUser Map(UpdateUserModel userModel)
         {
             var username = string.IsNullOrWhiteSpace(userModel.Username) ? "" : userModel.Username;
 
-            var user = new User(username)
+            var user = new ApplicationUser(username)
             {
                 Email = ControllerHelper.Trim(userModel.Email),
                 Roles = userModel.Roles,
@@ -149,9 +149,9 @@ namespace Snowinmars.Ui.Controllers
 
             return user;
         }
-        internal static Pseudonym MapPseudonym(AuthorModel authorModel)
+        internal static Name MapPseudonym(AuthorModel authorModel)
         {
-            return new Pseudonym
+            return new Name
             {
                 GivenName = ControllerHelper.Trim(authorModel.PseudonymGivenName),
                 FullMiddleName = ControllerHelper.Trim(authorModel.PseudonymFullMiddleName),
@@ -159,7 +159,17 @@ namespace Snowinmars.Ui.Controllers
             };
         }
 
-        internal static string Trim(string str) => str?.Trim() ?? "";
+	    internal static Name MapName(AuthorModel authorModel)
+	    {
+		    return new Name
+		    {
+			    GivenName = ControllerHelper.Trim(authorModel.GivenName),
+			    FullMiddleName = ControllerHelper.Trim(authorModel.FullMiddleName),
+			    FamilyName = ControllerHelper.Trim(authorModel.FamilyName),
+		    };
+	    }
+
+		internal static string Trim(string str) => str?.Trim() ?? "";
 
         private static void SetAuthorIds(IEnumerable<Guid> authorModelIds, ICollection<Guid> container)
         {
@@ -197,7 +207,7 @@ namespace Snowinmars.Ui.Controllers
             }
         }
 
-        public static IEnumerable<UpdateUserModel> Map(IEnumerable<User> users)
+        public static IEnumerable<UpdateUserModel> Map(IEnumerable<ApplicationUser> users)
         {
             return users.Select(ControllerHelper.Map).ToList();
         }

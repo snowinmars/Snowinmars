@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Snowinmars.Entities;
+using Snowinmars.BookSlice.BookEntities;
 
 namespace Snowinmars.Ui.Models
 {

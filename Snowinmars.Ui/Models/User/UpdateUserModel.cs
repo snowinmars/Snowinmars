@@ -1,7 +1,7 @@
-﻿using Snowinmars.Entities;
-using Snowinmars.Ui.App_LocalResources;
+﻿using Snowinmars.Ui.App_LocalResources;
 using System;
 using System.ComponentModel.DataAnnotations;
+using Snowinmars.Common;
 
 namespace Snowinmars.Ui.Models
 {

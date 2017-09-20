@@ -1,6 +1,4 @@
-﻿using Snowinmars.Bll.Interfaces;
-using Snowinmars.Entities;
-using Snowinmars.Ui.Models;
+﻿using Snowinmars.Ui.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,6 +6,9 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.UI;
+using Snowinmars.AuthorSlice.AuthorEntities;
+using Snowinmars.BookSlice.BookBll.Interfaces;
+using Snowinmars.BookSlice.BookEntities;
 
 namespace Snowinmars.Ui.Controllers
 {

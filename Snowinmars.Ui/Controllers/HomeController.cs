@@ -29,12 +29,12 @@ namespace Snowinmars.Ui.Controllers
         [AllowAnonymous]
         public JsonResult EmailAdmin(string message)
         {
-            bool wasSendToAdmin = EmailService.SendToAdmin(message);
+            //bool wasSendToAdmin = EmailService.SendToAdmin(message);
 
-            if (wasSendToAdmin)
-            {
-                return ControllerHelper.GetSuccessJsonResult(true);
-            }
+            //if (wasSendToAdmin)
+            //{
+            //    return ControllerHelper.GetSuccessJsonResult(true);
+            //}
 
             return ControllerHelper.GetFailJsonResult();
         }
