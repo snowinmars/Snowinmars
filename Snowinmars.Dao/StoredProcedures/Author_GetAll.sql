@@ -13,17 +13,20 @@ ALTER PROCEDURE [dbo].[Author_GetAll]
 AS
 BEGIN
 
-	SELECT AuthorId
-		,Shortcut
-		,GivenName
-		,FamilyName
-		,IsSynchronized
-		,FullMiddleName
-		,PseudonymGivenName
-		,PseudonymFamilyName
-		,PseudonymFullMiddleName
-		,MustInformAboutWarnings
-	FROM [Authors]
+	SELECT ba.BookId
+		,a.AuthorId
+		,a.Shortcut
+		,a.GivenName
+		,a.FamilyName
+		,a.IsSynchronized
+		,a.FullMiddleName
+		,a.PseudonymGivenName
+		,a.PseudonymFamilyName
+		,a.PseudonymFullMiddleName
+		,a.MustInformAboutWarnings
+	FROM [Authors] a
+		inner join [BookAuthorConnection] ba
+			on a.AuthorId = ba.AuthorId
 
 END
 GO

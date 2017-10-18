@@ -13,18 +13,21 @@ ALTER PROCEDURE [dbo].[Author_Get] (@authorId UNIQUEIDENTIFIER)
 AS
 BEGIN
 
-	SELECT AuthorId
-		,Shortcut
-		,GivenName
-		,FamilyName
-		,IsSynchronized
-		,FullMiddleName
-		,PseudonymGivenName
-		,PseudonymFamilyName
-		,PseudonymFullMiddleName
-		,MustInformAboutWarnings
-	FROM [Authors]
-	WHERE (AuthorId = @authorId)
+	SELECT ba.BookId
+		,a.AuthorId
+		,a.Shortcut
+		,a.GivenName
+		,a.FamilyName
+		,a.IsSynchronized
+		,a.FullMiddleName
+		,a.PseudonymGivenName
+		,a.PseudonymFamilyName
+		,a.PseudonymFullMiddleName
+		,a.MustInformAboutWarnings
+	FROM [Authors] a
+		inner join [BookAuthorConnection] ba
+			on a.AuthorId = ba.AuthorId
+	WHERE (a.AuthorId = @authorId)
 
 END
 GO
