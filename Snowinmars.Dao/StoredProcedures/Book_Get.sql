@@ -10,7 +10,7 @@ GO
 
 ALTER PROCEDURE [dbo].[Book_Get]
 (
-	@id UNIQUEIDENTIFIER
+	@bookId UNIQUEIDENTIFIER
 )
 AS
 BEGIN
@@ -29,11 +29,12 @@ SELECT b.[BookId]					AS BookId
 	,b.[AdditionalInfo] 			AS AdditionalInfo
 	,b.[MustInformAboutWarnings] 	AS MustInformAboutWarnings
 FROM [dbo].[Books] b
-WHERE b.[BookId] = @id
+WHERE b.[BookId] = @bookId
 
 
 
-SELECT a.[AuthorId] 				AS AuthorId
+SELECT ba.[BookId] 					as BookId
+	,a.[AuthorId]	 				AS AuthorId
 	,a.[FamilyName] 				AS FamilyName
 	,a.[FullMiddleName] 			AS FullMiddleName
 	,a.[GivenName] 					AS GivenName
@@ -45,7 +46,7 @@ SELECT a.[AuthorId] 				AS AuthorId
 FROM [dbo].[Authors] a
 	INNER JOIN [dbo].[BookAuthorConnection] ba
 		ON a.[AuthorId] = ba.[AuthorId]
-WHERE ba.[BookId] = @id
+WHERE ba.[BookId] = @bookId
 
 END
 

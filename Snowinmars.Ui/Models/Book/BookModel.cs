@@ -23,7 +23,6 @@ namespace Snowinmars.Ui.Models
             AdditionalInfo = "",
             IsSynchronized = true,
             AuthorModels = new List<AuthorModel>(),
-            AuthorShortcuts = new List<string>(),
         };
 
 		[Display(Name = "BookModel_Status", ResourceType = typeof(Global))]
@@ -34,9 +33,6 @@ namespace Snowinmars.Ui.Models
 
         [Display(Name = "BookModel_Authors", ResourceType = typeof(Global))]
         public IEnumerable<AuthorModel> AuthorModels { get; set; }
-
-        [Display(Name = "BookModel_Authors", ResourceType = typeof(Global))]
-        public IEnumerable<string> AuthorShortcuts { get; set; }
 
         [Display(Name = "BookModel_Bookshelf", ResourceType = typeof(Global))]
         public string Bookshelf { get; set; }

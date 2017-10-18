@@ -46,11 +46,6 @@ namespace Snowinmars.Dao
 
                 var reader = command.ExecuteReader();
 
-                if (!reader.Read())
-                {
-                    throw new ObjectNotFoundException();
-                }
-
                 Book book = LocalCommon.MapBook(reader);
 
                 sqlConnection.Close();
@@ -164,7 +159,7 @@ namespace Snowinmars.Dao
 		    {
 				DatabaseCommand databaseCommand = DatabaseCommand.StoredProcedure("Book_GetAllWishlist");
 
-			    databaseCommand.AddInputParameter(LocalConst.Book.Parameter.Owner, SqlDbType.UniqueIdentifier, LocalCommon.ConvertToDbValue(username));
+			    databaseCommand.AddInputParameter(LocalConst.Book.Parameter.Owner, SqlDbType.NVarChar, LocalCommon.ConvertToDbValue(username));
 
 			    var command = databaseCommand.GetSqlCommand(sqlConnection);
 
@@ -281,16 +276,16 @@ namespace Snowinmars.Dao
             sqlConnection.Close();
         }
 
-        private void DeleteBookAuthorConnections(Guid bookId, IEnumerable<Author> authorIds, SqlConnection sqlConnection)
+        private void DeleteBookAuthorConnections(Guid bookId, IEnumerable<Author> authors, SqlConnection sqlConnection)
         {
             sqlConnection.Open();
 
-            foreach (var authorId in authorIds)
+            foreach (var author in authors)
             {
 				DatabaseCommand databaseCommand = DatabaseCommand.StoredProcedure("BookAuthorConnection_Delete");
 
 	            databaseCommand.AddInputParameter(LocalConst.BookAuthor.Column.BookId, SqlDbType.UniqueIdentifier, LocalCommon.ConvertToDbValue(bookId));
-	            databaseCommand.AddInputParameter(LocalConst.BookAuthor.Column.AuthorId, SqlDbType.UniqueIdentifier, LocalCommon.ConvertToDbValue(authorId));
+	            databaseCommand.AddInputParameter(LocalConst.BookAuthor.Column.AuthorId, SqlDbType.UniqueIdentifier, LocalCommon.ConvertToDbValue(author.Id));
 
 				var command = databaseCommand.GetSqlCommand(sqlConnection);
 

@@ -25,8 +25,7 @@ BEGIN
 		,a.PseudonymFullMiddleName
 		,a.MustInformAboutWarnings
 	FROM [Authors] a
-		inner join [BookAuthorConnection] ba
+		LEFT OUTER join [BookAuthorConnection] ba
 			on a.AuthorId = ba.AuthorId
-
 END
 GO

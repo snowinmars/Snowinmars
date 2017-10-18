@@ -67,11 +67,6 @@ namespace Snowinmars.Dao
                 sqlConnection.Open();
                 var reader = command.ExecuteReader();
 
-                if (!reader.Read())
-                {
-                    throw new ObjectNotFoundException();
-                }
-
                 User user = LocalCommon.MapUser(reader);
                 sqlConnection.Close();
 
@@ -91,11 +86,6 @@ namespace Snowinmars.Dao
 
                 sqlConnection.Open();
                 var reader = command.ExecuteReader();
-
-                if (!reader.Read())
-                {
-                    throw new ObjectNotFoundException();
-                }
 
                 User user = LocalCommon.MapUser(reader);
                 sqlConnection.Close();

@@ -80,7 +80,7 @@
 					@Html.DisplayFor(modelItem => item.PageCount)
 				</td>
 				<td class="col-xs-4 hidden-sm hidden-xs">
-					@Html.DropDownList("authorModelIds_" + item.Id, item.AuthorShortcuts.Select(s => new SelectListItem { Text = s, Selected = true, }), new Dictionary<string, object> { { "class", "authorModelIds col-xs-10" }, { "multiple", "multiple" }, })
+					@Html.DropDownList("authorModelIds_" + item.Id, item.AuthorModels.Select(s => new SelectListItem { Text = s.Shortcut, Selected = true, }), new Dictionary<string, object> { { "class", "authorModelIds col-xs-10" }, { "multiple", "multiple" }, })
 
 					@if (!item.IsSynchronized)
 					{

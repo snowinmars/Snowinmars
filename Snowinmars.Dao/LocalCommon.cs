@@ -10,8 +10,13 @@ namespace Snowinmars.Dao
 {
     internal static class LocalCommon
     {
-        public static User MapUser(IDataRecord reader)
+        public static User MapUser(SqlDataReader reader)
         {
+	        if (!reader.Read())
+	        {
+		        throw new ObjectNotFoundException();
+	        }
+
             Guid id = LocalCommon.ConvertFromDbValue<Guid>(reader[LocalConst.User.Column.Id]);
             UserRoles roles = LocalCommon.ConvertFromDbValue<UserRoles>(reader[LocalConst.User.Column.Roles]);
             Language language = LocalCommon.ConvertFromDbValue<Language>(reader[LocalConst.User.Column.LanguageCode]);
@@ -58,7 +63,7 @@ namespace Snowinmars.Dao
             return obj;
         }
 
-        internal static (Author author, Guid forBookId) MapAuthor(IDataRecord reader)
+        internal static (Author author, Guid forBookId) MapAuthor(SqlDataReader reader)
         {
 	        Guid bookId = LocalCommon.ConvertFromDbValue<Guid>(reader[LocalConst.BookAuthor.Column.BookId]);
             Guid authorId = LocalCommon.ConvertFromDbValue<Guid>(reader[LocalConst.Author.Column.Id]);
@@ -83,7 +88,7 @@ namespace Snowinmars.Dao
             return (author: author, forBookId: bookId);
         }
 
-        internal static IEnumerable<(Author author, Guid forBookId)> MapAuthors(IDataReader reader)
+        internal static IEnumerable<(Author author, Guid forBookId)> MapAuthors(SqlDataReader reader)
         {
             var authors = new List<(Author author, Guid forBookId)>();
 
@@ -97,14 +102,14 @@ namespace Snowinmars.Dao
             return authors;
         }
 
-	    internal static Book MapBook(IDataReader reader) => LocalCommon.MapBooks(reader).First();
+	    internal static Book MapBook(SqlDataReader reader) => LocalCommon.MapBooks(reader).First();
 
-        internal static IEnumerable<Book> MapBooks(IDataReader reader)
+        internal static IEnumerable<Book> MapBooks(SqlDataReader reader)
         {
 			// I don't want to let anyone see or reuse the MapBook method due to this method returns an uncomplete book: the result doesn't have authors
 			Book MapBookPartial()
 	        {
-		        int year = LocalCommon.ConvertFromDbValue<int>(reader[LocalConst.Book.Column.Year]);
+				int year = LocalCommon.ConvertFromDbValue<int>(reader[LocalConst.Book.Column.Year]);
 		        Guid bookId = LocalCommon.ConvertFromDbValue<Guid>(reader[LocalConst.Book.Column.Id]);
 		        string owner = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.Owner]);
 		        string title = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.Title]);
@@ -135,13 +140,21 @@ namespace Snowinmars.Dao
 	        }
 
 			List<Book> books = new List<Book>();
+	        bool wasBookRead = false;
 
             while (reader.Read())
             {
                 Book book = MapBookPartial();
 
                 books.Add(book);
+
+	            wasBookRead = true;
             }
+
+	        if (!wasBookRead)
+	        {
+		        throw new ObjectNotFoundException();
+	        }
 
 	        reader.NextResult();
 
