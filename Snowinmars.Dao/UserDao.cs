@@ -28,7 +28,7 @@ namespace Snowinmars.Dao
         {
             using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
             {
-                var command = new SqlCommand(LocalConst.User.InsertCommand, sqlConnection);
+				DatabaseCommand databaseCommand = DatabaseCommand.StoredProcedure("User_Insert");
 
                 var id = LocalCommon.ConvertToDbValue(item.Id);
                 var username = LocalCommon.ConvertToDbValue(item.Username);
@@ -38,13 +38,15 @@ namespace Snowinmars.Dao
                 var salt = LocalCommon.ConvertToDbValue(item.Salt);
                 var language = LocalCommon.ConvertToDbValue(item.Language);
 
-                command.Parameters.AddWithValue(LocalConst.User.Parameter.Id, id);
-                command.Parameters.AddWithValue(LocalConst.User.Parameter.Username, username);
-                command.Parameters.AddWithValue(LocalConst.User.Parameter.PasswordHash, passwordHash);
-                command.Parameters.AddWithValue(LocalConst.User.Parameter.Roles, roles);
-                command.Parameters.AddWithValue(LocalConst.User.Parameter.Email, email);
-                command.Parameters.AddWithValue(LocalConst.User.Parameter.Salt, salt);
-                command.Parameters.AddWithValue(LocalConst.User.Parameter.LanguageCode, language);
+				databaseCommand.AddInputParameter(LocalConst.User.Parameter.Id,SqlDbType.UniqueIdentifier,  id);
+                databaseCommand.AddInputParameter(LocalConst.User.Parameter.Username, SqlDbType.NVarChar, username);
+                databaseCommand.AddInputParameter(LocalConst.User.Parameter.PasswordHash, SqlDbType.NVarChar, passwordHash);
+                databaseCommand.AddInputParameter(LocalConst.User.Parameter.Roles, SqlDbType.Int, roles);
+                databaseCommand.AddInputParameter(LocalConst.User.Parameter.Email, SqlDbType.NVarChar, email);
+                databaseCommand.AddInputParameter(LocalConst.User.Parameter.Salt, SqlDbType.NVarChar, salt);
+	            databaseCommand.AddInputParameter(LocalConst.User.Parameter.LanguageCode, SqlDbType.Int, language);
+
+				var command = databaseCommand.GetSqlCommand(sqlConnection);
 
                 sqlConnection.Open();
                 command.ExecuteNonQuery();
@@ -56,9 +58,11 @@ namespace Snowinmars.Dao
         {
             using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
             {
-                var command = new SqlCommand(LocalConst.User.SelectById, sqlConnection);
+				DatabaseCommand databaseCommand = DatabaseCommand.StoredProcedure("User_Get");
 
-                command.Parameters.AddWithValue(LocalConst.User.Parameter.Id, LocalCommon.ConvertToDbValue(id));
+                databaseCommand.AddInputParameter(LocalConst.User.Parameter.Id, SqlDbType.UniqueIdentifier, LocalCommon.ConvertToDbValue(id));
+
+				var command = databaseCommand.GetSqlCommand(sqlConnection);
 
                 sqlConnection.Open();
                 var reader = command.ExecuteReader();
@@ -79,9 +83,11 @@ namespace Snowinmars.Dao
         {
             using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
             {
-                var command = new SqlCommand(LocalConst.User.SelectByUsername, sqlConnection);
+	            DatabaseCommand databaseCommand = DatabaseCommand.StoredProcedure("User_GetByUsername");
 
-                command.Parameters.AddWithValue(LocalConst.User.Parameter.Username, LocalCommon.ConvertToDbValue(username));
+	            databaseCommand.AddInputParameter(LocalConst.User.Parameter.Username, SqlDbType.NVarChar, LocalCommon.ConvertToDbValue(username));
+
+				var command = databaseCommand.GetSqlCommand(sqlConnection);
 
                 sqlConnection.Open();
                 var reader = command.ExecuteReader();
@@ -99,29 +105,36 @@ namespace Snowinmars.Dao
         }
 
         public IEnumerable<User> Get(Func<User, bool> filter)
-        {
-            using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
-            {
-                var command = new SqlCommand(LocalConst.User.SelectAllCommand, sqlConnection);
+		{
+			return UserDao.GetAll();
+		}
 
-                IList<User> users = new List<User>();
+		private static IEnumerable<User> GetAll()
+		{
+			using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
+			{
+				DatabaseCommand databaseCommand = DatabaseCommand.StoredProcedure("User_GetAll");
 
-                sqlConnection.Open();
-                var reader = command.ExecuteReader();
+				var command = databaseCommand.GetSqlCommand(sqlConnection);
 
-                while (reader.Read())
-                {
-                    var user = LocalCommon.MapUser(reader);
-                    users.Add(user);
-                }
+				IList<User> users = new List<User>();
 
-                sqlConnection.Close();
+				sqlConnection.Open();
+				var reader = command.ExecuteReader();
 
-                return users;
-            }
-        }
+				while (reader.Read())
+				{
+					var user = LocalCommon.MapUser(reader);
+					users.Add(user);
+				}
 
-        public UserRoles GetRolesForUser(string username)
+				sqlConnection.Close();
+
+				return users;
+			}
+		}
+
+		public UserRoles GetRolesForUser(string username)
         {
             var user = this.Get(username);
 
@@ -158,9 +171,11 @@ namespace Snowinmars.Dao
         {
             using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
             {
-                var command = new SqlCommand(LocalConst.User.DeleteByIdCommand, sqlConnection);
+				DatabaseCommand databaseCommand = DatabaseCommand.StoredProcedure("User_Delete");
 
-                command.Parameters.AddWithValue(LocalConst.User.Parameter.Id, LocalCommon.ConvertToDbValue(id));
+	            databaseCommand.AddInputParameter(LocalConst.User.Parameter.Id, SqlDbType.NVarChar, LocalCommon.ConvertToDbValue(id));
+
+				var command = databaseCommand.GetSqlCommand(sqlConnection);
 
                 sqlConnection.Open();
                 command.ExecuteNonQuery();
@@ -172,9 +187,11 @@ namespace Snowinmars.Dao
         {
             using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
             {
-                var command = new SqlCommand(LocalConst.User.DeleteByUsernameCommand, sqlConnection);
+				DatabaseCommand databaseCommand = DatabaseCommand.StoredProcedure("User_DeleteByUsername");
 
-                command.Parameters.AddWithValue(LocalConst.User.Parameter.Username, LocalCommon.ConvertToDbValue(username));
+	            databaseCommand.AddInputParameter(LocalConst.User.Parameter.Username, SqlDbType.NVarChar, LocalCommon.ConvertToDbValue(username));
+
+				var command = databaseCommand.GetSqlCommand(sqlConnection);
 
                 sqlConnection.Open();
                 command.ExecuteNonQuery();
@@ -199,19 +216,21 @@ namespace Snowinmars.Dao
         {
             using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
             {
-                var command = new SqlCommand(LocalConst.User.UpdateCommand, sqlConnection);
+				DatabaseCommand databaseCommand = DatabaseCommand.StoredProcedure("User_Update");
 
                 var id = LocalCommon.ConvertToDbValue(item.Id);
                 var username = LocalCommon.ConvertToDbValue(item.Username);
                 var roles = LocalCommon.ConvertToDbValue(item.Roles);
                 var email = LocalCommon.ConvertToDbValue(item.Email);
                 var language = LocalCommon.ConvertToDbValue(item.Language);
+				
+                databaseCommand.AddInputParameter(LocalConst.User.Parameter.Id,SqlDbType.UniqueIdentifier,  id);
+                databaseCommand.AddInputParameter(LocalConst.User.Parameter.Username, SqlDbType.NVarChar, username);
+                databaseCommand.AddInputParameter(LocalConst.User.Parameter.Roles,SqlDbType.Int,  roles);
+                databaseCommand.AddInputParameter(LocalConst.User.Parameter.Email, SqlDbType.NVarChar, email);
+				databaseCommand.AddInputParameter(LocalConst.User.Parameter.LanguageCode, SqlDbType.Int, language);
 
-                command.Parameters.AddWithValue(LocalConst.User.Parameter.Id, id);
-                command.Parameters.AddWithValue(LocalConst.User.Parameter.Username, username);
-                command.Parameters.AddWithValue(LocalConst.User.Parameter.Roles, roles);
-                command.Parameters.AddWithValue(LocalConst.User.Parameter.Email, email);
-                command.Parameters.AddWithValue(LocalConst.User.Parameter.LanguageCode, language);
+				var command = databaseCommand.GetSqlCommand(sqlConnection);
 
                 sqlConnection.Open();
                 command.ExecuteNonQuery();

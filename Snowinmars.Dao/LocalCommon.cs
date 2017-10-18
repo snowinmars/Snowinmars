@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace Snowinmars.Dao
 {
@@ -57,8 +58,9 @@ namespace Snowinmars.Dao
             return obj;
         }
 
-        internal static Author MapAuthor(IDataRecord reader)
+        internal static (Author author, Guid forBookId) MapAuthor(IDataRecord reader)
         {
+	        Guid bookId = LocalCommon.ConvertFromDbValue<Guid>(reader[LocalConst.BookAuthor.Column.BookId]);
             Guid authorId = LocalCommon.ConvertFromDbValue<Guid>(reader[LocalConst.Author.Column.Id]);
             string shortcut = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Author.Column.Shortcut]);
             string givenName = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Author.Column.GivenName]);
@@ -80,78 +82,96 @@ namespace Snowinmars.Dao
                 MustInformAboutWarnings = mustInformAboutWarnings,
             };
 
-            return author;
+            return (author: author, forBookId: bookId);
         }
 
-        internal static IEnumerable<Author> MapAuthors(IDataReader reader)
+        internal static IEnumerable<(Author author, Guid forBookId)> MapAuthors(IDataReader reader)
         {
-            List<Author> authors = new List<Author>();
+            var authors = new List<(Author author, Guid forBookId)>();
 
             while (reader.Read())
             {
-                Author author = LocalCommon.MapAuthor(reader);
+                var authorPair = LocalCommon.MapAuthor(reader);
 
-                authors.Add(author);
+                authors.Add(authorPair);
             }
 
             return authors;
         }
 
-        internal static Book MapBook(IDataReader reader)
-        {
-            int year = LocalCommon.ConvertFromDbValue<int>(reader[LocalConst.Book.Column.Year]);
-            Guid bookId = LocalCommon.ConvertFromDbValue<Guid>(reader[LocalConst.Book.Column.Id]);
-            string owner = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.Owner]);
-            string title = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.Title]);
-	        BookStatus status = LocalCommon.ConvertFromDbValue<BookStatus>(reader[LocalConst.Book.Column.Status]);
-            int pageCount = LocalCommon.ConvertFromDbValue<int>(reader[LocalConst.Book.Column.PageCount]);
-            string bookshelf = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.Bookshelf]);
-            string liveLibUrl = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.LiveLibUrl]);
-            string libRusEcUrl = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.LibRusEcUrl]);
-            string flibustaUrl = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.FlibustaUrl]);
-            bool isSynchronized = LocalCommon.ConvertFromDbValue<bool>(reader[LocalConst.Book.Column.IsSynchronized]);
-            string additionalInfo = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.AdditionalInfo]);
-            bool mustInformAboutWarnings = LocalCommon.ConvertFromDbValue<bool>(reader[LocalConst.Book.Column.MustInformAboutWarnings]);
-
-            var book = new Book(title, pageCount)
-            {
-                Id = bookId,
-                Year = year,
-                Owner = owner,
-				Status = status,
-                Bookshelf = bookshelf,
-                LiveLibUrl = liveLibUrl,
-                LibRusEcUrl = libRusEcUrl,
-                FlibustaUrl = flibustaUrl,
-                AdditionalInfo = additionalInfo,
-                IsSynchronized = isSynchronized,
-                MustInformAboutWarnings = mustInformAboutWarnings,
-            };
-
-	        reader.NextResult();
-
-			IList<Author> authors = new List<Author>();
-
-			book.Authors.AddRange(authors);
-
-            return book;
-        }
+	    internal static Book MapBook(IDataReader reader) => LocalCommon.MapBooks(reader).First();
 
         internal static IEnumerable<Book> MapBooks(IDataReader reader)
         {
-            List<Book> books = new List<Book>();
+			// I don't want to let anyone see or reuse the MapBook method due to this method returns an uncomplete book: the result doesn't have authors
+			Book MapBookPartial()
+	        {
+		        int year = LocalCommon.ConvertFromDbValue<int>(reader[LocalConst.Book.Column.Year]);
+		        Guid bookId = LocalCommon.ConvertFromDbValue<Guid>(reader[LocalConst.Book.Column.Id]);
+		        string owner = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.Owner]);
+		        string title = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.Title]);
+		        int pageCount = LocalCommon.ConvertFromDbValue<int>(reader[LocalConst.Book.Column.PageCount]);
+		        string bookshelf = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.Bookshelf]);
+		        BookStatus status = LocalCommon.ConvertFromDbValue<BookStatus>(reader[LocalConst.Book.Column.Status]);
+		        string liveLibUrl = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.LiveLibUrl]);
+		        string libRusEcUrl = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.LibRusEcUrl]);
+		        string flibustaUrl = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.FlibustaUrl]);
+		        bool isSynchronized = LocalCommon.ConvertFromDbValue<bool>(reader[LocalConst.Book.Column.IsSynchronized]);
+		        string additionalInfo = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.AdditionalInfo]);
+		        bool mustInformAboutWarnings = LocalCommon.ConvertFromDbValue<bool>(reader[LocalConst.Book.Column.MustInformAboutWarnings]);
+
+		        var book = new Book(title, pageCount)
+		        {
+			        Id = bookId,
+			        Year = year,
+			        Owner = owner,
+			        Status = status,
+			        Bookshelf = bookshelf,
+			        LiveLibUrl = liveLibUrl,
+			        LibRusEcUrl = libRusEcUrl,
+			        FlibustaUrl = flibustaUrl,
+			        AdditionalInfo = additionalInfo,
+			        IsSynchronized = isSynchronized,
+			        MustInformAboutWarnings = mustInformAboutWarnings,
+		        };
+
+		        return book;
+	        }
+
+			List<Book> books = new List<Book>();
 
             while (reader.Read())
             {
-                Book book = LocalCommon.MapBook(reader);
+                Book book = MapBookPartial();
 
                 books.Add(book);
             }
 
+	        reader.NextResult();
+
+			IList<(Author author, Guid forBookId)> authorsPairs = new List<(Author author, Guid forBookId)>();
+	        
+			while (reader.Read())
+	        {
+		        var authorPair = LocalCommon.MapAuthor(reader);
+
+				authorsPairs.Add(authorPair);
+	        }
+
+	        LocalCommon.Merge(books, authorsPairs);
+
             return books;
         }
 
-        internal static Pseudonym MapPseudonym(IDataRecord reader)
+	    private static void Merge(IEnumerable<Book> books, IList<(Author author, Guid forBookId)> authors)
+	    {
+		    foreach (var book in books)
+		    {
+			    book.Authors.AddRange(authors.Where(p => p.forBookId == book.Id).Select(p => p.author));
+		    }
+	    }
+
+	    internal static Pseudonym MapPseudonym(IDataRecord reader)
         {
             string pseudonymFullMiddleName = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Author.Column.PseudonymFullMiddleName]);
             string pseudonymFamilyName = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Author.Column.PseudonymFamilyName]);

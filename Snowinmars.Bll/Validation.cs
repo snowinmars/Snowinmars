@@ -27,7 +27,6 @@ namespace Snowinmars.Bll
             Validation.Check(book.Id);
 
             Validation.CheckAdditionalInfo(book.AdditionalInfo);
-            Validation.CheckAuthorIds(book.Authors);
             Validation.CheckBookshelf(book.Bookshelf);
             Validation.CheckUrl(book.FlibustaUrl);
             Validation.CheckUrl(book.LibRusEcUrl);
@@ -36,6 +35,11 @@ namespace Snowinmars.Bll
             Validation.CheckPageCount(book.PageCount);
             Validation.CheckTitle(book.Title);
             Validation.CheckYear(book.Year);
+
+	        foreach (var author in book.Authors)
+	        {
+		        Validation.Check(author);
+	        }
         }
 
         public static void Check(Guid id)
@@ -127,14 +131,6 @@ namespace Snowinmars.Bll
             if (additionalInfo.Length > Common.Constant.MaxAdditionalInfoLength)
             {
                 throw new ValidationException("Book's additional info is too long");
-            }
-        }
-
-        private static void CheckAuthorIds(ICollection<Guid> authorIds)
-        {
-            if (authorIds == null)
-            {
-                throw new ValidationException("Book's author ids collection is null");
             }
         }
 

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace Snowinmars.Dao
@@ -22,7 +23,7 @@ namespace Snowinmars.Dao
 
 			using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
 			{
-				var command = new SqlCommand(LocalConst.Author.InsertCommand, sqlConnection);
+				DatabaseCommand databaseCommand = DatabaseCommand.StoredProcedure("Author_Insert");
 
 				var id = LocalCommon.ConvertToDbValue(item.Id);
 				var shortcut = LocalCommon.ConvertToDbValue(item.Shortcut);
@@ -35,16 +36,18 @@ namespace Snowinmars.Dao
 				var pseudonymFullMiddleName = LocalCommon.ConvertToDbValue(item.Pseudonym.FullMiddleName);
 				var mustInformAboutWarnings = LocalCommon.ConvertToDbValue(item.MustInformAboutWarnings);
 
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.Id, id);
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.Shortcut, shortcut);
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.GivenName, givenName);
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.FamilyName, familyName);
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.IsSynchronized, isSynchronized);
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.FullMiddleName, fullMiddleName);
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.PseudonymGivenName, pseudonymGivenName);
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.PseudonymFamilyName, pseudonymFamilyName);
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.PseudonymFullMiddleName, pseudonymFullMiddleName);
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.MustInformAboutWarnings, mustInformAboutWarnings);
+				databaseCommand.AddInputParameter(LocalConst.Author.Parameter.Id, SqlDbType.UniqueIdentifier,  id);
+				databaseCommand.AddInputParameter(LocalConst.Author.Parameter.Shortcut, SqlDbType.NVarChar, shortcut);
+				databaseCommand.AddInputParameter(LocalConst.Author.Parameter.GivenName, SqlDbType.NVarChar, givenName);
+				databaseCommand.AddInputParameter(LocalConst.Author.Parameter.FamilyName, SqlDbType.NVarChar, familyName);
+				databaseCommand.AddInputParameter(LocalConst.Author.Parameter.IsSynchronized, SqlDbType.Bit, isSynchronized);
+				databaseCommand.AddInputParameter(LocalConst.Author.Parameter.FullMiddleName, SqlDbType.NVarChar, fullMiddleName);
+				databaseCommand.AddInputParameter(LocalConst.Author.Parameter.PseudonymGivenName, SqlDbType.NVarChar, pseudonymGivenName);
+				databaseCommand.AddInputParameter(LocalConst.Author.Parameter.PseudonymFamilyName, SqlDbType.NVarChar, pseudonymFamilyName);
+				databaseCommand.AddInputParameter(LocalConst.Author.Parameter.PseudonymFullMiddleName, SqlDbType.NVarChar, pseudonymFullMiddleName);
+				databaseCommand.AddInputParameter(LocalConst.Author.Parameter.MustInformAboutWarnings, SqlDbType.Bit, mustInformAboutWarnings);
+
+				var command = databaseCommand.GetSqlCommand(sqlConnection);
 
 				sqlConnection.Open();
 				command.ExecuteNonQuery();
@@ -56,9 +59,11 @@ namespace Snowinmars.Dao
 		{
 			using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
 			{
-				var command = new SqlCommand(LocalConst.Author.SelectCommand, sqlConnection);
+				DatabaseCommand databaseCommand = DatabaseCommand.StoredProcedure("Author_Get");
 
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.Id, LocalCommon.ConvertToDbValue(id));
+				databaseCommand.AddInputParameter(LocalConst.Author.Parameter.Id, SqlDbType.UniqueIdentifier, LocalCommon.ConvertToDbValue(id));
+
+				var command = databaseCommand.GetSqlCommand(sqlConnection);
 
 				sqlConnection.Open();
 				var reader = command.ExecuteReader();
@@ -68,10 +73,10 @@ namespace Snowinmars.Dao
 					throw new ObjectNotFoundException();
 				}
 
-				var author = LocalCommon.MapAuthor(reader);
+				var authorPair = LocalCommon.MapAuthor(reader);
 				sqlConnection.Close();
 
-				return author;
+				return authorPair.author;
 			}
 		}
 
@@ -79,14 +84,16 @@ namespace Snowinmars.Dao
 		{
 			using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
 			{
-				var command = new SqlCommand(LocalConst.Author.SelectAllCommand, sqlConnection);
+				DatabaseCommand databaseCommand = DatabaseCommand.StoredProcedure("Author_GetAll");
+
+				var command = databaseCommand.GetSqlCommand(sqlConnection);
 
 				sqlConnection.Open();
 				var reader = command.ExecuteReader();
-				var authors = LocalCommon.MapAuthors(reader);
+				var authorPairs = LocalCommon.MapAuthors(reader);
 				sqlConnection.Close();
 
-				return authors;
+				return authorPairs.Select(p => p.author);
 			}
 		}
 
@@ -94,9 +101,11 @@ namespace Snowinmars.Dao
 		{
 			using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
 			{
-				var command = new SqlCommand(LocalConst.Author.DeleteCommand, sqlConnection);
+				DatabaseCommand databaseCommand = DatabaseCommand.StoredProcedure("Author_Delete");
 
-				command.Parameters.AddWithValue(LocalConst.Author.Column.Id, LocalCommon.ConvertToDbValue(id));
+				databaseCommand.AddInputParameter(LocalConst.Author.Parameter.Id, SqlDbType.UniqueIdentifier, LocalCommon.ConvertToDbValue(id));
+
+				var command = databaseCommand.GetSqlCommand(sqlConnection);
 
 				sqlConnection.Open();
 				command.ExecuteNonQuery();
@@ -110,7 +119,7 @@ namespace Snowinmars.Dao
 
 			using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
 			{
-				var command = new SqlCommand(LocalConst.Author.UpdateCommand, sqlConnection);
+				DatabaseCommand databaseCommand = DatabaseCommand.StoredProcedure("Author_Update");
 
 				var id = LocalCommon.ConvertToDbValue(item.Id);
 				var shortcut = LocalCommon.ConvertToDbValue(item.Shortcut);
@@ -123,18 +132,20 @@ namespace Snowinmars.Dao
 				var pseudonymFullMiddleName = LocalCommon.ConvertToDbValue(item.Pseudonym?.FullMiddleName);
 				var mustInformAboutWarnings = LocalCommon.ConvertToDbValue(item.MustInformAboutWarnings);
 
-                command.Parameters.AddWithValue(LocalConst.Author.Parameter.Id, id);
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.Shortcut, shortcut);
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.GivenName, givenName);
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.FamilyName, familyName);
-                command.Parameters.AddWithValue(LocalConst.Author.Parameter.IsSynchronized, isSynchronized);
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.FullMiddleName, fullMiddleName);
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.PseudonymGivenName, pseudonymGivenName);
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.PseudonymFamilyName, pseudonymFamilyName);
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.PseudonymFullMiddleName, pseudonymFullMiddleName);
-				command.Parameters.AddWithValue(LocalConst.Author.Parameter.MustInformAboutWarnings, mustInformAboutWarnings);
+				databaseCommand.AddInputParameter(LocalConst.Author.Parameter.Id, SqlDbType.UniqueIdentifier, id);
+				databaseCommand.AddInputParameter(LocalConst.Author.Parameter.Shortcut, SqlDbType.NVarChar, shortcut);
+				databaseCommand.AddInputParameter(LocalConst.Author.Parameter.GivenName, SqlDbType.NVarChar, givenName);
+				databaseCommand.AddInputParameter(LocalConst.Author.Parameter.FamilyName, SqlDbType.NVarChar, familyName);
+				databaseCommand.AddInputParameter(LocalConst.Author.Parameter.IsSynchronized, SqlDbType.Bit, isSynchronized);
+				databaseCommand.AddInputParameter(LocalConst.Author.Parameter.FullMiddleName, SqlDbType.NVarChar, fullMiddleName);
+				databaseCommand.AddInputParameter(LocalConst.Author.Parameter.PseudonymGivenName, SqlDbType.NVarChar, pseudonymGivenName);
+				databaseCommand.AddInputParameter(LocalConst.Author.Parameter.PseudonymFamilyName, SqlDbType.NVarChar, pseudonymFamilyName);
+				databaseCommand.AddInputParameter(LocalConst.Author.Parameter.PseudonymFullMiddleName, SqlDbType.NVarChar, pseudonymFullMiddleName);
+				databaseCommand.AddInputParameter(LocalConst.Author.Parameter.MustInformAboutWarnings, SqlDbType.Bit, mustInformAboutWarnings);
 
-                sqlConnection.Open();
+				var command = databaseCommand.GetSqlCommand(sqlConnection);
+
+				sqlConnection.Open();
 				command.ExecuteNonQuery();
 				sqlConnection.Close();
 			}

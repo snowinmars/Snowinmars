@@ -38,7 +38,7 @@ namespace Snowinmars.Dao
             {
 				DatabaseCommand databaseCommand = DatabaseCommand.StoredProcedure("Book_Get");
 
-	            databaseCommand.AddInputParameter("@id", SqlDbType.UniqueIdentifier, id);
+	            databaseCommand.AddInputParameter(LocalConst.Book.Parameter.Id, SqlDbType.UniqueIdentifier, LocalCommon.ConvertToDbValue(id));
 
 	            var command = databaseCommand.GetSqlCommand(sqlConnection);
 
@@ -75,7 +75,9 @@ namespace Snowinmars.Dao
         {
             using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
             {
-                var command = new SqlCommand(LocalConst.BookAuthor.SelectAllCommand, sqlConnection);
+				DatabaseCommand databaseCommand = DatabaseCommand.StoredProcedure("BookAuthorConnection_GetAll");
+
+	            var command = databaseCommand.GetSqlCommand(sqlConnection);
 
                 IList<KeyValuePair<Guid, Guid>> result = new List<KeyValuePair<Guid, Guid>>();
 
@@ -100,9 +102,11 @@ namespace Snowinmars.Dao
         {
             using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
             {
-                var command = new SqlCommand(LocalConst.BookAuthor.SelectByBookCommand, sqlConnection);
+				DatabaseCommand databaseCommand = DatabaseCommand.StoredProcedure("BookAuthorConnection_Get");
 
-                command.Parameters.AddWithValue(LocalConst.BookAuthor.Column.BookId, LocalCommon.ConvertToDbValue(bookId));
+	            databaseCommand.AddInputParameter(LocalConst.BookAuthor.Column.BookId, SqlDbType.UniqueIdentifier, LocalCommon.ConvertToDbValue(bookId));
+
+                var command = databaseCommand.GetSqlCommand(sqlConnection);
 
                 sqlConnection.Open();
                 var reader = command.ExecuteReader();
@@ -117,9 +121,11 @@ namespace Snowinmars.Dao
         {
             using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
             {
-                var command = new SqlCommand(LocalConst.Book.DeleteCommand, sqlConnection);
+				DatabaseCommand databaseCommand = DatabaseCommand.StoredProcedure("Book_Delete");
 
-                command.Parameters.AddWithValue(LocalConst.Book.Column.Id, LocalCommon.ConvertToDbValue(id));
+	            databaseCommand.AddInputParameter(LocalConst.Book.Parameter.Id, SqlDbType.UniqueIdentifier,  LocalCommon.ConvertToDbValue(id));
+
+                var command = databaseCommand.GetSqlCommand(sqlConnection);
 
                 sqlConnection.Open();
                 command.ExecuteNonQuery();
@@ -131,7 +137,9 @@ namespace Snowinmars.Dao
         {
             using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
             {
-                var command = new SqlCommand(LocalConst.Book.SelectBooksUnindexedByShortcutsCommand, sqlConnection);
+				DatabaseCommand databaseCommand = DatabaseCommand.StoredProcedure("Book_GetUnsynchronized");
+
+	            var command = databaseCommand.GetSqlCommand(sqlConnection);
 
                 List<Guid> ids = new List<Guid>();
 
@@ -140,7 +148,7 @@ namespace Snowinmars.Dao
 
                 while (reader.Read())
                 {
-                    Guid id = (Guid)reader[LocalConst.Book.Column.Id];
+                    Guid id = LocalCommon.ConvertFromDbValue<Guid>(reader[LocalConst.Book.Column.Id]);
                     ids.Add(id);
                 }
 
@@ -154,17 +162,17 @@ namespace Snowinmars.Dao
 	    {
 		    using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
 		    {
-			    var command = new SqlCommand(LocalConst.Book.GetWishlist, sqlConnection);
+				DatabaseCommand databaseCommand = DatabaseCommand.StoredProcedure("Book_GetAllWishlist");
 
-			    var un = LocalCommon.ConvertToDbValue(username);
-			    var s = LocalCommon.ConvertToDbValue(status);
+			    databaseCommand.AddInputParameter(LocalConst.Book.Parameter.Owner, SqlDbType.UniqueIdentifier, LocalCommon.ConvertToDbValue(username));
 
-				command.Parameters.AddWithValue(LocalConst.Book.Parameter.Owner, un);
-				command.Parameters.AddWithValue(LocalConst.Book.Parameter.Status, s);
+			    var command = databaseCommand.GetSqlCommand(sqlConnection);
 
 			    sqlConnection.Open();
+
 			    var reader = command.ExecuteReader();
 			    var books = LocalCommon.MapBooks(reader);
+
 			    sqlConnection.Close();
 
 			    return books;
@@ -180,8 +188,9 @@ namespace Snowinmars.Dao
                 this.HandleAuthorUpdate(item, sqlConnection);
 
                 // updating usual fields
-                var command = new SqlCommand(LocalConst.Book.UpdateCommand, sqlConnection);
 
+				DatabaseCommand databaseCommand = DatabaseCommand.StoredProcedure("Book_Update");
+				
                 var id = LocalCommon.ConvertToDbValue(item.Id);
                 var year = LocalCommon.ConvertToDbValue(item.Year);
                 var title = LocalCommon.ConvertToDbValue(item.Title);
@@ -196,21 +205,23 @@ namespace Snowinmars.Dao
                 var isSynchronized = LocalCommon.ConvertToDbValue(item.IsSynchronized);
                 var mustInformAboutWarnings = LocalCommon.ConvertToDbValue(item.MustInformAboutWarnings);
 
-                command.Parameters.AddWithValue(LocalConst.Book.Parameter.Id, id);
-                command.Parameters.AddWithValue(LocalConst.Book.Parameter.Year, year);
-                command.Parameters.AddWithValue(LocalConst.Book.Parameter.Title, title);
-                command.Parameters.AddWithValue(LocalConst.Book.Parameter.Owner, owner);
-                command.Parameters.AddWithValue(LocalConst.Book.Parameter.Status, status);
-				command.Parameters.AddWithValue(LocalConst.Book.Parameter.PageCount, pageCount);
-                command.Parameters.AddWithValue(LocalConst.Book.Parameter.Bookshelf, bookshelf);
-                command.Parameters.AddWithValue(LocalConst.Book.Parameter.LiveLibUrl, liveLibUrl);
-                command.Parameters.AddWithValue(LocalConst.Book.Parameter.LibRusEcUrl, libRusEcUrl);
-                command.Parameters.AddWithValue(LocalConst.Book.Parameter.FlibustaUrl, flibustaUrl);
-                command.Parameters.AddWithValue(LocalConst.Book.Parameter.IsSynchronized, isSynchronized);
-                command.Parameters.AddWithValue(LocalConst.Book.Parameter.AdditionalInfo, additionalInfo);
-                command.Parameters.AddWithValue(LocalConst.Book.Parameter.MustInformAboutWarnings, mustInformAboutWarnings);
+	            var command = databaseCommand.GetSqlCommand(sqlConnection);
 
-                sqlConnection.Open();
+	            databaseCommand.AddInputParameter(LocalConst.Book.Parameter.Id, SqlDbType.UniqueIdentifier, id);
+	            databaseCommand.AddInputParameter(LocalConst.Book.Parameter.Year, SqlDbType.Int, year);
+	            databaseCommand.AddInputParameter(LocalConst.Book.Parameter.Title, SqlDbType.NVarChar, title);
+	            databaseCommand.AddInputParameter(LocalConst.Book.Parameter.Owner, SqlDbType.NVarChar, owner);
+	            databaseCommand.AddInputParameter(LocalConst.Book.Parameter.Status, SqlDbType.Int, status);
+	            databaseCommand.AddInputParameter(LocalConst.Book.Parameter.PageCount, SqlDbType.Int, pageCount);
+	            databaseCommand.AddInputParameter(LocalConst.Book.Parameter.Bookshelf, SqlDbType.NVarChar, bookshelf);
+	            databaseCommand.AddInputParameter(LocalConst.Book.Parameter.LiveLibUrl, SqlDbType.NVarChar, liveLibUrl);
+	            databaseCommand.AddInputParameter(LocalConst.Book.Parameter.LibRusEcUrl, SqlDbType.NVarChar, libRusEcUrl);
+	            databaseCommand.AddInputParameter(LocalConst.Book.Parameter.FlibustaUrl, SqlDbType.NVarChar, flibustaUrl);
+	            databaseCommand.AddInputParameter(LocalConst.Book.Parameter.IsSynchronized, SqlDbType.Bit, isSynchronized);
+	            databaseCommand.AddInputParameter(LocalConst.Book.Parameter.AdditionalInfo, SqlDbType.NVarChar, additionalInfo);
+	            databaseCommand.AddInputParameter(LocalConst.Book.Parameter.MustInformAboutWarnings,SqlDbType.Bit,  mustInformAboutWarnings);
+
+				sqlConnection.Open();
                 command.ExecuteNonQuery();
                 sqlConnection.Close();
             }
@@ -218,7 +229,7 @@ namespace Snowinmars.Dao
 
         private void AddBook(Book book, SqlConnection sqlConnection)
         {
-            var command = new SqlCommand(LocalConst.Book.InsertCommand, sqlConnection);
+			DatabaseCommand databaseCommand = DatabaseCommand.StoredProcedure("Book_Insert");
 
             var id = LocalCommon.ConvertToDbValue(book.Id);
             var year = LocalCommon.ConvertToDbValue(book.Year);
@@ -234,19 +245,21 @@ namespace Snowinmars.Dao
             var isSynchronized = LocalCommon.ConvertToDbValue(book.IsSynchronized);
             var mustInformAboutWarnings = LocalCommon.ConvertToDbValue(book.MustInformAboutWarnings);
 
-            command.Parameters.AddWithValue(LocalConst.Book.Parameter.Id, id);
-            command.Parameters.AddWithValue(LocalConst.Book.Parameter.Year, year);
-            command.Parameters.AddWithValue(LocalConst.Book.Parameter.Title, title);
-            command.Parameters.AddWithValue(LocalConst.Book.Parameter.Owner, owner);
-            command.Parameters.AddWithValue(LocalConst.Book.Parameter.Status, status);
-            command.Parameters.AddWithValue(LocalConst.Book.Parameter.PageCount, pageCount);
-            command.Parameters.AddWithValue(LocalConst.Book.Parameter.Bookshelf, bookshelf);
-            command.Parameters.AddWithValue(LocalConst.Book.Parameter.LiveLibUrl, liveLibUrl);
-            command.Parameters.AddWithValue(LocalConst.Book.Parameter.LibRusEcUrl, libRusEcUrl);
-            command.Parameters.AddWithValue(LocalConst.Book.Parameter.FlibustaUrl, flibustaUrl);
-            command.Parameters.AddWithValue(LocalConst.Book.Parameter.AdditionalInfo, additionalInfo);
-            command.Parameters.AddWithValue(LocalConst.Book.Parameter.IsSynchronized, isSynchronized);
-            command.Parameters.AddWithValue(LocalConst.Book.Parameter.MustInformAboutWarnings, mustInformAboutWarnings);
+	        databaseCommand.AddInputParameter(LocalConst.Book.Parameter.Id, SqlDbType.UniqueIdentifier,  id);
+	        databaseCommand.AddInputParameter(LocalConst.Book.Parameter.Year, SqlDbType.Int,  year);
+	        databaseCommand.AddInputParameter(LocalConst.Book.Parameter.Title, SqlDbType.NVarChar, title);
+	        databaseCommand.AddInputParameter(LocalConst.Book.Parameter.Owner, SqlDbType.NVarChar, owner);
+	        databaseCommand.AddInputParameter(LocalConst.Book.Parameter.Status, SqlDbType.Int,  status);
+	        databaseCommand.AddInputParameter(LocalConst.Book.Parameter.PageCount, SqlDbType.Int, pageCount);
+	        databaseCommand.AddInputParameter(LocalConst.Book.Parameter.Bookshelf,SqlDbType.NVarChar,  bookshelf);
+	        databaseCommand.AddInputParameter(LocalConst.Book.Parameter.LiveLibUrl,SqlDbType.NVarChar, liveLibUrl);
+	        databaseCommand.AddInputParameter(LocalConst.Book.Parameter.LibRusEcUrl, SqlDbType.NVarChar, libRusEcUrl);
+	        databaseCommand.AddInputParameter(LocalConst.Book.Parameter.FlibustaUrl, SqlDbType.NVarChar, flibustaUrl);
+	        databaseCommand.AddInputParameter(LocalConst.Book.Parameter.AdditionalInfo, SqlDbType.NVarChar, additionalInfo);
+	        databaseCommand.AddInputParameter(LocalConst.Book.Parameter.IsSynchronized,SqlDbType.Bit,  isSynchronized);
+	        databaseCommand.AddInputParameter(LocalConst.Book.Parameter.MustInformAboutWarnings,SqlDbType.Bit,  mustInformAboutWarnings);
+
+	        var command = databaseCommand.GetSqlCommand(sqlConnection);
 
             sqlConnection.Open();
             command.ExecuteNonQuery();
@@ -255,19 +268,16 @@ namespace Snowinmars.Dao
 
         private void AddBookAuthorConnections(Guid bookId, IEnumerable<Author> authorIds, SqlConnection sqlConnection)
         {
-            var command = new SqlCommand(LocalConst.BookAuthor.InsertCommand, sqlConnection);
-
-            command.Parameters.AddWithValue(LocalConst.BookAuthor.Column.BookId, LocalCommon.ConvertToDbValue(bookId));
-
-            // Here I reusing SqlParameter to improve everything :3 Idk, is it true. Read about it? Todo.
-            var authorIdParameter = new SqlParameter(LocalConst.BookAuthor.Parameter.AuthorId, SqlDbType.UniqueIdentifier);
-            command.Parameters.Add(authorIdParameter);
-
             sqlConnection.Open();
 
             foreach (var authorId in authorIds)
             {
-                command.Parameters[1].Value = authorId;
+				DatabaseCommand databaseCommand = DatabaseCommand.StoredProcedure("BookAuthorConnection_Insert");
+
+				databaseCommand.AddInputParameter(LocalConst.BookAuthor.Column.BookId, SqlDbType.UniqueIdentifier, LocalCommon.ConvertToDbValue(bookId));
+				databaseCommand.AddInputParameter(LocalConst.BookAuthor.Column.AuthorId, SqlDbType.UniqueIdentifier, LocalCommon.ConvertToDbValue(authorId));
+
+				var command = databaseCommand.GetSqlCommand(sqlConnection);
 
                 command.ExecuteNonQuery();
             }
@@ -277,21 +287,18 @@ namespace Snowinmars.Dao
 
         private void DeleteBookAuthorConnections(Guid bookId, IEnumerable<Author> authorIds, SqlConnection sqlConnection)
         {
-            var command = new SqlCommand(LocalConst.BookAuthor.DeleteBookAuthorCommand, sqlConnection);
-
-            command.Parameters.AddWithValue(LocalConst.BookAuthor.Column.BookId, LocalCommon.ConvertToDbValue(bookId));
-
-            // Here I reusing SqlParameter to improve everything :3 Idk, is it true. Read about it? Todo.
-            var authorIdParameter = new SqlParameter(LocalConst.BookAuthor.Parameter.AuthorId, SqlDbType.UniqueIdentifier);
-            command.Parameters.Add(authorIdParameter);
-
             sqlConnection.Open();
 
             foreach (var authorId in authorIds)
             {
-                command.Parameters[1].Value = authorId;
+				DatabaseCommand databaseCommand = DatabaseCommand.StoredProcedure("BookAuthorConnection_Delete");
 
-                command.ExecuteNonQuery();
+	            databaseCommand.AddInputParameter(LocalConst.BookAuthor.Column.BookId, SqlDbType.UniqueIdentifier, LocalCommon.ConvertToDbValue(bookId));
+	            databaseCommand.AddInputParameter(LocalConst.BookAuthor.Column.AuthorId, SqlDbType.UniqueIdentifier, LocalCommon.ConvertToDbValue(authorId));
+
+				var command = databaseCommand.GetSqlCommand(sqlConnection);
+
+				command.ExecuteNonQuery();
             }
 
             sqlConnection.Close();
@@ -301,11 +308,15 @@ namespace Snowinmars.Dao
         {
             using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
             {
-                var command = new SqlCommand(LocalConst.Book.SelectAllCommand, sqlConnection);
+	            var databaseCommand = DatabaseCommand.StoredProcedure("Book_GetAll");
+
+                var command = databaseCommand.GetSqlCommand(sqlConnection);
 
                 sqlConnection.Open();
+
                 var reader = command.ExecuteReader();
                 var books = LocalCommon.MapBooks(reader);
+
                 sqlConnection.Close();
 
                 return books;
@@ -327,7 +338,7 @@ namespace Snowinmars.Dao
 
             while (reader.Read())
             {
-                Guid g = (Guid)reader[LocalConst.BookAuthor.Column.AuthorId];
+                Guid g = LocalCommon.ConvertFromDbValue<Guid>(reader[LocalConst.BookAuthor.Column.AuthorId]);
 
                 authors.Add(this.authorDao.Get(g));
             }
