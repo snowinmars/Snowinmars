@@ -22,7 +22,6 @@ namespace Snowinmars.Ui.Models
             LibRusEcUrl = "",
             AdditionalInfo = "",
             IsSynchronized = true,
-            MustInformAboutWarnings = true,
             AuthorModels = new List<AuthorModel>(),
             AuthorShortcuts = new List<string>(),
         };
@@ -55,9 +54,6 @@ namespace Snowinmars.Ui.Models
         [DataType(DataType.Url)]
         [Display(Name = "BookModel_LiveLibUrl", ResourceType = typeof(Global))]
         public string LiveLibUrl { get; set; }
-
-        [Display(Name = "Model_InformAboutWarnings", ResourceType = typeof(Global))]
-        public bool MustInformAboutWarnings { get; set; }
 
         [Required]
         [Display(Name = "BookModel_Owner", ResourceType = typeof(Global))]

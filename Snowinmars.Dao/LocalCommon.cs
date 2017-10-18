@@ -67,7 +67,6 @@ namespace Snowinmars.Dao
             string familyName = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Author.Column.FamilyName]);
             string fullMiddleName = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Author.Column.FullMiddleName]);
             bool isSynchronized = LocalCommon.ConvertFromDbValue<bool>(reader[LocalConst.Author.Column.IsSynchronized]);
-            bool mustInformAboutWarnings = LocalCommon.ConvertFromDbValue<bool>(reader[LocalConst.Book.Column.MustInformAboutWarnings]);
 
             var pseudonym = LocalCommon.MapPseudonym(reader);
 
@@ -79,7 +78,6 @@ namespace Snowinmars.Dao
                 FamilyName = familyName,
                 FullMiddleName = fullMiddleName,
                 IsSynchronized = isSynchronized,
-                MustInformAboutWarnings = mustInformAboutWarnings,
             };
 
             return (author: author, forBookId: bookId);
@@ -118,7 +116,6 @@ namespace Snowinmars.Dao
 		        string flibustaUrl = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.FlibustaUrl]);
 		        bool isSynchronized = LocalCommon.ConvertFromDbValue<bool>(reader[LocalConst.Book.Column.IsSynchronized]);
 		        string additionalInfo = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.AdditionalInfo]);
-		        bool mustInformAboutWarnings = LocalCommon.ConvertFromDbValue<bool>(reader[LocalConst.Book.Column.MustInformAboutWarnings]);
 
 		        var book = new Book(title, pageCount)
 		        {
@@ -132,7 +129,6 @@ namespace Snowinmars.Dao
 			        FlibustaUrl = flibustaUrl,
 			        AdditionalInfo = additionalInfo,
 			        IsSynchronized = isSynchronized,
-			        MustInformAboutWarnings = mustInformAboutWarnings,
 		        };
 
 		        return book;

@@ -42,7 +42,6 @@ namespace Snowinmars.Ui.Controllers
 		        LibRusEcUrl = book.LibRusEcUrl,
 		        LiveLibUrl = book.LiveLibUrl,
 		        Owner = book.Owner,
-		        MustInformAboutWarnings = book.MustInformAboutWarnings,
 		        IsSynchronized = book.IsSynchronized,
 		        Status = book.Status,
 	        };
@@ -62,7 +61,6 @@ namespace Snowinmars.Ui.Controllers
                 FlibustaUrl = ControllerHelper.Trim(bookModel.FlibustaUrl),
                 LibRusEcUrl = ControllerHelper.Trim(bookModel.LibRusEcUrl),
                 LiveLibUrl = ControllerHelper.Trim(bookModel.LiveLibUrl),
-                MustInformAboutWarnings = bookModel.MustInformAboutWarnings,
                 IsSynchronized = bookModel.IsSynchronized,
 				Status = bookModel.Status,
             };
@@ -84,7 +82,6 @@ namespace Snowinmars.Ui.Controllers
                 FamilyName = author.FamilyName,
                 Shortcut = author.Shortcut,
                 IsSynchronized = author.IsSynchronized,
-                MustInformAboutWarnings = author.MustInformAboutWarnings,
                 PseudonymGivenName = author.Pseudonym?.GivenName ?? "",
                 PseudonymFullMiddleName = author.Pseudonym?.FullMiddleName ?? "",
                 PseudonymFamilyName = author.Pseudonym?.FamilyName ?? "",
@@ -99,7 +96,6 @@ namespace Snowinmars.Ui.Controllers
                 FullMiddleName = ControllerHelper.Trim(authorModel.FullMiddleName),
                 FamilyName = ControllerHelper.Trim(authorModel.FamilyName),
                 IsSynchronized = authorModel.IsSynchronized,
-                MustInformAboutWarnings = authorModel.MustInformAboutWarnings,
                 Pseudonym = ControllerHelper.MapPseudonym(authorModel),
             };
 

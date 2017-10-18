@@ -55,8 +55,6 @@ namespace Snowinmars.Bll
         {
             var book = this.bookDao.Get(bookId);
 
-            book.MustInformAboutWarnings = true;
-
             this.bookDao.Update(book);
         }
 
@@ -66,7 +64,6 @@ namespace Snowinmars.Bll
 
             foreach (var book in books)
             {
-                book.MustInformAboutWarnings = true;
                 this.bookDao.Update(book);
             }
         }
@@ -75,7 +72,6 @@ namespace Snowinmars.Bll
         {
             var book = this.bookDao.Get(bookId);
 
-            book.MustInformAboutWarnings = false;
 
             this.bookDao.Update(book);
         }
@@ -86,7 +82,6 @@ namespace Snowinmars.Bll
 
             foreach (var book in books)
             {
-                book.MustInformAboutWarnings = false;
                 this.bookDao.Update(book);
             }
         }

@@ -19,7 +19,6 @@ ALTER PROCEDURE [dbo].[Author_Update] (
 	,@pseudonymGivenName NVARCHAR(100)
 	,@pseudonymFamilyName NVARCHAR(100)
 	,@pseudonymFullMiddleName NVARCHAR(100)
-	,@mustInformAboutWarnings BIT
 	)
 AS
 BEGIN
@@ -33,7 +32,6 @@ BEGIN
 		,PseudonymGivenName = @pseudonymGivenName
 		,PseudonymFamilyName = @pseudonymFamilyName
 		,PseudonymFullMiddleName = @pseudonymFullMiddleName
-		,MustInformAboutWarnings = @mustInformAboutWarnings
 	WHERE (AuthorId = @authorId)
 
 END

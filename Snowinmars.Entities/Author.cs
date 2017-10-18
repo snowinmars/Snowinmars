@@ -33,8 +33,6 @@ namespace Snowinmars.Entities
                 FullMiddleName = "",
                 FamilyName = "",
             };
-
-            this.MustInformAboutWarnings = true;
         }
 
         private Author() : this("")
@@ -45,7 +43,6 @@ namespace Snowinmars.Entities
         public string FamilyName { get; set; }
         public string FullMiddleName { get; set; }
         public string GivenName { get; set; }
-        public bool MustInformAboutWarnings { get; set; }
         public Pseudonym Pseudonym { get; set; }
         public string Shortcut { get; set; }
     }

@@ -10,7 +10,6 @@ namespace Snowinmars.Entities
             this.Title = title;
             this.PageCount = pageCount;
 
-            this.MustInformAboutWarnings = true;
 			this.Status = BookStatus.Wished;
 
             this.Authors = new List<Author>();
@@ -27,7 +26,6 @@ namespace Snowinmars.Entities
         public string FlibustaUrl { get; set; }
         public string LibRusEcUrl { get; set; }
         public string LiveLibUrl { get; set; }
-        public bool MustInformAboutWarnings { get; set; }
         public string Owner { get; set; }
         public int PageCount { get; set; }
         public string Title { get; set; }

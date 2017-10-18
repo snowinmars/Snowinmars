@@ -19,7 +19,6 @@ ALTER PROCEDURE [dbo].[Author_Insert] (
 	,@pseudonymGivenName nvarchar(100)
 	,@pseudonymFamilyName nvarchar(100)
 	,@pseudonymFullMiddleName nvarchar(100)
-	,@mustInformAboutWarnings bit
 	)
 AS
 BEGIN
@@ -34,7 +33,6 @@ BEGIN
 		,PseudonymGivenName
 		,PseudonymFamilyName
 		,PseudonymFullMiddleName
-		,MustInformAboutWarnings
 		)
 	VALUES (
 		@authorId
@@ -46,7 +44,6 @@ BEGIN
 		,@pseudonymGivenName
 		,@pseudonymFamilyName
 		,@pseudonymFullMiddleName
-		,@mustInformAboutWarnings
 		)
 
 END

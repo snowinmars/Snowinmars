@@ -203,7 +203,6 @@ namespace Snowinmars.Dao
                 var flibustaUrl = LocalCommon.ConvertToDbValue(item.FlibustaUrl);
                 var additionalInfo = LocalCommon.ConvertToDbValue(item.AdditionalInfo);
                 var isSynchronized = LocalCommon.ConvertToDbValue(item.IsSynchronized);
-                var mustInformAboutWarnings = LocalCommon.ConvertToDbValue(item.MustInformAboutWarnings);
 
 	            var command = databaseCommand.GetSqlCommand(sqlConnection);
 
@@ -219,7 +218,6 @@ namespace Snowinmars.Dao
 	            databaseCommand.AddInputParameter(LocalConst.Book.Parameter.FlibustaUrl, SqlDbType.NVarChar, flibustaUrl);
 	            databaseCommand.AddInputParameter(LocalConst.Book.Parameter.IsSynchronized, SqlDbType.Bit, isSynchronized);
 	            databaseCommand.AddInputParameter(LocalConst.Book.Parameter.AdditionalInfo, SqlDbType.NVarChar, additionalInfo);
-	            databaseCommand.AddInputParameter(LocalConst.Book.Parameter.MustInformAboutWarnings,SqlDbType.Bit,  mustInformAboutWarnings);
 
 				sqlConnection.Open();
                 command.ExecuteNonQuery();
@@ -243,7 +241,6 @@ namespace Snowinmars.Dao
             var flibustaUrl = LocalCommon.ConvertToDbValue(book.FlibustaUrl);
             var additionalInfo = LocalCommon.ConvertToDbValue(book.AdditionalInfo);
             var isSynchronized = LocalCommon.ConvertToDbValue(book.IsSynchronized);
-            var mustInformAboutWarnings = LocalCommon.ConvertToDbValue(book.MustInformAboutWarnings);
 
 	        databaseCommand.AddInputParameter(LocalConst.Book.Parameter.Id, SqlDbType.UniqueIdentifier,  id);
 	        databaseCommand.AddInputParameter(LocalConst.Book.Parameter.Year, SqlDbType.Int,  year);
@@ -257,7 +254,6 @@ namespace Snowinmars.Dao
 	        databaseCommand.AddInputParameter(LocalConst.Book.Parameter.FlibustaUrl, SqlDbType.NVarChar, flibustaUrl);
 	        databaseCommand.AddInputParameter(LocalConst.Book.Parameter.AdditionalInfo, SqlDbType.NVarChar, additionalInfo);
 	        databaseCommand.AddInputParameter(LocalConst.Book.Parameter.IsSynchronized,SqlDbType.Bit,  isSynchronized);
-	        databaseCommand.AddInputParameter(LocalConst.Book.Parameter.MustInformAboutWarnings,SqlDbType.Bit,  mustInformAboutWarnings);
 
 	        var command = databaseCommand.GetSqlCommand(sqlConnection);
 

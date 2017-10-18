@@ -18,7 +18,6 @@ namespace Snowinmars.Ui.Models
             PseudonymFamilyName = "",
             PseudonymFullMiddleName = "",
             IsSynchronized = true,
-            MustInformAboutWarnings = true,
         };
 
         public static AuthorModel Emtpy => AuthorModel.EmptyAuthor;
@@ -32,10 +31,6 @@ namespace Snowinmars.Ui.Models
 
         [Display(Name = "AuthorModel_GivenName", ResourceType = typeof(Global))]
         public string GivenName { get; set; }
-
-        [DisplayName("Have I inform you about warnings?")]
-        [Display(Name = "Model_InformAboutWarnings", ResourceType = typeof(Global))]
-        public bool MustInformAboutWarnings { get; set; }
 
         [DisplayName("Pseudonym family name")]
         [Display(Name = "AuthorModel_PseudonymFamilyName", ResourceType = typeof(Global))]

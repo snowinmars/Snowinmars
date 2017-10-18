@@ -34,7 +34,6 @@ namespace Snowinmars.Dao
 				var pseudonymGivenName = LocalCommon.ConvertToDbValue(item.Pseudonym.GivenName);
 				var pseudonymFamilyName = LocalCommon.ConvertToDbValue(item.Pseudonym.FamilyName);
 				var pseudonymFullMiddleName = LocalCommon.ConvertToDbValue(item.Pseudonym.FullMiddleName);
-				var mustInformAboutWarnings = LocalCommon.ConvertToDbValue(item.MustInformAboutWarnings);
 
 				databaseCommand.AddInputParameter(LocalConst.Author.Parameter.Id, SqlDbType.UniqueIdentifier,  id);
 				databaseCommand.AddInputParameter(LocalConst.Author.Parameter.Shortcut, SqlDbType.NVarChar, shortcut);
@@ -45,7 +44,6 @@ namespace Snowinmars.Dao
 				databaseCommand.AddInputParameter(LocalConst.Author.Parameter.PseudonymGivenName, SqlDbType.NVarChar, pseudonymGivenName);
 				databaseCommand.AddInputParameter(LocalConst.Author.Parameter.PseudonymFamilyName, SqlDbType.NVarChar, pseudonymFamilyName);
 				databaseCommand.AddInputParameter(LocalConst.Author.Parameter.PseudonymFullMiddleName, SqlDbType.NVarChar, pseudonymFullMiddleName);
-				databaseCommand.AddInputParameter(LocalConst.Author.Parameter.MustInformAboutWarnings, SqlDbType.Bit, mustInformAboutWarnings);
 
 				var command = databaseCommand.GetSqlCommand(sqlConnection);
 
@@ -130,7 +128,6 @@ namespace Snowinmars.Dao
 				var pseudonymGivenName = LocalCommon.ConvertToDbValue(item.Pseudonym?.GivenName);
 				var pseudonymFamilyName = LocalCommon.ConvertToDbValue(item.Pseudonym?.FamilyName);
 				var pseudonymFullMiddleName = LocalCommon.ConvertToDbValue(item.Pseudonym?.FullMiddleName);
-				var mustInformAboutWarnings = LocalCommon.ConvertToDbValue(item.MustInformAboutWarnings);
 
 				databaseCommand.AddInputParameter(LocalConst.Author.Parameter.Id, SqlDbType.UniqueIdentifier, id);
 				databaseCommand.AddInputParameter(LocalConst.Author.Parameter.Shortcut, SqlDbType.NVarChar, shortcut);
@@ -141,7 +138,6 @@ namespace Snowinmars.Dao
 				databaseCommand.AddInputParameter(LocalConst.Author.Parameter.PseudonymGivenName, SqlDbType.NVarChar, pseudonymGivenName);
 				databaseCommand.AddInputParameter(LocalConst.Author.Parameter.PseudonymFamilyName, SqlDbType.NVarChar, pseudonymFamilyName);
 				databaseCommand.AddInputParameter(LocalConst.Author.Parameter.PseudonymFullMiddleName, SqlDbType.NVarChar, pseudonymFullMiddleName);
-				databaseCommand.AddInputParameter(LocalConst.Author.Parameter.MustInformAboutWarnings, SqlDbType.Bit, mustInformAboutWarnings);
 
 				var command = databaseCommand.GetSqlCommand(sqlConnection);
 

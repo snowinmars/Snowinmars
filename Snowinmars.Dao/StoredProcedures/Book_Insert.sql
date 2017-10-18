@@ -22,7 +22,6 @@ ALTER PROCEDURE [dbo].[Book_Insert]
 	,@flibustaUrl varchar(200)
 	,@isSynchronized bit
 	,@additionalInfo nvarchar(1000)
-	,@mustInformAboutWarnings bit
 )
 AS
 BEGIN
@@ -40,7 +39,6 @@ INSERT INTO [Books] (
 	,[FlibustaUrl]
 	,[IsSynchronized]
 	,[AdditionalInfo]
-	,[MustInformAboutWarnings]
 	)
 VALUES (
 	@bookId
@@ -55,7 +53,6 @@ VALUES (
 	,@flibustaUrl
 	,@isSynchronized
 	,@additionalInfo
-	,@mustInformAboutWarnings
 	)
 
 END

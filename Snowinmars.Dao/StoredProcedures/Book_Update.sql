@@ -23,7 +23,6 @@ ALTER PROCEDURE [dbo].[Book_Update]
 	,@flibustaUrl varchar(200)
 	,@isSynchronized bit
 	,@additionalInfo nvarchar(1000)
-	,@mustInformAboutWarnings bit
 )
 AS
 BEGIN
@@ -41,7 +40,6 @@ BEGIN
 		,[FlibustaUrl] = @flibustaUrl
 		,[IsSynchronized] = @isSynchronized
 		,[AdditionalInfo] = @additionalInfo
-		,[MustInformAboutWarnings] = @mustInformAboutWarnings
 	WHERE (BookId = @bookId)
 
 
