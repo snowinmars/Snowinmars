@@ -28,7 +28,7 @@ namespace Snowinmars.Dao
             using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
             {
                 this.AddBook(item, sqlConnection);
-                this.AddBookAuthorConnections(item.Id, item.AuthorIds, sqlConnection);
+                this.AddBookAuthorConnections(item.Id, item.Authors, sqlConnection);
             }
         }
 
@@ -36,11 +36,14 @@ namespace Snowinmars.Dao
         {
             using (var sqlConnection = new SqlConnection(Constant.ConnectionString))
             {
-                var command = new SqlCommand(LocalConst.Book.SelectCommand, sqlConnection);
+				DatabaseCommand databaseCommand = DatabaseCommand.StoredProcedure("Book_Get");
 
-                command.Parameters.AddWithValue(LocalConst.Book.Parameter.Id, LocalCommon.ConvertToDbValue(id));
+	            databaseCommand.AddInputParameter("@id", SqlDbType.UniqueIdentifier, id);
+
+	            var command = databaseCommand.GetSqlCommand(sqlConnection);
 
                 sqlConnection.Open();
+
                 var reader = command.ExecuteReader();
 
                 if (!reader.Read())
@@ -49,26 +52,6 @@ namespace Snowinmars.Dao
                 }
 
                 Book book = LocalCommon.MapBook(reader);
-
-                sqlConnection.Close();
-
-                //////////////////////
-                //// I suppose that reusing SqlCommand will improve perfomance. I read few about it. I have to know it better. Todo?
-
-                command.CommandText = LocalConst.BookAuthor.SelectByBookCommand;
-
-                command.Parameters.Clear();
-                command.Parameters.AddWithValue(LocalConst.BookAuthor.Column.BookId, LocalCommon.ConvertToDbValue(book.Id));
-
-                sqlConnection.Open();
-                reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    Guid authorId = (Guid)reader[LocalConst.BookAuthor.Column.AuthorId];
-
-                    book.AuthorIds.Add(authorId);
-                }
 
                 sqlConnection.Close();
 
@@ -196,8 +179,6 @@ namespace Snowinmars.Dao
             {
                 this.HandleAuthorUpdate(item, sqlConnection);
 
-                var authorsShortcuts = LocalCommon.ConvertToDbValue(string.Join(",", item.AuthorShortcuts));
-
                 // updating usual fields
                 var command = new SqlCommand(LocalConst.Book.UpdateCommand, sqlConnection);
 
@@ -227,7 +208,6 @@ namespace Snowinmars.Dao
                 command.Parameters.AddWithValue(LocalConst.Book.Parameter.FlibustaUrl, flibustaUrl);
                 command.Parameters.AddWithValue(LocalConst.Book.Parameter.IsSynchronized, isSynchronized);
                 command.Parameters.AddWithValue(LocalConst.Book.Parameter.AdditionalInfo, additionalInfo);
-                command.Parameters.AddWithValue(LocalConst.Book.Parameter.AuthorsShortcuts, authorsShortcuts);
                 command.Parameters.AddWithValue(LocalConst.Book.Parameter.MustInformAboutWarnings, mustInformAboutWarnings);
 
                 sqlConnection.Open();
@@ -252,7 +232,6 @@ namespace Snowinmars.Dao
             var flibustaUrl = LocalCommon.ConvertToDbValue(book.FlibustaUrl);
             var additionalInfo = LocalCommon.ConvertToDbValue(book.AdditionalInfo);
             var isSynchronized = LocalCommon.ConvertToDbValue(book.IsSynchronized);
-            var authorsShortcuts = LocalCommon.ConvertToDbValue(string.Join(",", book.AuthorShortcuts));
             var mustInformAboutWarnings = LocalCommon.ConvertToDbValue(book.MustInformAboutWarnings);
 
             command.Parameters.AddWithValue(LocalConst.Book.Parameter.Id, id);
@@ -267,7 +246,6 @@ namespace Snowinmars.Dao
             command.Parameters.AddWithValue(LocalConst.Book.Parameter.FlibustaUrl, flibustaUrl);
             command.Parameters.AddWithValue(LocalConst.Book.Parameter.AdditionalInfo, additionalInfo);
             command.Parameters.AddWithValue(LocalConst.Book.Parameter.IsSynchronized, isSynchronized);
-            command.Parameters.AddWithValue(LocalConst.Book.Parameter.AuthorsShortcuts, authorsShortcuts);
             command.Parameters.AddWithValue(LocalConst.Book.Parameter.MustInformAboutWarnings, mustInformAboutWarnings);
 
             sqlConnection.Open();
@@ -275,7 +253,7 @@ namespace Snowinmars.Dao
             sqlConnection.Close();
         }
 
-        private void AddBookAuthorConnections(Guid bookId, IEnumerable<Guid> authorIds, SqlConnection sqlConnection)
+        private void AddBookAuthorConnections(Guid bookId, IEnumerable<Author> authorIds, SqlConnection sqlConnection)
         {
             var command = new SqlCommand(LocalConst.BookAuthor.InsertCommand, sqlConnection);
 
@@ -297,7 +275,7 @@ namespace Snowinmars.Dao
             sqlConnection.Close();
         }
 
-        private void DeleteBookAuthorConnections(Guid bookId, IEnumerable<Guid> authorIds, SqlConnection sqlConnection)
+        private void DeleteBookAuthorConnections(Guid bookId, IEnumerable<Author> authorIds, SqlConnection sqlConnection)
         {
             var command = new SqlCommand(LocalConst.BookAuthor.DeleteBookAuthorCommand, sqlConnection);
 
@@ -336,8 +314,8 @@ namespace Snowinmars.Dao
 
         private void HandleAuthorUpdate(Book item, SqlConnection sqlConnection)
         {
-            List<Guid> oldAuthors = this.GetAuthorsForBook(item.Id).Select(a => a.Id).ToList();
-            List<Guid> newAuthors = item.AuthorIds.ToList();
+            List<Author> oldAuthors = this.GetAuthorsForBook(item.Id).ToList();
+            List<Author> newAuthors = item.Authors.ToList();
 
             this.DeleteBookAuthorConnections(item.Id, oldAuthors, sqlConnection);
             this.AddBookAuthorConnections(item.Id, newAuthors, sqlConnection);

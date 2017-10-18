@@ -13,8 +13,7 @@ namespace Snowinmars.Entities
             this.MustInformAboutWarnings = true;
 			this.Status = BookStatus.Wished;
 
-            this.AuthorIds = new List<Guid>();
-            this.AuthorShortcuts = new List<string>();
+            this.Authors = new List<Author>();
         }
 
         private Book() : this("", 0)
@@ -23,8 +22,7 @@ namespace Snowinmars.Entities
 
 		public BookStatus Status { get; set; }
         public string AdditionalInfo { get; set; }
-        public ICollection<Guid> AuthorIds { get; }
-        public IList<string> AuthorShortcuts { get; }
+        public ICollection<Author> Authors { get; }
         public string Bookshelf { get; set; }
         public string FlibustaUrl { get; set; }
         public string LibRusEcUrl { get; set; }

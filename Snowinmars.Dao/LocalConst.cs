@@ -117,7 +117,6 @@
                             "," + Column.FlibustaUrl +
                             "," + Column.IsSynchronized +
                             "," + Column.AdditionalInfo +
-                            "," + Column.AuthorsShortcuts +
                             "," + Column.MustInformAboutWarnings +
                          @")
 					values
@@ -133,7 +132,6 @@
                             "," + Parameter.FlibustaUrl +
                             "," + Parameter.IsSynchronized +
                             "," + Parameter.AdditionalInfo +
-                            "," + Parameter.AuthorsShortcuts +
                             "," + Parameter.MustInformAboutWarnings +
                             " ) ";
 
@@ -150,16 +148,13 @@
                             "," + Column.FlibustaUrl +
                             "," + Column.IsSynchronized +
                             "," + Column.AdditionalInfo +
-                            "," + Column.AuthorsShortcuts +
                             "," + Column.MustInformAboutWarnings +
                     " from " + Book.TableName;
 
             internal const string SelectBooksUnindexedByShortcutsCommand =
                     " select " + Column.Id +
                     " from " + Book.TableName +
-                    " where ( " + Column.AuthorsShortcuts + " is null or " +
-                                Column.AuthorsShortcuts + " = '' and " +
-                                Column.IsSynchronized + " = 0 ) ";
+                    " where ( "+ Column.IsSynchronized + " = 0 ) ";
 
             internal const string SelectCommand =
                                 Book.SelectAllCommand +
@@ -172,42 +167,22 @@
 
 			internal const string TableName = "[Books]";
 
-            internal const string UpdateCommand =
-                    " if (" + Parameter.AuthorsShortcuts + " = '__ignore'" + ") " +
-                    " begin " +
-                        " update " + Book.TableName +
-                        " set " + Column.Title + " = " + Parameter.Title +
-                                    "," + Column.Year + " = " + Parameter.Year +
-                                    "," + Column.Owner + " = " + Parameter.Owner +
-                                    "," + Column.Status + " = " + Parameter.Status +
-                                    "," + Column.PageCount + " = " + Parameter.PageCount +
-                                    "," + Column.Bookshelf + " = " + Parameter.Bookshelf +
-                                    "," + Column.LiveLibUrl + " = " + Parameter.LiveLibUrl +
-                                    "," + Column.LibRusEcUrl + " = " + Parameter.LibRusEcUrl +
-                                    "," + Column.FlibustaUrl + " = " + Parameter.FlibustaUrl +
-                                    "," + Column.IsSynchronized + " = " + Parameter.IsSynchronized +
-                                    "," + Column.AdditionalInfo + " = " + Parameter.AdditionalInfo +
-                                    "," + Column.MustInformAboutWarnings + " = " + Parameter.MustInformAboutWarnings +
-                        " where ( " + Column.Id + " = " + Parameter.Id + " ) " +
-                    " end " +
-                    " else " +
-                    " begin " +
-                        " update " + Book.TableName +
-                        " set " + Column.Title + " = " + Parameter.Title +
-                                    "," + Column.Year + " = " + Parameter.Year +
-                                    "," + Column.Owner + " = " + Parameter.Owner +
-                                    "," + Column.Status + " = " + Parameter.Status +
-                                    "," + Column.PageCount + " = " + Parameter.PageCount +
-                                    "," + Column.Bookshelf + " = " + Parameter.Bookshelf +
-                                    "," + Column.LiveLibUrl + " = " + Parameter.LiveLibUrl +
-                                    "," + Column.LibRusEcUrl + " = " + Parameter.LibRusEcUrl +
-                                    "," + Column.FlibustaUrl + " = " + Parameter.FlibustaUrl +
-                                    "," + Column.IsSynchronized + " = " + Parameter.IsSynchronized +
-                                    "," + Column.AdditionalInfo + " = " + Parameter.AdditionalInfo +
-                                    "," + Column.AuthorsShortcuts + " = " + Parameter.AuthorsShortcuts +
-                                    "," + Column.MustInformAboutWarnings + " = " + Parameter.MustInformAboutWarnings +
-                        " where ( " + Column.Id + " = " + Parameter.Id + " ) " +
-                    " end ";
+	        internal const string UpdateCommand =
+		        " update " + Book.TableName +
+					" set " + Column.Title + " = " + Parameter.Title +
+					"," + Column.Year + " = " + Parameter.Year +
+					"," + Column.Owner + " = " + Parameter.Owner +
+					"," + Column.Status + " = " + Parameter.Status +
+					"," + Column.PageCount + " = " + Parameter.PageCount +
+					"," + Column.Bookshelf + " = " + Parameter.Bookshelf +
+					"," + Column.LiveLibUrl + " = " + Parameter.LiveLibUrl +
+					"," + Column.LibRusEcUrl + " = " + Parameter.LibRusEcUrl +
+					"," + Column.FlibustaUrl + " = " + Parameter.FlibustaUrl +
+					"," + Column.IsSynchronized + " = " + Parameter.IsSynchronized +
+					"," + Column.AdditionalInfo + " = " + Parameter.AdditionalInfo +
+					"," + Column.MustInformAboutWarnings + " = " + Parameter.MustInformAboutWarnings +
+		        " where ( " + Column.Id + " = " + Parameter.Id + " ) ";
+                    
 
             internal class Column
             {
@@ -224,7 +199,6 @@
                 internal const string LibRusEcUrl = "LibRusEcUrl";
                 internal const string IsSynchronized = "IsSynchronized";
                 internal const string AdditionalInfo = "AdditionalInfo";
-                internal const string AuthorsShortcuts = "AuthorShortcuts";
                 internal const string MustInformAboutWarnings = "MustInformAboutWarnings";
             }
 
@@ -243,7 +217,6 @@
                 internal const string LibRusEcUrl = "@libRusEcUrl";
                 internal const string IsSynchronized = "@isSynchronized";
                 internal const string AdditionalInfo = "@additionalInfo";
-                internal const string AuthorsShortcuts = "@authorShortcuts";
                 internal const string MustInformAboutWarnings = "@mustInformAboutWarnings";
             }
         }

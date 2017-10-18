@@ -38,9 +38,8 @@ namespace Snowinmars.Dao
         {
             Validation.Check(book.Id);
 
-            foreach (var authorId in book.AuthorIds)
+            foreach (var author in book.Authors)
             {
-                var author = Validation.AuthorDao.Get(authorId);
                 Validation.Check(author, false); // TODO this is bug
             }
 

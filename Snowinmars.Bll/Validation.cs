@@ -27,8 +27,7 @@ namespace Snowinmars.Bll
             Validation.Check(book.Id);
 
             Validation.CheckAdditionalInfo(book.AdditionalInfo);
-            Validation.CheckAuthorIds(book.AuthorIds);
-            Validation.CheckAuthorShortcuts(book.AuthorShortcuts);
+            Validation.CheckAuthorIds(book.Authors);
             Validation.CheckBookshelf(book.Bookshelf);
             Validation.CheckUrl(book.FlibustaUrl);
             Validation.CheckUrl(book.LibRusEcUrl);

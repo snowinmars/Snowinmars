@@ -1,11 +1,8 @@
-﻿using NUnit.Framework;
-using System.Linq;
-
-namespace Snowinmars.Bll.Tests
+﻿namespace Snowinmars.Bll.Tests
 {
 	public class PathOfExile
 	{
-		private PathOfExileLogic pathOfExileLogic;
+		//private PathOfExileLogic pathOfExileLogic;
 
 		//[Theory]
 		//[TestCase(new[] { 15, 15, 10, 5, 5 }, 40, 2)]
@@ -34,10 +31,10 @@ namespace Snowinmars.Bll.Tests
 		//	}
 		//}
 
-		[SetUp]
-		public void Setup()
-		{
-			this.pathOfExileLogic = new PathOfExileLogic();
-		}
+		//[SetUp]
+		//public void Setup()
+		//{
+		//	this.pathOfExileLogic = new PathOfExileLogic();
+		//}
 	}
 }

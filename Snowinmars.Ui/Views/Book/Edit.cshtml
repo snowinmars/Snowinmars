@@ -157,7 +157,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.AuthorModelIds, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.AuthorModels, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-6">
                 @Html.DropDownList("authorModelIds", new SelectListItem[0], new Dictionary<string, object> { { "class", "authorModelIds" }, { "multiple", "multiple" }, })
             </div>

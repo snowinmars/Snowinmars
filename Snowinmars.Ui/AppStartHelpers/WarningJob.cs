@@ -70,7 +70,7 @@ namespace Snowinmars.Ui.AppStartHelpers
                 });
             }
 
-            if (!book.AuthorIds.Any())
+            if (!book.Authors.Any())
             {
                 Queue.Add(new Warning(book.Id)
                 {

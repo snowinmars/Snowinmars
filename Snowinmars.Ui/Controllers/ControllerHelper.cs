@@ -30,24 +30,26 @@ namespace Snowinmars.Ui.Controllers
 
         internal static BookModel Map(Book book)
         {
-            return new BookModel
-            {
-                Id = book.Id,
-                PageCount = book.PageCount,
-                Title = book.Title,
-                Year = book.Year,
-                AuthorModelIds = book.AuthorIds.ToList(),
-                AuthorShortcuts = book.AuthorShortcuts.ToList(),
-                AdditionalInfo = book.AdditionalInfo,
-                Bookshelf = book.Bookshelf,
-                FlibustaUrl = book.FlibustaUrl,
-                LibRusEcUrl = book.LibRusEcUrl,
-                LiveLibUrl = book.LiveLibUrl,
-                Owner = book.Owner,
-                MustInformAboutWarnings = book.MustInformAboutWarnings,
-                IsSynchronized = book.IsSynchronized,
-				Status = book.Status,
-            };
+	        var bookModel = new BookModel
+	        {
+		        Id = book.Id,
+		        PageCount = book.PageCount,
+		        Title = book.Title,
+		        Year = book.Year,
+		        AdditionalInfo = book.AdditionalInfo,
+		        Bookshelf = book.Bookshelf,
+		        FlibustaUrl = book.FlibustaUrl,
+		        LibRusEcUrl = book.LibRusEcUrl,
+		        LiveLibUrl = book.LiveLibUrl,
+		        Owner = book.Owner,
+		        MustInformAboutWarnings = book.MustInformAboutWarnings,
+		        IsSynchronized = book.IsSynchronized,
+		        Status = book.Status,
+	        };
+
+	        bookModel.AuthorModels = book.Authors.Select(ControllerHelper.Map).ToList();
+
+			return bookModel;
         }
 
         internal static Book Map(BookModel bookModel)
@@ -67,8 +69,7 @@ namespace Snowinmars.Ui.Controllers
 
             ControllerHelper.SetOwner(bookModel.Owner, book);
             ControllerHelper.SetId(bookModel, book);
-            ControllerHelper.SetAuthorIds(bookModel.AuthorModelIds, book.AuthorIds);
-            ControllerHelper.SetAuthorShortcuts(bookModel.AuthorShortcuts, book.AuthorShortcuts);
+            ControllerHelper.SetAuthorIds(bookModel.AuthorModels, book.Authors);
 
             return book;
         }
@@ -161,11 +162,14 @@ namespace Snowinmars.Ui.Controllers
 
         internal static string Trim(string str) => str?.Trim() ?? "";
 
-        private static void SetAuthorIds(IEnumerable<Guid> authorModelIds, ICollection<Guid> container)
+        private static void SetAuthorIds(IEnumerable<AuthorModel> authorModels, ICollection<Author> container)
         {
-            if (authorModelIds != null && authorModelIds.Any())
+            if (authorModels != null)
             {
-                container.AddRange(authorModelIds);
+	            foreach (var authorModel in authorModels)
+	            {
+					container.Add(ControllerHelper.Map(authorModel));
+	            }
             }
         }
 

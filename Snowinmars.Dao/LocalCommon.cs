@@ -3,6 +3,7 @@ using Snowinmars.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace Snowinmars.Dao
 {
@@ -96,7 +97,7 @@ namespace Snowinmars.Dao
             return authors;
         }
 
-        internal static Book MapBook(IDataRecord reader)
+        internal static Book MapBook(IDataReader reader)
         {
             int year = LocalCommon.ConvertFromDbValue<int>(reader[LocalConst.Book.Column.Year]);
             Guid bookId = LocalCommon.ConvertFromDbValue<Guid>(reader[LocalConst.Book.Column.Id]);
@@ -110,7 +111,6 @@ namespace Snowinmars.Dao
             string flibustaUrl = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.FlibustaUrl]);
             bool isSynchronized = LocalCommon.ConvertFromDbValue<bool>(reader[LocalConst.Book.Column.IsSynchronized]);
             string additionalInfo = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.AdditionalInfo]);
-            string authorShortcuts = LocalCommon.ConvertFromDbValueToString(reader[LocalConst.Book.Column.AuthorsShortcuts]);
             bool mustInformAboutWarnings = LocalCommon.ConvertFromDbValue<bool>(reader[LocalConst.Book.Column.MustInformAboutWarnings]);
 
             var book = new Book(title, pageCount)
@@ -128,7 +128,11 @@ namespace Snowinmars.Dao
                 MustInformAboutWarnings = mustInformAboutWarnings,
             };
 
-            book.AuthorShortcuts.AddRange(authorShortcuts.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries));
+	        reader.NextResult();
+
+			IList<Author> authors = new List<Author>();
+
+			book.Authors.AddRange(authors);
 
             return book;
         }

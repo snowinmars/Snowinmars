@@ -37,8 +37,6 @@ namespace Snowinmars.Ui.AppStartHelpers
             var book = BookDao.Get(bookId);
             var authors = BookDao.GetAuthorsForBook(bookId);
 
-            book.AuthorShortcuts.Clear();
-            book.AuthorShortcuts.AddRange(authors.Select(a => a.Shortcut));
             book.IsSynchronized = true;
 
             BookDao.Update(book);

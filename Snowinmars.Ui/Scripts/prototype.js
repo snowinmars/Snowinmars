@@ -1,4 +1,5 @@
-﻿/*  Prototype JavaScript framework, version 1.7
+﻿
+/*  Prototype JavaScript framework, version 1.7
  *  (c) 2005-2010 Sam Stephenson
  *
  *  Prototype is freely distributable under the terms of an MIT-style license.
@@ -7,6 +8,7 @@
  *--------------------------------------------------------------------------*/
 
 var Prototype = {
+
   Version: '1.7',
 
   Browser: (function(){
@@ -59,7 +61,9 @@ var Prototype = {
 if (Prototype.Browser.MobileSafari)
   Prototype.BrowserFeatures.SpecificElementExtensions = false;
 
+
 var Abstract = { };
+
 
 var Try = {
   these: function() {
@@ -80,6 +84,7 @@ var Try = {
 /* Based on Alex Arnell's inheritance implementation. */
 
 var Class = (function() {
+
   var IS_DONTENUM_BUGGY = (function(){
     for (var p in { toString: 1 }) {
       if (p === 'toString') return false;
@@ -154,6 +159,7 @@ var Class = (function() {
   };
 })();
 (function() {
+
   var _toString = Object.prototype.toString,
       NULL_TYPE = 'Null',
       UNDEFINED_TYPE = 'Undefined',
@@ -446,7 +452,11 @@ Object.extend(Function.prototype, (function() {
   }
 })());
 
+
+
 (function(proto) {
+
+
   function toISOString() {
     return this.getUTCFullYear() + '-' +
       (this.getUTCMonth() + 1).toPaddedString(2) + '-' +
@@ -456,13 +466,16 @@ Object.extend(Function.prototype, (function() {
       this.getUTCSeconds().toPaddedString(2) + 'Z';
   }
 
+
   function toJSON() {
     return this.toISOString();
   }
 
   if (!proto.toISOString) proto.toISOString = toISOString;
   if (!proto.toJSON) proto.toJSON = toJSON;
+
 })(Date.prototype);
+
 
 RegExp.prototype.match = RegExp.prototype.test;
 
@@ -607,6 +620,7 @@ Object.extend(String.prototype, (function() {
   function unescapeHTML() {
     return this.stripTags().replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&');
   }
+
 
   function toQueryParams(separator) {
     var match = this.strip().match(/([^?#]*)(#.*)?$/);
@@ -1008,6 +1022,14 @@ var Enumerable = (function() {
     return '#<Enumerable:' + this.toArray().inspect() + '>';
   }
 
+
+
+
+
+
+
+
+
   return {
     each:       each,
     eachSlice:  eachSlice,
@@ -1050,6 +1072,7 @@ function $A(iterable) {
   return results;
 }
 
+
 function $w(string) {
   if (!Object.isString(string)) return [];
   string = string.strip();
@@ -1057,6 +1080,7 @@ function $w(string) {
 }
 
 Array.from = $A;
+
 
 (function() {
   var arrayProto = Array.prototype,
@@ -1122,6 +1146,7 @@ Array.from = $A;
       return array.detect(function(value) { return item === value });
     });
   }
+
 
   function clone() {
     return slice.call(this, 0);
@@ -1204,6 +1229,7 @@ var Hash = Class.create(Enumerable, (function() {
     this._object = Object.isHash(object) ? object.toObject() : Object.clone(object);
   }
 
+
   function _each(iterator) {
     for (var key in this._object) {
       var value = this._object[key], pair = [key, value];
@@ -1231,6 +1257,8 @@ var Hash = Class.create(Enumerable, (function() {
   function toObject() {
     return Object.clone(this._object);
   }
+
+
 
   function keys() {
     return this.pluck('key');
@@ -1393,6 +1421,8 @@ var ObjectRange = Class.create(Enumerable, (function() {
   };
 })());
 
+
+
 var Ajax = {
   getTransport: function() {
     return Try.these(
@@ -1503,6 +1533,7 @@ Ajax.Request = Class.create(Ajax.Base, {
       /* Force Firefox to handle ready state 4 for synchronous requests */
       if (!this.options.asynchronous && this.transport.overrideMimeType)
         this.onStateChange();
+
     }
     catch (e) {
       this.dispatchException(e);
@@ -1624,6 +1655,13 @@ Ajax.Request = Class.create(Ajax.Base, {
 
 Ajax.Request.Events =
   ['Uninitialized', 'Loading', 'Loaded', 'Interactive', 'Complete'];
+
+
+
+
+
+
+
 
 Ajax.Response = Class.create({
   initialize: function(request){
@@ -1777,6 +1815,7 @@ Ajax.PeriodicalUpdater = Class.create(Ajax.Base, {
   }
 });
 
+
 function $(element) {
   if (arguments.length > 1) {
     for (var i = 0, elements = [], length = arguments.length; i < length; i++)
@@ -1820,6 +1859,8 @@ if (!Node.ELEMENT_NODE) {
   });
 }
 
+
+
 (function(global) {
   function shouldUseCache(tagName, attributes) {
     if (tagName === 'select') return false;
@@ -1860,6 +1901,7 @@ if (!Node.ELEMENT_NODE) {
 
   Object.extend(global.Element, element || { });
   if (element) global.Element.prototype = element.prototype;
+
 })(this);
 
 Element.idCounter = 1;
@@ -1904,6 +1946,7 @@ Element.Methods = {
   },
 
   update: (function(){
+
     var SELECT_ELEMENT_INNERHTML_BUGGY = (function(){
       var el = document.createElement("select"),
           isBuggy = true;
@@ -1957,6 +2000,7 @@ Element.Methods = {
       s = null;
       return isBuggy;
     })();
+
 
     function update(element, content) {
       element = $(element);
@@ -2186,6 +2230,7 @@ Element.Methods = {
       return element.recursivelyCollect("nextSibling", index + 1)[index];
     }
   },
+
 
   select: function(element) {
     element = $(element);
@@ -2534,6 +2579,7 @@ else if (Prototype.Browser.IE) {
   };
 
   Element._attributeTranslations = (function(){
+
     var classProp = 'className',
         forProp = 'for',
         el = document.createElement('div');
@@ -2578,6 +2624,7 @@ else if (Prototype.Browser.IE) {
             return node ? node.value : "";
           },
           _getEv: (function(){
+
             var el = document.createElement('div'), f;
             el.onclick = Prototype.emptyFunction;
             var value = el.getAttribute('onclick');
@@ -2689,6 +2736,7 @@ else if (Prototype.Browser.IE) {
       }
     })();
   }
+
 }
 
 else if (Prototype.Browser.Gecko && /rv:1\.8\.0/.test(navigator.userAgent)) {
@@ -2823,6 +2871,7 @@ Element.Methods.ByTag = { };
 Object.extend(Element, Element.Methods);
 
 (function(div) {
+
   if (!Prototype.BrowserFeatures.ElementExtensions && div['__proto__']) {
     window.HTMLElement = { };
     window.HTMLElement.prototype = div['__proto__'];
@@ -2830,9 +2879,11 @@ Object.extend(Element, Element.Methods);
   }
 
   div = null;
+
 })(document.createElement('div'));
 
 Element.extend = (function() {
+
   function checkDeficiency(tagName) {
     if (typeof window.Element != 'undefined') {
       var proto = window.Element.prototype;
@@ -2891,6 +2942,7 @@ Element.extend = (function() {
 
     element._extendedByPrototype = Prototype.emptyFunction;
     return element;
+
   }, {
     refresh: function() {
       if (!Prototype.BrowserFeatures.ElementExtensions) {
@@ -3006,7 +3058,9 @@ Element.addMethods = function(methods) {
   Element.cache = { };
 };
 
+
 document.viewport = {
+
   getDimensions: function() {
     return { width: this.getWidth(), height: this.getHeight() };
   },
@@ -3044,6 +3098,7 @@ document.viewport = {
 
   viewport.getHeight = define.curry('Height');
 })(document.viewport);
+
 
 Element.Storage = {
   UID: 1
@@ -3122,6 +3177,7 @@ Element.addMethods({
 });
 
 (function() {
+
   function toDecimal(pctString) {
     var match = pctString.match(/^(\d+)%?$/i);
     if (!match) return null;
@@ -3654,6 +3710,7 @@ Element.addMethods({
     return $(document.body);
   }
 
+
   function cumulativeOffset(element) {
     element = $(element);
     var valueT = 0, valueL = 0;
@@ -3817,6 +3874,7 @@ Element.addMethods({
     };
   }
 
+
   Element.addMethods({
     getLayout:              getLayout,
     measure:                measure,
@@ -3867,6 +3925,7 @@ window.$$ = function() {
 };
 
 Prototype.Selector = (function() {
+
   function select() {
     throw new Error('Method "Prototype.Selector.select" must be defined.');
   }
@@ -3893,6 +3952,7 @@ Prototype.Selector = (function() {
     return elements;
   }
 
+
   var K = Prototype.K;
 
   return {
@@ -3911,6 +3971,7 @@ Prototype._original_property = window.Sizzle;
  *  More information: http://sizzlejs.com/
  */
 (function(){
+
 var chunker = /((?:\((?:\([^()]+\)|[^()]+)+\)|\[(?:\[[^[\]]*\]|['"][^'"]*['"]|[^[\]'"]+)+\]|\\.|[^ >+~,(\[\\]+)+|[>+~])(\s*,\s*)?((?:.|\r|\n)*)/g,
 	done = 0,
 	toString = Object.prototype.toString,
@@ -4580,6 +4641,7 @@ var makeArray = function(array, results) {
 
 try {
 	Array.prototype.slice.call( document.documentElement.childNodes, 0 );
+
 } catch(e){
 	makeArray = function(array, results) {
 		var ret = results || [];
@@ -4683,6 +4745,7 @@ if ( document.documentElement.compareDocumentPosition ) {
 })();
 
 (function(){
+
 	var div = document.createElement("div");
 	div.appendChild( document.createComment("") );
 
@@ -4830,6 +4893,7 @@ function dirCheck( dir, cur, doneName, checkSet, nodeCheck, isXML ) {
 							match = true;
 							break;
 						}
+
 					} else if ( Sizzle.filter( cur, [elem] ).length > 0 ) {
 						match = elem;
 						break;
@@ -4873,7 +4937,9 @@ var posProcess = function(selector, context){
 	return Sizzle.filter( later, tmpSet );
 };
 
+
 window.Sizzle = Sizzle;
+
 })();
 
 ;(function(engine) {
@@ -5025,6 +5091,7 @@ Form.Methods = {
 
 /*--------------------------------------------------------------------------*/
 
+
 Form.Element = {
   focus: function(element) {
     $(element).focus();
@@ -5038,6 +5105,7 @@ Form.Element = {
 };
 
 Form.Element.Methods = {
+
   serialize: function(element) {
     element = $(element);
     if (!element.disabled && element.name) {
@@ -5179,6 +5247,7 @@ Form.Element.Serializers = (function() {
 
 /*--------------------------------------------------------------------------*/
 
+
 Abstract.TimedObserver = Class.create(PeriodicalExecuter, {
   initialize: function($super, element, frequency, callback) {
     $super(callback, frequency);
@@ -5261,6 +5330,7 @@ Form.EventObserver = Class.create(Abstract.EventObserver, {
   }
 });
 (function() {
+
   var Event = {
     KEY_BACKSPACE: 8,
     KEY_TAB:       9,
@@ -5283,6 +5353,8 @@ Form.EventObserver = Class.create(Abstract.EventObserver, {
   var docEl = document.documentElement;
   var MOUSEENTER_MOUSELEAVE_EVENTS_SUPPORTED = 'onmouseenter' in docEl
     && 'onmouseleave' in docEl;
+
+
 
   var isIELegacyEvent = function(event) { return false; };
 
@@ -5390,6 +5462,7 @@ Form.EventObserver = Class.create(Abstract.EventObserver, {
        (docElement.clientTop || 0));
   }
 
+
   function stop(event) {
     Event.extend(event);
     event.preventDefault();
@@ -5397,6 +5470,7 @@ Form.EventObserver = Class.create(Abstract.EventObserver, {
 
     event.stopped = true;
   }
+
 
   Event.Methods = {
     isLeftClick:   isLeftClick,
@@ -5546,6 +5620,7 @@ Form.EventObserver = Class.create(Abstract.EventObserver, {
 
   if (Prototype.Browser.WebKit)
     window.addEventListener('unload', Prototype.emptyFunction, false);
+
 
   var _getDOMEventName = Prototype.K,
       translations = { mouseenter: "mouseover", mouseleave: "mouseout" };
@@ -5852,6 +5927,7 @@ var Position = {
       return ((this.offset[0] + element.offsetWidth) - this.xcomp) /
         element.offsetWidth;
   },
+
 
   cumulativeOffset: Element.Methods.cumulativeOffset,
 
