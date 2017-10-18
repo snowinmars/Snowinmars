@@ -1,0 +1,1 @@
+ALTER TABLE [dbo].[Authors] ALTER COLUMN [GivenName] nvarchar(100) NULL
