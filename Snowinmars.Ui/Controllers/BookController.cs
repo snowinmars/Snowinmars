@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.UI;
@@ -122,25 +123,34 @@ namespace Snowinmars.Ui.Controllers
         [HttpGet]
         [Route("")]
         [AllowAnonymous]
-        [OutputCache(Duration = 10, VaryByParam = "none", Location = OutputCacheLocation.Any)]
         public ActionResult Index()
-        {
-            IEnumerable<Book> c;
-            try
-            {
-                c = this.bookLogic.Get(null);
-            }
-            catch (ObjectNotFoundException e)
-            {
-                return this.View("BrokenDetails");
-            }
+		{
+			this.SetNoCache();
 
-            List<BookModel> models = c.Select(ControllerHelper.Map).ToList();
+			IEnumerable<Book> c;
+			try
+			{
+				c = this.bookLogic.Get(null);
+			}
+			catch (ObjectNotFoundException e)
+			{
+				return this.View("BrokenDetails");
+			}
 
-            return this.View(models);
-        }
+			List<BookModel> models = c.Select(ControllerHelper.Map).ToList();
 
-        [HttpPost]
+			return this.View(models);
+		}
+
+		private void SetNoCache()
+		{
+			Response.Cache.SetCacheability(HttpCacheability.NoCache);
+			HttpContext.Response.AddHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+			HttpContext.Response.AddHeader("Pragma", "no-cache");
+			HttpContext.Response.AddHeader("Expires", "0");
+		}
+
+		[HttpPost]
         [Route("startInformAboutWarnings")]
         public ActionResult StartInformAboutWarnings(Guid bookId)
         {
@@ -180,7 +190,9 @@ namespace Snowinmars.Ui.Controllers
 	    [Route("wishlist")]
 		public ActionResult Wishlist()
 	    {
-		    string username = User.Identity.Name;
+		    this.SetNoCache();
+
+			string username = User.Identity.Name;
 
 		    IEnumerable<Book> c;
 		    try
